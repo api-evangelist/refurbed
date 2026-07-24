@@ -1,0 +1,1491 @@
+swagger: '2.0'
+info:
+  title: Affiliate Partner BuybackBidService MarketOfferService API
+  version: '1.0'
+  description: The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).
+  contact:
+    name: Refurbed Affiliate Partner Integrations Team
+    email: integrations@refurbed.com
+host: api.refurbed.com
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- APIKeyAuth: []
+tags:
+- name: MarketOfferService
+paths:
+  /refb.merchant.v1.MarketOfferService/BatchCreateMarketOffer:
+    post:
+      summary: Batch creates market offers / offer market prices of offers.
+      description: "Known errors:\n - identical to the CreateMarketOffer operation"
+      operationId: BatchCreateMarketOffer
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/BatchCreateMarketOffersResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/BatchCreateMarketOffersRequest'
+      tags:
+      - MarketOfferService
+  /refb.merchant.v1.MarketOfferService/BatchDeleteMarketOffer:
+    post:
+      summary: Batch deletes market offers / offer market prices of offers.
+      description: "Known errors:\n - identical to the DeleteMarketOffer operation"
+      operationId: BatchDeleteMarketOffer
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/BatchDeleteMarketOffersResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/BatchDeleteMarketOffersRequest'
+      tags:
+      - MarketOfferService
+  /refb.merchant.v1.MarketOfferService/BatchGetMarketOffer:
+    post:
+      summary: Batch gets market offers / offer market prices of offers.
+      description: "Known errors:\n - identical to the GetMarketOffer operation"
+      operationId: BatchGetMarketOffer
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/BatchGetMarketOffersResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/BatchGetMarketOffersRequest'
+      tags:
+      - MarketOfferService
+  /refb.merchant.v1.MarketOfferService/BatchUpdateMarketOffer:
+    post:
+      summary: Batch updates market offers / offer market prices of offers.
+      description: "Known errors:\n - identical to the UpdateMarketOffer operation"
+      operationId: BatchUpdateMarketOffer
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/BatchUpdateMarketOffersResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/BatchUpdateMarketOffersRequest'
+      tags:
+      - MarketOfferService
+  /refb.merchant.v1.MarketOfferService/CreateMarketOffer:
+    post:
+      summary: Creates a single market offer / an offer market price of an offer.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- ALREADY_EXISTS\n  - when market offer already exists, i.e. market price is defined for\n    given offer and market combination\n- INVALID_ARGUMENT\n  - when the unknown offer is provided\n  - invalid market code is provided\n  - invalid input market offer data is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: CreateMarketOffer
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/CreateMarketOfferResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/CreateMarketOfferRequest'
+      tags:
+      - MarketOfferService
+  /refb.merchant.v1.MarketOfferService/DeleteMarketOffer:
+    post:
+      summary: Deletes a single market offer / an offer market price of an offer.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when market offer does not exists\n- INVALID_ARGUMENT\n  - invalid market offer identifier is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: DeleteMarketOffer
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/DeleteMarketOfferRequest'
+      tags:
+      - MarketOfferService
+  /refb.merchant.v1.MarketOfferService/GetMarketOffer:
+    post:
+      summary: Gets a single market offer.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the offer is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: GetMarketOffer
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/GetMarketOfferResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/GetMarketOfferRequest'
+      tags:
+      - MarketOfferService
+  /refb.merchant.v1.MarketOfferService/ListMarketOffers:
+    post:
+      summary: Lists all market offers.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: ListMarketOffers
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ListMarketOffersResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ListMarketOffersRequest'
+      tags:
+      - MarketOfferService
+  /refb.merchant.v1.MarketOfferService/ListMarketOffersByOffer:
+    post:
+      summary: Lists all market offers of a specific offer.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when offer identifier is not valid\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: ListMarketOffersByOffer
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ListMarketOffersByOfferResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ListMarketOffersByOfferRequest'
+      tags:
+      - MarketOfferService
+  /refb.merchant.v1.MarketOfferService/UpdateMarketOffer:
+    post:
+      summary: Updates a single market offer / an offer market price of an offer.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when market offer does not exists\n- INVALID_ARGUMENT\n  - when the unknown offer is provided\n  - invalid input market offer data is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: UpdateMarketOffer
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/UpdateMarketOfferResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateMarketOfferRequest'
+      tags:
+      - MarketOfferService
+definitions:
+  OfferState:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - OK
+    - UNVERIFIED
+    - SUBMITTED
+    - PENDING_REVIEW
+    - REJECTED
+    default: UNSPECIFIED
+    description: " - OK: Everything is in order. Final state.\n - UNVERIFIED: Offer needs to be verified in the refurbed merchant interface before\nbeing shown publicly. This state is set on all offers that are created\nusing GTIN/MPN identifiers. Next state: OK.\n - SUBMITTED: Offer has been submitted using catalog attributes, but not processed yet.\nNext state: PENDING_REVIEW.\n - PENDING_REVIEW: Offer has been submitted using catalog attributes, and is awaiting manual review.\nNext state: OK, REJECTED.\n - REJECTED: Offer will not proceed to the marketplace. Final state."
+  BatchDeleteMarketOffersResponse.Result:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/Status'
+  NumericRangeFilter:
+    type: object
+    properties:
+      gt:
+        type: string
+        x-nullable: true
+      ge:
+        type: string
+        x-nullable: true
+      any_of:
+        type: array
+        items:
+          type: string
+      none_of:
+        type: array
+        items:
+          type: string
+      le:
+        type: string
+        x-nullable: true
+      lt:
+        type: string
+        x-nullable: true
+    description: 'Numeric range filter is used for decimal numbers. It is especially
+
+      used for monetary amounts and other quantities where exactness is required.'
+  BatchUpdateMarketOffersResponse.Result:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/Status'
+      market_offer:
+        $ref: '#/definitions/MarketOffer'
+        x-nullable: true
+        description: Updated market offer. Set if status code is OK.
+  BatchUpdateMarketOffersRequest:
+    type: object
+    properties:
+      market_offers:
+        type: array
+        items:
+          $ref: '#/definitions/BatchUpdateMarketOffersRequest.Update'
+        description: Market offers to update. Between 1 and 50.
+        required:
+        - market_offers
+    required:
+    - market_offers
+  BatchGetMarketOffersRequest.Get:
+    type: object
+    properties:
+      identifier:
+        $ref: '#/definitions/MarketOfferIdentifier'
+        description: The identifier of the market offer to get.
+  BatchCreateMarketOffersResponse:
+    type: object
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/BatchCreateMarketOffersResponse.Result'
+        description: Results of the create operation. In request order.
+  OfferWarranty:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - M12
+    - M18
+    - M24
+    - M30
+    - M36
+    default: UNSPECIFIED
+    description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
+  CreateMarketOfferRequest:
+    type: object
+    properties:
+      identifier:
+        $ref: '#/definitions/OfferIdentifier'
+      market_price:
+        $ref: '#/definitions/CreateMarketOfferRequest.CreateOfferMarketPrice'
+  OfferTaxationFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferTaxation'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferTaxation'
+  OfferVisibilityFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferVisibility'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferVisibility'
+  CreateMarketOfferRequest.CreateOfferMarketPrice:
+    type: object
+    properties:
+      market_code:
+        type: string
+        required:
+        - market_code
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+      price:
+        type: string
+        required:
+        - price
+      min_price:
+        type: string
+        x-nullable: true
+    required:
+    - market_code
+    - price
+  ListMarketOffersByOfferRequest.Sort.By:
+    type: string
+    enum:
+    - ID
+    - MARKET_PRICE_MARKET_CODE
+    - MARKET_PRICE_MARKET_NAME
+    - MARKET_PRICE_IS_SITE_MARKET
+    - MARKET_PRICE_IS_CALCULATED
+    - MARKET_PRICE_CURRENCY_CODE
+    - MARKET_PRICE_PRICE
+    - MARKET_PRICE_MIN_PRICE
+    - MARKET_PRICE_SITE_MARKET_CURRENCY_CODE
+    - MARKET_PRICE_SITE_MARKET_PRICE
+    - MARKET_PRICE_SITE_MARKET_MIN_PRICE
+    default: ID
+  UpdateMarketOfferRequest:
+    type: object
+    properties:
+      identifier:
+        $ref: '#/definitions/MarketOfferIdentifier'
+        description: The identifier of the market offer to update.
+      market_price:
+        $ref: '#/definitions/UpdateMarketOfferRequest.UpdateOfferMarketPrice'
+  OfferGrading:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - A
+    - B
+    - C
+    - AA
+    default: UNSPECIFIED
+    description: 'The grading of the item being sold.
+
+
+      Please consult the refurbed seller guide and quality charta to learn about
+
+      refurbed''s grading requirements.'
+  BatchCreateMarketOffersResponse.Result:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/Status'
+      market_offer:
+        $ref: '#/definitions/MarketOffer'
+        x-nullable: true
+        description: Created market offer. Set if status code is OK.
+  BoolFilter:
+    type: object
+    properties:
+      value:
+        type: boolean
+        x-nullable: true
+  ListMarketOffersByOfferRequest.Filter:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/MarketOfferIdentifierFilter'
+      market_price_market_code:
+        $ref: '#/definitions/StringFilter'
+      market_price_is_site_market:
+        $ref: '#/definitions/BoolFilter'
+      market_price_is_calculated:
+        $ref: '#/definitions/BoolFilter'
+      market_price_currency_code:
+        $ref: '#/definitions/CurrencyCodeFilter'
+      market_price_price:
+        $ref: '#/definitions/NumericRangeFilter'
+      market_price_min_price:
+        $ref: '#/definitions/OptionalNumericRangeFilter'
+      market_price_site_market_currency_code:
+        $ref: '#/definitions/CurrencyCodeFilter'
+      market_price_site_market_price:
+        $ref: '#/definitions/NumericRangeFilter'
+      market_price_site_market_min_price:
+        $ref: '#/definitions/OptionalNumericRangeFilter'
+      market_price_visibility:
+        $ref: '#/definitions/OfferVisibilityFilter'
+      market_price_instance_buybox_state:
+        $ref: '#/definitions/OfferBuyboxStateFilter'
+      market_price_buybox_scope:
+        $ref: '#/definitions/OfferBuyboxScopeFilter'
+        title: only applicable when buybox state is WON
+  OfferBuyboxState:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - WON
+    - SHOULD_WIN
+    - ELIGIBLE
+    - WON_ELSEWHERE
+    - INELIGIBLE
+    default: UNSPECIFIED
+    description: " - WON: Offer currently has the BuyBox.\n - SHOULD_WIN: Current offer configuration should win the BuyBox on next refresh.\n - ELIGIBLE: Offer currently does not have the BuyBox.\n - WON_ELSEWHERE: Offer currently does not have the BuyBox but another offer of this\nmerchant does.\n - INELIGIBLE: Offer cannot reach the BuyBox at this time, e.g. because refurbed's\nBuyBox protection for this product is enabled and the offer's stock\nis too low."
+  OptionalNumericRangeFilter:
+    type: object
+    properties:
+      is_set:
+        type: boolean
+        x-nullable: true
+      gt:
+        type: string
+        x-nullable: true
+      ge:
+        type: string
+        x-nullable: true
+      any_of:
+        type: array
+        items:
+          type: string
+      none_of:
+        type: array
+        items:
+          type: string
+      le:
+        type: string
+        x-nullable: true
+      lt:
+        type: string
+        x-nullable: true
+    description: 'Numeric range filter is used for decimal numbers. It is especially
+
+      used for monetary amounts and other quantities where exactness is required.'
+  UpdateMarketOfferResponse:
+    type: object
+    properties:
+      market_offer:
+        $ref: '#/definitions/MarketOffer'
+  BatchCreateMarketOffersRequest.Create:
+    type: object
+    properties:
+      identifier:
+        $ref: '#/definitions/OfferIdentifier'
+      market_price:
+        $ref: '#/definitions/Create.CreateOfferMarketPrice'
+  ListMarketOffersResponse:
+    type: object
+    properties:
+      market_offers:
+        type: array
+        items:
+          $ref: '#/definitions/MarketOffer'
+        description: The market offers found.
+      has_more:
+        type: boolean
+        description: Indicates whether there are more results available.
+  BatchDeleteMarketOffersResponse:
+    type: object
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/BatchDeleteMarketOffersResponse.Result'
+        description: Results of the delete operation. In request order.
+  OfferStateFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferState'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferState'
+  BatchGetMarketOffersRequest:
+    type: object
+    properties:
+      market_offers:
+        type: array
+        items:
+          $ref: '#/definitions/BatchGetMarketOffersRequest.Get'
+        description: Market offers to get. Between 1 and 50.
+        required:
+        - market_offers
+    required:
+    - market_offers
+  BatchDeleteMarketOffersRequest.Delete:
+    type: object
+    properties:
+      identifier:
+        $ref: '#/definitions/MarketOfferIdentifier'
+        description: The identifier of the market offer to delete.
+  OfferBuyboxScope:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - INSTANCE_GRADING_BATTERY_CONDITION
+    default: UNSPECIFIED
+  MarketOfferIdentifierFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/MarketOfferIdentifier'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/MarketOfferIdentifier'
+  Any:
+    type: object
+    properties:
+      '@type':
+        type: string
+        description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+    additionalProperties: {}
+    description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+  MarketOffer:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/MarketOfferIdentifier'
+        description: Primary key.
+      version:
+        type: string
+        format: int64
+        description: Version of this offer / offer market price.
+      is_current:
+        type: boolean
+        description: Indicates whether this is the currently available version.
+      created_at:
+        type: string
+        format: date-time
+        description: When the offer was initially created.
+      instance_id:
+        type: string
+        format: int64
+        description: The refurbed instance id ("product variant") this offer is for.
+      instance_name:
+        type: string
+        description: Human-readable name of the instance this offer is for.
+      state:
+        $ref: '#/definitions/OfferState'
+        description: The offer's state.
+      sku:
+        type: string
+        description: 'The merchant''s SKU.
+
+
+          Max. length is 256 unicode characters. SKUs cannot have leading or trailing
+
+          whitespace characters.
+
+
+          Can be empty string for old offers that did not require SKU to be set.'
+      grading:
+        $ref: '#/definitions/OfferGrading'
+        description: Grading of the item sold.
+      warranty:
+        $ref: '#/definitions/OfferWarranty'
+        description: Warranty of the item sold.
+      stock:
+        type: integer
+        format: int64
+        description: The item's stock.
+      shipping_profile_id:
+        type: string
+        format: int64
+        description: 'The shipping profile connected to this offer. This determines in what
+
+          markets the offer is sold and what the shipping costs are.'
+      shipping_profile_name:
+        type: string
+        description: Name of shipping profile.
+      secondary_shipping_profile_id:
+        type: string
+        format: int64
+        x-nullable: true
+        description: 'An optional secondary shipping profile id. Can be used to offer express
+
+          shipping next to standard shipping. Has to be different from the primary
+
+          shipping profile.'
+      secondary_shipping_profile_name:
+        type: string
+        x-nullable: true
+        description: 'Name of secondary shipping profile. Only returned if secondary shipping
+
+          profile is set.'
+      taxation:
+        $ref: '#/definitions/OfferTaxation'
+        description: The taxation mode set for this offer.
+      real_taxation:
+        $ref: '#/definitions/OfferTaxation'
+        description: 'The taxation mode the offer uses. This is either the set offer taxation
+
+          or the global taxation mode (merchant account settings) that overrides it.'
+      reference_currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        description: Currency of reference prices.
+      reference_price:
+        type: string
+        description: 'Reference gross price of this offer. The reference price is used to
+
+          calculate prices if they are not defined for a market.'
+      reference_min_price:
+        type: string
+        x-nullable: true
+        description: 'Optional reference minimum price in market currency for automatic
+
+          repricing. The reference minimum price is used to calculate minimum prices
+
+          if they are not defined for a market.'
+      market_price:
+        $ref: '#/definitions/OfferMarketPrice'
+        description: The market price.
+    description: 'A merchant''s market offer. A market offer is a combination of an offer with
+
+      a specific offer market price.'
+  ListMarketOffersByOfferRequest.Sort:
+    type: object
+    properties:
+      order:
+        $ref: '#/definitions/SortOrder'
+      by:
+        $ref: '#/definitions/ListMarketOffersByOfferRequest.Sort.By'
+  SortOrder:
+    type: string
+    enum:
+    - ASC
+    - DESC
+    default: ASC
+  BuyboxInfo:
+    type: object
+    properties:
+      site_market_competitor_price:
+        type: string
+        description: 'Total gross price of the competitor offer that currently has the
+
+          BuyBox. This is the price shown to customers and includes shipping
+
+          costs. In site market currency.'
+      site_market_suggested_offer_price:
+        type: string
+        description: 'The suggested gross price (excl. shipping costs that might have been converted)
+
+          for this offer that would make it get the BuyBox. In site market currency.
+
+
+          If you want to automatically underbid your competitors, set the offer
+
+          minimum price and do not try to keep up by constantly pushing offer
+
+          price updates yourself.'
+      site_market_suggested_offer_price_diff:
+        type: string
+        description: 'Absolute difference between the current offer price (MIN(price, min price))
+
+          and the suggested offer price, in site market currency.'
+      suggested_offer_price:
+        type: string
+        description: Same as site_market_suggested_offer_price but in offer price currency.
+      suggested_offer_price_diff:
+        type: string
+        description: Same as site_market_suggested_offer_price_diff but in offer price currency.
+  Update.UpdateOfferMarketPrice:
+    type: object
+    properties:
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        x-nullable: true
+      price:
+        type: string
+        x-nullable: true
+      min_price:
+        type: string
+      delete_min_price:
+        type: boolean
+  UInt32RangeFilter:
+    type: object
+    properties:
+      gt:
+        type: integer
+        format: int64
+        x-nullable: true
+      ge:
+        type: integer
+        format: int64
+        x-nullable: true
+      any_of:
+        type: array
+        items:
+          type: integer
+          format: int64
+      none_of:
+        type: array
+        items:
+          type: integer
+          format: int64
+      le:
+        type: integer
+        format: int64
+        x-nullable: true
+      lt:
+        type: integer
+        format: int64
+        x-nullable: true
+  OptionalInt64Filter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          type: string
+          format: int64
+      none_of:
+        type: array
+        items:
+          type: string
+          format: int64
+      is_set:
+        type: boolean
+        x-nullable: true
+  OfferGradingFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferGrading'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferGrading'
+  Status:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+      message:
+        type: string
+        description: 'A developer-facing error message, which should be in English. Any
+
+          user-facing error message should be localized and sent in the
+
+          [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/Any'
+        description: 'A list of messages that carry the error details.  There is a common set of
+
+          message types for APIs to use.'
+    description: 'The `Status` type defines a logical error model that is suitable for
+
+      different programming environments, including REST APIs and RPC APIs. It is
+
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
+      three pieces of data: error code, error message, and error details.
+
+
+      You can find out more about this error model and how to work with it in the
+
+      [API Design Guide](https://cloud.google.com/apis/design/errors).'
+  BatchUpdateMarketOffersRequest.Update:
+    type: object
+    properties:
+      identifier:
+        $ref: '#/definitions/MarketOfferIdentifier'
+        description: The identifier of the market offer to update.
+      market_price:
+        $ref: '#/definitions/Update.UpdateOfferMarketPrice'
+  GetMarketOfferRequest:
+    type: object
+    properties:
+      identifier:
+        $ref: '#/definitions/MarketOfferIdentifier'
+        description: The identifier of the market offer to get.
+  OfferMarketPrice:
+    type: object
+    properties:
+      offer_id:
+        type: string
+        format: int64
+        description: Id of the offer the price is set for.
+      market_code:
+        type: string
+        description: Code of the market the price is set for.
+      market_name:
+        type: string
+        description: Name of the market the price is set for.
+      is_site_market:
+        type: boolean
+        description: Indicates whether there exists a refurbed website for this market.
+      is_calculated:
+        type: boolean
+        description: 'Indicates whether the price was calculated by a rule or set manually by
+
+          the merchant.'
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        description: Currency of prices set.
+      price:
+        type: string
+        description: 'Gross price of this offer. Either set by merchant, or calculated by
+
+          refurbed.'
+      min_price:
+        type: string
+        x-nullable: true
+        description: 'Optional minimum price in market currency for automatic repricing. Either
+
+          set by merchant, or calculated by refurbed.'
+      site_market_currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        x-nullable: true
+        description: Native currency of the market. Only set for site markets.
+      site_market_price:
+        type: string
+        x-nullable: true
+        description: Price in currency of the site market. Only set for site markets.
+      site_market_min_price:
+        type: string
+        x-nullable: true
+        description: Minimum price in currency of the site market. Only set for site markets.
+      visibility:
+        $ref: '#/definitions/OfferVisibility'
+        x-nullable: true
+        description: Visibility of the offer in this market. Only set on the current version.
+      instance_buybox_state:
+        $ref: '#/definitions/OfferBuyboxState'
+        x-nullable: true
+        description: 'Shows if the offer has the BuyBox in this market.
+
+          Only set for site markets in the current offer version.'
+      instance_buybox_info:
+        $ref: '#/definitions/BuyboxInfo'
+        x-nullable: true
+        description: 'More detailed information about how to win the BuyBox.
+
+
+          This is only set if the BuyBox state is ELIGIBLE.'
+      buybox_scope:
+        $ref: '#/definitions/OfferBuyboxScope'
+        x-nullable: true
+        description: It may be set only if market offer is in WON BuyBox state.
+    description: 'An offer price defines the price configuration of an offer for a single
+
+      market.'
+  ListMarketOffersRequest.Sort:
+    type: object
+    properties:
+      order:
+        $ref: '#/definitions/SortOrder'
+      by:
+        $ref: '#/definitions/ListMarketOffersRequest.Sort.By'
+  TimestampRangeFilter:
+    type: object
+    properties:
+      gt:
+        type: string
+        format: date-time
+        x-nullable: true
+      ge:
+        type: string
+        format: date-time
+        x-nullable: true
+      any_of:
+        type: array
+        items:
+          type: string
+          format: date-time
+      none_of:
+        type: array
+        items:
+          type: string
+          format: date-time
+      le:
+        type: string
+        format: date-time
+        x-nullable: true
+      lt:
+        type: string
+        format: date-time
+        x-nullable: true
+  OfferBuyboxStateFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferBuyboxState'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferBuyboxState'
+  ListMarketOffersRequest.Filter.OfferNameFilter:
+    type: object
+    properties:
+      matches:
+        type: string
+        x-nullable: true
+  MarketOfferIdentifier:
+    type: object
+    properties:
+      offer_id:
+        $ref: '#/definitions/OfferIdentifier'
+      market_code:
+        type: string
+        required:
+        - market_code
+    required:
+    - market_code
+  OfferSKUFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          type: string
+      none_of:
+        type: array
+        items:
+          type: string
+      contains:
+        type: string
+        x-nullable: true
+  OfferVisibility:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - FULL
+    - NONE
+    - LIMITED
+    - HIDDEN
+    default: UNSPECIFIED
+    description: "Indicates if and how an offer is shown on the refurbed platform.\n\n - FULL: Offer is normally shown to customers.\n - NONE: Offer is not shown to customers (e.g. does not ship into this market, is\nout of stock, is not verified,...).\n - LIMITED: Offer was hidden from some pages by refurbed (e.g. because price is\nhigher than refurbed's instance SRP).\n - HIDDEN: Offer was hidden by refurbed (e.g. because of an unreasonably low or high\nprice)."
+  ListMarketOffersRequest.Filter:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/MarketOfferIdentifierFilter'
+      offer_id:
+        $ref: '#/definitions/Int64Filter'
+      created_at:
+        $ref: '#/definitions/TimestampRangeFilter'
+      instance_id:
+        $ref: '#/definitions/Int64Filter'
+      state:
+        $ref: '#/definitions/OfferStateFilter'
+      name:
+        $ref: '#/definitions/ListMarketOffersRequest.Filter.OfferNameFilter'
+      sku:
+        $ref: '#/definitions/OfferSKUFilter'
+      grading:
+        $ref: '#/definitions/OfferGradingFilter'
+      warranty:
+        $ref: '#/definitions/OfferWarrantyFilter'
+      stock:
+        $ref: '#/definitions/UInt32RangeFilter'
+      shipping_profile_id:
+        $ref: '#/definitions/Int64Filter'
+      secondary_shipping_profile_id:
+        $ref: '#/definitions/OptionalInt64Filter'
+      taxation:
+        $ref: '#/definitions/OfferTaxationFilter'
+      reference_currency_code:
+        $ref: '#/definitions/CurrencyCodeFilter'
+      reference_price:
+        $ref: '#/definitions/NumericRangeFilter'
+      reference_min_price:
+        $ref: '#/definitions/OptionalNumericRangeFilter'
+      market_price_market_code:
+        $ref: '#/definitions/StringFilter'
+      market_price_is_site_market:
+        $ref: '#/definitions/BoolFilter'
+      market_price_is_calculated:
+        $ref: '#/definitions/BoolFilter'
+      market_price_currency_code:
+        $ref: '#/definitions/CurrencyCodeFilter'
+      market_price_price:
+        $ref: '#/definitions/NumericRangeFilter'
+      market_price_min_price:
+        $ref: '#/definitions/OptionalNumericRangeFilter'
+      market_price_site_market_currency_code:
+        $ref: '#/definitions/CurrencyCodeFilter'
+      market_price_site_market_price:
+        $ref: '#/definitions/NumericRangeFilter'
+      market_price_site_market_min_price:
+        $ref: '#/definitions/OptionalNumericRangeFilter'
+      market_price_visibility:
+        $ref: '#/definitions/OfferVisibilityFilter'
+      market_price_instance_buybox_state:
+        $ref: '#/definitions/OfferBuyboxStateFilter'
+      market_price_buybox_scope:
+        $ref: '#/definitions/OfferBuyboxScopeFilter'
+        title: only applicable when buybox state is WON
+  BatchUpdateMarketOffersResponse:
+    type: object
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/BatchUpdateMarketOffersResponse.Result'
+        description: Results of the update operation. In request order.
+  GetMarketOfferResponse:
+    type: object
+    properties:
+      market_offer:
+        $ref: '#/definitions/MarketOffer'
+  OfferTaxation:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - GROSS
+    - MARGINAL
+    default: UNSPECIFIED
+  UpdateMarketOfferRequest.UpdateOfferMarketPrice:
+    type: object
+    properties:
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        x-nullable: true
+      price:
+        type: string
+        x-nullable: true
+      min_price:
+        type: string
+      delete_min_price:
+        type: boolean
+  BatchDeleteMarketOffersRequest:
+    type: object
+    properties:
+      offers:
+        type: array
+        items:
+          $ref: '#/definitions/BatchDeleteMarketOffersRequest.Delete'
+        description: Market offers to delete. Between 1 and 50.
+        required:
+        - offers
+    required:
+    - offers
+  BatchCreateMarketOffersRequest:
+    type: object
+    properties:
+      market_offers:
+        type: array
+        items:
+          $ref: '#/definitions/BatchCreateMarketOffersRequest.Create'
+        description: Market offers to create. Between 1 and 50.
+        required:
+        - market_offers
+    required:
+    - market_offers
+  BatchGetMarketOffersResponse.Result:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/Status'
+      market_offer:
+        $ref: '#/definitions/MarketOffer'
+        x-nullable: true
+        description: Retrieved market offer. Set if status code is OK.
+  DeleteMarketOfferRequest:
+    type: object
+    properties:
+      identifier:
+        $ref: '#/definitions/MarketOfferIdentifier'
+        description: The identifier of the market offer to delete.
+  BatchGetMarketOffersResponse:
+    type: object
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/BatchGetMarketOffersResponse.Result'
+        description: Results of the get operation. In request order.
+  OfferIdentifier:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+      sku:
+        type: string
+  CurrencyCode:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - AED
+    - AFN
+    - ALL
+    - AMD
+    - ANG
+    - AOA
+    - ARS
+    - AUD
+    - AWG
+    - AZN
+    - BAM
+    - BBD
+    - BDT
+    - BGN
+    - BHD
+    - BIF
+    - BMD
+    - BND
+    - BOB
+    - BOV
+    - BRL
+    - BSD
+    - BTN
+    - BWP
+    - BYR
+    - BZD
+    - CAD
+    - CDF
+    - CHE
+    - CHF
+    - CHW
+    - CLF
+    - CLP
+    - CNY
+    - COP
+    - COU
+    - CRC
+    - CUC
+    - CUP
+    - CVE
+    - CZK
+    - DJF
+    - DKK
+    - DOP
+    - DZD
+    - EGP
+    - ERN
+    - ETB
+    - EUR
+    - FJD
+    - FKP
+    - GBP
+    - GEL
+    - GHS
+    - GIP
+    - GMD
+    - GNF
+    - GTQ
+    - GYD
+    - HKD
+    - HNL
+    - HRK
+    - HTG
+    - HUF
+    - IDR
+    - ILS
+    - INR
+    - IQD
+    - IRR
+    - ISK
+    - JMD
+    - JOD
+    - JPY
+    - KES
+    - KGS
+    - KHR
+    - KMF
+    - KPW
+    - KRW
+    - KWD
+    - KYD
+    - KZT
+    - LAK
+    - LBP
+    - LKR
+    - LRD
+    - LSL
+    - LTL
+    - LYD
+    - MAD
+    - MDL
+    - MGA
+    - MKD
+    - MMK
+    - MNT
+    - MOP
+    - MRO
+    - MUR
+    - MVR
+    - MWK
+    - MXN
+    - MXV
+    - MYR
+    - MZN
+    - NAD
+    - NGN
+    - NIO
+    - NOK
+    - NPR
+    - NZD
+    - OMR
+    - PAB
+    - PEN
+    - PGK
+    - PHP
+    - PKR
+    - PLN
+    - PYG
+    - QAR
+    - RON
+    - RSD
+    - RUB
+    - RWF
+    - SAR
+    - SBD
+    - SCR
+    - SDG
+    - SEK
+    - SGD
+    - SHP
+    - SLL
+    - SOS
+    - SRD
+    - SSP
+    - STD
+    - SVC
+    - SYP
+    - SZL
+    - THB
+    - TJS
+    - TMT
+    - TND
+    - TOP
+    - TRY
+    - TTD
+    - TWD
+    - TZS
+    - UAH
+    - UGX
+    - USD
+    - USN
+    - UYI
+    - UYU
+    - UZS
+    - VEF
+    - VND
+    - VUV
+    - WST
+    - XAF
+    - XAG
+    - XAU
+    - XBA
+    - XBB
+    - XBC
+    - XBD
+    - XCD
+    - XDR
+    - XOF
+    - XPD
+    - XPF
+    - XPT
+    - XSU
+    - XUA
+    - YER
+    - ZAR
+    - ZMW
+    - ZWL
+    default: UNSPECIFIED
+    description: "Currency codes as specified in ISO 4217.\n\n - AED: XTS = 963; // Code reserved for testing purposes."
+  StringFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          type: string
+      none_of:
+        type: array
+        items:
+          type: string
+  Int64Filter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          type: string
+          format: int64
+      none_of:
+        type: array
+        items:
+          type: string
+          format: int64
+  ListMarketOffersByOfferRequest:
+    type: object
+    properties:
+      pagination:
+        $ref: '#/definitions/StringPagination'
+      sort:
+        $ref: '#/definitions/ListMarketOffersByOfferRequest.Sort'
+      filter:
+        $ref: '#/definitions/ListMarketOffersByOfferRequest.Filter'
+      offer_identifier:
+        $ref: '#/definitions/OfferIdentifier'
+  StringPagination:
+    type: object
+    properties:
+      limit:
+        type: integer
+        format: int64
+        x-nullable: true
+        description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+          Default and maximum is 100.'
+      ending_before:
+        type: string
+      starting_after:
+        type: string
+    description: Paginates resources with string primary key.
+  OfferBuyboxScopeFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferBuyboxScope'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferBuyboxScope'
+  OfferWarrantyFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferWarranty'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferWarranty'
+  MarketOfferIdentifierPagination:
+    type: object
+    properties:
+      limit:
+        type: integer
+        format: int64
+        x-nullable: true
+        description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+          Default and maximum is 100.'
+      ending_before:
+        $ref: '#/definitions/MarketOfferIdentifier'
+      starting_after:
+        $ref: '#/definitions/MarketOfferIdentifier'
+    description: Paginates resources with market offer identifier key.
+  CurrencyCodeFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/CurrencyCode'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/CurrencyCode'
+  ListMarketOffersRequest:
+    type: object
+    properties:
+      pagination:
+        $ref: '#/definitions/MarketOfferIdentifierPagination'
+      sort:
+        $ref: '#/definitions/ListMarketOffersRequest.Sort'
+      filter:
+        $ref: '#/definitions/ListMarketOffersRequest.Filter'
+  Create.CreateOfferMarketPrice:
+    type: object
+    properties:
+      market_code:
+        type: string
+        required:
+        - market_code
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+      price:
+        type: string
+        required:
+        - price
+      min_price:
+        type: string
+        x-nullable: true
+    required:
+    - market_code
+    - price
+  CreateMarketOfferResponse:
+    type: object
+    properties:
+      market_offer:
+        $ref: '#/definitions/MarketOffer'
+  ListMarketOffersRequest.Sort.By:
+    type: string
+    enum:
+    - ID
+    default: ID
+  ListMarketOffersByOfferResponse:
+    type: object
+    properties:
+      market_offers:
+        type: array
+        items:
+          $ref: '#/definitions/MarketOffer'
+        description: The market offers found.
+      has_more:
+        type: boolean
+        description: Indicates whether there are more results available.
+securityDefinitions:
+  APIKeyAuth:
+    type: apiKey
+    name: Authorization
+    in: header

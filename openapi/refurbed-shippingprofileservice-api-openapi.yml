@@ -1,0 +1,1298 @@
+swagger: '2.0'
+info:
+  title: Affiliate Partner BuybackBidService ShippingProfileService API
+  version: '1.0'
+  description: The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).
+  contact:
+    name: Refurbed Affiliate Partner Integrations Team
+    email: integrations@refurbed.com
+host: api.refurbed.com
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- APIKeyAuth: []
+tags:
+- name: ShippingProfileService
+paths:
+  /refb.merchant.v1.ShippingProfileService/CreateShippingProfile:
+    post:
+      summary: Creates a shipping profile.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when unknown source country market code is provided\n  - when unknown destination market code is provided\n  - when invalid shipping costs amount\n  - when unknown currency code is provided\n  - when invalid min/max delivery days\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: CreateShippingProfile
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/CreateShippingProfileResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/CreateShippingProfileRequest'
+      tags:
+      - ShippingProfileService
+  /refb.merchant.v1.ShippingProfileService/DeleteShippingProfile:
+    post:
+      summary: 'Deletes a shipping profile.
+
+        Only shipping profiles marked as deletable can be deleted.'
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- FAILED_PRECONDITION\n  - when shipping profile has at least one active offer assigned\n- NOT_FOUND\n  - when shipping profile is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: DeleteShippingProfile
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/DeleteShippingProfileRequest'
+      tags:
+      - ShippingProfileService
+  /refb.merchant.v1.ShippingProfileService/GetShippingProfile:
+    post:
+      summary: 'Gets a single shipping profile.
+
+        If no version is defined, its current version is returned.'
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the shipping profile is not found\n  - when the shipping profile has been deleted and no version is given as\n    parameter even though the individual historic versions are still\n    accessible\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: GetShippingProfile
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/GetShippingProfileResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/GetShippingProfileRequest'
+      tags:
+      - ShippingProfileService
+  /refb.merchant.v1.ShippingProfileService/ListAvailableCarriers:
+    post:
+      summary: 'Lists available carriers for shipping profiles.
+
+        Make sure to pre-fetch and cache the response of this method to avoid running into rate-limits.'
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: ListAvailableCarriers
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ListAvailableCarriersResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          properties: {}
+      tags:
+      - ShippingProfileService
+  /refb.merchant.v1.ShippingProfileService/ListShippingProfiles:
+    post:
+      summary: Lists all current shipping profiles.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: ListShippingProfiles
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ListShippingProfilesResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ListShippingProfilesRequest'
+      tags:
+      - ShippingProfileService
+  /refb.merchant.v1.ShippingProfileService/UpdateShippingProfile:
+    post:
+      summary: Updates a shipping profile.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when unknown source country market code is provided\n  - when unknown destination market code is provided\n  - when invalid shipping costs amount\n  - when unknown currency code is provided\n  - when invalid min/max delivery days\n- ALREADY_EXISTS\n  - when destination already exists for provided market code\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: UpdateShippingProfile
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/UpdateShippingProfileResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateShippingProfileRequest'
+      tags:
+      - ShippingProfileService
+definitions:
+  ListShippingProfilesRequest.Sort.By:
+    type: string
+    enum:
+    - ID
+    - CREATED_AT
+    - NAME
+    - SOURCE_COUNTRY_MARKET_CODE
+    - NUM_OFFERS_ASSIGNED
+    - SOURCE_COUNTRY_MARKET_NAME
+    default: ID
+  ListShippingProfilesRequest.Filter:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/Int64Filter'
+      created_at:
+        $ref: '#/definitions/TimestampRangeFilter'
+      name:
+        $ref: '#/definitions/ShippingProfileNameFilter'
+      source_country_market_code:
+        $ref: '#/definitions/StringFilter'
+      destination_market_code:
+        $ref: '#/definitions/StringFilter'
+      num_offers_assigned:
+        $ref: '#/definitions/UInt32RangeFilter'
+  Int64Pagination:
+    type: object
+    properties:
+      limit:
+        type: integer
+        format: int64
+        x-nullable: true
+        description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+          Default and maximum is 100.'
+      ending_before:
+        type: string
+        format: int64
+      starting_after:
+        type: string
+        format: int64
+    description: Paginates resources with int64 primary key.
+  ListAvailableCarriersResponse:
+    type: object
+    properties:
+      carriers:
+        type: array
+        items:
+          $ref: '#/definitions/v1.Carrier'
+  CreateShippingProfileRequest.Address:
+    type: object
+    properties:
+      first_name:
+        type: string
+        x-nullable: true
+      family_name:
+        type: string
+        x-nullable: true
+      company_name:
+        type: string
+        required:
+        - company_name
+      country_code:
+        $ref: '#/definitions/CountryCode'
+      post_code:
+        type: string
+        required:
+        - post_code
+      town:
+        type: string
+        required:
+        - town
+      street_name:
+        type: string
+        required:
+        - street_name
+      house_no:
+        type: string
+        required:
+        - house_no
+      supplement:
+        type: string
+        x-nullable: true
+      phone_number:
+        type: string
+        x-nullable: true
+    required:
+    - company_name
+    - post_code
+    - town
+    - street_name
+    - house_no
+  ShippingProfile:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: Primary key.
+      version:
+        type: string
+        format: int64
+        description: Version of the shipping profile.
+      is_current:
+        type: boolean
+        description: 'Indicates whether this is the currently available (latest and non-deleted).
+
+          version.'
+      created_at:
+        type: string
+        format: date-time
+        description: When the shipping profile was created.
+      name:
+        type: string
+        description: Shipping profile name.
+      source_country_market_code:
+        type: string
+        description: Code if the country market the parcel is being shipped from.
+      source_country_market_name:
+        type: string
+        description: Name of the country market the parcel is being shipped from.
+      source_address:
+        $ref: '#/definitions/MerchantAddress'
+        x-nullable: true
+        description: 'It must match the address the items are dispatched from.
+
+          It has a non-operational ID field (a stub), so it cannot be used in API requests.'
+        title: Address to use for estimating parcel delivery dates
+      is_deletable:
+        type: boolean
+        description: 'Indicates whether the shipping profile can be deleted. Will always be
+
+          false on historic versions.'
+      num_offers_assigned:
+        type: integer
+        format: int64
+        x-nullable: true
+        description: 'Number of offers this shipping profile is assigned to. Has to be 0 for the
+
+          shipping profile to be deletable. Set on current version only.'
+      destinations:
+        type: array
+        items:
+          $ref: '#/definitions/Destination'
+        description: Destinations by market code.
+    description: 'A shipping profile defines from where a parcel will be shipped, and in what
+
+      markets it will be made available and under what conditions.'
+  Destination:
+    type: object
+    properties:
+      market_code:
+        type: string
+        description: Code of the market the price is set for.
+      market_name:
+        type: string
+        description: Name of the market the price is set for.
+      is_site_market:
+        type: boolean
+        description: Indicates whether there exists a refurbed website for this market.
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        description: Currency of the shipping costs the merchant set.
+      shipping_costs:
+        type: string
+        description: 'Shipping costs to add to the offer price. This is merely for convenience;
+
+          refurbed does not display any shipping costs to customers.
+
+
+          Merchants are *not* allowed to show shipping costs in their invoices to
+
+          customers.'
+      site_market_currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        x-nullable: true
+        description: Native currency of the market. Only set for site markets.
+      site_market_shipping_costs:
+        type: string
+        x-nullable: true
+        description: 'Shipping costs in the site market''s currency. This is only set if market
+
+          is a site market. Equal to shipping costs set by the merchant if the
+
+          currencies match.
+
+
+          This depends on the latest exchange rates and therefore is a snapshot
+
+          in time. There is no guarantee that new orders will apply the same
+
+          exchange rate.'
+      min_delivery_days:
+        type: integer
+        format: int64
+        description: Minimum number of days the parcel delivery will take. Between 1 and 30.
+      max_delivery_days:
+        type: integer
+        format: int64
+        description: 'Maximum number of days the parcel delivery will take. Between min.
+
+          delivery days and 30.'
+      label_creation_enabled:
+        type: boolean
+        title: Indicates if generating label for shipment for this destination is enabled
+      carrier:
+        type: string
+        x-nullable: true
+        description: The slug of the carrier.
+      dispatch_cutoff_hour:
+        type: integer
+        format: int64
+        x-nullable: true
+        description: The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
+  UpdateShippingProfileRequest:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        required:
+        - id
+      name:
+        type: string
+        x-nullable: true
+      source_country_market_code:
+        type: string
+        x-nullable: true
+        description: 'Deprecated: use source_address instead.'
+      source_address:
+        $ref: '#/definitions/UpdateShippingProfileRequest.Address'
+        x-nullable: true
+        description: Address to use for estimating parcel delivery dates.
+      create_destinations:
+        type: array
+        items:
+          $ref: '#/definitions/UpdateShippingProfileRequest.CreateDestination'
+        description: Destinations to create.
+      update_destinations:
+        type: array
+        items:
+          $ref: '#/definitions/UpdateDestination'
+        description: Destinations to update.
+      delete_destinations:
+        type: array
+        items:
+          type: string
+        description: Destinations to delete. Takes a list of market codes.
+    description: See shipping profile for full documentation.
+    required:
+    - id
+  v1.Carrier:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the carrier. Only used for display purposes.
+      slug:
+        type: string
+        description: Slug of the carrier. Used in requests and responses to identify the carrier.
+  UpdateShippingProfileRequest.CreateDestination:
+    type: object
+    properties:
+      market_code:
+        type: string
+        required:
+        - market_code
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+      shipping_costs:
+        type: string
+        required:
+        - shipping_costs
+      min_delivery_days:
+        type: integer
+        format: int64
+        required:
+        - min_delivery_days
+      max_delivery_days:
+        type: integer
+        format: int64
+        required:
+        - max_delivery_days
+      label_creation_enabled:
+        type: boolean
+        x-nullable: true
+      carrier:
+        type: string
+        x-nullable: true
+        description: Carrier slug, obtained from ListAvailableCarriers RPC.
+      dispatch_cutoff_hour:
+        type: integer
+        format: int64
+        x-nullable: true
+        description: The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
+    required:
+    - market_code
+    - shipping_costs
+    - min_delivery_days
+    - max_delivery_days
+  ListShippingProfilesResponse:
+    type: object
+    properties:
+      shipping_profiles:
+        type: array
+        items:
+          $ref: '#/definitions/ShippingProfile'
+        description: The shipping profiles found.
+      has_more:
+        type: boolean
+        description: Indicates whether there are more results available.
+  GetShippingProfileResponse:
+    type: object
+    properties:
+      shipping_profile:
+        $ref: '#/definitions/ShippingProfile'
+  CreateShippingProfileRequest:
+    type: object
+    properties:
+      name:
+        type: string
+        required:
+        - name
+      source_country_market_code:
+        type: string
+        x-nullable: true
+        description: 'Deprecated: use source_address instead.'
+        required:
+        - source_country_market_code
+      source_address:
+        $ref: '#/definitions/CreateShippingProfileRequest.Address'
+        x-nullable: true
+        description: Address to use for estimating parcel delivery dates.
+      create_destinations:
+        type: array
+        items:
+          $ref: '#/definitions/CreateShippingProfileRequest.CreateDestination'
+        description: Destinations to create.
+    description: See shipping profile for full documentation.
+    required:
+    - name
+    - source_country_market_code
+  MerchantAddress:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+      version:
+        type: string
+        format: int64
+      label:
+        type: string
+        title: A user-defined label to identify or categorize the address, e.g. "Main Warehouse"
+      first_name:
+        type: string
+        x-nullable: true
+      family_name:
+        type: string
+        x-nullable: true
+      company_name:
+        type: string
+      country_code:
+        $ref: '#/definitions/CountryCode'
+      post_code:
+        type: string
+      town:
+        type: string
+      street_name:
+        type: string
+      house_no:
+        type: string
+        x-nullable: true
+      supplement:
+        type: string
+        x-nullable: true
+      phone_number:
+        type: string
+        x-nullable: true
+      type:
+        $ref: '#/definitions/MerchantAddressType'
+    description: 'MerchantAddress is the address from which the merchant dispatches shipments.
+
+      Used as the merchant''s shipping address in the context of shipping label creation.'
+  Any:
+    type: object
+    properties:
+      '@type':
+        type: string
+        description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+    additionalProperties: {}
+    description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+  CreateShippingProfileResponse:
+    type: object
+    properties:
+      shipping_profile:
+        $ref: '#/definitions/ShippingProfile'
+  UpdateShippingProfileResponse:
+    type: object
+    properties:
+      shipping_profile:
+        $ref: '#/definitions/ShippingProfile'
+  SortOrder:
+    type: string
+    enum:
+    - ASC
+    - DESC
+    default: ASC
+  CountryCode:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - AF
+    - AL
+    - AQ
+    - DZ
+    - AS
+    - AD
+    - AO
+    - AG
+    - AZ
+    - AR
+    - AU
+    - AT
+    - BS
+    - BH
+    - BD
+    - AM
+    - BB
+    - BE
+    - BM
+    - BT
+    - BO
+    - BA
+    - BW
+    - BV
+    - BR
+    - BZ
+    - IO
+    - SB
+    - VG
+    - BN
+    - BG
+    - MM
+    - BI
+    - BY
+    - KH
+    - CM
+    - CA
+    - CV
+    - KY
+    - CF
+    - LK
+    - TD
+    - CL
+    - CN
+    - TW
+    - CX
+    - CC
+    - CO
+    - KM
+    - YT
+    - CG
+    - CD
+    - CK
+    - CR
+    - HR
+    - CU
+    - CY
+    - CZ
+    - BJ
+    - DK
+    - DM
+    - DO
+    - EC
+    - SV
+    - GQ
+    - ET
+    - ER
+    - EE
+    - FO
+    - FK
+    - GS
+    - FJ
+    - FI
+    - AX
+    - FR
+    - GF
+    - PF
+    - TF
+    - DJ
+    - GA
+    - GE
+    - GM
+    - PS
+    - DE
+    - GH
+    - GI
+    - KI
+    - GR
+    - GL
+    - GD
+    - GP
+    - GU
+    - GT
+    - GN
+    - GY
+    - HT
+    - HM
+    - VA
+    - HN
+    - HK
+    - HU
+    - IS
+    - IN
+    - ID
+    - IR
+    - IQ
+    - IE
+    - IL
+    - IT
+    - CI
+    - JM
+    - JP
+    - KZ
+    - JO
+    - KE
+    - KP
+    - KR
+    - KW
+    - KG
+    - LA
+    - LB
+    - LS
+    - LV
+    - LR
+    - LY
+    - LI
+    - LT
+    - LU
+    - MO
+    - MG
+    - MW
+    - MY
+    - MV
+    - ML
+    - MT
+    - MQ
+    - MR
+    - MU
+    - MX
+    - MC
+    - MN
+    - MD
+    - ME
+    - MS
+    - MA
+    - MZ
+    - OM
+    - NA
+    - NR
+    - NP
+    - NL
+    - CW
+    - AW
+    - SX
+    - BQ
+    - NC
+    - VU
+    - NZ
+    - NI
+    - NE
+    - NG
+    - NU
+    - NF
+    - 'NO'
+    - MP
+    - UM
+    - FM
+    - MH
+    - PW
+    - PK
+    - PA
+    - PG
+    - PY
+    - PE
+    - PH
+    - PN
+    - PL
+    - PT
+    - GW
+    - TL
+    - PR
+    - QA
+    - RE
+    - RO
+    - RU
+    - RW
+    - BL
+    - SH
+    - KN
+    - AI
+    - LC
+    - MF
+    - PM
+    - VC
+    - SM
+    - ST
+    - SA
+    - SN
+    - RS
+    - SC
+    - SL
+    - SG
+    - SK
+    - VN
+    - SI
+    - SO
+    - ZA
+    - ZW
+    - ES
+    - SS
+    - SD
+    - EH
+    - SR
+    - SJ
+    - SZ
+    - SE
+    - CH
+    - SY
+    - TJ
+    - TH
+    - TG
+    - TK
+    - TO
+    - TT
+    - AE
+    - TN
+    - TR
+    - TM
+    - TC
+    - TV
+    - UG
+    - UA
+    - MK
+    - EG
+    - GB
+    - GG
+    - JE
+    - IM
+    - TZ
+    - US
+    - VI
+    - BF
+    - UY
+    - UZ
+    - VE
+    - WF
+    - WS
+    - YE
+    - ZM
+    default: UNSPECIFIED
+    description: Alpha-2 country codes as specified in ISO 3166-1.
+  UInt32RangeFilter:
+    type: object
+    properties:
+      gt:
+        type: integer
+        format: int64
+        x-nullable: true
+      ge:
+        type: integer
+        format: int64
+        x-nullable: true
+      any_of:
+        type: array
+        items:
+          type: integer
+          format: int64
+      none_of:
+        type: array
+        items:
+          type: integer
+          format: int64
+      le:
+        type: integer
+        format: int64
+        x-nullable: true
+      lt:
+        type: integer
+        format: int64
+        x-nullable: true
+  ListShippingProfilesRequest.Sort:
+    type: object
+    properties:
+      order:
+        $ref: '#/definitions/SortOrder'
+      by:
+        $ref: '#/definitions/ListShippingProfilesRequest.Sort.By'
+  Status:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+      message:
+        type: string
+        description: 'A developer-facing error message, which should be in English. Any
+
+          user-facing error message should be localized and sent in the
+
+          [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/Any'
+        description: 'A list of messages that carry the error details.  There is a common set of
+
+          message types for APIs to use.'
+    description: 'The `Status` type defines a logical error model that is suitable for
+
+      different programming environments, including REST APIs and RPC APIs. It is
+
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
+      three pieces of data: error code, error message, and error details.
+
+
+      You can find out more about this error model and how to work with it in the
+
+      [API Design Guide](https://cloud.google.com/apis/design/errors).'
+  TimestampRangeFilter:
+    type: object
+    properties:
+      gt:
+        type: string
+        format: date-time
+        x-nullable: true
+      ge:
+        type: string
+        format: date-time
+        x-nullable: true
+      any_of:
+        type: array
+        items:
+          type: string
+          format: date-time
+      none_of:
+        type: array
+        items:
+          type: string
+          format: date-time
+      le:
+        type: string
+        format: date-time
+        x-nullable: true
+      lt:
+        type: string
+        format: date-time
+        x-nullable: true
+  ShippingProfileNameFilter:
+    type: object
+    properties:
+      contains:
+        type: string
+        x-nullable: true
+  ListShippingProfilesRequest:
+    type: object
+    properties:
+      pagination:
+        $ref: '#/definitions/Int64Pagination'
+      sort:
+        $ref: '#/definitions/ListShippingProfilesRequest.Sort'
+      filter:
+        $ref: '#/definitions/ListShippingProfilesRequest.Filter'
+  UpdateDestination:
+    type: object
+    properties:
+      market_code:
+        type: string
+        required:
+        - market_code
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        x-nullable: true
+      shipping_costs:
+        type: string
+        x-nullable: true
+      min_delivery_days:
+        type: integer
+        format: int64
+        x-nullable: true
+      max_delivery_days:
+        type: integer
+        format: int64
+        x-nullable: true
+      label_creation_enabled:
+        type: boolean
+        x-nullable: true
+      carrier:
+        type: string
+        x-nullable: true
+        description: Carrier slug, obtained from ListAvailableCarriers RPC.
+      dispatch_cutoff_hour:
+        type: integer
+        format: int64
+        x-nullable: true
+        description: The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
+    required:
+    - market_code
+  MerchantAddressType:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - DELIVERY
+    - RETURN
+    default: UNSPECIFIED
+  CurrencyCode:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - AED
+    - AFN
+    - ALL
+    - AMD
+    - ANG
+    - AOA
+    - ARS
+    - AUD
+    - AWG
+    - AZN
+    - BAM
+    - BBD
+    - BDT
+    - BGN
+    - BHD
+    - BIF
+    - BMD
+    - BND
+    - BOB
+    - BOV
+    - BRL
+    - BSD
+    - BTN
+    - BWP
+    - BYR
+    - BZD
+    - CAD
+    - CDF
+    - CHE
+    - CHF
+    - CHW
+    - CLF
+    - CLP
+    - CNY
+    - COP
+    - COU
+    - CRC
+    - CUC
+    - CUP
+    - CVE
+    - CZK
+    - DJF
+    - DKK
+    - DOP
+    - DZD
+    - EGP
+    - ERN
+    - ETB
+    - EUR
+    - FJD
+    - FKP
+    - GBP
+    - GEL
+    - GHS
+    - GIP
+    - GMD
+    - GNF
+    - GTQ
+    - GYD
+    - HKD
+    - HNL
+    - HRK
+    - HTG
+    - HUF
+    - IDR
+    - ILS
+    - INR
+    - IQD
+    - IRR
+    - ISK
+    - JMD
+    - JOD
+    - JPY
+    - KES
+    - KGS
+    - KHR
+    - KMF
+    - KPW
+    - KRW
+    - KWD
+    - KYD
+    - KZT
+    - LAK
+    - LBP
+    - LKR
+    - LRD
+    - LSL
+    - LTL
+    - LYD
+    - MAD
+    - MDL
+    - MGA
+    - MKD
+    - MMK
+    - MNT
+    - MOP
+    - MRO
+    - MUR
+    - MVR
+    - MWK
+    - MXN
+    - MXV
+    - MYR
+    - MZN
+    - NAD
+    - NGN
+    - NIO
+    - NOK
+    - NPR
+    - NZD
+    - OMR
+    - PAB
+    - PEN
+    - PGK
+    - PHP
+    - PKR
+    - PLN
+    - PYG
+    - QAR
+    - RON
+    - RSD
+    - RUB
+    - RWF
+    - SAR
+    - SBD
+    - SCR
+    - SDG
+    - SEK
+    - SGD
+    - SHP
+    - SLL
+    - SOS
+    - SRD
+    - SSP
+    - STD
+    - SVC
+    - SYP
+    - SZL
+    - THB
+    - TJS
+    - TMT
+    - TND
+    - TOP
+    - TRY
+    - TTD
+    - TWD
+    - TZS
+    - UAH
+    - UGX
+    - USD
+    - USN
+    - UYI
+    - UYU
+    - UZS
+    - VEF
+    - VND
+    - VUV
+    - WST
+    - XAF
+    - XAG
+    - XAU
+    - XBA
+    - XBB
+    - XBC
+    - XBD
+    - XCD
+    - XDR
+    - XOF
+    - XPD
+    - XPF
+    - XPT
+    - XSU
+    - XUA
+    - YER
+    - ZAR
+    - ZMW
+    - ZWL
+    default: UNSPECIFIED
+    description: "Currency codes as specified in ISO 4217.\n\n - AED: XTS = 963; // Code reserved for testing purposes."
+  UpdateShippingProfileRequest.Address:
+    type: object
+    properties:
+      first_name:
+        type: string
+        x-nullable: true
+      family_name:
+        type: string
+        x-nullable: true
+      company_name:
+        type: string
+        required:
+        - company_name
+      country_code:
+        $ref: '#/definitions/CountryCode'
+      post_code:
+        type: string
+        required:
+        - post_code
+      town:
+        type: string
+        required:
+        - town
+      street_name:
+        type: string
+        required:
+        - street_name
+      house_no:
+        type: string
+        required:
+        - house_no
+      supplement:
+        type: string
+        x-nullable: true
+      phone_number:
+        type: string
+        x-nullable: true
+    required:
+    - company_name
+    - post_code
+    - town
+    - street_name
+    - house_no
+  Int64Filter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          type: string
+          format: int64
+      none_of:
+        type: array
+        items:
+          type: string
+          format: int64
+  StringFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          type: string
+      none_of:
+        type: array
+        items:
+          type: string
+  CreateShippingProfileRequest.CreateDestination:
+    type: object
+    properties:
+      market_code:
+        type: string
+        required:
+        - market_code
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+      shipping_costs:
+        type: string
+        required:
+        - shipping_costs
+      min_delivery_days:
+        type: integer
+        format: int64
+        required:
+        - min_delivery_days
+      max_delivery_days:
+        type: integer
+        format: int64
+        required:
+        - max_delivery_days
+      label_creation_enabled:
+        type: boolean
+        x-nullable: true
+      carrier:
+        type: string
+        x-nullable: true
+        description: Carrier slug, obtained from ListAvailableCarriers RPC.
+      dispatch_cutoff_hour:
+        type: integer
+        format: int64
+        x-nullable: true
+        description: The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
+    required:
+    - market_code
+    - shipping_costs
+    - min_delivery_days
+    - max_delivery_days
+  DeleteShippingProfileRequest:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        required:
+        - id
+    required:
+    - id
+  GetShippingProfileRequest:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: The id of the shipping profile to get.
+        required:
+        - id
+      version:
+        type: string
+        format: int64
+        x-nullable: true
+        description: Shipping profile version. Assumes "current", if not set.
+    required:
+    - id
+securityDefinitions:
+  APIKeyAuth:
+    type: apiKey
+    name: Authorization
+    in: header

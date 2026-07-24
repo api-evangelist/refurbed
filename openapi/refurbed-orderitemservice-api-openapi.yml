@@ -1,0 +1,1632 @@
+swagger: '2.0'
+info:
+  title: Affiliate Partner BuybackBidService OrderItemService API
+  version: '1.0'
+  description: The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).
+  contact:
+    name: Refurbed Affiliate Partner Integrations Team
+    email: integrations@refurbed.com
+host: api.refurbed.com
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- APIKeyAuth: []
+tags:
+- name: OrderItemService
+paths:
+  /refb.merchant.v1.OrderItemService/BatchUpdateOrderItems:
+    post:
+      summary: Batch updates order items.
+      description: "Known errors: Errors are identical to the UpdateOrderItem operation per\neach individual order item update and:\n- INVALID_ARGUMENT\n  - when more than 50 updates are attempted"
+      operationId: BatchUpdateOrderItems
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/BatchUpdateOrderItemsResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/BatchUpdateOrderItemsRequest'
+      tags:
+      - OrderItemService
+  /refb.merchant.v1.OrderItemService/BatchUpdateOrderItemsState:
+    post:
+      summary: Batch updates order items' state.
+      description: "Known errors: Errors are identical to the UpdateOrderItemState operation\nper each individual order item state update and:\n- INVALID_ARGUMENT\n  - when more than 50 updates are attempted"
+      operationId: BatchUpdateOrderItemsState
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/BatchUpdateOrderItemsStateResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/BatchUpdateOrderItemsStateRequest'
+      tags:
+      - OrderItemService
+  /refb.merchant.v1.OrderItemService/CalculateRefundOrderItem:
+    post:
+      summary: 'Calculate values for a refund of a single order item, i.e. using the
+
+        RefundOrderItem method.'
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order item is not found\n- INVALID_ARGUMENT\n  - invalid input refund data is provided\n- FAILED_PRECONDITION\n  - when order item is not refundable\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: CalculateRefundOrderItem
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/CalculateRefundOrderItemResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/CalculateRefundOrderItemRequest'
+      tags:
+      - OrderItemService
+  /refb.merchant.v1.OrderItemService/GetOrderItem:
+    post:
+      summary: Gets a single order item.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order item is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: GetOrderItem
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/GetOrderItemResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/GetOrderItemRequest'
+      tags:
+      - OrderItemService
+  /refb.merchant.v1.OrderItemService/ListOrderItemsByOrder:
+    post:
+      summary: Lists all order items of a specific order.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: ListOrderItemsByOrder
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ListOrderItemsByOrderResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ListOrderItemsByOrderRequest'
+      tags:
+      - OrderItemService
+  /refb.merchant.v1.OrderItemService/RefundOrderItem:
+    post:
+      summary: Refunds a single order item. Item needs to be refundable.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order item is not found\n- INVALID_ARGUMENT\n  - invalid input refund data is provided\n- FAILED_PRECONDITION\n  - when order item is not refundable\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: RefundOrderItem
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/RefundOrderItemResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/RefundOrderItemRequest'
+      tags:
+      - OrderItemService
+  /refb.merchant.v1.OrderItemService/UpdateOrderItem:
+    post:
+      summary: Updates a single order item.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the updated order item is not found\n- INVALID_ARGUMENT\n  - when invalid parcel tracking url is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: UpdateOrderItem
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/UpdateOrderItemResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateOrderItemRequest'
+      tags:
+      - OrderItemService
+  /refb.merchant.v1.OrderItemService/UpdateOrderItemState:
+    post:
+      summary: Updates the state of a single order item.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the updated order item is not found\n- INVALID_ARGUMENT\n  - when illegal state transition is attempted\n  - when no parcel tracking url is set when transitioning to SHIPPED state\n  - when invalid parcel tracking url is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+      operationId: UpdateOrderItemState
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/UpdateOrderItemStateResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateOrderItemStateRequest'
+      tags:
+      - OrderItemService
+definitions:
+  GetOrderItemRequest:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: The id of the order item to get.
+        required:
+        - id
+    required:
+    - id
+  NumericRangeFilter:
+    type: object
+    properties:
+      gt:
+        type: string
+        x-nullable: true
+      ge:
+        type: string
+        x-nullable: true
+      any_of:
+        type: array
+        items:
+          type: string
+      none_of:
+        type: array
+        items:
+          type: string
+      le:
+        type: string
+        x-nullable: true
+      lt:
+        type: string
+        x-nullable: true
+    description: 'Numeric range filter is used for decimal numbers. It is especially
+
+      used for monetary amounts and other quantities where exactness is required.'
+  Int64Pagination:
+    type: object
+    properties:
+      limit:
+        type: integer
+        format: int64
+        x-nullable: true
+        description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+          Default and maximum is 100.'
+      ending_before:
+        type: string
+        format: int64
+      starting_after:
+        type: string
+        format: int64
+    description: Paginates resources with int64 primary key.
+  OfferWarranty:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - M12
+    - M18
+    - M24
+    - M30
+    - M36
+    default: UNSPECIFIED
+    description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
+  CalculateRefundOrderItemRequest:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: The id of the order item to calculate item refund values for.
+        required:
+        - id
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        description: Currency to refund. This needs to match the order / order item currency.
+      target_paid_amount:
+        type: string
+        description: 'The desired paid amount of this order item. Example: if the customer paid
+
+          100EUR and the merchant wants to refund 10EUR, the target-paid-amount would
+
+          be 90. 0 for a full refund.'
+        required:
+        - target_paid_amount
+    required:
+    - id
+    - target_paid_amount
+  OrderItemStateFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItemState'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItemState'
+  OfferGrading:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - A
+    - B
+    - C
+    - AA
+    default: UNSPECIFIED
+    description: 'The grading of the item being sold.
+
+
+      Please consult the refurbed seller guide and quality charta to learn about
+
+      refurbed''s grading requirements.'
+  GetOrderItemResponse:
+    type: object
+    properties:
+      order_item:
+        $ref: '#/definitions/OrderItem'
+  BoolFilter:
+    type: object
+    properties:
+      value:
+        type: boolean
+        x-nullable: true
+  BatchUpdateOrderItemsRequest:
+    type: object
+    properties:
+      order_items:
+        type: array
+        items:
+          $ref: '#/definitions/BatchUpdateOrderItemsRequest.Update'
+        description: Order items to update. Between 1 and 50.
+        required:
+        - order_items
+    required:
+    - order_items
+  BatchUpdateOrderItemsStateRequest:
+    type: object
+    properties:
+      updates:
+        type: array
+        items:
+          $ref: '#/definitions/BatchUpdateOrderItemsStateRequest.Update'
+        description: Order items to update. Between 1 and 50.
+        required:
+        - updates
+    required:
+    - updates
+  ListOrderItemsByOrderRequest.Filter.OrderItemNameFilter:
+    type: object
+    properties:
+      matches:
+        type: string
+        x-nullable: true
+  ListOrderItemsByOrderResponse:
+    type: object
+    properties:
+      order_items:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItem'
+        description: The order items found.
+      has_more:
+        type: boolean
+        description: Indicates whether there are more results available.
+  BatchUpdateOrderItemsRequest.Update:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: The id of the order item to update.
+        required:
+        - id
+      parcel_tracking_url:
+        type: string
+        x-nullable: true
+        description: Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
+      item_identifier:
+        type: string
+        x-nullable: true
+        description: 'IMEI (if smartphone) or serial number (other product categories) of the
+
+          item shipped.
+
+          Deprecated: use item_identifiers field instead.'
+      item_identifiers:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItemIdentifier'
+      weight_kg:
+        type: number
+        format: float
+        x-nullable: true
+        description: Net weight of this item, in kilograms.
+      manufacturing_country:
+        $ref: '#/definitions/CountryCode'
+        x-nullable: true
+        description: Country where the item was manufactured.
+      hs_code:
+        type: string
+        x-nullable: true
+        description: 'HS (Harmonized System) code for customs classification.
+
+
+          e.g. 8517.1300 for iPhones'
+      parcel_carrier_tracking_number:
+        $ref: '#/definitions/CarrierTrackingNumber'
+        description: Carrier + tracking number pair.
+    required:
+    - id
+  OrderItemTaxation:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - GROSS
+    - MARGINAL
+    - NET
+    default: UNSPECIFIED
+  OrderItemShipmentSubstatus:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - INFO_RECEIVED
+    - LABEL_CREATED_NO_UPDATES_YET
+    - IN_TRANSIT
+    - OUT_FOR_DELIVERY
+    - AVAILABLE_FOR_PICKUP
+    - DELIVERED
+    - PICKED_UP_BY_CUSTOMER
+    - SIGN_BY_CUSTOMER
+    - NEW_ATTEMPT_OF_DELIVERY
+    - ADDRESS_ISSUES
+    - RETURN_TO_SENDER
+    - DELIVERY_FAILED
+    - ORDER_DELAYED
+    - ORDER_DAMAGED
+    - ORDER_LOST
+    default: UNSPECIFIED
+    description: " - INFO_RECEIVED: The carrier received a request from the shipper and is about to pick up the shipment.\n - LABEL_CREATED_NO_UPDATES_YET: The order has been processed/packaged, but not scanned at a shipping location yet.\n - IN_TRANSIT: Shipment on the way.\n - OUT_FOR_DELIVERY: The package is out for delivery.\n - AVAILABLE_FOR_PICKUP: The package arrived at a pickup point near you and is available for pickup.\n - DELIVERED: Shipment delivered successfully.\n - PICKED_UP_BY_CUSTOMER: Package picked up by the customer.\n - SIGN_BY_CUSTOMER: Package delivered to and signed by the customer.\n - NEW_ATTEMPT_OF_DELIVERY: The delivery of the package failed due to some reason. Courier usually leaves a notice and will try to deliver again.\n - ADDRESS_ISSUES: Package not delivered due to incorrect recipient address.\n - RETURN_TO_SENDER: The package is on its way back to the sender.\n - DELIVERY_FAILED: Delivery of the package failed due to some shipping exception.\n - ORDER_DELAYED: Package delayed due to some unforeseen reasons.\n - ORDER_DAMAGED: Shipment damaged.\n - ORDER_LOST: Delivery of the package failed as it got lost."
+  BatteryCondition:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - OPTIMAL
+    - NEW
+    default: UNSPECIFIED
+  Any:
+    type: object
+    properties:
+      '@type':
+        type: string
+        description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+    additionalProperties: {}
+    description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+  OrderItem:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: Primary key.
+      order_id:
+        type: string
+        format: int64
+        description: ID of the order this item belongs to.
+      name:
+        type: string
+        description: Human-readable name of the item sold.
+      state:
+        $ref: '#/definitions/OrderItemState'
+        description: State of this item.
+      sku:
+        type: string
+        description: 'Merchant SKU of the item. This can be empty string as it is/was possible
+
+          for the merchant to create offers without SKU in the refurbed merchant
+
+          management interface.'
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        description: 'Currency the order item was charged in. Is always equal to the currency
+
+          of the order.'
+      settlement_currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        description: 'Currency the order item was settled it. This is the currency the merchant will
+
+          be paid out in. Is always equal to the settlement currency of the order.'
+      total_charged:
+        type: string
+        description: 'The total amount the customer was charged for this item, in order
+
+          currency. This is the sum of total paid and total refunded.'
+      settlement_total_charged:
+        type: string
+        description: 'The total amount the customer was charged for this item, in order
+
+          settlement currency.'
+      total_discount:
+        type: string
+        description: Discount amount if coupon was applied to the order.
+      settlement_total_discount:
+        type: string
+        description: Discount amount if coupon was applied to the order, in settlement currency.
+      total_charged_dynamic:
+        type: string
+        description: 'The dynamic price part of the amount the customer was charged
+
+          ("dynamic pricing").'
+      settlement_total_charged_dynamic:
+        type: string
+        description: 'The dynamic price part of the amount the customer was charged, in order
+
+          settlement currency.'
+      total_paid:
+        type: string
+        description: 'The total amount the customer paid for this item plus discount value, in order currency. This
+
+          value decreases on refund.'
+      settlement_total_paid:
+        type: string
+        description: The total amount the customer paid for this item plus discount value, in order settlement currency.
+      total_refunded:
+        type: string
+        description: The total amount the customer was refunded, in order currency.
+      settlement_total_refunded:
+        type: string
+        description: The total amount the customer was refunded, in order settlement currency.
+      settlement_total_commission:
+        type: string
+        description: Total commission paid by the merchant, in order settlement currency.
+      settlement_base_commission:
+        type: string
+        description: Base commission paid by the merchant, in order settlement currency.
+      settlement_payout_commission:
+        type: string
+        description: Payout commission paid by the merchant, in order settlement currency.
+      settlement_payment_commission:
+        type: string
+        description: Payment commission paid by the merchant, in order settlement currency.
+      settlement_dynamic_commission:
+        type: string
+        description: 'Dynamic commission paid by the merchant (commission of the dynamic part),
+
+          in order settlement currency.'
+      taxation:
+        $ref: '#/definitions/OrderItemTaxation'
+        description: How this item was taxed.
+      is_refundable:
+        type: boolean
+        description: Indicates whether this item is currently refundable.
+      refund_eligibility:
+        $ref: '#/definitions/RefundEligibility'
+        description: Indicates whether this item is refundable, if not, why it's not.
+      offer_data:
+        $ref: '#/definitions/OfferData'
+        description: Set if item was created from an offer.
+      parcel_tracking_url:
+        type: string
+        x-nullable: true
+        description: Parcel tracking link. Needs to be a valid HTTP(S) URL.
+      return_shipment_tracking_url:
+        type: string
+        x-nullable: true
+        description: 'Tracking link for the return parcel. Needs to be a valid HTTP(S) URL.
+
+          Only provided if a return label for this order item has been issued.'
+      item_identifier:
+        type: string
+        x-nullable: true
+        description: 'IMEI (if smartphone) or serial number (other product categories) of the
+
+          item shipped.
+
+          Deprecated: use item_identifiers field instead.'
+      item_identifiers:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItemIdentifier'
+      shipment_status:
+        $ref: '#/definitions/OrderItemShipmentStatus'
+        x-nullable: true
+        description: The current shipment status of the order item.
+      shipment_substatus:
+        $ref: '#/definitions/OrderItemShipmentSubstatus'
+        x-nullable: true
+        description: The current shipment substatus of the order item.
+      return_initiated:
+        type: boolean
+        description: 'Indicates whether the return process was started for an item by the customer.
+
+          This concerns only returns where the customer generated a label themselves.'
+      vat_rate:
+        type: string
+        title: 'Rate of the value-added tax (VAT) applied to the order item.
+
+          Example: vat_rate = 20 stands for 20% VAT'
+      vat_country:
+        $ref: '#/definitions/CountryCode'
+        description: The country VAT is calculated for.
+      vat_charged:
+        type: string
+        description: The amount of VAT the customer was charged for this item, in order currency.
+      settlement_vat_charged:
+        type: string
+        description: The amount of VAT the customer was charged for this item, in settlement currency.
+      weight_kg:
+        type: number
+        format: float
+        x-nullable: true
+        description: Net weight of this item, in kilograms.
+      manufacturing_country:
+        $ref: '#/definitions/CountryCode'
+        x-nullable: true
+        description: Country where the item was manufactured.
+      hs_code:
+        type: string
+        x-nullable: true
+        description: 'HS (Harmonized System) code for customs classification.
+
+
+          e.g. 8517.1300 for iPhones'
+    description: An order item.
+  OrderItemShipmentStatus:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - INFO_RECEIVED
+    - IN_TRANSIT
+    - OUT_FOR_DELIVERY
+    - AVAILABLE_FOR_PICKUP
+    - DELIVERED
+    - FAILED_ATTEMPT
+    - EXCEPTION
+    default: UNSPECIFIED
+    description: " - INFO_RECEIVED: Carrier has received request from shipper and is about to pick up the shipment.\n - IN_TRANSIT: Carrier has accepted or picked up shipment from shipper. The shipment is on the way.\n - OUT_FOR_DELIVERY: Carrier is about to deliver the shipment , or it is ready to pickup.\n - AVAILABLE_FOR_PICKUP: The package arrived at a pickup point near you and is available for pickup.\n - DELIVERED: The shipment was delivered successfully.\n - FAILED_ATTEMPT: Carrier attempted to deliver but failed, and usually leaves a notice and will try to deliver again.\n - EXCEPTION: Custom hold, undelivered, returned shipment to sender or any shipping exceptions."
+  SortOrder:
+    type: string
+    enum:
+    - ASC
+    - DESC
+    default: ASC
+  CountryCode:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - AF
+    - AL
+    - AQ
+    - DZ
+    - AS
+    - AD
+    - AO
+    - AG
+    - AZ
+    - AR
+    - AU
+    - AT
+    - BS
+    - BH
+    - BD
+    - AM
+    - BB
+    - BE
+    - BM
+    - BT
+    - BO
+    - BA
+    - BW
+    - BV
+    - BR
+    - BZ
+    - IO
+    - SB
+    - VG
+    - BN
+    - BG
+    - MM
+    - BI
+    - BY
+    - KH
+    - CM
+    - CA
+    - CV
+    - KY
+    - CF
+    - LK
+    - TD
+    - CL
+    - CN
+    - TW
+    - CX
+    - CC
+    - CO
+    - KM
+    - YT
+    - CG
+    - CD
+    - CK
+    - CR
+    - HR
+    - CU
+    - CY
+    - CZ
+    - BJ
+    - DK
+    - DM
+    - DO
+    - EC
+    - SV
+    - GQ
+    - ET
+    - ER
+    - EE
+    - FO
+    - FK
+    - GS
+    - FJ
+    - FI
+    - AX
+    - FR
+    - GF
+    - PF
+    - TF
+    - DJ
+    - GA
+    - GE
+    - GM
+    - PS
+    - DE
+    - GH
+    - GI
+    - KI
+    - GR
+    - GL
+    - GD
+    - GP
+    - GU
+    - GT
+    - GN
+    - GY
+    - HT
+    - HM
+    - VA
+    - HN
+    - HK
+    - HU
+    - IS
+    - IN
+    - ID
+    - IR
+    - IQ
+    - IE
+    - IL
+    - IT
+    - CI
+    - JM
+    - JP
+    - KZ
+    - JO
+    - KE
+    - KP
+    - KR
+    - KW
+    - KG
+    - LA
+    - LB
+    - LS
+    - LV
+    - LR
+    - LY
+    - LI
+    - LT
+    - LU
+    - MO
+    - MG
+    - MW
+    - MY
+    - MV
+    - ML
+    - MT
+    - MQ
+    - MR
+    - MU
+    - MX
+    - MC
+    - MN
+    - MD
+    - ME
+    - MS
+    - MA
+    - MZ
+    - OM
+    - NA
+    - NR
+    - NP
+    - NL
+    - CW
+    - AW
+    - SX
+    - BQ
+    - NC
+    - VU
+    - NZ
+    - NI
+    - NE
+    - NG
+    - NU
+    - NF
+    - 'NO'
+    - MP
+    - UM
+    - FM
+    - MH
+    - PW
+    - PK
+    - PA
+    - PG
+    - PY
+    - PE
+    - PH
+    - PN
+    - PL
+    - PT
+    - GW
+    - TL
+    - PR
+    - QA
+    - RE
+    - RO
+    - RU
+    - RW
+    - BL
+    - SH
+    - KN
+    - AI
+    - LC
+    - MF
+    - PM
+    - VC
+    - SM
+    - ST
+    - SA
+    - SN
+    - RS
+    - SC
+    - SL
+    - SG
+    - SK
+    - VN
+    - SI
+    - SO
+    - ZA
+    - ZW
+    - ES
+    - SS
+    - SD
+    - EH
+    - SR
+    - SJ
+    - SZ
+    - SE
+    - CH
+    - SY
+    - TJ
+    - TH
+    - TG
+    - TK
+    - TO
+    - TT
+    - AE
+    - TN
+    - TR
+    - TM
+    - TC
+    - TV
+    - UG
+    - UA
+    - MK
+    - EG
+    - GB
+    - GG
+    - JE
+    - IM
+    - TZ
+    - US
+    - VI
+    - BF
+    - UY
+    - UZ
+    - VE
+    - WF
+    - WS
+    - YE
+    - ZM
+    default: UNSPECIFIED
+    description: Alpha-2 country codes as specified in ISO 3166-1.
+  RefundEligibility:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - ELIGIBLE
+    - INELIGIBLE_UNKNOWN
+    - INELIGIBLE_PERIOD_EXPIRED
+    - INELIGIBLE_ALREADY_REFUNDED
+    - INELIGIBLE_UNCAPTURED_PAYMENT
+    - INELIGIBLE_NO_TICKET
+    default: UNSPECIFIED
+    description: " - ELIGIBLE: Refunds are allowed.\n - INELIGIBLE_UNKNOWN: Refunds are not allowed for an unspecified reason.\n - INELIGIBLE_PERIOD_EXPIRED: Refunds are not allowed because the order was created long ago.\n - INELIGIBLE_ALREADY_REFUNDED: Refunds are not allowed because everything the customer paid has already been refunded.\n - INELIGIBLE_UNCAPTURED_PAYMENT: Refunds are not allowed because Refurbed doesn't have the payment guaranteed yet.\n - INELIGIBLE_NO_TICKET: Refunds are not allowed because no relevant Zendesk ticket exists."
+  OrderItemState:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - NEW
+    - REJECTED
+    - CANCELLED
+    - ACCEPTED
+    - SHIPPED
+    - RETURNED
+    default: UNSPECIFIED
+    description: " - NEW: Order item was not handled yet. Next states: REJECTED, CANCELLED or\nACCEPTED.\n - REJECTED: Order item cannot be fulfilled. Final state.\n - CANCELLED: Order item was cancelled by the customer. Is like REJECTED but was\nrequested by the customer. Final state.\n - ACCEPTED: Order item was accepted for fulfillment. Next states: CANCELLED or\nSHIPPED.\n - SHIPPED: Order item was shipped. The parcel tracking link needs to be set for this\nstate to be set. The item identifier should be set, if possible. Possible\nfinal state. Next possible state, if necessary: RETURNED.\n - RETURNED: Order item was returned by the customer. Final state."
+  OrderItemIdentifier:
+    type: object
+    properties:
+      identifier_type:
+        $ref: '#/definitions/OrderItemIdentifierType'
+      value:
+        type: string
+  OfferGradingFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferGrading'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferGrading'
+  Status:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+      message:
+        type: string
+        description: 'A developer-facing error message, which should be in English. Any
+
+          user-facing error message should be localized and sent in the
+
+          [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/Any'
+        description: 'A list of messages that carry the error details.  There is a common set of
+
+          message types for APIs to use.'
+    description: 'The `Status` type defines a logical error model that is suitable for
+
+      different programming environments, including REST APIs and RPC APIs. It is
+
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
+      three pieces of data: error code, error message, and error details.
+
+
+      You can find out more about this error model and how to work with it in the
+
+      [API Design Guide](https://cloud.google.com/apis/design/errors).'
+  UpdateOrderItemRequest:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: The id of the order item to update.
+        required:
+        - id
+      parcel_tracking_url:
+        type: string
+        x-nullable: true
+        description: Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
+      item_identifier:
+        type: string
+        x-nullable: true
+        description: 'IMEI (if smartphone) or serial number (other product categories) of the
+
+          item shipped.
+
+          Deprecated: use item_identifiers field instead.'
+      item_identifiers:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItemIdentifier'
+      weight_kg:
+        type: number
+        format: float
+        x-nullable: true
+        description: Net weight of this item, in kilograms.
+      manufacturing_country:
+        $ref: '#/definitions/CountryCode'
+        x-nullable: true
+        description: Country where the item was manufactured.
+      hs_code:
+        type: string
+        x-nullable: true
+        description: 'HS (Harmonized System) code for customs classification.
+
+
+          e.g. 8517.1300 for iPhones'
+      parcel_carrier_tracking_number:
+        $ref: '#/definitions/CarrierTrackingNumber'
+        description: Carrier + tracking number pair.
+    required:
+    - id
+  BatchUpdateOrderItemsResponse:
+    type: object
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/BatchUpdateOrderItemsResponse.Result'
+        description: Results of the update operation. In request order.
+  UpdateOrderItemResponse:
+    type: object
+    properties:
+      order_item:
+        $ref: '#/definitions/OrderItem'
+  UpdateOrderItemStateRequest:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: The id of the order item to update.
+        required:
+        - id
+      state:
+        $ref: '#/definitions/OrderItemState'
+        description: The new state to set.
+      parcel_tracking_url:
+        type: string
+        x-nullable: true
+        description: Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
+      item_identifier:
+        type: string
+        x-nullable: true
+        description: 'IMEI (if smartphone) or serial number (other product categories) of the
+
+          item shipped.
+
+          Deprecated: use item_identifiers field instead.'
+      item_identifiers:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItemIdentifier'
+      weight_kg:
+        type: number
+        format: float
+        x-nullable: true
+        description: Net weight of this item, in kilograms.
+      manufacturing_country:
+        $ref: '#/definitions/CountryCode'
+        x-nullable: true
+        description: Country where the item was manufactured.
+      hs_code:
+        type: string
+        x-nullable: true
+        description: 'HS (Harmonized System) code for customs classification.
+
+
+          e.g. 8517.1300 for iPhones'
+      parcel_carrier_tracking_number:
+        $ref: '#/definitions/CarrierTrackingNumber'
+        description: Carrier + tracking number pair.
+    required:
+    - id
+  ListOrderItemsByOrderRequest.Filter:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/Int64Filter'
+      name:
+        $ref: '#/definitions/ListOrderItemsByOrderRequest.Filter.OrderItemNameFilter'
+      state:
+        $ref: '#/definitions/OrderItemStateFilter'
+      sku:
+        $ref: '#/definitions/OfferSKUFilter'
+      currency_code:
+        $ref: '#/definitions/CurrencyCodeFilter'
+      settlement_currency_code:
+        $ref: '#/definitions/CurrencyCodeFilter'
+      total_charged:
+        $ref: '#/definitions/NumericRangeFilter'
+      settlement_total_charged:
+        $ref: '#/definitions/NumericRangeFilter'
+      total_charged_dynamic:
+        $ref: '#/definitions/NumericRangeFilter'
+      settlement_total_charged_dynamic:
+        $ref: '#/definitions/NumericRangeFilter'
+      total_paid:
+        $ref: '#/definitions/NumericRangeFilter'
+      settlement_total_paid:
+        $ref: '#/definitions/NumericRangeFilter'
+      total_refunded:
+        $ref: '#/definitions/NumericRangeFilter'
+      settlement_total_refunded:
+        $ref: '#/definitions/NumericRangeFilter'
+      settlement_total_commission:
+        $ref: '#/definitions/NumericRangeFilter'
+      settlement_base_commission:
+        $ref: '#/definitions/NumericRangeFilter'
+      settlement_payout_commission:
+        $ref: '#/definitions/NumericRangeFilter'
+      settlement_payment_commission:
+        $ref: '#/definitions/NumericRangeFilter'
+      settlement_dynamic_commission:
+        $ref: '#/definitions/NumericRangeFilter'
+      taxation:
+        $ref: '#/definitions/OrderItemTaxationFilter'
+      is_refundable:
+        $ref: '#/definitions/BoolFilter'
+      is_parcel_tracking_url:
+        $ref: '#/definitions/BoolFilter'
+      is_item_identifier:
+        $ref: '#/definitions/BoolFilter'
+      linked_offer_data_offer_id:
+        $ref: '#/definitions/Int64Filter'
+      linked_offer_data_offer_warranty:
+        $ref: '#/definitions/OfferWarrantyFilter'
+      linked_offer_data_offer_grading:
+        $ref: '#/definitions/OfferGradingFilter'
+      linked_offer_data_shipping_profile_id:
+        $ref: '#/definitions/Int64Filter'
+  OfferSKUFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          type: string
+      none_of:
+        type: array
+        items:
+          type: string
+      contains:
+        type: string
+        x-nullable: true
+  OrderItemTaxationFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItemTaxation'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItemTaxation'
+  BatchUpdateOrderItemsStateRequest.Update:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: The id of the order item to refund.
+        required:
+        - id
+      state:
+        $ref: '#/definitions/OrderItemState'
+      parcel_tracking_url:
+        type: string
+        x-nullable: true
+        description: Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
+      item_identifier:
+        type: string
+        x-nullable: true
+        description: 'IMEI (if smartphone) or serial number (other product categories) of the
+
+          item shipped.
+
+          Deprecated: use item_identifiers field instead.'
+      item_identifiers:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItemIdentifier'
+      weight_kg:
+        type: number
+        format: float
+        x-nullable: true
+        description: Net weight of this item, in kilograms.
+      manufacturing_country:
+        $ref: '#/definitions/CountryCode'
+        x-nullable: true
+        description: Country where the item was manufactured.
+      hs_code:
+        type: string
+        x-nullable: true
+        description: 'HS (Harmonized System) code for customs classification.
+
+
+          e.g. 8517.1300 for iPhones'
+      parcel_carrier_tracking_number:
+        $ref: '#/definitions/CarrierTrackingNumber'
+        description: Carrier + tracking number pair.
+    required:
+    - id
+  BatchUpdateOrderItemsStateResponse.Result:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/Status'
+      order_item:
+        $ref: '#/definitions/OrderItem'
+        x-nullable: true
+        description: Updated order item. Set if status code is OK.
+  CalculateRefundOrderItemResponse:
+    type: object
+    properties:
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        description: Currency of the refund. This matches the order / order item currency.
+      total_paid:
+        type: string
+        description: New total paid of the order item.
+      total_refunded:
+        type: string
+        description: Total refunded amount.
+      refunded:
+        type: string
+        description: Refunded amount.
+      refunded_refurbed:
+        type: string
+        description: Part that refurbed refunded.
+      refunded_merchant:
+        type: string
+        description: Part that the merchant refunded.
+  CarrierTrackingNumber:
+    type: object
+    properties:
+      carrier:
+        type: string
+        description: Carrier slug, obtained from ListAvailableCarriers RPC.
+      tracking_number:
+        type: string
+        description: Tracking number belonging to that carrier.
+  CurrencyCode:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - AED
+    - AFN
+    - ALL
+    - AMD
+    - ANG
+    - AOA
+    - ARS
+    - AUD
+    - AWG
+    - AZN
+    - BAM
+    - BBD
+    - BDT
+    - BGN
+    - BHD
+    - BIF
+    - BMD
+    - BND
+    - BOB
+    - BOV
+    - BRL
+    - BSD
+    - BTN
+    - BWP
+    - BYR
+    - BZD
+    - CAD
+    - CDF
+    - CHE
+    - CHF
+    - CHW
+    - CLF
+    - CLP
+    - CNY
+    - COP
+    - COU
+    - CRC
+    - CUC
+    - CUP
+    - CVE
+    - CZK
+    - DJF
+    - DKK
+    - DOP
+    - DZD
+    - EGP
+    - ERN
+    - ETB
+    - EUR
+    - FJD
+    - FKP
+    - GBP
+    - GEL
+    - GHS
+    - GIP
+    - GMD
+    - GNF
+    - GTQ
+    - GYD
+    - HKD
+    - HNL
+    - HRK
+    - HTG
+    - HUF
+    - IDR
+    - ILS
+    - INR
+    - IQD
+    - IRR
+    - ISK
+    - JMD
+    - JOD
+    - JPY
+    - KES
+    - KGS
+    - KHR
+    - KMF
+    - KPW
+    - KRW
+    - KWD
+    - KYD
+    - KZT
+    - LAK
+    - LBP
+    - LKR
+    - LRD
+    - LSL
+    - LTL
+    - LYD
+    - MAD
+    - MDL
+    - MGA
+    - MKD
+    - MMK
+    - MNT
+    - MOP
+    - MRO
+    - MUR
+    - MVR
+    - MWK
+    - MXN
+    - MXV
+    - MYR
+    - MZN
+    - NAD
+    - NGN
+    - NIO
+    - NOK
+    - NPR
+    - NZD
+    - OMR
+    - PAB
+    - PEN
+    - PGK
+    - PHP
+    - PKR
+    - PLN
+    - PYG
+    - QAR
+    - RON
+    - RSD
+    - RUB
+    - RWF
+    - SAR
+    - SBD
+    - SCR
+    - SDG
+    - SEK
+    - SGD
+    - SHP
+    - SLL
+    - SOS
+    - SRD
+    - SSP
+    - STD
+    - SVC
+    - SYP
+    - SZL
+    - THB
+    - TJS
+    - TMT
+    - TND
+    - TOP
+    - TRY
+    - TTD
+    - TWD
+    - TZS
+    - UAH
+    - UGX
+    - USD
+    - USN
+    - UYI
+    - UYU
+    - UZS
+    - VEF
+    - VND
+    - VUV
+    - WST
+    - XAF
+    - XAG
+    - XAU
+    - XBA
+    - XBB
+    - XBC
+    - XBD
+    - XCD
+    - XDR
+    - XOF
+    - XPD
+    - XPF
+    - XPT
+    - XSU
+    - XUA
+    - YER
+    - ZAR
+    - ZMW
+    - ZWL
+    default: UNSPECIFIED
+    description: "Currency codes as specified in ISO 4217.\n\n - AED: XTS = 963; // Code reserved for testing purposes."
+  BatchUpdateOrderItemsStateResponse:
+    type: object
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/BatchUpdateOrderItemsStateResponse.Result'
+        description: Results of the update operation. In request order.
+  Int64Filter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          type: string
+          format: int64
+      none_of:
+        type: array
+        items:
+          type: string
+          format: int64
+  ListOrderItemsByOrderRequest.Sort:
+    type: object
+    properties:
+      order:
+        $ref: '#/definitions/SortOrder'
+      by:
+        $ref: '#/definitions/ListOrderItemsByOrderRequest.Sort.By'
+  OfferWarrantyFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferWarranty'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/OfferWarranty'
+  ListOrderItemsByOrderRequest.Sort.By:
+    type: string
+    enum:
+    - ID
+    - NAME
+    - STATE
+    - SKU
+    - CURRENCY_CODE
+    - SETTLEMENT_CURRENCY_CODE
+    - TOTAL_CHARGED
+    - SETTLEMENT_TOTAL_CHARGED
+    - TOTAL_CHARGED_DYNAMIC
+    - SETTLEMENT_TOTAL_CHARGED_DYNAMIC
+    - TOTAL_PAID
+    - SETTLEMENT_TOTAL_PAID
+    - TOTAL_REFUNDED
+    - SETTLEMENT_TOTAL_REFUNDED
+    - SETTLEMENT_TOTAL_COMMISSION
+    - SETTLEMENT_BASE_COMMISSION
+    - SETTLEMENT_PAYOUT_COMMISSION
+    - SETTLEMENT_PAYMENT_COMMISSION
+    - SETTLEMENT_DYNAMIC_COMMISSION
+    - TAXATION
+    - IS_REFUNDABLE
+    default: ID
+  CurrencyCodeFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/CurrencyCode'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/CurrencyCode'
+  RefundOrderItemRequest:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: The id of the order item to refund.
+        required:
+        - id
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        description: Currency to refund. This needs to match the order / order item currency.
+      target_paid_amount:
+        type: string
+        description: 'The desired paid amount of this order item. Example: if the customer paid
+
+          100EUR and the merchant wants to refund 10EUR, the target-paid-amount would
+
+          be 90. 0 for a full refund.'
+        required:
+        - target_paid_amount
+    required:
+    - id
+    - target_paid_amount
+  OrderItemIdentifierType:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - IMEI
+    - SERIAL_NUMBER
+    default: UNSPECIFIED
+  ListOrderItemsByOrderRequest:
+    type: object
+    properties:
+      pagination:
+        $ref: '#/definitions/Int64Pagination'
+      sort:
+        $ref: '#/definitions/ListOrderItemsByOrderRequest.Sort'
+      filter:
+        $ref: '#/definitions/ListOrderItemsByOrderRequest.Filter'
+      order_id:
+        type: string
+        format: int64
+        required:
+        - order_id
+    required:
+    - order_id
+  UpdateOrderItemStateResponse:
+    type: object
+    properties:
+      order_item:
+        $ref: '#/definitions/OrderItem'
+  BatchUpdateOrderItemsResponse.Result:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/Status'
+      order_item:
+        $ref: '#/definitions/OrderItem'
+        x-nullable: true
+        description: Updated order item. Set if status code is OK.
+  RefundOrderItemResponse:
+    type: object
+    properties:
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        description: Currency of the refund. This matches the order / order item currency.
+      total_paid:
+        type: string
+        description: New total paid of the order item.
+      total_refunded:
+        type: string
+        description: Total refunded amount.
+      refunded:
+        type: string
+        description: Refunded amount.
+      refunded_refurbed:
+        type: string
+        description: Part that refurbed refunded.
+      refunded_merchant:
+        type: string
+        description: Part that the merchant refunded.
+  OfferData:
+    type: object
+    properties:
+      offer_id:
+        type: string
+        format: int64
+      offer_version:
+        type: string
+        format: int64
+      offer_order_exchange_rate:
+        type: string
+        description: 'Exchange rate applied to convert amounts from offer currency to order
+
+          currency.'
+      offer_warranty:
+        $ref: '#/definitions/OfferWarranty'
+        description: The offer warranty.
+      offer_grading:
+        $ref: '#/definitions/OfferGrading'
+        description: The offer grading.
+      shipping_profile_id:
+        type: string
+        format: int64
+      shipping_profile_version:
+        type: string
+        format: int64
+        x-nullable: true
+        description: 'Shipping profiles on old orders do not have proper version information
+
+          attached to them. This is only set for newer orders.'
+      shipping_costs:
+        type: string
+        description: The shipping costs, in order currency.
+      battery_condition:
+        $ref: '#/definitions/BatteryCondition'
+        x-nullable: true
+securityDefinitions:
+  APIKeyAuth:
+    type: apiKey
+    name: Authorization
+    in: header

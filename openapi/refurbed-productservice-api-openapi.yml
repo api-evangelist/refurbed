@@ -1,0 +1,594 @@
+swagger: '2.0'
+info:
+  title: Affiliate Partner BuybackBidService ProductService API
+  version: '1.0'
+  description: The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).
+  contact:
+    name: Refurbed Affiliate Partner Integrations Team
+    email: integrations@refurbed.com
+host: api.refurbed.com
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- APIKeyAuth: []
+tags:
+- name: ProductService
+paths:
+  /refb.partner.affiliate.v1.ProductService/GetProduct:
+    post:
+      summary: Gets a single product.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the product is not found"
+      operationId: GetProduct
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/GetProductResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/GetProductRequest'
+      tags:
+      - ProductService
+  /refb.partner.affiliate.v1.ProductService/ListProducts:
+    post:
+      summary: Lists products.
+      description: "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination"
+      operationId: ListProducts
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ListProductsResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ListProductsRequest'
+      tags:
+      - ProductService
+definitions:
+  Product:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: Primary key.
+      name:
+        type: string
+        description: Human-readable name.
+      category_id:
+        type: string
+        format: int64
+        description: Identifier of category this product is linked with.
+      category_path:
+        type: array
+        items:
+          type: string
+        description: Human-readable names of category hierarchy path (e.g. ["Smartphones", "Apple"]).
+      attributes:
+        type: array
+        items:
+          $ref: '#/definitions/Attribute'
+        description: List of attributes assigned to this product.
+      medias:
+        type: array
+        items:
+          $ref: '#/definitions/Media'
+        description: List of media assigned to this product.
+      buybox:
+        $ref: '#/definitions/Buybox'
+        description: 'Buybox data, defines the price and conditions (grading, warranty) by which
+
+          this best instance for a given product is sold.'
+    description: A product.
+  MediaType:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - IMAGE
+    default: UNSPECIFIED
+  Int64Pagination:
+    type: object
+    properties:
+      limit:
+        type: integer
+        format: int64
+        x-nullable: true
+        description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+          Default and maximum is 100.'
+      ending_before:
+        type: string
+        format: int64
+      starting_after:
+        type: string
+        format: int64
+    description: Paginates resources with int64 primary key.
+  ListProductsRequest.Filter:
+    type: object
+    properties:
+      id:
+        $ref: '#/definitions/ProductIDFilter'
+      name:
+        $ref: '#/definitions/ProductNameFilter'
+      category_id:
+        $ref: '#/definitions/CategoryFilter'
+      attributes:
+        $ref: '#/definitions/AttributesFilter'
+  OfferWarranty:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - M12
+    - M18
+    - M24
+    - M30
+    - M36
+    default: UNSPECIFIED
+    description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
+  ListProductsRequest:
+    type: object
+    properties:
+      pagination:
+        $ref: '#/definitions/Int64Pagination'
+      sort:
+        $ref: '#/definitions/ListProductsRequest.Sort'
+      filter:
+        $ref: '#/definitions/ListProductsRequest.Filter'
+      site_market_code:
+        type: string
+        description: The code of a site market where the products are sold.
+        required:
+        - site_market_code
+      back_link:
+        type: string
+        x-nullable: true
+        description: 'URL linking back to partner''s site.
+
+
+          If provided, it is used to populate a query parameter for each
+
+          product buybox link.'
+    required:
+    - site_market_code
+  Buybox:
+    type: object
+    properties:
+      instance_id:
+        type: string
+        format: int64
+        description: Primary key of the linked instance.
+      instance_name:
+        type: string
+        description: Human-readable name of the linked instance.
+      grading:
+        $ref: '#/definitions/OfferGrading'
+        description: Grading of the item sold.
+      grading_name:
+        type: string
+        description: Human-readable name of the grading.
+      warranty:
+        $ref: '#/definitions/OfferWarranty'
+        description: Warranty of the item sold.
+      currency_code:
+        $ref: '#/definitions/CurrencyCode'
+        description: Currency in which the item is sold.
+      price:
+        type: string
+        description: Price at which the item is sold.
+      link:
+        type: string
+        description: 'URL to the item on refurbed marketplace.
+
+
+          If a back link is specified in the original request an additional query
+
+          parameter will be included in the link.'
+    description: A Buybox.
+  Media:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/MediaType'
+        description: Type of the media.
+      url:
+        type: string
+        description: URL to the media.
+    description: A media.
+  OfferGrading:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - A
+    - B
+    - C
+    default: UNSPECIFIED
+    description: The grading of the item being sold.
+  GetProductRequest:
+    type: object
+    properties:
+      site_market_code:
+        type: string
+        description: Code of a site market where the product is sold.
+        required:
+        - site_market_code
+      id:
+        type: string
+        format: int64
+        description: Primary key of the product to get.
+        required:
+        - id
+      back_link:
+        type: string
+        x-nullable: true
+        description: 'URL linking back to partner''s site.
+
+
+          If provided, it is used to populate a query parameter for product
+
+          buybox link.'
+    required:
+    - site_market_code
+    - id
+  ProductIDFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          type: string
+          format: int64
+  ListProductsRequest.Sort.By:
+    type: string
+    enum:
+    - POPULARITY
+    - PRICE
+    default: POPULARITY
+    description: " - POPULARITY: Sort by popularity.\n\nNOTE: ASC and DESC will return the same result.\n - PRICE: Sort by price."
+  Any:
+    type: object
+    properties:
+      '@type':
+        type: string
+    additionalProperties: {}
+  Attribute:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: Primary key.
+      name:
+        type: string
+        description: Human-readable name.
+      type:
+        $ref: '#/definitions/AttributeType'
+        description: Type fo the attribute.
+      value_str:
+        $ref: '#/definitions/StringValue'
+        description: Value is set if type is ENUM.
+      value_num:
+        $ref: '#/definitions/NumericValue'
+        description: Value is set if type is NUMERIC.
+    description: An Attribute.
+  SortOrder:
+    type: string
+    enum:
+    - ASC
+    - DESC
+    default: ASC
+  Status:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/Any'
+  NumericValue:
+    type: object
+    properties:
+      value:
+        type: number
+        format: double
+      unit:
+        type: string
+        x-nullable: true
+  EnumValueCond:
+    type: object
+    properties:
+      eq:
+        type: string
+        x-nullable: true
+    description: An enum attribute value condition.
+  ListProductsRequest.Sort:
+    type: object
+    properties:
+      order:
+        $ref: '#/definitions/SortOrder'
+      by:
+        $ref: '#/definitions/ListProductsRequest.Sort.By'
+  NumericValueCond:
+    type: object
+    properties:
+      eq:
+        type: number
+        format: double
+        x-nullable: true
+    description: A numeric attribute value condition.
+  GetProductResponse:
+    type: object
+    properties:
+      product:
+        $ref: '#/definitions/Product'
+        description: The product retrieved.
+  CurrencyCode:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - AED
+    - AFN
+    - ALL
+    - AMD
+    - ANG
+    - AOA
+    - ARS
+    - AUD
+    - AWG
+    - AZN
+    - BAM
+    - BBD
+    - BDT
+    - BGN
+    - BHD
+    - BIF
+    - BMD
+    - BND
+    - BOB
+    - BOV
+    - BRL
+    - BSD
+    - BTN
+    - BWP
+    - BYR
+    - BZD
+    - CAD
+    - CDF
+    - CHE
+    - CHF
+    - CHW
+    - CLF
+    - CLP
+    - CNY
+    - COP
+    - COU
+    - CRC
+    - CUC
+    - CUP
+    - CVE
+    - CZK
+    - DJF
+    - DKK
+    - DOP
+    - DZD
+    - EGP
+    - ERN
+    - ETB
+    - EUR
+    - FJD
+    - FKP
+    - GBP
+    - GEL
+    - GHS
+    - GIP
+    - GMD
+    - GNF
+    - GTQ
+    - GYD
+    - HKD
+    - HNL
+    - HRK
+    - HTG
+    - HUF
+    - IDR
+    - ILS
+    - INR
+    - IQD
+    - IRR
+    - ISK
+    - JMD
+    - JOD
+    - JPY
+    - KES
+    - KGS
+    - KHR
+    - KMF
+    - KPW
+    - KRW
+    - KWD
+    - KYD
+    - KZT
+    - LAK
+    - LBP
+    - LKR
+    - LRD
+    - LSL
+    - LTL
+    - LYD
+    - MAD
+    - MDL
+    - MGA
+    - MKD
+    - MMK
+    - MNT
+    - MOP
+    - MRO
+    - MUR
+    - MVR
+    - MWK
+    - MXN
+    - MXV
+    - MYR
+    - MZN
+    - NAD
+    - NGN
+    - NIO
+    - NOK
+    - NPR
+    - NZD
+    - OMR
+    - PAB
+    - PEN
+    - PGK
+    - PHP
+    - PKR
+    - PLN
+    - PYG
+    - QAR
+    - RON
+    - RSD
+    - RUB
+    - RWF
+    - SAR
+    - SBD
+    - SCR
+    - SDG
+    - SEK
+    - SGD
+    - SHP
+    - SLL
+    - SOS
+    - SRD
+    - SSP
+    - STD
+    - SVC
+    - SYP
+    - SZL
+    - THB
+    - TJS
+    - TMT
+    - TND
+    - TOP
+    - TRY
+    - TTD
+    - TWD
+    - TZS
+    - UAH
+    - UGX
+    - USD
+    - USN
+    - UYI
+    - UYU
+    - UZS
+    - VEF
+    - VND
+    - VUV
+    - WST
+    - XAF
+    - XAG
+    - XAU
+    - XBA
+    - XBB
+    - XBC
+    - XBD
+    - XCD
+    - XDR
+    - XOF
+    - XPD
+    - XPF
+    - XPT
+    - XSU
+    - XUA
+    - YER
+    - ZAR
+    - ZMW
+    - ZWL
+    default: UNSPECIFIED
+    description: "Currency codes as specified in ISO 4217.\n\n - AED: XTS = 963; // Code reserved for testing purposes."
+  AttributeType:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - ENUM
+    - NUMERIC
+    default: UNSPECIFIED
+    description: "A type of an attribute.\n\n - ENUM: An enumerated attribute has a string value, e.g. Colour = black.\n - NUMERIC: A numeric attribute has a numeric value with an optional unit, e.g.\nMemory = 2 GB"
+  ListProductsResponse:
+    type: object
+    properties:
+      products:
+        type: array
+        items:
+          $ref: '#/definitions/Product'
+        description: The products found.
+      has_more:
+        type: boolean
+        description: Indicates whether there are more results available.
+  Expression:
+    type: object
+    properties:
+      attribute_id:
+        type: string
+        format: int64
+      cond_enum:
+        $ref: '#/definitions/EnumValueCond'
+      cond_numeric:
+        $ref: '#/definitions/NumericValueCond'
+    description: An attribute expression.
+  ProductNameFilter:
+    type: object
+    properties:
+      matches:
+        type: string
+        x-nullable: true
+  CategoryFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          type: string
+          format: int64
+      is_recursive:
+        type: boolean
+        description: 'If set to true selected category and all its subcategories will
+
+          be considered recursively.'
+  StringValue:
+    type: object
+    properties:
+      value:
+        type: string
+  AttributesFilter:
+    type: object
+    properties:
+      all_of:
+        type: array
+        items:
+          $ref: '#/definitions/Expression'
+securityDefinitions:
+  APIKeyAuth:
+    type: apiKey
+    name: Authorization
+    in: header

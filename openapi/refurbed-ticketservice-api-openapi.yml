@@ -1,0 +1,1294 @@
+swagger: '2.0'
+info:
+  title: Affiliate Partner BuybackBidService TicketService API
+  version: '1.0'
+  description: The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).
+  contact:
+    name: Refurbed Affiliate Partner Integrations Team
+    email: integrations@refurbed.com
+host: api.refurbed.com
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+security:
+- APIKeyAuth: []
+tags:
+- name: TicketService
+paths:
+  /refb.merchant.v1.TicketService/CreateTicket:
+    post:
+      summary: Creates a new ticket.
+      operationId: CreateTicket
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/CreateTicketResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/CreateTicketRequest'
+      tags:
+      - TicketService
+  /refb.merchant.v1.TicketService/CreateTicketHelpRequest:
+    post:
+      summary: Creates a help request for a given ticket.
+      operationId: CreateTicketHelpRequest
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/CreateTicketHelpRequestResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/CreateTicketHelpRequestRequest'
+      tags:
+      - TicketService
+  /refb.merchant.v1.TicketService/GenerateReturnShippingLabel:
+    post:
+      summary: 'Generates a return shipping label and posts it as a message on the ticket.
+
+        Call GetTicket to load the ticket messages again.'
+      operationId: GenerateReturnShippingLabel
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/GenerateReturnShippingLabelRequest'
+      tags:
+      - TicketService
+  /refb.merchant.v1.TicketService/GetTicket:
+    post:
+      summary: Retrieves a single ticket by its ID, including its messages.
+      operationId: GetTicket
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/GetTicketResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/GetTicketRequest'
+      tags:
+      - TicketService
+  /refb.merchant.v1.TicketService/GetTicketHelpRequest:
+    post:
+      summary: Retrieves details of a single help request by its ID, including the messages.
+      operationId: GetTicketHelpRequest
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/GetTicketHelpRequestResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/GetTicketHelpRequestRequest'
+      tags:
+      - TicketService
+  /refb.merchant.v1.TicketService/ListTicketHelpRequests:
+    post:
+      summary: Lists all help requests for a given ticket.
+      operationId: ListTicketHelpRequests
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ListTicketHelpRequestsResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ListTicketHelpRequestsRequest'
+      tags:
+      - TicketService
+  /refb.merchant.v1.TicketService/ListTickets:
+    post:
+      summary: Lists tickets.
+      operationId: ListTickets
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/ListTicketsResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ListTicketsRequest'
+      tags:
+      - TicketService
+  /refb.merchant.v1.TicketService/RequestTopicChange:
+    post:
+      summary: 'Requests a topic change for a ticket.
+
+        If request is approved, the ticket topic is changed to a generic topic, the caller does
+
+        not specify the desired topic.'
+      operationId: RequestTopicChange
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/RequestTopicChangeResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/RequestTopicChangeRequest'
+      tags:
+      - TicketService
+  /refb.merchant.v1.TicketService/UpdateTicket:
+    post:
+      summary: 'Updates the ticket by performing one or more of the following actions:
+
+        - Assigning the ticket to a user (by email)
+
+        - Changing the ticket status
+
+        - Adding a message to the ticket
+
+        - Updating the notes'
+      operationId: UpdateTicket
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/UpdateTicketResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateTicketRequest'
+      tags:
+      - TicketService
+  /refb.merchant.v1.TicketService/UpdateTicketHelpRequest:
+    post:
+      summary: Updates the ticket help request by adding a message to it.
+      operationId: UpdateTicketHelpRequest
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/UpdateTicketHelpRequestResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/Status'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateTicketHelpRequestRequest'
+      tags:
+      - TicketService
+definitions:
+  ScopedTicketMessage:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/TicketMessage'
+      scope:
+        $ref: '#/definitions/TicketMessageScope'
+    description: Represents a ticket message with a scope of visibility.
+  SubmittableTicketStatus:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - PENDING
+    - SOLVED
+    default: UNSPECIFIED
+  TicketMessageSubmission:
+    type: object
+    properties:
+      body_html:
+        type: string
+        description: The HTML body of the message.
+        required:
+        - body_html
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/TicketMessageSubmission.Attachment'
+        description: File attachments.
+    description: 'Represents a message to be submitted to a ticket when creating a new ticket or adding a message to an existing ticket.
+
+      Also used for creating messages within ticket help requests.'
+    required:
+    - body_html
+  ScopedMessageSubmission:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/TicketMessageSubmission'
+      scope:
+        $ref: '#/definitions/TicketMessageScope'
+  SlaCheckpoint:
+    type: object
+    properties:
+      checkpoint_type:
+        $ref: '#/definitions/TicketSlaCheckpointType'
+      at:
+        type: string
+        format: date-time
+  StringSetContainsFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          type: string
+      none_of:
+        type: array
+        items:
+          type: string
+      contains:
+        type: string
+        x-nullable: true
+  Int64Pagination:
+    type: object
+    properties:
+      limit:
+        type: integer
+        format: int64
+        x-nullable: true
+        description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+          Default and maximum is 100.'
+      ending_before:
+        type: string
+        format: int64
+      starting_after:
+        type: string
+        format: int64
+    description: Paginates resources with int64 primary key.
+  StringEqualsFilter:
+    type: object
+    properties:
+      eq:
+        type: string
+  TicketUrgencyStatus:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - PANIC
+    - URGENT
+    default: UNSPECIFIED
+    description: " - PANIC: Refurbed customer service is monitoring each update and will support you and the customer if need be.\n - URGENT: The ticket has been escalated to refurbed second-level team,\nand they are working with your agents and the customer to find the best solution for all parties."
+  CreateTicketHelpRequestRequest:
+    type: object
+    properties:
+      ticket_id:
+        type: string
+        format: int64
+        description: The ID of the ticket for which help is being requested.
+        required:
+        - ticket_id
+      topic:
+        $ref: '#/definitions/TicketHelpRequestTopic'
+        description: The topic of the help request. This is needed to route the request to the appropriate support team.
+      message:
+        $ref: '#/definitions/TicketMessageSubmission'
+        description: Message describing the issue for which help is requested, as well relevant attachments (documents).
+    required:
+    - ticket_id
+  TicketTopicChangeRequestAttachmentExemptionReason:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - ISSUE_SOLVED_ITSELF
+    - WRONG_CONFIGURATION_BY_CUSTOMER
+    - OTHER
+    default: UNSPECIFIED
+    title: "- ISSUE_SOLVED_ITSELF: The customer reported a problem, but there was no actual problem.\n - WRONG_CONFIGURATION_BY_CUSTOMER: Customer's fault, e.g., wrong software configuration or treatment"
+  TicketUrgencyStatusFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/TicketUrgencyStatus'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/TicketUrgencyStatus'
+  GetTicketResponse:
+    type: object
+    properties:
+      ticket:
+        $ref: '#/definitions/Ticket'
+        description: The ticket details.
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/ScopedTicketMessage'
+        description: Messages posted on the ticket.
+  ListTicketsResponse:
+    type: object
+    properties:
+      tickets:
+        type: array
+        items:
+          $ref: '#/definitions/Ticket'
+      has_more:
+        type: boolean
+  Customer:
+    type: object
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+  BoolFilter:
+    type: object
+    properties:
+      value:
+        type: boolean
+        x-nullable: true
+  TicketMessageSubmission.Attachment:
+    type: object
+    properties:
+      filename:
+        type: string
+        description: Name of the file.
+        required:
+        - filename
+      data:
+        type: string
+        format: byte
+        description: Raw bytes of the file.
+        required:
+        - data
+    required:
+    - filename
+    - data
+  CreateTicketHelpRequestResponse:
+    type: object
+    properties:
+      help_request:
+        $ref: '#/definitions/TicketHelpRequest'
+        description: The created help request.
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/TicketMessage'
+        description: Messages posted on the help request.
+  MarketplaceOrderItem:
+    type: object
+    properties:
+      order_item_id:
+        type: string
+        format: int64
+      order_id:
+        type: string
+        format: int64
+      instance_name:
+        type: string
+        title: Product and instance name combined, e.g., iPhone 12 | 64 GB | blue
+  ListTicketsRequest:
+    type: object
+    properties:
+      pagination:
+        $ref: '#/definitions/Int64Pagination'
+      sort:
+        $ref: '#/definitions/ListTicketsRequest.Sort'
+      filter:
+        $ref: '#/definitions/ListTicketsRequest.Filter'
+  Author:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/TicketMessageSenderType'
+        title: Type of the author (customer, merchant or refurbed)
+      email:
+        type: string
+        x-nullable: true
+        description: Email of the author. Populated only if type=merchant.
+      name:
+        type: string
+        description: Name of the author.
+  RequestTopicChangeResponse:
+    type: object
+    properties:
+      ticket:
+        $ref: '#/definitions/Ticket'
+        description: The ticket for which a topic change was requested.
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/ScopedTicketMessage'
+        description: Messages posted on the ticket.
+  TicketSlaCheckpointType:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - AWAITING_REPLY_SINCE
+    - OVERDUE
+    - REFURBED_TAKEOVER
+    default: UNSPECIFIED
+    description: " - AWAITING_REPLY_SINCE: The time since when the SLA timer starts (e.g., customer or refurbed agent response).\n - OVERDUE: The time when the ticket passes its SLA due time.\n - REFURBED_TAKEOVER: When the ticket is taken over by refurbed due to SLA breach."
+  GenerateReturnShippingLabelRequest:
+    type: object
+    properties:
+      ticket_id:
+        type: string
+        format: int64
+        description: The ID of the ticket for which the return shipping label should be generated.
+        required:
+        - ticket_id
+    required:
+    - ticket_id
+  UpdateTicketHelpRequestRequest:
+    type: object
+    properties:
+      ticket_id:
+        type: string
+        format: int64
+        description: The ID of the ticket the help request belongs to.
+        required:
+        - ticket_id
+      help_request_id:
+        type: string
+        format: int64
+        required:
+        - help_request_id
+      new_message:
+        $ref: '#/definitions/TicketMessageSubmission'
+        description: A message to be added to the help request.
+    required:
+    - ticket_id
+    - help_request_id
+  CountryCodeFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/CountryCode'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/CountryCode'
+  ListTicketsRequest.Sort.By:
+    type: string
+    enum:
+    - CREATED_AT
+    - NEXT_SLA_BREACH_AT
+    - UPDATED_AT
+    default: CREATED_AT
+  Any:
+    type: object
+    properties:
+      '@type':
+        type: string
+        description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+    additionalProperties: {}
+    description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+  TicketMessageSenderType:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - CUSTOMER
+    - REFURBED
+    - MERCHANT
+    - SYSTEM
+    default: UNSPECIFIED
+  GetTicketRequest:
+    type: object
+    properties:
+      ticket_id:
+        type: string
+        format: int64
+        required:
+        - ticket_id
+    required:
+    - ticket_id
+  UpdateTicketResponse:
+    type: object
+    properties:
+      ticket:
+        $ref: '#/definitions/Ticket'
+        description: The updated ticket.
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/ScopedTicketMessage'
+        description: Messages posted on the ticket.
+  ListTicketsRequest.Sort:
+    type: object
+    properties:
+      order:
+        $ref: '#/definitions/SortOrder'
+      by:
+        $ref: '#/definitions/ListTicketsRequest.Sort.By'
+  SortOrder:
+    type: string
+    enum:
+    - ASC
+    - DESC
+    default: ASC
+  CountryCode:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - AF
+    - AL
+    - AQ
+    - DZ
+    - AS
+    - AD
+    - AO
+    - AG
+    - AZ
+    - AR
+    - AU
+    - AT
+    - BS
+    - BH
+    - BD
+    - AM
+    - BB
+    - BE
+    - BM
+    - BT
+    - BO
+    - BA
+    - BW
+    - BV
+    - BR
+    - BZ
+    - IO
+    - SB
+    - VG
+    - BN
+    - BG
+    - MM
+    - BI
+    - BY
+    - KH
+    - CM
+    - CA
+    - CV
+    - KY
+    - CF
+    - LK
+    - TD
+    - CL
+    - CN
+    - TW
+    - CX
+    - CC
+    - CO
+    - KM
+    - YT
+    - CG
+    - CD
+    - CK
+    - CR
+    - HR
+    - CU
+    - CY
+    - CZ
+    - BJ
+    - DK
+    - DM
+    - DO
+    - EC
+    - SV
+    - GQ
+    - ET
+    - ER
+    - EE
+    - FO
+    - FK
+    - GS
+    - FJ
+    - FI
+    - AX
+    - FR
+    - GF
+    - PF
+    - TF
+    - DJ
+    - GA
+    - GE
+    - GM
+    - PS
+    - DE
+    - GH
+    - GI
+    - KI
+    - GR
+    - GL
+    - GD
+    - GP
+    - GU
+    - GT
+    - GN
+    - GY
+    - HT
+    - HM
+    - VA
+    - HN
+    - HK
+    - HU
+    - IS
+    - IN
+    - ID
+    - IR
+    - IQ
+    - IE
+    - IL
+    - IT
+    - CI
+    - JM
+    - JP
+    - KZ
+    - JO
+    - KE
+    - KP
+    - KR
+    - KW
+    - KG
+    - LA
+    - LB
+    - LS
+    - LV
+    - LR
+    - LY
+    - LI
+    - LT
+    - LU
+    - MO
+    - MG
+    - MW
+    - MY
+    - MV
+    - ML
+    - MT
+    - MQ
+    - MR
+    - MU
+    - MX
+    - MC
+    - MN
+    - MD
+    - ME
+    - MS
+    - MA
+    - MZ
+    - OM
+    - NA
+    - NR
+    - NP
+    - NL
+    - CW
+    - AW
+    - SX
+    - BQ
+    - NC
+    - VU
+    - NZ
+    - NI
+    - NE
+    - NG
+    - NU
+    - NF
+    - 'NO'
+    - MP
+    - UM
+    - FM
+    - MH
+    - PW
+    - PK
+    - PA
+    - PG
+    - PY
+    - PE
+    - PH
+    - PN
+    - PL
+    - PT
+    - GW
+    - TL
+    - PR
+    - QA
+    - RE
+    - RO
+    - RU
+    - RW
+    - BL
+    - SH
+    - KN
+    - AI
+    - LC
+    - MF
+    - PM
+    - VC
+    - SM
+    - ST
+    - SA
+    - SN
+    - RS
+    - SC
+    - SL
+    - SG
+    - SK
+    - VN
+    - SI
+    - SO
+    - ZA
+    - ZW
+    - ES
+    - SS
+    - SD
+    - EH
+    - SR
+    - SJ
+    - SZ
+    - SE
+    - CH
+    - SY
+    - TJ
+    - TH
+    - TG
+    - TK
+    - TO
+    - TT
+    - AE
+    - TN
+    - TR
+    - TM
+    - TC
+    - TV
+    - UG
+    - UA
+    - MK
+    - EG
+    - GB
+    - GG
+    - JE
+    - IM
+    - TZ
+    - US
+    - VI
+    - BF
+    - UY
+    - UZ
+    - VE
+    - WF
+    - WS
+    - YE
+    - ZM
+    default: UNSPECIFIED
+    description: Alpha-2 country codes as specified in ISO 3166-1.
+  Int64AnyOfFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          type: string
+          format: int64
+  TicketHelpRequestStatus:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - OPEN
+    - CLOSED
+    - PENDING
+    - SOLVED
+    default: UNSPECIFIED
+    description: " - OPEN: Help request is open, awaiting a response from refurbed.\n - CLOSED: Help request is permanently closed and immutable.\n - PENDING: Refurbed has replied; the merchant should review.\n - SOLVED: Refurbed has resolved the help request; the merchant can still reply, unlike closed."
+  TicketOrderItemIdentifier:
+    type: object
+    properties:
+      marketplace_order_item_id:
+        type: string
+        format: int64
+      buyback_order_item_id:
+        type: string
+        format: int64
+    description: 'Used to identify an order item related to a ticket. It could be either a marketplace order item (order_items.id), or
+
+      a buyback order item (buyback_order_items.id).'
+    title: Ticket order item identifier
+  CreateTicketResponse:
+    type: object
+    properties:
+      ticket:
+        $ref: '#/definitions/Ticket'
+        description: The created ticket.
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/ScopedTicketMessage'
+        description: Messages posted on the ticket.
+  TicketHelpRequestTopic:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - REFURBED_RESPONSIBILITY
+    - CUSTOMER_COMMUNICATION
+    - TECHNICAL_ISSUES
+    - ACCOUNT_TAKEOVER
+    - SHIPPING_AGREEMENT
+    - LEGAL
+    - INFORMATION_FOR_REFURBED
+    - POTENTIAL_FRAUD_CASE
+    - OTHER
+    default: UNSPECIFIED
+  TicketMessage.Attachment:
+    type: object
+    properties:
+      filename:
+        type: string
+        description: Name of the attachment file.
+      url:
+        type: string
+        description: Public URL to view or download the attachment.
+      content_type:
+        type: string
+        description: Content type of the attachment file, e.g., image/png.
+  Status:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+      message:
+        type: string
+        description: 'A developer-facing error message, which should be in English. Any
+
+          user-facing error message should be localized and sent in the
+
+          [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/Any'
+        description: 'A list of messages that carry the error details.  There is a common set of
+
+          message types for APIs to use.'
+    description: 'The `Status` type defines a logical error model that is suitable for
+
+      different programming environments, including REST APIs and RPC APIs. It is
+
+      used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
+      three pieces of data: error code, error message, and error details.
+
+
+      You can find out more about this error model and how to work with it in the
+
+      [API Design Guide](https://cloud.google.com/apis/design/errors).'
+  ListTicketsRequest.Filter:
+    type: object
+    properties:
+      ticket_id:
+        $ref: '#/definitions/Int64AnyOfFilter'
+      assignee_user_email:
+        $ref: '#/definitions/StringEqualsFilter'
+      status:
+        $ref: '#/definitions/TicketStatusFilter'
+      customer_email:
+        $ref: '#/definitions/StringEqualsFilter'
+      marketplace_order_id:
+        $ref: '#/definitions/Int64AnyOfFilter'
+      marketplace_order_item_id:
+        $ref: '#/definitions/Int64AnyOfFilter'
+      buyback_order_id:
+        $ref: '#/definitions/Int64AnyOfFilter'
+      buyback_order_item_id:
+        $ref: '#/definitions/Int64AnyOfFilter'
+      country:
+        $ref: '#/definitions/CountryCodeFilter'
+      topic:
+        $ref: '#/definitions/StringFilter'
+      urgency_status:
+        $ref: '#/definitions/TicketUrgencyStatusFilter'
+      customer_panicked:
+        $ref: '#/definitions/BoolFilter'
+      is_buyback:
+        $ref: '#/definitions/BoolFilter'
+      customer_name:
+        $ref: '#/definitions/StringSetContainsFilter'
+      seller_action_needed:
+        $ref: '#/definitions/BoolFilter'
+      has_help_requests:
+        $ref: '#/definitions/BoolFilter'
+  UpdateTicketHelpRequestResponse:
+    type: object
+    properties:
+      help_request:
+        $ref: '#/definitions/TicketHelpRequest'
+        description: The updated help request.
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/TicketMessage'
+        description: Messages posted on the help request.
+  Ticket:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: The ID of the ticket.
+      status:
+        $ref: '#/definitions/TicketStatus'
+        description: Status of the ticket.
+      urgency_status:
+        $ref: '#/definitions/TicketUrgencyStatus'
+        x-nullable: true
+        description: Urgency status of the ticket.
+      created_at:
+        type: string
+        format: date-time
+        description: Time of ticket creation.
+      marketplace_order_item:
+        $ref: '#/definitions/MarketplaceOrderItem'
+      buyback_order_item:
+        $ref: '#/definitions/Ticket.BuybackOrderItem'
+      topic_slug:
+        type: string
+        description: Ticket topic.
+      country:
+        $ref: '#/definitions/CountryCode'
+        description: Country of the order associated to the ticket.
+      customer:
+        $ref: '#/definitions/Customer'
+        description: The customer who placed the order associated to the ticket.
+      assignee:
+        $ref: '#/definitions/Assignee'
+        x-nullable: true
+        description: The user currently assigned to handle the ticket.
+      sla_checkpoints:
+        type: array
+        items:
+          $ref: '#/definitions/SlaCheckpoint'
+        description: Service Level Agreement (SLA) checkpoints associated with the ticket.
+      updated_at:
+        type: string
+        format: date-time
+        description: When the ticket was last updated.
+      seller_action_needed:
+        type: boolean
+        description: Indicates whether the ticket requires action from the seller.
+      customer_panicked:
+        type: boolean
+        description: Indicates whether the customer has panicked the ticket (requested help).
+      notes:
+        type: string
+        description: Notes that the merchant can add to the ticket for internal use. Only visible to the merchant.
+      follow_up_to_ticket_id:
+        type: string
+        format: int64
+        x-nullable: true
+        description: If the ticket is a follow-up ticket, this field contains the ID of the original ticket.
+      topic_change_allowed:
+        type: boolean
+        description: Whether ticket topic change requests for the ticket are allowed.
+      has_help_requests:
+        type: boolean
+        description: Whether the ticket has at least one help request created by the merchant.
+    description: 'A customer support ticket.
+
+      Only stores metadata, such as status, order, etc.
+
+      Ticket messages can be retrieved only when calling GetTicket.'
+  TicketMessageScope:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - PUBLIC
+    - INTERNAL
+    default: UNSPECIFIED
+    description: " - PUBLIC: Messages visible to all parties (merchant, refurbed agents, customer).\n - INTERNAL: Messages visible only to the merchant and refurbed agents."
+  Assignee:
+    type: object
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+  RequestTopicChangeRequest:
+    type: object
+    properties:
+      ticket_id:
+        type: string
+        format: int64
+        description: The ID of the ticket for which the topic change is being requested.
+        required:
+        - ticket_id
+      message:
+        $ref: '#/definitions/TicketMessageSubmission'
+        description: Message justifying the request, as well relevant attachments (documents).
+      attachment_exemption_reason:
+        $ref: '#/definitions/TicketTopicChangeRequestAttachmentExemptionReason'
+        x-nullable: true
+        description: Justification if the topic change request is exempt from providing the relevant attachments (documents).
+    required:
+    - ticket_id
+  TicketHelpRequest:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: The ID of the help request.
+      ticket_id:
+        type: string
+        format: int64
+        description: The ID of the ticket associated to the help request.
+      status:
+        $ref: '#/definitions/TicketHelpRequestStatus'
+        description: Status of the help request.
+      topic:
+        $ref: '#/definitions/TicketHelpRequestTopic'
+        description: Topic of the help request.
+      created_at:
+        type: string
+        format: date-time
+        description: Time of help request creation.
+    description: 'A help request associated to a ticket.
+
+      Created by a merchant to request help from refurbed to assist with handling a ticket.'
+  StringFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          type: string
+      none_of:
+        type: array
+        items:
+          type: string
+  GetTicketHelpRequestResponse:
+    type: object
+    properties:
+      help_request:
+        $ref: '#/definitions/TicketHelpRequest'
+        description: The help request details.
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/TicketMessage'
+        description: Messages posted on the help request.
+  Ticket.BuybackOrderItem:
+    type: object
+    properties:
+      buyback_order_item_id:
+        type: string
+        format: int64
+      buyback_order_id:
+        type: string
+        format: int64
+      product_variant_name:
+        type: string
+        title: Product name and attributes combined, e.g., iPhone 12 | 64 GB
+  UpdateTicketRequest:
+    type: object
+    properties:
+      ticket_id:
+        type: string
+        format: int64
+        description: The ID of the ticket to be updated.
+        required:
+        - ticket_id
+      new_message:
+        $ref: '#/definitions/ScopedMessageSubmission'
+        x-nullable: true
+        description: A message to be added to the ticket.
+      assignee_user_email:
+        type: string
+      unassign:
+        type: boolean
+      status:
+        $ref: '#/definitions/SubmittableTicketStatus'
+        x-nullable: true
+        description: The status to set on the ticket. Defaults to pending unless specified otherwise.
+      notes:
+        type: string
+        x-nullable: true
+        description: 'Notes that the merchant can add to the ticket for internal use. Only visible to the merchant.
+
+          If not provided, the notes will stay unchanged.'
+    required:
+    - ticket_id
+  CreateTicketRequest:
+    type: object
+    properties:
+      order_item_identifier:
+        $ref: '#/definitions/TicketOrderItemIdentifier'
+        description: 'The order item ID to associate the ticket to.
+
+          Either marketplace or buyback.'
+      topic:
+        type: string
+        description: 'The topic of the ticket.
+
+          TODO: possible values are to be defined later.'
+        required:
+        - topic
+      message:
+        $ref: '#/definitions/TicketMessageSubmission'
+        description: The initial message to be added to the ticket. The PUBLIC scope is used for the first message by default.
+      notes:
+        type: string
+        x-nullable: true
+        description: Notes that the merchant can add to the ticket for internal use. Only visible to the merchant.
+      follow_up_to_ticket_id:
+        type: string
+        format: int64
+        x-nullable: true
+        description: 'If the ticket to be created is a follow-up ticket to a closed ticket,
+
+          this field contains the ID of the original ticket.'
+    required:
+    - topic
+  TicketStatusFilter:
+    type: object
+    properties:
+      any_of:
+        type: array
+        items:
+          $ref: '#/definitions/TicketStatus'
+      none_of:
+        type: array
+        items:
+          $ref: '#/definitions/TicketStatus'
+  TicketMessage:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: The ID of the message.
+      body_html:
+        type: string
+        description: The HTML body of the message (sanitized, safe to render in a browser).
+      created_at:
+        type: string
+        format: date-time
+        description: Time of message creation.
+      author:
+        $ref: '#/definitions/Author'
+        description: Author of the message.
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/TicketMessage.Attachment'
+        description: File attachments related to the message.
+    description: 'A message belonging to either a ticket or a ticket help request.
+
+      Contains the message body, attachments, as well as information about the author of the message.'
+  ListTicketHelpRequestsRequest:
+    type: object
+    properties:
+      ticket_id:
+        type: string
+        format: int64
+        required:
+        - ticket_id
+    required:
+    - ticket_id
+  TicketStatus:
+    type: string
+    enum:
+    - UNSPECIFIED
+    - OPEN
+    - PENDING
+    - SOLVED
+    - CLOSED
+    default: UNSPECIFIED
+  ListTicketHelpRequestsResponse:
+    type: object
+    properties:
+      help_requests:
+        type: array
+        items:
+          $ref: '#/definitions/TicketHelpRequest'
+  GetTicketHelpRequestRequest:
+    type: object
+    properties:
+      help_request_id:
+        type: string
+        format: int64
+        required:
+        - help_request_id
+      ticket_id:
+        type: string
+        format: int64
+        required:
+        - ticket_id
+    required:
+    - help_request_id
+    - ticket_id
+securityDefinitions:
+  APIKeyAuth:
+    type: apiKey
+    name: Authorization
+    in: header
