@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OrderItemIdentifierTypeEnum {
+  enum OrderItemIdentifierType {
+    UNSPECIFIED = 0;
+    IMEI = 1;
+    SERIAL_NUMBER = 2;
+  }
+}

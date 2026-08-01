@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OptionalInt64Filter {
+  repeated int64 any_of = 1;
+  repeated int64 none_of = 2;
+  optional bool is_set = 3;
+}

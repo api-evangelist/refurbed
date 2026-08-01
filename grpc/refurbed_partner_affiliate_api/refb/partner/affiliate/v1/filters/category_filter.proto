@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+message CategoryFilter {
+  repeated int64 any_of = 1;
+
+  // If set to true selected category and all its subcategories will
+  // be considered recursively.
+  bool is_recursive = 3;
+}

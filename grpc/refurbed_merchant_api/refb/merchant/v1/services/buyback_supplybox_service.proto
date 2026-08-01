@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/descriptor.proto";
+import "refb/merchant/v1/enums/sort_order.proto";
+import "refb/merchant/v1/filters/buyback_attribute_filter.proto";
+import "refb/merchant/v1/filters/buyback_bid_grading_filter.proto";
+import "refb/merchant/v1/filters/buyback_supplybox_state_filter.proto";
+import "refb/merchant/v1/filters/country_code_filter.proto";
+import "refb/merchant/v1/filters/int64_filter.proto";
+import "refb/merchant/v1/filters/numeric_range_filter.proto";
+import "refb/merchant/v1/filters/optional_numeric_range_filter.proto";
+import "refb/merchant/v1/filters/optional_uint32_range_filter.proto";
+import "refb/merchant/v1/filters/string_set_contains_filter.proto";
+import "refb/merchant/v1/filters/text_search_filter.proto";
+import "refb/merchant/v1/filters/timestamp_range_filter.proto";
+import "refb/merchant/v1/paginations/buyback_supplybox_identifier_pagination.proto";
+import "refb/merchant/v1/resources/buyback_supplybox.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+service BuybackSupplyboxService {
+  // Lists all supplyboxes.
+  //
+  // Returns the current bid versions only.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when pagination limit is too large (>100)
+  //   - when both "ending_before" and "starting_after" are specified in pagination
+  rpc ListBuybackSupplyboxes(ListBuybackSupplyboxesRequest) returns (ListBuybackSupplyboxesResponse) {
+    option (permission) = "merchant.buybackSupplybox:list";
+  }
+}
+
+message ListBuybackSupplyboxesRequest {
+  BuybackSupplyboxIdentifierPagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      BID_ID = 0;
+      BID_CREATED_AT = 1;
+      WON_AT = 2;
+      PRODUCT_NAME = 3;
+      GRADING = 4;
+      STOCK = 5;
+      MARKET_CODE = 6;
+      STATE = 7;
+      MERCHANT_PRICE = 8;
+      WINNING_PRICE = 9;
+      PRICE_DIFFERENCE = 10;
+      SUGGESTED_PRICE = 11;
+      BID_SKU = 12;
+    }
+  }
+
+  message Filter {
+    Int64Filter bid_id = 1;
+    TimestampRangeFilter bid_created_at = 2;
+    TimestampRangeFilter won_at = 3;
+    Int64Filter product_id = 4;
+    BuybackBidGradingFilter grading = 5;
+    OptionalUInt32RangeFilter stock = 6;
+    CountryCodeFilter market_code = 7;
+    BuybackSupplyboxStateFilter state = 8;
+    NumericRangeFilter merchant_price = 9;
+    NumericRangeFilter winning_price = 10;
+    OptionalNumericRangeFilter suggested_price = 11;
+    OptionalNumericRangeFilter price_difference = 12;
+    TextSearchFilter product_name = 13;
+    BuybackAttributeFilter product_attribute = 14;
+    StringSetContainsFilter sku = 15;
+  }
+}
+
+message ListBuybackSupplyboxesResponse {
+  // The supplyboxes found.
+  repeated BuybackSupplybox supplyboxes = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}

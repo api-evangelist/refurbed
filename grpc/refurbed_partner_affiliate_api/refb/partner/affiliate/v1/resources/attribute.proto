@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+import "google/api/resource.proto";
+import "refb/partner/affiliate/v1/enums/attribute_type.proto";
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+// An Attribute.
+message Attribute {
+  option (google.api.resource) = {type: "refb.partner.affiliate.v1/Attribute"};
+
+  // Primary key.
+  int64 id = 1;
+
+  // Human-readable name.
+  string name = 2;
+
+  // Type fo the attribute.
+  AttributeTypeEnum.AttributeType type = 3;
+
+  // Value of the attribute.
+  oneof value {
+    // Value is set if type is ENUM.
+    StringValue value_str = 4;
+
+    // Value is set if type is NUMERIC.
+    NumericValue value_num = 5;
+  }
+
+  message StringValue {
+    string value = 1;
+  }
+
+  message NumericValue {
+    double value = 1;
+    optional string unit = 2;
+  }
+}

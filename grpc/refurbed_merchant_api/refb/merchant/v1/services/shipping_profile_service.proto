@@ -1,0 +1,350 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "google/protobuf/empty.proto";
+import "refb/descriptor.proto";
+import "refb/merchant/v1/enums/country_code.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/enums/sort_order.proto";
+import "refb/merchant/v1/filters/int64_filter.proto";
+import "refb/merchant/v1/filters/string_filter.proto";
+import "refb/merchant/v1/filters/timestamp_range_filter.proto";
+import "refb/merchant/v1/filters/uint32_range_filter.proto";
+import "refb/merchant/v1/paginations/int64_pagination.proto";
+import "refb/merchant/v1/resources/carrier.proto";
+import "refb/merchant/v1/resources/shipping_profile.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Service to manage shipping profiles.
+service ShippingProfileService {
+  // Lists all current shipping profiles.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when pagination limit is too large (>100)
+  //   - when both "ending_before" and "starting_after" are specified in pagination
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc ListShippingProfiles(ListShippingProfilesRequest) returns (ListShippingProfilesResponse) {
+    option (permission) = "merchant.shippingProfile:list";
+  }
+
+  // Gets a single shipping profile.
+  // If no version is defined, its current version is returned.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the shipping profile is not found
+  //   - when the shipping profile has been deleted and no version is given as
+  //     parameter even though the individual historic versions are still
+  //     accessible
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc GetShippingProfile(GetShippingProfileRequest) returns (GetShippingProfileResponse) {
+    option (permission) = "merchant.shippingProfile:view";
+  }
+
+  // Creates a shipping profile.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when unknown source country market code is provided
+  //   - when unknown destination market code is provided
+  //   - when invalid shipping costs amount
+  //   - when unknown currency code is provided
+  //   - when invalid min/max delivery days
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc CreateShippingProfile(CreateShippingProfileRequest) returns (CreateShippingProfileResponse) {
+    option (permission) = "merchant.shippingProfile:create";
+  }
+
+  // Updates a shipping profile.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when unknown source country market code is provided
+  //   - when unknown destination market code is provided
+  //   - when invalid shipping costs amount
+  //   - when unknown currency code is provided
+  //   - when invalid min/max delivery days
+  // - ALREADY_EXISTS
+  //   - when destination already exists for provided market code
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc UpdateShippingProfile(UpdateShippingProfileRequest) returns (UpdateShippingProfileResponse) {
+    option (permission) = "merchant.shippingProfile:update";
+  }
+
+  // Deletes a shipping profile.
+  // Only shipping profiles marked as deletable can be deleted.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - FAILED_PRECONDITION
+  //   - when shipping profile has at least one active offer assigned
+  // - NOT_FOUND
+  //   - when shipping profile is not found
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc DeleteShippingProfile(DeleteShippingProfileRequest) returns (google.protobuf.Empty) {
+    option (permission) = "merchant.shippingProfile:delete";
+  }
+
+  // Lists available carriers for shipping profiles.
+  // Make sure to pre-fetch and cache the response of this method to avoid running into rate-limits.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc ListAvailableCarriers(google.protobuf.Empty) returns (ListAvailableCarriersResponse) {
+    option (permission) = "merchant.shippingProfile:list"; // no need for a separate permission
+  }
+}
+
+message ListShippingProfilesRequest {
+  Int64Pagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      ID = 0;
+      CREATED_AT = 1;
+      NAME = 2;
+      SOURCE_COUNTRY_MARKET_CODE = 3;
+      NUM_OFFERS_ASSIGNED = 4;
+      SOURCE_COUNTRY_MARKET_NAME = 5;
+    }
+  }
+
+  message Filter {
+    Int64Filter id = 1;
+    TimestampRangeFilter created_at = 2;
+    ShippingProfileNameFilter name = 3;
+    StringFilter source_country_market_code = 4;
+    StringFilter destination_market_code = 5; // Any match.
+    UInt32RangeFilter num_offers_assigned = 6;
+
+    message ShippingProfileNameFilter {
+      optional string contains = 1; // Partial/substring match.
+    }
+  }
+}
+
+message ListShippingProfilesResponse {
+  // The shipping profiles found.
+  repeated ShippingProfile shipping_profiles = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}
+
+message GetShippingProfileRequest {
+  // The id of the shipping profile to get.
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Shipping profile version. Assumes "current", if not set.
+  optional int64 version = 2;
+}
+
+message GetShippingProfileResponse {
+  ShippingProfile shipping_profile = 1;
+}
+
+// See shipping profile for full documentation.
+message CreateShippingProfileRequest {
+  string name = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Deprecated: use source_address instead.
+  optional string source_country_market_code = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    deprecated = true
+  ];
+
+  // Address to use for estimating parcel delivery dates.
+  optional Address source_address = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Destinations to create.
+  repeated CreateDestination create_destinations = 3;
+
+  message Address {
+    optional string first_name = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    optional string family_name = 2 [(google.api.field_behavior) = OPTIONAL];
+
+    string company_name = 3 [(google.api.field_behavior) = REQUIRED];
+
+    CountryCodeEnum.CountryCode country_code = 4 [(google.api.field_behavior) = REQUIRED];
+
+    string post_code = 5 [(google.api.field_behavior) = REQUIRED];
+
+    string town = 6 [(google.api.field_behavior) = REQUIRED];
+
+    string street_name = 7 [(google.api.field_behavior) = REQUIRED];
+
+    string house_no = 8 [(google.api.field_behavior) = REQUIRED];
+
+    optional string supplement = 9 [(google.api.field_behavior) = OPTIONAL];
+
+    optional string phone_number = 10 [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  message CreateDestination {
+    string market_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+    CurrencyCodeEnum.CurrencyCode currency_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+    string shipping_costs = 3 [(google.api.field_behavior) = REQUIRED];
+
+    uint32 min_delivery_days = 4 [(google.api.field_behavior) = REQUIRED];
+
+    uint32 max_delivery_days = 5 [(google.api.field_behavior) = REQUIRED];
+
+    optional bool label_creation_enabled = 6 [(google.api.field_behavior) = OPTIONAL];
+
+    // Carrier slug, obtained from ListAvailableCarriers RPC.
+    optional string carrier = 7 [(google.api.field_behavior) = OPTIONAL];
+
+    // The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
+    optional uint32 dispatch_cutoff_hour = 8 [(google.api.field_behavior) = OPTIONAL];
+  }
+}
+
+message CreateShippingProfileResponse {
+  ShippingProfile shipping_profile = 1;
+}
+
+// See shipping profile for full documentation.
+message UpdateShippingProfileRequest {
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  optional string name = 2;
+
+  // Deprecated: use source_address instead.
+  optional string source_country_market_code = 3 [
+    (google.api.field_behavior) = OPTIONAL,
+    deprecated = true
+  ];
+
+  // Address to use for estimating parcel delivery dates.
+  optional Address source_address = 7 [(google.api.field_behavior) = OPTIONAL];
+
+  // Destinations to create.
+  repeated CreateDestination create_destinations = 4;
+
+  // Destinations to update.
+  repeated UpdateDestination update_destinations = 5;
+
+  // Destinations to delete. Takes a list of market codes.
+  repeated string delete_destinations = 6;
+
+  message Address {
+    optional string first_name = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    optional string family_name = 2 [(google.api.field_behavior) = OPTIONAL];
+
+    string company_name = 3 [(google.api.field_behavior) = REQUIRED];
+
+    CountryCodeEnum.CountryCode country_code = 4 [(google.api.field_behavior) = REQUIRED];
+
+    string post_code = 5 [(google.api.field_behavior) = REQUIRED];
+
+    string town = 6 [(google.api.field_behavior) = REQUIRED];
+
+    string street_name = 7 [(google.api.field_behavior) = REQUIRED];
+
+    string house_no = 8 [(google.api.field_behavior) = REQUIRED];
+
+    optional string supplement = 9 [(google.api.field_behavior) = OPTIONAL];
+
+    optional string phone_number = 10 [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  message CreateDestination {
+    string market_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+    CurrencyCodeEnum.CurrencyCode currency_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+    string shipping_costs = 3 [(google.api.field_behavior) = REQUIRED];
+
+    uint32 min_delivery_days = 4 [(google.api.field_behavior) = REQUIRED];
+
+    uint32 max_delivery_days = 5 [(google.api.field_behavior) = REQUIRED];
+
+    optional bool label_creation_enabled = 6 [(google.api.field_behavior) = OPTIONAL];
+
+    // Carrier slug, obtained from ListAvailableCarriers RPC.
+    optional string carrier = 7 [(google.api.field_behavior) = OPTIONAL];
+
+    // The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
+    optional uint32 dispatch_cutoff_hour = 8 [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  message UpdateDestination {
+    string market_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+    optional CurrencyCodeEnum.CurrencyCode currency_code = 2;
+
+    optional string shipping_costs = 3;
+
+    optional uint32 min_delivery_days = 4;
+
+    optional uint32 max_delivery_days = 5;
+
+    optional bool label_creation_enabled = 6;
+
+    // Carrier slug, obtained from ListAvailableCarriers RPC.
+    optional string carrier = 7 [(google.api.field_behavior) = OPTIONAL];
+
+    // The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
+    optional uint32 dispatch_cutoff_hour = 8 [(google.api.field_behavior) = OPTIONAL];
+  }
+}
+
+message UpdateShippingProfileResponse {
+  ShippingProfile shipping_profile = 1;
+}
+
+message DeleteShippingProfileRequest {
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message ListAvailableCarriersResponse {
+  repeated Carrier carriers = 1;
+}

@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OrderLabelEnum {
+  // Labels are additional indicators set next to the order state. They can be
+  // filtered by.
+  enum OrderLabel {
+    UNSPECIFIED = 0;
+
+    // Set if the items' states of an order are neither all state NEW, nor all
+    // a final state.
+    PROCESSING = 1;
+
+    // Set if at least one order item (but not all) has state REJECTED.
+    PARTIALLY_REJECTED = 2;
+
+    // Set if at least one order item (but not all) has state CANCELLED.
+    PARTIALLY_CANCELLED = 3;
+
+    // Set if at least one order item (but not all) has state SHIPPED.
+    PARTIALLY_SHIPPED = 4;
+
+    // Set if at least one order item (but not all) has state RETURNED.
+    PARTIALLY_RETURNED = 5;
+
+    // Set if at least one order item does not have parcel tracking url set.
+    MISSING_PARCEL_TRACKING_URLS = 6;
+
+    // Set if at least one order item does not have item identifier set.
+    MISSING_ITEM_IDENTIFIERS = 7;
+  }
+}

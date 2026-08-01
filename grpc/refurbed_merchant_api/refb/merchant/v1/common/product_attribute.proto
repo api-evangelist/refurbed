@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message ProductAttribute {
+  // Attribute ID
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Value of the attribute.
+  oneof value {
+    string value_str = 2 [(google.api.field_behavior) = REQUIRED];
+
+    double value_num = 3 [(google.api.field_behavior) = REQUIRED];
+  }
+}

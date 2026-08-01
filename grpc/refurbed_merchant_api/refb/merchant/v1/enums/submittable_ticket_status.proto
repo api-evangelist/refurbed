@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// The ticket status that the merchant is allowed to set when updating a ticket.
+message SubmittableTicketStatusEnum {
+  enum SubmittableTicketStatus {
+    reserved 1;
+    reserved "OPEN";
+
+    UNSPECIFIED = 0;
+    PENDING = 2;
+    SOLVED = 3;
+  }
+}

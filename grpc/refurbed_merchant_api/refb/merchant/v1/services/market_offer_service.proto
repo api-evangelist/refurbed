@@ -1,0 +1,464 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "google/protobuf/empty.proto";
+import "google/rpc/status.proto";
+import "refb/descriptor.proto";
+import "refb/merchant/v1/common/market_offer_identifier.proto";
+import "refb/merchant/v1/common/offer_identifier.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/enums/sort_order.proto";
+import "refb/merchant/v1/filters/bool_filter.proto";
+import "refb/merchant/v1/filters/currency_code_filter.proto";
+import "refb/merchant/v1/filters/int64_filter.proto";
+import "refb/merchant/v1/filters/market_offer_identifier_filter.proto";
+import "refb/merchant/v1/filters/numeric_range_filter.proto";
+import "refb/merchant/v1/filters/offer_buybox_scope_filter.proto";
+import "refb/merchant/v1/filters/offer_buybox_state_filter.proto";
+import "refb/merchant/v1/filters/offer_grading_filter.proto";
+import "refb/merchant/v1/filters/offer_sku_filter.proto";
+import "refb/merchant/v1/filters/offer_state_filter.proto";
+import "refb/merchant/v1/filters/offer_taxation_filter.proto";
+import "refb/merchant/v1/filters/offer_visibility_filter.proto";
+import "refb/merchant/v1/filters/offer_warranty_filter.proto";
+import "refb/merchant/v1/filters/optional_int64_filter.proto";
+import "refb/merchant/v1/filters/optional_numeric_range_filter.proto";
+import "refb/merchant/v1/filters/string_filter.proto";
+import "refb/merchant/v1/filters/timestamp_range_filter.proto";
+import "refb/merchant/v1/filters/uint32_range_filter.proto";
+import "refb/merchant/v1/paginations/market_offer_identifier_pagination.proto";
+import "refb/merchant/v1/paginations/string_pagination.proto";
+import "refb/merchant/v1/resources/market_offer.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Service to manage market offers / offer market prices.
+service MarketOfferService {
+  // Lists all market offers.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when pagination limit is too large (>100)
+  //   - when both "ending_before" and "starting_after" are specified in pagination
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc ListMarketOffers(ListMarketOffersRequest) returns (ListMarketOffersResponse) {
+    option (permission) = "merchant.marketOffer:list";
+  }
+
+  // Lists all market offers of a specific offer.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when offer identifier is not valid
+  //   - when pagination limit is too large (>100)
+  //   - when both "ending_before" and "starting_after" are specified in pagination
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc ListMarketOffersByOffer(ListMarketOffersByOfferRequest) returns (ListMarketOffersByOfferResponse) {
+    option (permission) = "merchant.marketOffer:list";
+  }
+
+  // Gets a single market offer.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the offer is not found
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc GetMarketOffer(GetMarketOfferRequest) returns (GetMarketOfferResponse) {
+    option (permission) = "merchant.marketOffer:view";
+  }
+
+  // Creates a single market offer / an offer market price of an offer.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - ALREADY_EXISTS
+  //   - when market offer already exists, i.e. market price is defined for
+  //     given offer and market combination
+  // - INVALID_ARGUMENT
+  //   - when the unknown offer is provided
+  //   - invalid market code is provided
+  //   - invalid input market offer data is provided
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc CreateMarketOffer(CreateMarketOfferRequest) returns (CreateMarketOfferResponse) {
+    option (permission) = "merchant.marketOffer:create";
+  }
+
+  // Updates a single market offer / an offer market price of an offer.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when market offer does not exists
+  // - INVALID_ARGUMENT
+  //   - when the unknown offer is provided
+  //   - invalid input market offer data is provided
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc UpdateMarketOffer(UpdateMarketOfferRequest) returns (UpdateMarketOfferResponse) {
+    option (permission) = "merchant.marketOffer:update";
+  }
+
+  // Deletes a single market offer / an offer market price of an offer.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when market offer does not exists
+  // - INVALID_ARGUMENT
+  //   - invalid market offer identifier is provided
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc DeleteMarketOffer(DeleteMarketOfferRequest) returns (google.protobuf.Empty) {
+    option (permission) = "merchant.marketOffer:delete";
+  }
+
+  // Batch gets market offers / offer market prices of offers.
+  //
+  // Known errors:
+  //  - identical to the GetMarketOffer operation
+  rpc BatchGetMarketOffer(BatchGetMarketOffersRequest) returns (BatchGetMarketOffersResponse) {
+    option (permission) = "merchant.marketOffer:view";
+  }
+
+  // Batch creates market offers / offer market prices of offers.
+  //
+  // Known errors:
+  //  - identical to the CreateMarketOffer operation
+  rpc BatchCreateMarketOffer(BatchCreateMarketOffersRequest) returns (BatchCreateMarketOffersResponse) {
+    option (permission) = "merchant.marketOffer:create";
+  }
+
+  // Batch updates market offers / offer market prices of offers.
+  //
+  // Known errors:
+  //  - identical to the UpdateMarketOffer operation
+  rpc BatchUpdateMarketOffer(BatchUpdateMarketOffersRequest) returns (BatchUpdateMarketOffersResponse) {
+    option (permission) = "merchant.marketOffer:update";
+  }
+
+  // Batch deletes market offers / offer market prices of offers.
+  //
+  // Known errors:
+  //  - identical to the DeleteMarketOffer operation
+  rpc BatchDeleteMarketOffer(BatchDeleteMarketOffersRequest) returns (BatchDeleteMarketOffersResponse) {
+    option (permission) = "merchant.marketOffer:delete";
+  }
+}
+
+message ListMarketOffersRequest {
+  MarketOfferIdentifierPagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      ID = 0;
+    }
+  }
+
+  message Filter {
+    MarketOfferIdentifierFilter id = 1;
+    Int64Filter offer_id = 2;
+    TimestampRangeFilter created_at = 3;
+    Int64Filter instance_id = 4;
+    OfferStateFilter state = 5;
+    OfferNameFilter name = 6;
+    OfferSKUFilter sku = 7;
+    OfferGradingFilter grading = 8;
+    OfferWarrantyFilter warranty = 9;
+    UInt32RangeFilter stock = 10;
+    Int64Filter shipping_profile_id = 11;
+    OptionalInt64Filter secondary_shipping_profile_id = 12;
+    OfferTaxationFilter taxation = 13;
+    CurrencyCodeFilter reference_currency_code = 14;
+    NumericRangeFilter reference_price = 15;
+    OptionalNumericRangeFilter reference_min_price = 16;
+
+    StringFilter market_price_market_code = 17;
+    BoolFilter market_price_is_site_market = 18;
+    BoolFilter market_price_is_calculated = 19;
+    CurrencyCodeFilter market_price_currency_code = 20;
+    NumericRangeFilter market_price_price = 21;
+    OptionalNumericRangeFilter market_price_min_price = 22;
+    CurrencyCodeFilter market_price_site_market_currency_code = 23;
+    NumericRangeFilter market_price_site_market_price = 24;
+    OptionalNumericRangeFilter market_price_site_market_min_price = 25;
+    OfferVisibilityFilter market_price_visibility = 26;
+    OfferBuyboxStateFilter market_price_instance_buybox_state = 27;
+    // only applicable when buybox state is WON
+    OfferBuyboxScopeFilter market_price_buybox_scope = 28;
+
+    message OfferNameFilter {
+      optional string matches = 1; // Full-text match.
+    }
+  }
+}
+
+message ListMarketOffersResponse {
+  // The market offers found.
+  repeated MarketOffer market_offers = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}
+
+message ListMarketOffersByOfferRequest {
+  StringPagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  OfferIdentifier offer_identifier = 4 [(google.api.field_behavior) = REQUIRED];
+
+  reserved 6;
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      ID = 0;
+
+      MARKET_PRICE_MARKET_CODE = 1;
+      MARKET_PRICE_MARKET_NAME = 2;
+      MARKET_PRICE_IS_SITE_MARKET = 3;
+      MARKET_PRICE_IS_CALCULATED = 4;
+      MARKET_PRICE_CURRENCY_CODE = 5;
+      MARKET_PRICE_PRICE = 6;
+      MARKET_PRICE_MIN_PRICE = 7;
+      MARKET_PRICE_SITE_MARKET_CURRENCY_CODE = 8;
+      MARKET_PRICE_SITE_MARKET_PRICE = 9;
+      MARKET_PRICE_SITE_MARKET_MIN_PRICE = 10;
+    }
+  }
+
+  message Filter {
+    MarketOfferIdentifierFilter id = 1;
+
+    StringFilter market_price_market_code = 2;
+    BoolFilter market_price_is_site_market = 3;
+    BoolFilter market_price_is_calculated = 4;
+    CurrencyCodeFilter market_price_currency_code = 5;
+    NumericRangeFilter market_price_price = 6;
+    OptionalNumericRangeFilter market_price_min_price = 7;
+    CurrencyCodeFilter market_price_site_market_currency_code = 8;
+    NumericRangeFilter market_price_site_market_price = 9;
+    OptionalNumericRangeFilter market_price_site_market_min_price = 10;
+    OfferVisibilityFilter market_price_visibility = 11;
+    OfferBuyboxStateFilter market_price_instance_buybox_state = 12;
+    // only applicable when buybox state is WON
+    OfferBuyboxScopeFilter market_price_buybox_scope = 13;
+  }
+}
+
+message ListMarketOffersByOfferResponse {
+  // The market offers found.
+  repeated MarketOffer market_offers = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}
+
+message GetMarketOfferRequest {
+  // The identifier of the market offer to get.
+  MarketOfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+  reserved 2;
+}
+
+message GetMarketOfferResponse {
+  MarketOffer market_offer = 1;
+}
+
+message CreateMarketOfferRequest {
+  OfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+  CreateOfferMarketPrice market_price = 2 [(google.api.field_behavior) = REQUIRED];
+
+  message CreateOfferMarketPrice {
+    string market_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+    CurrencyCodeEnum.CurrencyCode currency_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+    string price = 3 [(google.api.field_behavior) = REQUIRED];
+
+    optional string min_price = 4;
+  }
+}
+
+message CreateMarketOfferResponse {
+  MarketOffer market_offer = 1;
+}
+
+message UpdateMarketOfferRequest {
+  // The identifier of the market offer to update.
+  MarketOfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+  UpdateOfferMarketPrice market_price = 2 [(google.api.field_behavior) = REQUIRED];
+
+  message UpdateOfferMarketPrice {
+    optional CurrencyCodeEnum.CurrencyCode currency_code = 1;
+
+    optional string price = 2;
+
+    oneof update_min_price {
+      string min_price = 3;
+      bool delete_min_price = 4;
+    }
+  }
+}
+
+message UpdateMarketOfferResponse {
+  MarketOffer market_offer = 1;
+}
+
+message DeleteMarketOfferRequest {
+  // The identifier of the market offer to delete.
+  MarketOfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message BatchGetMarketOffersRequest {
+  // Market offers to get. Between 1 and 50.
+  repeated Get market_offers = 1 [(google.api.field_behavior) = REQUIRED];
+
+  message Get {
+    // The identifier of the market offer to get.
+    MarketOfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+    reserved 2;
+  }
+}
+
+message BatchGetMarketOffersResponse {
+  // Results of the get operation. In request order.
+  repeated Result results = 1;
+
+  message Result {
+    google.rpc.Status status = 1;
+
+    // Retrieved market offer. Set if status code is OK.
+    optional MarketOffer market_offer = 2;
+  }
+}
+
+message BatchCreateMarketOffersRequest {
+  // Market offers to create. Between 1 and 50.
+  repeated Create market_offers = 1 [(google.api.field_behavior) = REQUIRED];
+
+  message Create {
+    OfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+    CreateOfferMarketPrice market_price = 2 [(google.api.field_behavior) = REQUIRED];
+
+    message CreateOfferMarketPrice {
+      string market_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+      CurrencyCodeEnum.CurrencyCode currency_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+      string price = 3 [(google.api.field_behavior) = REQUIRED];
+
+      optional string min_price = 4;
+    }
+  }
+}
+
+message BatchCreateMarketOffersResponse {
+  // Results of the create operation. In request order.
+  repeated Result results = 1;
+
+  message Result {
+    google.rpc.Status status = 1;
+
+    // Created market offer. Set if status code is OK.
+    optional MarketOffer market_offer = 2;
+  }
+}
+
+message BatchUpdateMarketOffersRequest {
+  // Market offers to update. Between 1 and 50.
+  repeated Update market_offers = 1 [(google.api.field_behavior) = REQUIRED];
+
+  message Update {
+    // The identifier of the market offer to update.
+    MarketOfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+    UpdateOfferMarketPrice market_price = 2 [(google.api.field_behavior) = REQUIRED];
+
+    message UpdateOfferMarketPrice {
+      optional CurrencyCodeEnum.CurrencyCode currency_code = 1;
+
+      optional string price = 2;
+
+      oneof update_min_price {
+        string min_price = 3;
+        bool delete_min_price = 4;
+      }
+    }
+  }
+}
+
+message BatchUpdateMarketOffersResponse {
+  // Results of the update operation. In request order.
+  repeated Result results = 1;
+
+  message Result {
+    google.rpc.Status status = 1;
+
+    // Updated market offer. Set if status code is OK.
+    optional MarketOffer market_offer = 2;
+  }
+}
+
+message BatchDeleteMarketOffersRequest {
+  // Market offers to delete. Between 1 and 50.
+  repeated Delete offers = 1 [(google.api.field_behavior) = REQUIRED];
+
+  message Delete {
+    // The identifier of the market offer to delete.
+    MarketOfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+  }
+}
+
+message BatchDeleteMarketOffersResponse {
+  // Results of the delete operation. In request order.
+  repeated Result results = 1;
+
+  message Result {
+    google.rpc.Status status = 1;
+  }
+}

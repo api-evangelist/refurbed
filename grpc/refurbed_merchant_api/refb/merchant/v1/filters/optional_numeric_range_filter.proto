@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Numeric range filter is used for decimal numbers. It is especially
+// used for monetary amounts and other quantities where exactness is required.
+message OptionalNumericRangeFilter {
+  optional bool is_set = 1;
+  optional string gt = 2; // Greater than.
+  optional string ge = 3; // Greater than or equal to.
+  repeated string any_of = 4;
+  repeated string none_of = 5;
+  optional string le = 6; // Less than or equal to.
+  optional string lt = 7; // Less than.
+}

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OfferVisibilityEnum {
+  // Indicates if and how an offer is shown on the refurbed platform.
+  enum OfferVisibility {
+    UNSPECIFIED = 0;
+
+    // Offer is normally shown to customers.
+    FULL = 1;
+
+    // Offer is not shown to customers (e.g. does not ship into this market, is
+    // out of stock, is not verified,...).
+    NONE = 2;
+
+    // Offer was hidden from some pages by refurbed (e.g. because price is
+    // higher than refurbed's instance SRP).
+    LIMITED = 3;
+
+    // Offer was hidden by refurbed (e.g. because of an unreasonably low or high
+    // price).
+    HIDDEN = 4;
+  }
+}

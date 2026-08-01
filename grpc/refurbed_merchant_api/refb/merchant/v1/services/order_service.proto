@@ -1,0 +1,580 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "google/protobuf/empty.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "refb/descriptor.proto";
+import "refb/merchant/v1/enums/carrier_enum.proto";
+import "refb/merchant/v1/enums/country_code.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/enums/sort_order.proto";
+import "refb/merchant/v1/filters/address_entity_filter.proto";
+import "refb/merchant/v1/filters/bool_filter.proto";
+import "refb/merchant/v1/filters/country_code_filter.proto";
+import "refb/merchant/v1/filters/currency_code_filter.proto";
+import "refb/merchant/v1/filters/int64_filter.proto";
+import "refb/merchant/v1/filters/numeric_range_filter.proto";
+import "refb/merchant/v1/filters/offer_sku_filter.proto";
+import "refb/merchant/v1/filters/order_label_collection_filter.proto";
+import "refb/merchant/v1/filters/order_state_filter.proto";
+import "refb/merchant/v1/filters/timestamp_range_filter.proto";
+import "refb/merchant/v1/paginations/int64_pagination.proto";
+import "refb/merchant/v1/resources/address.proto";
+import "refb/merchant/v1/resources/order.proto";
+import "refb/merchant/v1/resources/shipping_label.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Service to manage orders.
+service OrderService {
+  // Lists orders.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when pagination limit is too large (>100)
+  //   - when both "ending_before" and "starting_after" are specified in pagination
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse) {
+    option (permission) = "merchant.order:list";
+  }
+
+  // Gets a single order using its identifier.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order is not found
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse) {
+    option (permission) = "merchant.order:view";
+  }
+
+  // Refunds all refundable items of an order at once.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order is not found
+  // - INVALID_ARGUMENT
+  //   - invalid input refund data is provided
+  // - FAILED_PRECONDITION
+  //   - when order is not refundable
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc RefundOrder(RefundOrderRequest) returns (RefundOrderResponse) {
+    option (permission) = "merchant.order:refund";
+  }
+
+  // Calculate values for a refund of all refundable items of an order at once,
+  // i.e. using the RefundOrder method.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order is not found
+  // - INVALID_ARGUMENT
+  //   - invalid input refund data is provided
+  // - FAILED_PRECONDITION
+  //   - when order is not refundable
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc CalculateRefundOrder(CalculateRefundOrderRequest) returns (CalculateRefundOrderResponse) {
+    option (permission) = "merchant.order:view";
+  }
+
+  // Uploads an invoice for an order.
+  //
+  // Overrides a possibly already existing invoice. Order needs to be
+  // invoiceable.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order is not found for the merchant
+  // - FAILED_PRECONDITION
+  //   - when the invoice exceeds the permitted size
+  //   - when the order is not invoiceable
+  // - INVALID_ARGUMENT
+  //   - when the invoice format is not supported
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc SetOrderInvoiceStream(stream SetOrderInvoiceRequest) returns (SetOrderInvoiceResponse) {
+    option (permission) = "merchant.orderInvoice:update";
+  }
+
+  // Gets the order's invoice. The URL access token is valid for 24h.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order is not found for the merchant
+  //   - when no invoice is found in the order
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc GetOrderInvoice(GetOrderInvoiceRequest) returns (GetOrderInvoiceResponse) {
+    option (permission) = "merchant.orderInvoice:view";
+  }
+
+  // Deletes the order's invoice. Order needs to be
+  // invoiceable.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order is not found for the merchant
+  //   - when no invoice is found in the order
+  // - FAILED_PRECONDITION
+  //   - when the order is not invoiceable
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc DeleteOrderInvoice(DeleteOrderInvoiceRequest) returns (google.protobuf.Empty) {
+    option (permission) = "merchant.orderInvoice:delete";
+  }
+
+  // Creates shipping label for an order
+  //
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order is not found
+  //   - when merchant address is not found
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc CreateShippingLabel(CreateShippingLabelRequest) returns (CreateShippingLabelResponse) {
+    option (permission) = "merchant.shippingLabel:create";
+  }
+
+  // Lists shipping labels for an order
+  //
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order is not found
+  //   - when merchant address is not found
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc ListShippingLabels(ListShippingLabelsRequest) returns (ListShippingLabelsResponse) {
+    option (permission) = "merchant.shippingLabel:list";
+  }
+
+  // Uploads a commercial invoice for an order.
+  //
+  // This document is required for customs when shipping internationally (e.g., outside the EU), and must be provided
+  // before shipping the order. The document must be in PDF.
+  // Intra-EU orders (e.g., non-CH orders) are not eligible for commercial invoice upload.
+  // If a commercial invoice was already uploaded, the call will return an error.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order is not found
+  // - FAILED_PRECONDITION
+  //   - when the order is not eligible for commercial invoice upload
+  //   - when a commercial invoice was already uploaded for the order
+  // - INVALID_ARGUMENT
+  //   - when the commercial invoice format is not supported
+  //   - when the commercial invoice exceeds the permitted size
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc UploadOrderCommercialInvoice(stream UploadOrderCommercialInvoiceRequest) returns (UploadOrderCommercialInvoiceResponse) {
+    option (permission) = "merchant.orderCommercialInvoice:update";
+  }
+
+  // Returns the previously uploaded commercial invoice for an order.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order is not found
+  //   - when the commercial invoice was not uploaded
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc GetOrderCommercialInvoice(GetOrderCommercialInvoiceRequest) returns (GetOrderCommercialInvoiceResponse) {
+    option (permission) = "merchant.orderCommercialInvoice:view";
+  }
+
+  // Deletes the previously uploaded commercial invoice for an order.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order is not found
+  //   - when the commercial invoice was not uploaded
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc DeleteOrderCommercialInvoice(DeleteOrderCommercialInvoiceRequest) returns (google.protobuf.Empty) {
+    option (permission) = "merchant.orderCommercialInvoice:delete";
+  }
+
+  // Updates the shipping label address for an order.
+  //
+  // The shipping label address is used when creating shipping labels. This is
+  // useful when the carrier rejects the original customer address and the merchant
+  // needs to correct it.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - FAILED_PRECONDITION
+  //   - when shipping label address is not enabled for the merchant
+  // - NOT_FOUND
+  //   - when the order is not found
+  // - INVALID_ARGUMENT
+  //   - when address fields are invalid
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc UpdateShippingLabelAddress(UpdateShippingLabelAddressRequest) returns (UpdateShippingLabelAddressResponse) {
+    option (permission) = "merchant.shippingLabelAddress:update";
+  }
+}
+
+message ListOrdersRequest {
+  Int64Pagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      ID = 0;
+      RELEASED_AT = 1;
+      CUSTOMER_EMAIL = 2;
+      CURRENCY_CODE = 3;
+      SETTLEMENT_CURRENCY_CODE = 4;
+      TOTAL_CHARGED = 5;
+      SETTLEMENT_TOTAL_CHARGED = 6;
+      TOTAL_PAID = 7;
+      SETTLEMENT_TOTAL_PAID = 8;
+      TOTAL_REFUNDED = 9;
+      SETTLEMENT_TOTAL_REFUNDED = 10;
+    }
+  }
+
+  message Filter {
+    Int64Filter id = 1;
+    TimestampRangeFilter released_at = 2;
+    OrderStateFilter state = 3;
+    OrderLabelCollectionFilter labels = 4;
+    OrderCustomerEmailFilter customer_email = 5;
+    OrderAddressFilter address = 6; // Both addresses.
+    OrderAddressPhoneNumberFilter address_phone_number = 7; // Both addresses.
+    AddressEntityFilter shipping_address_entity = 8;
+    CountryCodeFilter shipping_address_country_code = 9;
+    OrderAddressFilter invoice_address = 10;
+    AddressEntityFilter invoice_address_entity = 11;
+    OrderAddressVATINFilter invoice_address_vatin = 12;
+    CountryCodeFilter invoice_address_country_code = 13;
+    CurrencyCodeFilter currency_code = 14;
+    CurrencyCodeFilter settlement_currency_code = 15;
+    NumericRangeFilter total_charged = 16;
+    NumericRangeFilter settlement_total_charged = 17;
+    NumericRangeFilter total_paid = 18;
+    NumericRangeFilter settlement_total_paid = 19;
+    NumericRangeFilter total_refunded = 20;
+    NumericRangeFilter settlement_total_refunded = 21;
+    BoolFilter is_invoiceable = 22;
+    BoolFilter has_invoice = 23;
+
+    OrderItemNameFilter item_name = 24; // Any.
+    OfferSKUFilter item_sku = 25; // Any.
+    Int64Filter item_offer_id = 26; // Any.
+
+    BoolFilter is_return_initiated = 27; // for any of the order items
+    BoolFilter is_return_shipment_label_used = 28; // for any of the order items
+
+    message OrderCustomerEmailFilter {
+      optional string eq = 1;
+      optional string contains = 2; // Partial/substring match.
+    }
+
+    message OrderAddressFilter {
+      optional string matches = 1; // Full-text match.
+    }
+
+    message OrderAddressPhoneNumberFilter {
+      optional string eq = 1;
+      optional string contains = 2; // Partial/substring match.
+    }
+
+    message OrderAddressVATINFilter {
+      optional string eq = 1;
+      optional string contains = 2; // Partial/substring match.
+    }
+
+    message OrderItemNameFilter {
+      optional string matches = 1; // Full-text match.
+    }
+  }
+}
+
+message ListOrdersResponse {
+  // The orders found.
+  repeated Order orders = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}
+
+message GetOrderRequest {
+  // The id of the order to get.
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetOrderResponse {
+  Order order = 1;
+}
+
+message RefundOrderRequest {
+  // The id of the order to fully refund.
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message RefundOrderResponse {
+  // Currency of the refund. This matches the order / order item currency.
+  CurrencyCodeEnum.CurrencyCode currency_code = 1;
+
+  // New total paid of the order.
+  string total_paid = 2;
+
+  // Total refunded amount.
+  string total_refunded = 3;
+
+  // Refunded amount.
+  string refunded = 4;
+
+  // Part that refurbed refunded.
+  string refunded_refurbed = 5;
+
+  // Part that the merchant refunded.
+  string refunded_merchant = 6;
+}
+
+message CalculateRefundOrderRequest {
+  // The id of the order to calculate a full refund values for.
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message CalculateRefundOrderResponse {
+  // Currency of the refund. This matches the order / order item currency.
+  CurrencyCodeEnum.CurrencyCode currency_code = 1;
+
+  // New total paid of the order.
+  string total_paid = 2;
+
+  // Total refunded amount.
+  string total_refunded = 3;
+
+  // Refunded amount.
+  string refunded = 4;
+
+  // Part that refurbed refunded.
+  string refunded_refurbed = 5;
+
+  // Part that the merchant refunded.
+  string refunded_merchant = 6;
+}
+
+// Send first message with Meta set, then other messages with chunked data to stream.
+// Max total data size is 2MB (2 * 1024^2 bytes).
+message SetOrderInvoiceRequest {
+  oneof content {
+    Meta meta = 1;
+
+    // File data in PDF format. Can be at most 1MB (1024^2 bytes).
+    bytes data = 2;
+  }
+
+  message Meta {
+    int64 order_id = 1 [(google.api.field_behavior) = REQUIRED];
+  }
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {type: ARRAY}
+    example: "[{\"meta\":{\"order_id\": \"123\"}},{\"data\": \"base64encodedbinary\"}]"
+  };
+}
+
+message SetOrderInvoiceResponse {
+  // Size of uploaded invoice in bytes.
+  int64 size = 1;
+
+  // Hex string representation of CRC32 checksum
+  //
+  // Uses the IEEE polynomial (0xedb88320).
+  string crc32 = 2;
+
+  // URL to invoice file. This will expire.
+  string url = 3;
+}
+
+message GetOrderInvoiceRequest {
+  int64 order_id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetOrderInvoiceResponse {
+  // URL to invoice file. This will expire.
+  string url = 1;
+}
+
+message DeleteOrderInvoiceRequest {
+  int64 order_id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message CreateShippingLabelRequest {
+  // The id of the order for which to generate shipping labels.
+  int64 order_id = 1 [(google.api.field_behavior) = REQUIRED];
+  // The id of the merchant address.
+  int64 merchant_address_id = 2 [(google.api.field_behavior) = REQUIRED];
+  // The weight of the parcel that labels are generated for
+  float parcel_weight = 3 [(google.api.field_behavior) = REQUIRED];
+  // Carrier that should be used to create shipping label
+  CarrierEnum.Carrier carrier = 4 [(google.api.field_behavior) = REQUIRED];
+}
+
+message CreateShippingLabelResponse {
+  ShippingLabel shipping_label = 1;
+}
+
+message ListShippingLabelsRequest {
+  // The id of the order for which to list shipping labels.
+  int64 order_id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message ListShippingLabelsResponse {
+  repeated ShippingLabel shipping_labels = 1;
+}
+
+// Send first message with Meta set, then other messages with chunked data to stream.
+// Max total data size is 2MB (2 * 1024^2 bytes).
+message UploadOrderCommercialInvoiceRequest {
+  oneof content {
+    Meta meta = 1;
+
+    // File data in PDF format. Can be at most 1MB (1024^2 bytes).
+    bytes data = 2;
+  }
+
+  message Meta {
+    // Order ID
+    int64 order_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // Commercial invoice number, as indicated on the document
+    string commercial_invoice_number = 2 [(google.api.field_behavior) = REQUIRED];
+  }
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {type: ARRAY}
+    example: "[{\"meta\":{\"order_id\": \"123\", \"commercial_invoice_number\": \"INV-123\"}},{\"data\": \"base64encodedbinary\"}]"
+  };
+}
+
+message UploadOrderCommercialInvoiceResponse {
+  // Size of uploaded invoice in bytes.
+  int64 size = 1;
+
+  reserved 2;
+
+  // URL to invoice file. This will expire.
+  string url = 3;
+
+  // Commercial invoice number, as indicated on the document.
+  string commercial_invoice_number = 4;
+}
+
+message GetOrderCommercialInvoiceRequest {
+  int64 order_id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetOrderCommercialInvoiceResponse {
+  // URL to invoice file. This will expire.
+  string url = 1;
+
+  // Commercial invoice number, as indicated on the document.
+  string commercial_invoice_number = 2;
+}
+
+message DeleteOrderCommercialInvoiceRequest {
+  int64 order_id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message UpdateShippingLabelAddressRequest {
+  int64 order_id = 1 [(google.api.field_behavior) = REQUIRED];
+  Address address = 2 [(google.api.field_behavior) = REQUIRED];
+
+  message Address {
+    string first_name = 1 [(google.api.field_behavior) = REQUIRED];
+    string family_name = 2 [(google.api.field_behavior) = REQUIRED];
+    optional string company = 3;
+    string street_name = 4 [(google.api.field_behavior) = REQUIRED];
+    optional string house_no = 5;
+    optional string supplement = 6;
+    string town = 7 [(google.api.field_behavior) = REQUIRED];
+    string post_code = 8 [(google.api.field_behavior) = REQUIRED];
+    CountryCodeEnum.CountryCode country_code = 9 [(google.api.field_behavior) = REQUIRED];
+    string phone = 10 [(google.api.field_behavior) = REQUIRED];
+  }
+}
+
+message UpdateShippingLabelAddressResponse {
+  Address address = 1;
+}

@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message PaymentMethodEnum {
+  enum PaymentMethod {
+    UNSPECIFIED = 0;
+    SOFORT = 1;
+    PAYPAL = 2;
+    CASHPRESSO = 3;
+    STRIPE_DIGITAL_WALLET = 4;
+    STRIPE_CARDS = 5;
+    STRIPE_EPS = 6;
+    STRIPE_GIRO_PAY = 7;
+    STRIPE_IDEAL = 8;
+    STRIPE_MOBILE_PAY = 9;
+    STRIPE_P24 = 10;
+    STRIPE_SOFORT = 11;
+    STRIPE_KLARNA = 12;
+    STRIPE_SWISH = 13;
+    STRIPE_MBWAY = 18;
+    STRIPE_REVOLUT_PAY = 19;
+    STRIPE_MONDU = 20;
+    BRAINTREE_PAYPAL = 14;
+    BRAINTREE_SATISPAY = 15;
+    BRAINTREE_CARDS = 16;
+    BRAINTREE_BANCONTACT = 17;
+  }
+}

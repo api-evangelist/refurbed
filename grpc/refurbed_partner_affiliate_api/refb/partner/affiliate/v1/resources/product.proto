@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+import "google/api/resource.proto";
+import "refb/partner/affiliate/v1/resources/attribute.proto";
+import "refb/partner/affiliate/v1/resources/buybox.proto";
+import "refb/partner/affiliate/v1/resources/media.proto";
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+// A product.
+message Product {
+  option (google.api.resource) = {type: "refb.partner.affiliate.v1/Product"};
+
+  // Primary key.
+  int64 id = 1;
+
+  // Human-readable name.
+  string name = 2;
+
+  // Identifier of category this product is linked with.
+  int64 category_id = 3;
+
+  // Human-readable names of category hierarchy path (e.g. ["Smartphones", "Apple"]).
+  repeated string category_path = 4;
+
+  // List of attributes assigned to this product.
+  repeated Attribute attributes = 5;
+
+  // List of media assigned to this product.
+  repeated Media medias = 6;
+
+  // Buybox data, defines the price and conditions (grading, warranty) by which
+  // this best instance for a given product is sold.
+  Buybox buybox = 7;
+}

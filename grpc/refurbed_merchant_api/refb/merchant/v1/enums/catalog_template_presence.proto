@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Presence of a specification in a template.
+message PresenceEnum {
+  enum Presence {
+    UNSPECIFIED = 0;
+    OPTIONAL = 1;
+    REQUIRED = 2;
+  }
+}

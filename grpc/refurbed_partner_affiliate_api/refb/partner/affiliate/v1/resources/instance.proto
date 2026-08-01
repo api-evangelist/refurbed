@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+import "google/api/resource.proto";
+import "refb/partner/affiliate/v1/resources/attribute.proto";
+import "refb/partner/affiliate/v1/resources/buybox.proto";
+import "refb/partner/affiliate/v1/resources/media.proto";
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+// An instance.
+message Instance {
+  option (google.api.resource) = {type: "refb.partner.affiliate.v1/Instance"};
+
+  // Primary key.
+  int64 id = 1;
+
+  // Human-readable name.
+  string name = 2;
+
+  // Identifier of product this instance is linked with.
+  int64 product_id = 3;
+
+  // Identifier of category this instance is linked with.
+  int64 category_id = 4;
+
+  // Human-readable names of category hierarchy path (e.g. ["Smartphones", "Apple"]).
+  repeated string category_path = 5;
+
+  // List of attributes assigned to this instance including product attributes.
+  repeated Attribute attributes = 6;
+
+  // List of media assigned to this instance including the instance's product
+  // media.
+  repeated Media medias = 7;
+
+  // Buybox data, defines the price and conditions (grading, warranty) by which
+  // this instance is sold.
+  Buybox buybox = 8;
+}

@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// A currency.
+message Currency {
+  option (google.api.resource) = {type: "refb.merchant.v1/Currency"};
+
+  // Primary key. ISO currency code.
+  CurrencyCodeEnum.CurrencyCode code = 1;
+
+  // Lists the current exchange rates to all other currencies.
+  //
+  // This is a snapshot in time and there is no guarantee that new orders will
+  // be using the exchange rates returned.
+  repeated ExchangeRate exchange_rates = 2;
+
+  message ExchangeRate {
+    option (google.api.resource) = {type: "refb.merchant.v1/CurrencyExchangeRate"};
+
+    CurrencyCodeEnum.CurrencyCode base_currency = 1;
+
+    CurrencyCodeEnum.CurrencyCode target_currency = 2;
+
+    string rate = 3;
+  }
+}

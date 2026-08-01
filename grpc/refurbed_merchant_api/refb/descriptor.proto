@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package refb;
+
+import "google/protobuf/descriptor.proto";
+
+option go_package = "refurbed/grpc/generated";
+
+extend google.protobuf.MethodOptions {
+  string permission = 1001;
+}

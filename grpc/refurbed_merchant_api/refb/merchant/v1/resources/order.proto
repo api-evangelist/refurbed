@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/enums/order_label.proto";
+import "refb/merchant/v1/enums/order_state.proto";
+import "refb/merchant/v1/enums/payment_method.proto";
+import "refb/merchant/v1/enums/refund_eligibility.proto";
+import "refb/merchant/v1/resources/address.proto";
+import "refb/merchant/v1/resources/order_item.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// An order.
+message Order {
+  option (google.api.resource) = {type: "refb.merchant.v1/Order"};
+
+  // Primary key.
+  int64 id = 1;
+
+  // When the order was released to the merchant.
+  google.protobuf.Timestamp released_at = 2;
+
+  // The order state. To understand the flow, please read the documentation of
+  // the individual order states and order item states.
+  OrderStateEnum.OrderState state = 3;
+
+  // Order labels.
+  repeated OrderLabelEnum.OrderLabel labels = 4 [(google.api.field_behavior) = UNORDERED_LIST];
+
+  // The customer's email address.
+  string customer_email = 5;
+
+  // The shipping address.
+  Address shipping_address = 6;
+
+  // The invoice address.
+  Address invoice_address = 7;
+
+  // Currency the order was charged in.
+  CurrencyCodeEnum.CurrencyCode currency_code = 8;
+
+  // Currency the order was settled it. This is the currency the merchant will
+  // be paid out in.
+  CurrencyCodeEnum.CurrencyCode settlement_currency_code = 9;
+
+  // Exchange rate applied to convert amounts from currency to settlement
+  // currency.
+  string settlement_exchange_rate = 10;
+
+  // The total amount the customer was charged. This is the sum of all of the
+  // order item's total charged values; it is also the sum of total paid and
+  // total refunded.
+  string total_charged = 11;
+
+  // The total amount the customer was charged, in settlement currency.
+  string settlement_total_charged = 12;
+
+  // Discount amount if coupon was applied to the order.
+  string total_discount = 24;
+
+  // Discount amount if coupon was applied to the order, in settlement currency.
+  string settlement_total_discount = 25;
+
+  // The total amount the user paid for this order. This is the sum of all the
+  // order item's total paid values plus discount values.
+  string total_paid = 13;
+
+  // The total amount the user paid for this order plus discount value in settlement currency.
+  string settlement_total_paid = 14;
+
+  // The total amount the customer was refunded. This is the sum of all of the
+  // order item's total refunded values.
+  string total_refunded = 15;
+
+  // The total amount the customer was refunded, in settlement currency.
+  string settlement_total_refunded = 16;
+
+  // The total amount of VAT the customer was charged for, in order currency.
+  string total_vat_charged = 26;
+
+  // The total amount of VAT the customer was charged for, in settlement currency.
+  string settlement_total_vat_charged = 27;
+
+  // Indicates whether this order is currently refundable.
+  bool is_refundable = 20;
+
+  // Indicates whether this order is eligible for a refund, if not, why it's not.
+  RefundEligibilityEnum.RefundEligibility refund_eligibility = 21;
+
+  // Indicates whether an invoice can be uploaded. Will turn false ~30 days
+  // after order release.
+  bool is_invoiceable = 17;
+
+  // Indicates whether an invoice was uploaded.
+  bool has_invoice = 18;
+
+  // All items of this order.
+  repeated OrderItem items = 19 [(google.api.field_behavior) = UNORDERED_LIST];
+
+  // Shipping label address used for label creation.
+  Address shipping_label_address = 28;
+
+  // Payment method used to charge the customer.
+  PaymentMethodEnum.PaymentMethod payment_method = 29;
+}

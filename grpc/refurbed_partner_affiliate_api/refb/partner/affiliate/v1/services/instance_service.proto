@@ -1,0 +1,124 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+import "google/api/field_behavior.proto";
+import "refb/descriptor.proto";
+import "refb/partner/affiliate/v1/enums/sort_order.proto";
+import "refb/partner/affiliate/v1/filters/attributes_filter.proto";
+import "refb/partner/affiliate/v1/paginations/int64_pagination.proto";
+import "refb/partner/affiliate/v1/resources/instance.proto";
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+// Service to retrieve information about instances.
+service InstanceService {
+  // Lists instances for a specific product.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when pagination limit is too large (>100)
+  //   - when both "ending_before" and "starting_after" are specified in pagination
+  rpc ListInstancesByProduct(ListInstancesByProductRequest) returns (ListInstancesByProductResponse) {
+    option (permission) = "partner.affiliate.instance:list";
+  }
+
+  // Gets a single instance.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the instance is not found
+  // - INVALID_ARGUMENT
+  //   - when invalid GTIN is provided
+  rpc GetInstance(GetInstanceRequest) returns (GetInstanceResponse) {
+    option (permission) = "partner.affiliate.instance:view";
+  }
+}
+
+message ListInstancesByProductRequest {
+  Int64Pagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  // The code of a site market where the instances are sold.
+  string site_market_code = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // Identifier of product instances are linked with.
+  int64 product_id = 5 [(google.api.field_behavior) = REQUIRED];
+
+  // URL linking back to partner's site.
+  //
+  // If provided, it is used to populate a query parameter for each
+  // instance buybox link.
+  optional string back_link = 6;
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      ID = 0;
+      PRICE = 1;
+      NAME = 2;
+    }
+  }
+
+  message Filter {
+    InstanceIDFilter id = 1;
+    InstanceNameFilter name = 2;
+    AttributesFilter attributes = 4;
+
+    message InstanceIDFilter {
+      repeated int64 any_of = 1;
+    }
+
+    message InstanceNameFilter {
+      optional string matches = 1; // Full-text match.
+    }
+  }
+}
+
+message ListInstancesByProductResponse {
+  // The instances found.
+  repeated Instance instances = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}
+
+message GetInstanceRequest {
+  // The code of a site market where the instance is sold.
+  string site_market_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // The identifier of the instance to get.
+  //
+  //  It is either primary key or externally recognized Global Trade Item
+  //  Number (GTIN).
+  oneof identifier {
+    int64 id = 2;
+
+    // A GTIN-8, GTIN-12 or GTIN-13. Note that EAN-13 and UPC-A codes are GTINs.
+    string gtin = 3;
+  }
+
+  // URL linking back to partner's site.
+  //
+  // If provided, it is used to populate a query parameter for instance
+  // buybox link.
+  optional string back_link = 4;
+}
+
+message GetInstanceResponse {
+  // The instance retrieved.
+  Instance instance = 1;
+}

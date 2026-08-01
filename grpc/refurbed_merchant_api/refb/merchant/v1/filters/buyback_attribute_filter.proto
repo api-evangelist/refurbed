@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message BuybackAttributeFilter {
+  message Enum {
+    int64 id = 1;
+    repeated string any_of = 2;
+    repeated string none_of = 3;
+  }
+
+  message Numeric {
+    int64 id = 1;
+    repeated double any_of = 2;
+    repeated double none_of = 3;
+  }
+
+  message Attribute {
+    oneof value {
+      Enum value_str = 1;
+      Numeric value_num = 2;
+    }
+  }
+
+  repeated Attribute attributes = 1;
+}

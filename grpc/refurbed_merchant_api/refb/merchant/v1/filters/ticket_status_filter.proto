@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/ticket_status.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message TicketStatusFilter {
+  repeated TicketStatusEnum.TicketStatus any_of = 1;
+  repeated TicketStatusEnum.TicketStatus none_of = 2;
+}

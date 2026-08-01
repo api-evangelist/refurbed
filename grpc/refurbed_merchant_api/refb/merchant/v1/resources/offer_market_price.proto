@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/enums/offer_buybox_scope.proto";
+import "refb/merchant/v1/enums/offer_buybox_state.proto";
+import "refb/merchant/v1/enums/offer_visibility.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// An offer price defines the price configuration of an offer for a single
+// market.
+message OfferMarketPrice {
+  option (google.api.resource) = {type: "refb.merchant.v1/OfferMarketPrice"};
+
+  // Id of the offer the price is set for.
+  int64 offer_id = 1;
+
+  // Code of the market the price is set for.
+  string market_code = 2;
+
+  // Name of the market the price is set for.
+  string market_name = 3;
+
+  // Indicates whether there exists a refurbed website for this market.
+  bool is_site_market = 4;
+
+  // Indicates whether the price was calculated by a rule or set manually by
+  // the merchant.
+  bool is_calculated = 5;
+
+  // Currency of prices set.
+  CurrencyCodeEnum.CurrencyCode currency_code = 6;
+
+  // Gross price of this offer. Either set by merchant, or calculated by
+  // refurbed.
+  string price = 7;
+
+  // Optional minimum price in market currency for automatic repricing. Either
+  // set by merchant, or calculated by refurbed.
+  optional string min_price = 8;
+
+  // Native currency of the market. Only set for site markets.
+  optional CurrencyCodeEnum.CurrencyCode site_market_currency_code = 9;
+
+  // Price in currency of the site market. Only set for site markets.
+  optional string site_market_price = 10;
+
+  // Minimum price in currency of the site market. Only set for site markets.
+  optional string site_market_min_price = 11;
+
+  // Visibility of the offer in this market. Only set on the current version.
+  optional OfferVisibilityEnum.OfferVisibility visibility = 12;
+
+  // Shows if the offer has the BuyBox in this market.
+  // Only set for site markets in the current offer version.
+  optional OfferBuyboxStateEnum.OfferBuyboxState instance_buybox_state = 13;
+
+  // More detailed information about how to win the BuyBox.
+  //
+  // This is only set if the BuyBox state is ELIGIBLE.
+  optional BuyboxInfo instance_buybox_info = 14;
+
+  // It may be set only if market offer is in WON BuyBox state.
+  optional OfferBuyboxScopeEnum.OfferBuyboxScope buybox_scope = 15;
+
+  message BuyboxInfo {
+    option (google.api.resource) = {type: "refb.merchant.v1/OfferBuyboxInfo"};
+
+    // Total gross price of the competitor offer that currently has the
+    // BuyBox. This is the price shown to customers and includes shipping
+    // costs. In site market currency.
+    string site_market_competitor_price = 1;
+
+    // The suggested gross price (excl. shipping costs that might have been converted)
+    // for this offer that would make it get the BuyBox. In site market currency.
+    //
+    // If you want to automatically underbid your competitors, set the offer
+    // minimum price and do not try to keep up by constantly pushing offer
+    // price updates yourself.
+    string site_market_suggested_offer_price = 2;
+
+    // Absolute difference between the current offer price (MIN(price, min price))
+    // and the suggested offer price, in site market currency.
+    string site_market_suggested_offer_price_diff = 3;
+
+    // Same as site_market_suggested_offer_price but in offer price currency.
+    string suggested_offer_price = 4;
+
+    // Same as site_market_suggested_offer_price_diff but in offer price currency.
+    string suggested_offer_price_diff = 5;
+  }
+}

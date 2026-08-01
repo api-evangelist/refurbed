@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message TimestampRangeFilter {
+  optional google.protobuf.Timestamp gt = 1; // Greater than.
+  optional google.protobuf.Timestamp ge = 2; // Greater than or equal to.
+  repeated google.protobuf.Timestamp any_of = 3;
+  repeated google.protobuf.Timestamp none_of = 4;
+  optional google.protobuf.Timestamp le = 5; // Less than or equal to.
+  optional google.protobuf.Timestamp lt = 6; // Less than.
+}

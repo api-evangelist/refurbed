@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+summary: >-
+  The refurbed Merchant API enforces rate limiting to keep systems stable and
+  signals remaining budget via response headers. No fixed numeric limit is
+  published; merchants are asked to implement sensibly and prefer batch
+  operations. Limits are communicated at runtime through the headers below.
+signaling:
+  headers:
+    - name: X-RateLimit-Limit
+      meaning: how many requests you have already made in this time window
+    - name: X-RateLimit-Remaining
+      meaning: how many requests you have left in this time window
+    - name: X-RateLimit-Reset
+      meaning: when the time window resets, as a unix timestamp
+exhaustion:
+  grpc_status: RESOURCE_EXHAUSTED
+  http_status: 429
+guidance: >-
+  Use batch operations (BatchGetOffers, BatchUpdateOrderItems, etc.) whenever
+  they make sense to reduce request volume.
+limits: []

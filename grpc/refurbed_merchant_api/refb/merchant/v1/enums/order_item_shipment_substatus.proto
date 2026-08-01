@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OrderItemShipmentSubstatusEnum {
+  enum OrderItemShipmentSubstatus {
+    UNSPECIFIED = 0;
+
+    // The carrier received a request from the shipper and is about to pick up the shipment.
+    INFO_RECEIVED = 1;
+
+    // The order has been processed/packaged, but not scanned at a shipping location yet.
+    LABEL_CREATED_NO_UPDATES_YET = 2;
+
+    // Shipment on the way.
+    IN_TRANSIT = 3;
+
+    // The package is out for delivery.
+    OUT_FOR_DELIVERY = 4;
+
+    // The package arrived at a pickup point near you and is available for pickup.
+    AVAILABLE_FOR_PICKUP = 5;
+
+    // Shipment delivered successfully.
+    DELIVERED = 6;
+
+    // Package picked up by the customer.
+    PICKED_UP_BY_CUSTOMER = 7;
+
+    // Package delivered to and signed by the customer.
+    SIGN_BY_CUSTOMER = 8;
+
+    // The delivery of the package failed due to some reason. Courier usually leaves a notice and will try to deliver again.
+    NEW_ATTEMPT_OF_DELIVERY = 9;
+
+    // Package not delivered due to incorrect recipient address.
+    ADDRESS_ISSUES = 10;
+
+    // The package is on its way back to the sender.
+    RETURN_TO_SENDER = 11;
+
+    // Delivery of the package failed due to some shipping exception.
+    DELIVERY_FAILED = 12;
+
+    // Package delayed due to some unforeseen reasons.
+    ORDER_DELAYED = 13;
+
+    // Shipment damaged.
+    ORDER_DAMAGED = 14;
+
+    // Delivery of the package failed as it got lost.
+    ORDER_LOST = 15;
+  }
+}

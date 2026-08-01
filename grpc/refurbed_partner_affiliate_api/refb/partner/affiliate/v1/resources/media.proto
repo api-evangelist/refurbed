@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+import "google/api/resource.proto";
+import "refb/partner/affiliate/v1/enums/media_type.proto";
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+// A media.
+message Media {
+  option (google.api.resource) = {type: "refb.partner.affiliate.v1/Media"};
+
+  // Type of the media.
+  MediaTypeEnum.MediaType type = 1;
+
+  // URL to the media.
+  string url = 2;
+}

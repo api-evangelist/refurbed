@@ -1,0 +1,109 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/refurbed-merchant-api-openapi.json (definitions + id-reference fields)
+notes: >-
+  Entity-relationship graph derived from the Merchant API message definitions.
+  Relationships inferred from *_id reference fields and the documented offer /
+  market-price model (an Offer has many OfferMarketPrice entries; a MarketOffer
+  pairs the offer with a single market price).
+entities:
+  - name: Offer
+    key: id
+    summary: A merchant's market-independent offer on an instance (grading, warranty, stock, reference prices).
+  - name: MarketOffer
+    key: id
+    summary: An offer scoped to one market, carrying that market's price and BuyBox state.
+  - name: OfferMarketPrice
+    key: [offer_id, market_code]
+    summary: Per-market price entry for an offer (1:n from Offer).
+  - name: Instance
+    key: id
+    summary: A product variant (by GTIN or refurbed instance id); managed by refurbed.
+  - name: Order
+    key: id
+    summary: A customer order released to the merchant for fulfillment.
+  - name: OrderItem
+    key: id
+    summary: A single line item within an order.
+  - name: OrderItemReturn
+    key: id
+    summary: A return initiated against an order item.
+  - name: ShippingProfile
+    key: id
+    summary: Defines destination markets and shipping costs for offers.
+  - name: MerchantAddress
+    key: id
+    summary: A merchant address (source/return address).
+  - name: Ticket
+    key: id
+    summary: A support ticket, optionally tied to a marketplace or buyback order item.
+  - name: Currency
+    key: code
+    summary: A supported currency from the CurrencyService.
+  - name: Market
+    key: code
+    summary: A market/area in which instances are sold (site markets and others).
+  - name: BuybackBid
+    key: id
+    summary: A merchant bid in the buyback (trade-in) program.
+  - name: BuybackOrder
+    summary: A buyback order flowing to the merchant.
+  - name: BuybackOrderItem
+    summary: A single item within a buyback order.
+relationships:
+  - from: Offer
+    to: Instance
+    type: belongs_to
+    via: instance_id
+  - from: Offer
+    to: ShippingProfile
+    type: belongs_to
+    via: shipping_profile_id
+  - from: Offer
+    to: ShippingProfile
+    type: belongs_to
+    via: secondary_shipping_profile_id
+  - from: Offer
+    to: OfferMarketPrice
+    type: has_many
+    via: offer_id
+  - from: MarketOffer
+    to: Instance
+    type: belongs_to
+    via: instance_id
+  - from: MarketOffer
+    to: ShippingProfile
+    type: belongs_to
+    via: shipping_profile_id
+  - from: OfferMarketPrice
+    to: Offer
+    type: belongs_to
+    via: offer_id
+  - from: OfferMarketPrice
+    to: Currency
+    type: belongs_to
+    via: currency_code
+  - from: Order
+    to: OrderItem
+    type: has_many
+    via: order_id
+  - from: Order
+    to: Currency
+    type: belongs_to
+    via: currency_code
+  - from: OrderItem
+    to: Order
+    type: belongs_to
+    via: order_id
+  - from: OrderItemReturn
+    to: Order
+    type: belongs_to
+    via: order_id
+  - from: OrderItemReturn
+    to: OrderItem
+    type: belongs_to
+    via: order_item_id
+  - from: Ticket
+    to: Ticket
+    type: belongs_to
+    via: follow_up_to_ticket_id

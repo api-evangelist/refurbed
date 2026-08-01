@@ -1,0 +1,56 @@
+{
+  "provider": "refurbed",
+  "sources": [
+    "refurbed-buybackbidservice-api-openapi.yml",
+    "refurbed-buybackorderitemservice-api-openapi.yml",
+    "refurbed-buybackorderservice-api-openapi.yml",
+    "refurbed-buybackproductservice-api-openapi.yml",
+    "refurbed-buybacksupplyboxservice-api-openapi.yml",
+    "refurbed-catalogservice-api-openapi.yml",
+    "refurbed-currencyservice-api-openapi.yml",
+    "refurbed-instanceservice-api-openapi.yml",
+    "refurbed-marketofferservice-api-openapi.yml",
+    "refurbed-marketservice-api-openapi.yml",
+    "refurbed-merchantservice-api-openapi.yml",
+    "refurbed-offerservice-api-openapi.yml",
+    "refurbed-orderitemreturnservice-api-openapi.yml",
+    "refurbed-orderitemservice-api-openapi.yml",
+    "refurbed-orderservice-api-openapi.yml",
+    "refurbed-productservice-api-openapi.yml",
+    "refurbed-shippingprofileservice-api-openapi.yml",
+    "refurbed-ticketservice-api-openapi.yml",
+    "grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/api.swagger.json",
+    "grpc/refurbed_merchant_api/refb/merchant/v1/api.swagger.json"
+  ],
+  "outputs": [
+    "refurbed-buybackbidservice-api-openapi.yml",
+    "refurbed-buybackorderitemservice-api-openapi.yml",
+    "refurbed-buybackorderservice-api-openapi.yml",
+    "refurbed-buybackproductservice-api-openapi.yml",
+    "refurbed-buybacksupplyboxservice-api-openapi.yml",
+    "refurbed-catalogservice-api-openapi.yml",
+    "refurbed-currencyservice-api-openapi.yml",
+    "refurbed-instanceservice-api-openapi.yml",
+    "refurbed-marketofferservice-api-openapi.yml",
+    "refurbed-marketservice-api-openapi.yml",
+    "refurbed-merchantservice-api-openapi.yml",
+    "refurbed-offerservice-api-openapi.yml",
+    "refurbed-orderitemreturnservice-api-openapi.yml",
+    "refurbed-orderitemservice-api-openapi.yml",
+    "refurbed-orderservice-api-openapi.yml",
+    "refurbed-productservice-api-openapi.yml",
+    "refurbed-shippingprofileservice-api-openapi.yml",
+    "refurbed-ticketservice-api-openapi.yml"
+  ],
+  "archived": [
+    "archived grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/api.swagger.json",
+    "archived grpc/refurbed_merchant_api/refb/merchant/v1/api.swagger.json"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "discovered stray spec: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/api.swagger.json",
+    "discovered stray spec: grpc/refurbed_merchant_api/refb/merchant/v1/api.swagger.json"
+  ],
+  "skipped": []
+}

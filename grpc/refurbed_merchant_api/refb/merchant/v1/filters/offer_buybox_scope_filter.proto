@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/offer_buybox_scope.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OfferBuyboxScopeFilter {
+  repeated OfferBuyboxScopeEnum.OfferBuyboxScope any_of = 1;
+  repeated OfferBuyboxScopeEnum.OfferBuyboxScope none_of = 2;
+}

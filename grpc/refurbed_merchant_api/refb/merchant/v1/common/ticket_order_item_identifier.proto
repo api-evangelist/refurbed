@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Ticket order item identifier
+//
+// Used to identify an order item related to a ticket. It could be either a marketplace order item (order_items.id), or
+// a buyback order item (buyback_order_items.id).
+message TicketOrderItemIdentifier {
+  oneof order_item_identifier {
+    int64 marketplace_order_item_id = 1;
+    int64 buyback_order_item_id = 2;
+  }
+}

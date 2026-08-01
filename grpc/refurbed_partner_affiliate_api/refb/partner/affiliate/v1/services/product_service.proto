@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+import "google/api/field_behavior.proto";
+import "refb/descriptor.proto";
+import "refb/partner/affiliate/v1/enums/sort_order.proto";
+import "refb/partner/affiliate/v1/filters/attributes_filter.proto";
+import "refb/partner/affiliate/v1/filters/category_filter.proto";
+import "refb/partner/affiliate/v1/paginations/int64_pagination.proto";
+import "refb/partner/affiliate/v1/resources/product.proto";
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+// Service to retrieve information about products.
+service ProductService {
+  // Lists products.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when pagination limit is too large (>100)
+  //   - when both "ending_before" and "starting_after" are specified in pagination
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse) {
+    option (permission) = "partner.affiliate.product:list";
+  }
+
+  // Gets a single product.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the product is not found
+  rpc GetProduct(GetProductRequest) returns (GetProductResponse) {
+    option (permission) = "partner.affiliate.product:view";
+  }
+}
+
+message ListProductsRequest {
+  Int64Pagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  // The code of a site market where the products are sold.
+  string site_market_code = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // URL linking back to partner's site.
+  //
+  // If provided, it is used to populate a query parameter for each
+  // product buybox link.
+  optional string back_link = 5;
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      // Sort by popularity.
+      //
+      // NOTE: ASC and DESC will return the same result.
+      POPULARITY = 0;
+
+      // Sort by price.
+      PRICE = 1;
+    }
+  }
+
+  message Filter {
+    ProductIDFilter id = 1;
+    ProductNameFilter name = 2;
+    CategoryFilter category_id = 3;
+    AttributesFilter attributes = 4;
+
+    message ProductIDFilter {
+      repeated int64 any_of = 1;
+    }
+
+    message ProductNameFilter {
+      optional string matches = 1; // Full-text match.
+    }
+  }
+}
+
+message ListProductsResponse {
+  // The products found.
+  repeated Product products = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}
+
+message GetProductRequest {
+  // Code of a site market where the product is sold.
+  string site_market_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Primary key of the product to get.
+  int64 id = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // URL linking back to partner's site.
+  //
+  // If provided, it is used to populate a query parameter for product
+  // buybox link.
+  optional string back_link = 3;
+}
+
+message GetProductResponse {
+  // The product retrieved.
+  Product product = 1;
+}

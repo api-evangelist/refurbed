@@ -1,0 +1,29 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/refurbed-affiliate-api-openapi.json, openapi/refurbed-merchant-api-openapi.json
+docs: https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  # Same secret token authenticates both the HTTP/JSON and the gRPC transport.
+  # Tokens are issued by refurbed (contact your account/partnership manager);
+  # there is no self-service OAuth or key-rotation portal documented.
+  token_scheme: Plain
+  header_example: 'Authorization: Plain f4e133d1-6cc4-4792-be5d-80a446a3d0dd'
+  grpc_metadata: authorization = "Plain <token>"
+  issuance: manual (account manager / integrations@refurbed.com)
+schemes:
+- name: APIKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  scheme_prefix: Plain
+  description: >-
+    Secret token passed in the Authorization header using the "Plain" method
+    (e.g. "Authorization: Plain <token>"). The identical token is used as gRPC
+    call metadata. Credentials are provisioned manually by refurbed.
+  sources:
+  - openapi/refurbed-affiliate-api-openapi.json
+  - openapi/refurbed-merchant-api-openapi.json

@@ -1,0 +1,494 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "google/rpc/status.proto";
+import "refb/descriptor.proto";
+import "refb/merchant/v1/enums/country_code.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/enums/order_item_state.proto";
+import "refb/merchant/v1/enums/sort_order.proto";
+import "refb/merchant/v1/filters/bool_filter.proto";
+import "refb/merchant/v1/filters/currency_code_filter.proto";
+import "refb/merchant/v1/filters/int64_filter.proto";
+import "refb/merchant/v1/filters/numeric_range_filter.proto";
+import "refb/merchant/v1/filters/offer_grading_filter.proto";
+import "refb/merchant/v1/filters/offer_sku_filter.proto";
+import "refb/merchant/v1/filters/offer_warranty_filter.proto";
+import "refb/merchant/v1/filters/order_item_state_filter.proto";
+import "refb/merchant/v1/filters/order_item_taxation_filter.proto";
+import "refb/merchant/v1/paginations/int64_pagination.proto";
+import "refb/merchant/v1/resources/order_item.proto";
+import "refb/merchant/v1/resources/order_item_identifier.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Service to manage order items.
+service OrderItemService {
+  // Lists all order items of a specific order.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when pagination limit is too large (>100)
+  //   - when both "ending_before" and "starting_after" are specified in pagination
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc ListOrderItemsByOrder(ListOrderItemsByOrderRequest) returns (ListOrderItemsByOrderResponse) {
+    option (permission) = "merchant.orderItem:list";
+  }
+
+  // Gets a single order item.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order item is not found
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc GetOrderItem(GetOrderItemRequest) returns (GetOrderItemResponse) {
+    option (permission) = "merchant.orderItem:view";
+  }
+
+  // Updates a single order item.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the updated order item is not found
+  // - INVALID_ARGUMENT
+  //   - when invalid parcel tracking url is provided
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc UpdateOrderItem(UpdateOrderItemRequest) returns (UpdateOrderItemResponse) {
+    option (permission) = "merchant.orderItem:update";
+  }
+
+  // Updates the state of a single order item.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the updated order item is not found
+  // - INVALID_ARGUMENT
+  //   - when illegal state transition is attempted
+  //   - when no parcel tracking url is set when transitioning to SHIPPED state
+  //   - when invalid parcel tracking url is provided
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc UpdateOrderItemState(UpdateOrderItemStateRequest) returns (UpdateOrderItemStateResponse) {
+    option (permission) = "merchant.orderItem:update";
+  }
+
+  // Refunds a single order item. Item needs to be refundable.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order item is not found
+  // - INVALID_ARGUMENT
+  //   - invalid input refund data is provided
+  // - FAILED_PRECONDITION
+  //   - when order item is not refundable
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc RefundOrderItem(RefundOrderItemRequest) returns (RefundOrderItemResponse) {
+    option (permission) = "merchant.orderItem:refund";
+  }
+
+  // Calculate values for a refund of a single order item, i.e. using the
+  // RefundOrderItem method.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the order item is not found
+  // - INVALID_ARGUMENT
+  //   - invalid input refund data is provided
+  // - FAILED_PRECONDITION
+  //   - when order item is not refundable
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc CalculateRefundOrderItem(CalculateRefundOrderItemRequest) returns (CalculateRefundOrderItemResponse) {
+    option (permission) = "merchant.orderItem:view";
+  }
+
+  // Batch updates order items.
+  //
+  // Known errors: Errors are identical to the UpdateOrderItem operation per
+  // each individual order item update and:
+  // - INVALID_ARGUMENT
+  //   - when more than 50 updates are attempted
+  rpc BatchUpdateOrderItems(BatchUpdateOrderItemsRequest) returns (BatchUpdateOrderItemsResponse) {
+    option (permission) = "merchant.orderItem:update";
+  }
+
+  // Batch updates order items' state.
+  //
+  // Known errors: Errors are identical to the UpdateOrderItemState operation
+  // per each individual order item state update and:
+  // - INVALID_ARGUMENT
+  //   - when more than 50 updates are attempted
+  rpc BatchUpdateOrderItemsState(BatchUpdateOrderItemsStateRequest) returns (BatchUpdateOrderItemsStateResponse) {
+    option (permission) = "merchant.orderItem:update";
+  }
+}
+
+message ListOrderItemsByOrderRequest {
+  Int64Pagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  int64 order_id = 4 [(google.api.field_behavior) = REQUIRED];
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      ID = 0;
+      NAME = 1;
+      STATE = 2;
+      SKU = 3;
+      CURRENCY_CODE = 4;
+      SETTLEMENT_CURRENCY_CODE = 5;
+      TOTAL_CHARGED = 6;
+      SETTLEMENT_TOTAL_CHARGED = 7;
+      TOTAL_CHARGED_DYNAMIC = 8;
+      SETTLEMENT_TOTAL_CHARGED_DYNAMIC = 9;
+      TOTAL_PAID = 10;
+      SETTLEMENT_TOTAL_PAID = 11;
+      TOTAL_REFUNDED = 12;
+      SETTLEMENT_TOTAL_REFUNDED = 13;
+      SETTLEMENT_TOTAL_COMMISSION = 14;
+      SETTLEMENT_BASE_COMMISSION = 15;
+      SETTLEMENT_PAYOUT_COMMISSION = 19;
+      SETTLEMENT_PAYMENT_COMMISSION = 20;
+      SETTLEMENT_DYNAMIC_COMMISSION = 16;
+      TAXATION = 17;
+      IS_REFUNDABLE = 18;
+    }
+  }
+
+  message Filter {
+    Int64Filter id = 1;
+    OrderItemNameFilter name = 2;
+    OrderItemStateFilter state = 3;
+    OfferSKUFilter sku = 4;
+    CurrencyCodeFilter currency_code = 5;
+    CurrencyCodeFilter settlement_currency_code = 6;
+    NumericRangeFilter total_charged = 7;
+    NumericRangeFilter settlement_total_charged = 8;
+    NumericRangeFilter total_charged_dynamic = 9;
+    NumericRangeFilter settlement_total_charged_dynamic = 10;
+    NumericRangeFilter total_paid = 11;
+    NumericRangeFilter settlement_total_paid = 12;
+    NumericRangeFilter total_refunded = 13;
+    NumericRangeFilter settlement_total_refunded = 14;
+    NumericRangeFilter settlement_total_commission = 15;
+    NumericRangeFilter settlement_base_commission = 16;
+    NumericRangeFilter settlement_payout_commission = 26;
+    NumericRangeFilter settlement_payment_commission = 27;
+    NumericRangeFilter settlement_dynamic_commission = 17;
+    OrderItemTaxationFilter taxation = 18;
+    BoolFilter is_refundable = 19;
+    BoolFilter is_parcel_tracking_url = 20;
+    BoolFilter is_item_identifier = 21;
+
+    Int64Filter linked_offer_data_offer_id = 22;
+    OfferWarrantyFilter linked_offer_data_offer_warranty = 23;
+    OfferGradingFilter linked_offer_data_offer_grading = 24;
+    Int64Filter linked_offer_data_shipping_profile_id = 25;
+
+    message OrderItemNameFilter {
+      optional string matches = 1;
+    }
+  }
+}
+
+message ListOrderItemsByOrderResponse {
+  // The order items found.
+  repeated OrderItem order_items = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}
+
+message GetOrderItemRequest {
+  // The id of the order item to get.
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetOrderItemResponse {
+  OrderItem order_item = 1;
+}
+
+message UpdateOrderItemRequest {
+  // The id of the order item to update.
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
+  optional string parcel_tracking_url = 2;
+
+  // IMEI (if smartphone) or serial number (other product categories) of the
+  // item shipped.
+  // Deprecated: use item_identifiers field instead.
+  optional string item_identifier = 3 [deprecated = true];
+
+  reserved 4, 5;
+
+  repeated OrderItemIdentifier item_identifiers = 10;
+
+  // Net weight of this item, in kilograms.
+  optional float weight_kg = 6;
+
+  // Country where the item was manufactured.
+  optional CountryCodeEnum.CountryCode manufacturing_country = 7;
+
+  // HS (Harmonized System) code for customs classification.
+  //
+  // e.g. 8517.1300 for iPhones
+  optional string hs_code = 8;
+
+  // Carrier + tracking number pair.
+  CarrierTrackingNumber parcel_carrier_tracking_number = 9;
+}
+
+message UpdateOrderItemResponse {
+  OrderItem order_item = 1;
+}
+
+message UpdateOrderItemStateRequest {
+  // The id of the order item to update.
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // The new state to set.
+  OrderItemStateEnum.OrderItemState state = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
+  optional string parcel_tracking_url = 3;
+
+  // IMEI (if smartphone) or serial number (other product categories) of the
+  // item shipped.
+  // Deprecated: use item_identifiers field instead.
+  optional string item_identifier = 4 [deprecated = true];
+
+  reserved 5, 6;
+
+  repeated OrderItemIdentifier item_identifiers = 11;
+
+  // Net weight of this item, in kilograms.
+  optional float weight_kg = 7;
+
+  // Country where the item was manufactured.
+  optional CountryCodeEnum.CountryCode manufacturing_country = 8;
+
+  // HS (Harmonized System) code for customs classification.
+  //
+  // e.g. 8517.1300 for iPhones
+  optional string hs_code = 9;
+
+  // Carrier + tracking number pair.
+  CarrierTrackingNumber parcel_carrier_tracking_number = 10;
+}
+
+message UpdateOrderItemStateResponse {
+  OrderItem order_item = 1;
+}
+
+message RefundOrderItemRequest {
+  // The id of the order item to refund.
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Currency to refund. This needs to match the order / order item currency.
+  CurrencyCodeEnum.CurrencyCode currency_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // The desired paid amount of this order item. Example: if the customer paid
+  // 100EUR and the merchant wants to refund 10EUR, the target-paid-amount would
+  // be 90. 0 for a full refund.
+  string target_paid_amount = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+message RefundOrderItemResponse {
+  // Currency of the refund. This matches the order / order item currency.
+  CurrencyCodeEnum.CurrencyCode currency_code = 1;
+
+  // New total paid of the order item.
+  string total_paid = 2;
+
+  // Total refunded amount.
+  string total_refunded = 3;
+
+  // Refunded amount.
+  string refunded = 4;
+
+  // Part that refurbed refunded.
+  string refunded_refurbed = 5;
+
+  // Part that the merchant refunded.
+  string refunded_merchant = 6;
+}
+
+message CalculateRefundOrderItemRequest {
+  // The id of the order item to calculate item refund values for.
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Currency to refund. This needs to match the order / order item currency.
+  CurrencyCodeEnum.CurrencyCode currency_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // The desired paid amount of this order item. Example: if the customer paid
+  // 100EUR and the merchant wants to refund 10EUR, the target-paid-amount would
+  // be 90. 0 for a full refund.
+  string target_paid_amount = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+message CalculateRefundOrderItemResponse {
+  // Currency of the refund. This matches the order / order item currency.
+  CurrencyCodeEnum.CurrencyCode currency_code = 1;
+
+  // New total paid of the order item.
+  string total_paid = 2;
+
+  // Total refunded amount.
+  string total_refunded = 3;
+
+  // Refunded amount.
+  string refunded = 4;
+
+  // Part that refurbed refunded.
+  string refunded_refurbed = 5;
+
+  // Part that the merchant refunded.
+  string refunded_merchant = 6;
+}
+
+message BatchUpdateOrderItemsRequest {
+  // Order items to update. Between 1 and 50.
+  repeated Update order_items = 1 [(google.api.field_behavior) = REQUIRED];
+
+  message Update {
+    // The id of the order item to update.
+    int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
+    optional string parcel_tracking_url = 2;
+
+    // IMEI (if smartphone) or serial number (other product categories) of the
+    // item shipped.
+    // Deprecated: use item_identifiers field instead.
+    optional string item_identifier = 3 [deprecated = true];
+
+    reserved 4, 5;
+
+    repeated OrderItemIdentifier item_identifiers = 10;
+
+    // Net weight of this item, in kilograms.
+    optional float weight_kg = 6;
+
+    // Country where the item was manufactured.
+    optional CountryCodeEnum.CountryCode manufacturing_country = 7;
+
+    // HS (Harmonized System) code for customs classification.
+    //
+    // e.g. 8517.1300 for iPhones
+    optional string hs_code = 8;
+
+    // Carrier + tracking number pair.
+    CarrierTrackingNumber parcel_carrier_tracking_number = 9;
+  }
+}
+
+message BatchUpdateOrderItemsResponse {
+  // Results of the update operation. In request order.
+  repeated Result results = 1;
+
+  message Result {
+    google.rpc.Status status = 1;
+
+    // Updated order item. Set if status code is OK.
+    optional OrderItem order_item = 2;
+  }
+}
+
+message BatchUpdateOrderItemsStateRequest {
+  // Order items to update. Between 1 and 50.
+  repeated Update updates = 1 [(google.api.field_behavior) = REQUIRED];
+
+  message Update {
+    // The id of the order item to refund.
+    int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+
+    OrderItemStateEnum.OrderItemState state = 2 [(google.api.field_behavior) = REQUIRED];
+
+    // Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
+    optional string parcel_tracking_url = 3;
+
+    // IMEI (if smartphone) or serial number (other product categories) of the
+    // item shipped.
+    // Deprecated: use item_identifiers field instead.
+    optional string item_identifier = 4 [deprecated = true];
+
+    reserved 5, 6;
+
+    repeated OrderItemIdentifier item_identifiers = 11;
+
+    // Net weight of this item, in kilograms.
+    optional float weight_kg = 7;
+
+    // Country where the item was manufactured.
+    optional CountryCodeEnum.CountryCode manufacturing_country = 8;
+
+    // HS (Harmonized System) code for customs classification.
+    //
+    // e.g. 8517.1300 for iPhones
+    optional string hs_code = 9;
+
+    // Carrier + tracking number pair.
+    CarrierTrackingNumber parcel_carrier_tracking_number = 10;
+  }
+}
+
+message BatchUpdateOrderItemsStateResponse {
+  // Results of the update operation. In request order.
+  repeated Result results = 1;
+
+  message Result {
+    google.rpc.Status status = 1;
+
+    // Updated order item. Set if status code is OK.
+    optional OrderItem order_item = 2;
+  }
+}
+
+message CarrierTrackingNumber {
+  // Carrier slug, obtained from ListAvailableCarriers RPC.
+  string carrier = 1;
+
+  // Tracking number belonging to that carrier.
+  string tracking_number = 2;
+}

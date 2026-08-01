@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+import "refb/partner/affiliate/v1/enums/currency_code.proto";
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+message CurrencyCodeFilter {
+  repeated CurrencyCodeEnum.CurrencyCode any_of = 1;
+  repeated CurrencyCodeEnum.CurrencyCode none_of = 2;
+}

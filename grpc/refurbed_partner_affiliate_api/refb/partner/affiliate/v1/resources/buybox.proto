@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+import "google/api/resource.proto";
+import "refb/partner/affiliate/v1/enums/currency_code.proto";
+import "refb/partner/affiliate/v1/enums/offer_grading.proto";
+import "refb/partner/affiliate/v1/enums/offer_warranty.proto";
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+// A Buybox.
+message Buybox {
+  option (google.api.resource) = {type: "refb.partner.affiliate.v1/Buybox"};
+
+  // Primary key of the linked instance.
+  int64 instance_id = 1;
+
+  // Human-readable name of the linked instance.
+  string instance_name = 2;
+
+  // Grading of the item sold.
+  OfferGradingEnum.OfferGrading grading = 3;
+
+  // Human-readable name of the grading.
+  string grading_name = 4;
+
+  // Warranty of the item sold.
+  OfferWarrantyEnum.OfferWarranty warranty = 5;
+
+  // Currency in which the item is sold.
+  CurrencyCodeEnum.CurrencyCode currency_code = 6;
+
+  // Price at which the item is sold.
+  string price = 7;
+
+  // URL to the item on refurbed marketplace.
+  //
+  // If a back link is specified in the original request an additional query
+  // parameter will be included in the link.
+  string link = 8;
+}

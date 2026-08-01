@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/descriptor.proto";
+import "refb/merchant/v1/enums/sort_order.proto";
+import "refb/merchant/v1/filters/buyback_attribute_filter.proto";
+import "refb/merchant/v1/filters/buyback_order_item_state_filter.proto";
+import "refb/merchant/v1/filters/int64_filter.proto";
+import "refb/merchant/v1/filters/numeric_range_filter.proto";
+import "refb/merchant/v1/filters/string_filter.proto";
+import "refb/merchant/v1/filters/string_set_contains_filter.proto";
+import "refb/merchant/v1/filters/text_search_filter.proto";
+import "refb/merchant/v1/filters/timestamp_range_filter.proto";
+import "refb/merchant/v1/paginations/int64_pagination.proto";
+import "refb/merchant/v1/resources/buyback_order.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Service to manage buyback orders.
+service BuybackOrderService {
+  // Lists all buyback orders.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when pagination limit is too large (>100)
+  //   - when both "ending_before" and "starting_after" are specified in pagination
+  rpc ListBuybackOrders(ListBuybackOrdersRequest) returns (ListBuybackOrdersResponse) {
+    option (permission) = "merchant.buybackOrder:list";
+  }
+}
+
+message ListBuybackOrdersRequest {
+  Int64Pagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      ID = 0;
+      STATE = 1;
+      PRODUCT_NAME = 2;
+      CREATED_AT = 3;
+      SKU = 4;
+    }
+  }
+
+  message Filter {
+    Int64Filter id = 1;
+    BuybackOrderItemStateFilter state = 2;
+    TextSearchFilter product_name = 3;
+    BuybackAttributeFilter product_attribute = 4;
+    NumericRangeFilter price = 5;
+    TimestampRangeFilter created_at = 6;
+    StringFilter shipping_tracking_number = 7;
+    StringSetContainsFilter sku = 8;
+  }
+}
+
+message ListBuybackOrdersResponse {
+  // The buyback orders found.
+  repeated BuybackOrder orders = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}

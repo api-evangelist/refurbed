@@ -1,0 +1,288 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "google/protobuf/empty.proto";
+import "refb/descriptor.proto";
+import "refb/merchant/v1/common/scoped_ticket_message.proto";
+import "refb/merchant/v1/common/ticket_message_submission.proto";
+import "refb/merchant/v1/common/ticket_order_item_identifier.proto";
+import "refb/merchant/v1/enums/sort_order.proto";
+import "refb/merchant/v1/enums/submittable_ticket_status.proto";
+import "refb/merchant/v1/enums/ticket_help_request_topic.proto";
+import "refb/merchant/v1/enums/ticket_message_scope.proto";
+import "refb/merchant/v1/enums/ticket_topic_change_request_attachment_exemption_reason.proto";
+import "refb/merchant/v1/filters/bool_filter.proto";
+import "refb/merchant/v1/filters/country_code_filter.proto";
+import "refb/merchant/v1/filters/int64_any_of_filter.proto";
+import "refb/merchant/v1/filters/string_equals_filter.proto";
+import "refb/merchant/v1/filters/string_filter.proto";
+import "refb/merchant/v1/filters/string_set_contains_filter.proto";
+import "refb/merchant/v1/filters/ticket_status_filter.proto";
+import "refb/merchant/v1/filters/ticket_urgency_status_filter.proto";
+import "refb/merchant/v1/paginations/int64_pagination.proto";
+import "refb/merchant/v1/resources/ticket.proto";
+import "refb/merchant/v1/resources/ticket_help_request.proto";
+import "refb/merchant/v1/resources/ticket_message.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Service to manage customer support inquiries (tickets).
+service TicketService {
+  // Lists tickets.
+  rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {
+    option (permission) = "merchant.ticket:list";
+  }
+
+  // Retrieves a single ticket by its ID, including its messages.
+  rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {
+    option (permission) = "merchant.ticket:view";
+  }
+
+  // Updates the ticket by performing one or more of the following actions:
+  // - Assigning the ticket to a user (by email)
+  // - Changing the ticket status
+  // - Adding a message to the ticket
+  // - Updating the notes
+  rpc UpdateTicket(UpdateTicketRequest) returns (UpdateTicketResponse) {
+    option (permission) = "merchant.ticket:update";
+  }
+
+  // Requests a topic change for a ticket.
+  // If request is approved, the ticket topic is changed to a generic topic, the caller does
+  // not specify the desired topic.
+  rpc RequestTopicChange(RequestTopicChangeRequest) returns (RequestTopicChangeResponse) {
+    option (permission) = "merchant.ticket.topic:requestChange";
+  }
+
+  // Creates a new ticket.
+  rpc CreateTicket(CreateTicketRequest) returns (CreateTicketResponse) {
+    option (permission) = "merchant.ticket:create";
+  }
+
+  // Lists all help requests for a given ticket.
+  rpc ListTicketHelpRequests(ListTicketHelpRequestsRequest) returns (ListTicketHelpRequestsResponse) {
+    option (permission) = "merchant.ticket.helpRequest:list";
+  }
+
+  // Retrieves details of a single help request by its ID, including the messages.
+  rpc GetTicketHelpRequest(GetTicketHelpRequestRequest) returns (GetTicketHelpRequestResponse) {
+    option (permission) = "merchant.ticket.helpRequest:view";
+  }
+
+  // Updates the ticket help request by adding a message to it.
+  rpc UpdateTicketHelpRequest(UpdateTicketHelpRequestRequest) returns (UpdateTicketHelpRequestResponse) {
+    option (permission) = "merchant.ticket.helpRequest:update";
+  }
+
+  // Creates a help request for a given ticket.
+  rpc CreateTicketHelpRequest(CreateTicketHelpRequestRequest) returns (CreateTicketHelpRequestResponse) {
+    option (permission) = "merchant.ticket.helpRequest:create";
+  }
+
+  // Generates a return shipping label and posts it as a message on the ticket.
+  // Call GetTicket to load the ticket messages again.
+  rpc GenerateReturnShippingLabel(GenerateReturnShippingLabelRequest) returns (google.protobuf.Empty) {
+    option (permission) = "merchant.ticket:update";
+  }
+}
+
+message ListTicketsRequest {
+  Int64Pagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      CREATED_AT = 0;
+      NEXT_SLA_BREACH_AT = 1;
+      UPDATED_AT = 2;
+    }
+  }
+
+  message Filter {
+    Int64AnyOfFilter ticket_id = 1;
+    StringEqualsFilter assignee_user_email = 2;
+    TicketStatusFilter status = 3;
+    StringEqualsFilter customer_email = 4;
+    Int64AnyOfFilter marketplace_order_id = 5;
+    Int64AnyOfFilter marketplace_order_item_id = 6;
+    Int64AnyOfFilter buyback_order_id = 7;
+    Int64AnyOfFilter buyback_order_item_id = 8;
+    CountryCodeFilter country = 9;
+    StringFilter topic = 10;
+    TicketUrgencyStatusFilter urgency_status = 11;
+    BoolFilter customer_panicked = 12;
+    BoolFilter is_buyback = 13;
+    StringSetContainsFilter customer_name = 14;
+    BoolFilter seller_action_needed = 15;
+    BoolFilter has_help_requests = 16;
+  }
+}
+
+message ListTicketsResponse {
+  repeated Ticket tickets = 1;
+
+  bool has_more = 2;
+}
+
+message GetTicketRequest {
+  int64 ticket_id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetTicketResponse {
+  // The ticket details.
+  Ticket ticket = 1;
+
+  // Messages posted on the ticket.
+  repeated ScopedTicketMessage messages = 2;
+}
+
+message UpdateTicketRequest {
+  // The ID of the ticket to be updated.
+  int64 ticket_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // A message to be added to the ticket.
+  optional ScopedMessageSubmission new_message = 2;
+
+  // Email of the user to assign the ticket to, or unassign the ticket if "unassign" is set to true.
+  // If not provided, the assignee will stay unchanged.
+  oneof update_assignee {
+    string assignee_user_email = 3;
+    bool unassign = 4;
+  }
+
+  // The status to set on the ticket. Defaults to pending unless specified otherwise.
+  optional SubmittableTicketStatusEnum.SubmittableTicketStatus status = 5;
+
+  // Notes that the merchant can add to the ticket for internal use. Only visible to the merchant.
+  // If not provided, the notes will stay unchanged.
+  optional string notes = 6;
+
+  message ScopedMessageSubmission {
+    TicketMessageSubmission message = 1;
+    TicketMessageScopeEnum.TicketMessageScope scope = 2;
+  }
+}
+
+message UpdateTicketResponse {
+  // The updated ticket.
+  Ticket ticket = 1;
+
+  // Messages posted on the ticket.
+  repeated ScopedTicketMessage messages = 2;
+}
+
+message CreateTicketRequest {
+  // The order item ID to associate the ticket to.
+  // Either marketplace or buyback.
+  TicketOrderItemIdentifier order_item_identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // The topic of the ticket.
+  // TODO: possible values are to be defined later.
+  string topic = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // The initial message to be added to the ticket. The PUBLIC scope is used for the first message by default.
+  TicketMessageSubmission message = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // Notes that the merchant can add to the ticket for internal use. Only visible to the merchant.
+  optional string notes = 4;
+
+  // If the ticket to be created is a follow-up ticket to a closed ticket,
+  // this field contains the ID of the original ticket.
+  optional int64 follow_up_to_ticket_id = 5;
+}
+
+message CreateTicketResponse {
+  // The created ticket.
+  Ticket ticket = 1;
+
+  // Messages posted on the ticket.
+  repeated ScopedTicketMessage messages = 2;
+}
+
+message RequestTopicChangeRequest {
+  // The ID of the ticket for which the topic change is being requested.
+  int64 ticket_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Message justifying the request, as well relevant attachments (documents).
+  TicketMessageSubmission message = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Justification if the topic change request is exempt from providing the relevant attachments (documents).
+  optional TicketTopicChangeRequestAttachmentExemptionReasonEnum.TicketTopicChangeRequestAttachmentExemptionReason attachment_exemption_reason = 3;
+}
+
+message RequestTopicChangeResponse {
+  // The ticket for which a topic change was requested.
+  Ticket ticket = 1;
+
+  // Messages posted on the ticket.
+  repeated ScopedTicketMessage messages = 2;
+}
+
+message ListTicketHelpRequestsRequest {
+  int64 ticket_id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message ListTicketHelpRequestsResponse {
+  repeated TicketHelpRequest help_requests = 1;
+}
+
+message GetTicketHelpRequestRequest {
+  int64 help_request_id = 1 [(google.api.field_behavior) = REQUIRED];
+  int64 ticket_id = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetTicketHelpRequestResponse {
+  // The help request details.
+  TicketHelpRequest help_request = 1;
+
+  // Messages posted on the help request.
+  repeated TicketMessage messages = 2;
+}
+
+message UpdateTicketHelpRequestRequest {
+  // The ID of the ticket the help request belongs to.
+  int64 ticket_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  int64 help_request_id = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // A message to be added to the help request.
+  TicketMessageSubmission new_message = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+message UpdateTicketHelpRequestResponse {
+  // The updated help request.
+  TicketHelpRequest help_request = 1;
+
+  // Messages posted on the help request.
+  repeated TicketMessage messages = 2;
+}
+
+message CreateTicketHelpRequestRequest {
+  // The ID of the ticket for which help is being requested.
+  int64 ticket_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // The topic of the help request. This is needed to route the request to the appropriate support team.
+  TicketHelpRequestTopicEnum.TicketHelpRequestTopic topic = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Message describing the issue for which help is requested, as well relevant attachments (documents).
+  TicketMessageSubmission message = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+message CreateTicketHelpRequestResponse {
+  // The created help request.
+  TicketHelpRequest help_request = 1;
+
+  // Messages posted on the help request.
+  repeated TicketMessage messages = 2;
+}
+
+message GenerateReturnShippingLabelRequest {
+  // The ID of the ticket for which the return shipping label should be generated.
+  int64 ticket_id = 1 [(google.api.field_behavior) = REQUIRED];
+}

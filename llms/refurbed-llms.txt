@@ -1,0 +1,40 @@
+# Refurbed
+
+> Refurbed is a European marketplace for professionally refurbished electronics
+> and sustainable goods, based in Vienna, Austria. It exposes two public partner
+> APIs — a Merchant API (manage offers, prices, orders, returns, refunds,
+> shipping, tickets and buyback flows) and an Affiliate Partner API (read the
+> marketplace catalog: markets, products, instances and BuyBox data). Both are
+> gRPC-first with an equivalent HTTP/JSON transport, defined by published
+> Protobuf and Swagger 2.0 (OpenAPI) specs, authenticated with a secret token in
+> the Authorization header ("Plain <token>"). Production host: api.refurbed.com.
+
+## APIs
+
+- [Refurbed Merchant API](https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1): 85 operations across BuybackBid, BuybackOrder, BuybackOrderItem, BuybackProduct, BuybackSupplybox, Catalog, Currency, Instance, MarketOffer, Market, Merchant, Offer, OrderItemReturn, OrderItem, Order, ShippingProfile and Ticket services.
+- [Refurbed Affiliate Partner API](https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1): 6 operations across Market, Product and Instance services with attached BuyBox pricing.
+
+## Specs
+
+- [Merchant API OpenAPI (Swagger 2.0)](openapi/refurbed-merchant-api-openapi.json)
+- [Affiliate Partner API OpenAPI (Swagger 2.0)](openapi/refurbed-affiliate-api-openapi.json)
+- [Merchant API Protobuf / gRPC](grpc/refurbed_merchant_api/refb/merchant/v1/services)
+- [Affiliate Partner API Protobuf / gRPC](grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services)
+
+## Docs
+
+- [Public APIs repository](https://gitlab.com/refurbed-community/public-apis)
+- [Merchant API README](https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md)
+- [Affiliate Partner API README](https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md)
+
+## Conventions
+
+- [Authentication](authentication/refurbed-authentication.yml): apiKey, `Authorization: Plain <token>`; same token for gRPC metadata; issued manually by refurbed.
+- [API conventions](conventions/refurbed-conventions.yml): cursor pagination (limit/starting_after/ending_before + has_more), typed filters, string-encoded monetary decimals, batch operations.
+- [Error codes](errors/refurbed-error-codes.yml): grpc-status envelope (google.rpc.Status) with the standard google.rpc.Code set.
+- [Rate limits](rate-limits/refurbed-rate-limits.yml): X-RateLimit-Limit / -Remaining / -Reset headers.
+- [Data model](data-model/refurbed-data-model.yml): Offer / MarketOffer / OfferMarketPrice / Order / OrderItem / Instance entity graph.
+
+## Contact
+
+- integrations@refurbed.com (account / partnership manager provisions credentials)

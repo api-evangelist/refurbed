@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message UInt32RangeFilter {
+  optional uint32 gt = 1; // Greater than.
+  optional uint32 ge = 2; // Greater than or equal to.
+  repeated uint32 any_of = 3;
+  repeated uint32 none_of = 4;
+  optional uint32 le = 5; // Less than or equal to.
+  optional uint32 lt = 6; // Less than.
+}

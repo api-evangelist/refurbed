@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/buyback_order_item_state.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message BuybackOrderItemStateFilter {
+  repeated BuybackOrderItemStateEnum.BuybackOrderItemState any_of = 1;
+  repeated BuybackOrderItemStateEnum.BuybackOrderItemState none_of = 2;
+}

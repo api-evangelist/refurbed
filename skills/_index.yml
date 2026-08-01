@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/refurbed-merchant-api-openapi.json, openapi/refurbed-affiliate-api-openapi.json
+skills:
+  - file: refurbed-manage-offers.md
+    name: Manage refurbed offers and market prices
+    api: openapi/refurbed-merchant-api-openapi.json
+    operations: [GetInstance, ListMarkets, ListCurrencies, ListShippingProfiles, CreateOffer, UpdateOffer, ListOffers, CreateMarketOffer, UpdateMarketOffer, ListMarketOffersByOffer]
+  - file: refurbed-fulfill-order.md
+    name: Fulfill a refurbed order
+    api: openapi/refurbed-merchant-api-openapi.json
+    operations: [ListOrders, GetOrder, ListOrderItemsByOrder, GetOrderItem, UpdateOrderItemState, BatchUpdateOrderItemsState, CreateShippingLabel, ListShippingLabels, GetOrderInvoice]
+  - file: refurbed-refund-order-item.md
+    name: Refund a refurbed order item
+    api: openapi/refurbed-merchant-api-openapi.json
+    operations: [GetOrderItem, CalculateRefundOrderItem, RefundOrderItem, CalculateRefundOrder, RefundOrder]
+  - file: refurbed-browse-catalog.md
+    name: Browse the refurbed catalog (Affiliate Partner API)
+    api: openapi/refurbed-affiliate-api-openapi.json
+    operations: [ListMarkets, GetMarket, ListProducts, GetProduct, ListInstancesByProduct, GetInstance]

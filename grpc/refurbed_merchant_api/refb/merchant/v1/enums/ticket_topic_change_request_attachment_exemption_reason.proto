@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message TicketTopicChangeRequestAttachmentExemptionReasonEnum {
+  enum TicketTopicChangeRequestAttachmentExemptionReason {
+    UNSPECIFIED = 0;
+
+    // The customer reported a problem, but there was no actual problem.
+    ISSUE_SOLVED_ITSELF = 1;
+
+    // Customer's fault, e.g., wrong software configuration or treatment
+    WRONG_CONFIGURATION_BY_CUSTOMER = 2;
+
+    OTHER = 3;
+  }
+}

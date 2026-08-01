@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OrderItemTaxationEnum {
+  enum OrderItemTaxation {
+    UNSPECIFIED = 0;
+    GROSS = 1;
+    MARGINAL = 2;
+    NET = 3;
+  }
+}

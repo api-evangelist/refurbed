@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/market_type.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message MarketTypeFilter {
+  repeated MarketTypeEnum.MarketType any_of = 1;
+  repeated MarketTypeEnum.MarketType none_of = 2;
+}

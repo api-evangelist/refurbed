@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message BuybackSupplyboxStateEnum {
+  // Represents the supplybox status of a bid
+  enum BuybackSupplyboxState {
+    UNSPECIFIED = 0;
+
+    // Currently winning the supplybox.
+    WON = 1;
+
+    // Currently not winning the supplybox, but could with a better price.
+    ELIGIBLE = 2;
+
+    // Cannot win the supplybox, e.g. because refurbed's
+    // Supplybox protection for this product is enabled and the offer's stock
+    // is too low.
+    INELIGIBLE = 3;
+  }
+}

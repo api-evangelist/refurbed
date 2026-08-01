@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "refb/descriptor.proto";
+import "refb/merchant/v1/enums/catalog_template_language.proto";
+import "refb/merchant/v1/enums/category_type.proto";
+import "refb/merchant/v1/resources/catalog_template.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+service CatalogService {
+  // Retrieves a list of attribute templates for the specified category type and
+  // optionally a specific category.
+  rpc GetCatalogTemplates(GetCatalogTemplatesRequest) returns (GetCatalogTemplatesResponse) {
+    option (permission) = "merchant.catalogTemplate:view";
+  }
+}
+
+message GetCatalogTemplatesRequest {
+  CategoryTypeEnum.CategoryType category_type = 1 [(google.api.field_behavior) = REQUIRED];
+  // if no category_id is set in the request, it returns a
+  // list of templates for all the child categories
+  // in the specified category type.
+  optional int64 category_id = 2;
+
+  TemplateLanguageCodeEnum.LanguageCode lang_code = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetCatalogTemplatesResponse {
+  repeated CatalogTemplate templates = 1;
+}

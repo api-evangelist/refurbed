@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message TicketStatusEnum {
+  enum TicketStatus {
+    UNSPECIFIED = 0;
+    OPEN = 1;
+    PENDING = 2;
+    SOLVED = 3;
+    CLOSED = 4;
+  }
+}

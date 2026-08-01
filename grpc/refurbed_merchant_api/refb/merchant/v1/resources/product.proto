@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// A Product.
+message Product {
+  option (google.api.resource) = {type: "refb.merchant.v1/Product"};
+
+  // Product primary key.
+  int64 id = 1;
+
+  // The human readable product name.
+  string name = 2;
+
+  // The product slug.
+  string slug = 3;
+
+  // The category this product is linked with.
+  Category category = 4;
+}
+
+message Category {
+  // The category id.
+  int64 id = 1;
+}

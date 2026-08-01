@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message RefundEligibilityEnum {
+  enum RefundEligibility {
+    UNSPECIFIED = 0;
+    // Refunds are allowed.
+    ELIGIBLE = 1;
+    // Refunds are not allowed for an unspecified reason.
+    INELIGIBLE_UNKNOWN = 2;
+    // Refunds are not allowed because the order was created long ago.
+    INELIGIBLE_PERIOD_EXPIRED = 3;
+    // Refunds are not allowed because everything the customer paid has already been refunded.
+    INELIGIBLE_ALREADY_REFUNDED = 4;
+    // Refunds are not allowed because Refurbed doesn't have the payment guaranteed yet.
+    INELIGIBLE_UNCAPTURED_PAYMENT = 5;
+    // Refunds are not allowed because no relevant Zendesk ticket exists.
+    INELIGIBLE_NO_TICKET = 6;
+  }
+}

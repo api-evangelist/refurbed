@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+import "refb/merchant/v1/common/buyback_attribute.proto";
+import "refb/merchant/v1/enums/buyback_bid_grading.proto";
+import "refb/merchant/v1/enums/buyback_supplybox_state.proto";
+import "refb/merchant/v1/enums/country_code.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message BuybackSupplybox {
+  option (google.api.resource) = {type: "refb.refurbed.merchant.v1/Supplybox"};
+
+  // Primary key of the bid.
+  int64 bid_id = 1;
+
+  // When the bid was created.
+  google.protobuf.Timestamp bid_created_at = 2;
+
+  // The product id
+  int64 product_id = 3;
+
+  // The user-friendly product_name
+  string product_name = 4;
+
+  // List of attributes assigned to the product
+  repeated BuybackAttribute attributes = 5;
+
+  // Stock the merchant is willing to buy
+  optional uint32 stock = 6;
+
+  // Two-letter code indicating the market
+  refb.merchant.v1.CountryCodeEnum.CountryCode market_code = 7;
+
+  // Grading for the desired product
+  BuybackBidGradingEnum.BuybackBidGrading grading = 8;
+
+  // Currency for the price
+  CurrencyCodeEnum.CurrencyCode currency_code = 9;
+
+  // The price that is currently winning the supplybox
+  string winning_price = 10;
+
+  // The price the merchant is willing to pay for this product and grading
+  // If the merchant is winning the supplybox this will be equal to winning_price
+  string merchant_price = 11;
+
+  // The price the merchant needs to bid in order to win the supplybox
+  // This field is empty if the merchant has won the supplybox or if the bid is ineligible.
+  optional string suggested_price = 12;
+
+  // Absolute difference between the current and suggested price
+  // This field is empty if the merchant has won the supplybox or if the bid is ineligible.
+  optional string price_diff = 13;
+
+  // When the supplybox was won.
+  // This field is empty if the merchant hasn't won the supplybox.
+  optional google.protobuf.Timestamp won_at = 14;
+
+  // State of the supplybox
+  BuybackSupplyboxStateEnum.BuybackSupplyboxState state = 15;
+
+  // ID of the market bid.
+  int64 market_bid_id = 16;
+
+  // SKU of the bid.
+  optional string bid_sku = 17;
+}

@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+import "refb/merchant/v1/enums/ticket_message_sender_type.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// A message belonging to either a ticket or a ticket help request.
+// Contains the message body, attachments, as well as information about the author of the message.
+message TicketMessage {
+  option (google.api.resource) = {type: "refb.merchant.v1/TicketMessage"};
+
+  // The ID of the message.
+  int64 id = 1;
+
+  // The HTML body of the message (sanitized, safe to render in a browser).
+  string body_html = 2;
+
+  // Time of message creation.
+  google.protobuf.Timestamp created_at = 3;
+
+  // Author of the message.
+  Author author = 4;
+
+  // File attachments related to the message.
+  repeated Attachment attachments = 5;
+
+  message Attachment {
+    // Name of the attachment file.
+    string filename = 1;
+
+    // Public URL to view or download the attachment.
+    string url = 2;
+
+    // Content type of the attachment file, e.g., image/png.
+    string content_type = 3;
+  }
+
+  message Author {
+    // Type of the author (customer, merchant or refurbed)
+    TicketMessageSenderTypeEnum.TicketMessageSenderType type = 1;
+
+    // Email of the author. Populated only if type=merchant.
+    optional string email = 2;
+
+    // Name of the author.
+    string name = 3;
+  }
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message BuybackBidGradingEnum {
+  enum BuybackBidGrading {
+    UNSPECIFIED = 0;
+    A = 1;
+    B = 2;
+    C = 3;
+    D = 4;
+    E = 5;
+  }
+}

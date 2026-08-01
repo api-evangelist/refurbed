@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OrderStateEnum {
+  // Order states are calculated based on the individual order item states.
+  enum OrderState {
+    UNSPECIFIED = 0;
+
+    // Order was not handled yet. At least one order item has state NEW.
+    NEW = 1;
+
+    // Order was rejected (cannot be fulfilled). All order items have state
+    // REJECTED.
+    REJECTED = 2;
+
+    // Order was cancelled. All order items have state CANCELLED.
+    CANCELLED = 3;
+
+    // Order was accepted. At least one order item has state ACCEPTED, and none
+    // of the other items still have state NEW.
+    ACCEPTED = 4;
+
+    // Order was fully shipped. All order items have state SHIPPED.
+    SHIPPED = 5;
+
+    // Order was fully returned. All order items have state RETURNED.
+    RETURNED = 6;
+
+    // Order was fulfilled. Order has only items with both SHIPPED and RETURNED.
+    FULFILLED = 7;
+
+    // Order was unfulfilled. Order has only items with both REJECTED and CANCELLED.
+    UNFULFILLED = 8;
+
+    // Order was partially fulfilled. Order has items with both fulfilled (SHIPPED, RETURNED)
+    // and unfulfilled (REJECTED, CANCELLED) states.
+    PARTIALLY_FULFILLED = 9;
+  }
+}

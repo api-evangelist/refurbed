@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/currency_code.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message CurrencyCodeFilter {
+  repeated CurrencyCodeEnum.CurrencyCode any_of = 1;
+  repeated CurrencyCodeEnum.CurrencyCode none_of = 2;
+}

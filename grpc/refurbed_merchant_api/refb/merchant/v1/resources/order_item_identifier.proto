@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "refb/merchant/v1/enums/order_item_identifier_type.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OrderItemIdentifier {
+  option (google.api.resource) = {type: "refb.merchant.v1/OrderItemIdentifier"};
+
+  OrderItemIdentifierTypeEnum.OrderItemIdentifierType identifier_type = 1;
+  string value = 2;
+}

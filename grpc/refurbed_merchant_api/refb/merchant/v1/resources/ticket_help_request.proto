@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+import "refb/merchant/v1/enums/ticket_help_request_status.proto";
+import "refb/merchant/v1/enums/ticket_help_request_topic.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// A help request associated to a ticket.
+// Created by a merchant to request help from refurbed to assist with handling a ticket.
+message TicketHelpRequest {
+  option (google.api.resource) = {type: "refb.merchant.v1/TicketHelpRequest"};
+
+  // The ID of the help request.
+  int64 id = 1;
+
+  // The ID of the ticket associated to the help request.
+  int64 ticket_id = 2;
+
+  // Status of the help request.
+  TicketHelpRequestStatusEnum.TicketHelpRequestStatus status = 3;
+
+  // Topic of the help request.
+  TicketHelpRequestTopicEnum.TicketHelpRequestTopic topic = 4;
+
+  // Time of help request creation.
+  google.protobuf.Timestamp created_at = 5;
+}

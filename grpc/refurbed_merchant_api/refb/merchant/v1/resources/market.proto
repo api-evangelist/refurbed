@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/enums/market_type.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// A market.
+message Market {
+  option (google.api.resource) = {type: "refb.merchant.v1/Market"};
+
+  // Primary key. Code of the market.
+  string code = 1;
+
+  // Indicates whether there exists a refurbed website for this market.
+  bool is_site = 2;
+
+  // Defines what type of market it is.
+  MarketTypeEnum.MarketType type = 3;
+
+  // Human-readable name of the market.
+  string name = 4;
+
+  // The market's currency.
+  CurrencyCodeEnum.CurrencyCode currency_code = 5;
+}

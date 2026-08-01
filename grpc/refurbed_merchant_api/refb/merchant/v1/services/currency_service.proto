@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "refb/descriptor.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/enums/sort_order.proto";
+import "refb/merchant/v1/filters/currency_code_filter.proto";
+import "refb/merchant/v1/paginations/currency_code_pagination.proto";
+import "refb/merchant/v1/resources/currency.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Service to retrieve information about supported currencies.
+//
+// Supported currencies are the site market currencies.
+service CurrencyService {
+  // Lists all supported currencies.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when pagination limit is too large (>100)
+  //   - when both "ending_before" and "starting_after" are specified in pagination
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc ListCurrencies(ListCurrenciesRequest) returns (ListCurrenciesResponse) {
+    option (permission) = "merchant.currency:list";
+  }
+
+  // Gets a single supported currency.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when the currency code is invalid
+  // - NOT_FOUND
+  //   - when the currency is not found in our system
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc GetCurrency(GetCurrencyRequest) returns (GetCurrencyResponse) {
+    option (permission) = "merchant.currency:view";
+  }
+}
+
+message ListCurrenciesRequest {
+  CurrencyCodePagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      CODE = 0;
+    }
+  }
+
+  message Filter {
+    CurrencyCodeFilter code = 1;
+  }
+}
+
+message ListCurrenciesResponse {
+  repeated Currency currencies = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}
+
+message GetCurrencyRequest {
+  // The identifier of the currency to get.
+  CurrencyCodeEnum.CurrencyCode code = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetCurrencyResponse {
+  Currency currency = 1;
+}

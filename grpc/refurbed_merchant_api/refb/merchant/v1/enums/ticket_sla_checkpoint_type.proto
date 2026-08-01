@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message TicketSlaCheckpointTypeEnum {
+  enum TicketSlaCheckpointType {
+    UNSPECIFIED = 0;
+
+    // The time since when the SLA timer starts (e.g., customer or refurbed agent response).
+    AWAITING_REPLY_SINCE = 3;
+
+    // The time when the ticket passes its SLA due time.
+    OVERDUE = 1;
+
+    // When the ticket is taken over by refurbed due to SLA breach.
+    REFURBED_TAKEOVER = 2;
+  }
+}

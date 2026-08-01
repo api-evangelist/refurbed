@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: derived
+source: >-
+  https://gitlab.com/refurbed-community/public-apis +
+  openapi/refurbed-merchant-api-openapi.json,
+  openapi/refurbed-affiliate-api-openapi.json
+versioning:
+  scheme: uri-path
+  current: v1
+  packages: [refb.merchant.v1, refb.partner.affiliate.v1]
+  docs: https://gitlab.com/refurbed-community/public-apis
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: >-
+    No public deprecation policy or RFC 8594 Sunset/Deprecation header support
+    is documented. Spec is versioned via the proto package (v1).
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+support:
+  contact: integrations@refurbed.com
+  channel: account/partnership manager
+deprecated_operations: []
+notes: >-
+  refurbed distributes its API definitions as versioned Protobuf + Swagger in a
+  public GitLab repository. Changes are shipped by updating that repository;
+  there is no separate dated changelog, status page, or published SLA at time of
+  probing.

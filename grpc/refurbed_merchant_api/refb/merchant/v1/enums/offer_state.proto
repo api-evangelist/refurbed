@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OfferStateEnum {
+  enum OfferState {
+    UNSPECIFIED = 0;
+
+    // Everything is in order. Final state.
+    OK = 1;
+
+    // Offer needs to be verified in the refurbed merchant interface before
+    // being shown publicly. This state is set on all offers that are created
+    // using GTIN/MPN identifiers. Next state: OK.
+    UNVERIFIED = 2;
+
+    // Offer has been submitted using catalog attributes, but not processed yet.
+    // Next state: PENDING_REVIEW.
+    SUBMITTED = 3;
+
+    // Offer has been submitted using catalog attributes, and is awaiting manual review.
+    // Next state: OK, REJECTED.
+    PENDING_REVIEW = 4;
+
+    // Offer will not proceed to the marketplace. Final state.
+    REJECTED = 5;
+  }
+}

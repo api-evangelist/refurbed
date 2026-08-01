@@ -1,0 +1,383 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/refurbed-merchant-api-openapi.json, openapi/refurbed-affiliate-api-openapi.json
+note: 'No official refurbed-hosted MCP server was found. This is a CANDIDATE tool list derived one-to-one
+  from the published HTTP/OpenAPI operations of the Merchant and Affiliate Partner APIs; auth is the refurbed
+  secret token (Authorization: Plain <token>).'
+server:
+  name: refurbed
+  transport: stdio
+  url: null
+tools:
+- name: CreateBuybackBid
+  description: Creates a single bid.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#CreateBuybackBid
+  service: BuybackBidService
+- name: CreateBuybackMarketBid
+  description: Adds a new price for a marketplace inside an existing bid
+  source_operation: openapi/refurbed-merchant-api-openapi.json#CreateBuybackMarketBid
+  service: BuybackBidService
+- name: DeleteBuybackBid
+  description: Deletes a single bid.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#DeleteBuybackBid
+  service: BuybackBidService
+- name: DeleteBuybackMarketBid
+  description: Deletes a price for a marketplace inside an existing bid.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#DeleteBuybackMarketBid
+  service: BuybackBidService
+- name: GetSecondOfferBuybackMarketBid
+  description: Gets a market bid available for making a second offer.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetSecondOfferBuybackMarketBid
+  service: BuybackBidService
+- name: ListBuybackBids
+  description: Lists all bids.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListBuybackBids
+  service: BuybackBidService
+- name: UpdateBuybackBid
+  description: Updates a single bid by setting its stock
+  source_operation: openapi/refurbed-merchant-api-openapi.json#UpdateBuybackBid
+  service: BuybackBidService
+- name: UpdateBuybackMarketBid
+  description: Sets the price for a marketplace for an existing bid.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#UpdateBuybackMarketBid
+  service: BuybackBidService
+- name: Accept
+  description: Marks order item as accepted to indicate that the received item matches the seller's description
+  source_operation: openapi/refurbed-merchant-api-openapi.json#Accept
+  service: BuybackOrderItemService
+- name: ConfirmReceived
+  description: Notifies that the merchant has received the item shipped by the seller
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ConfirmReceived
+  service: BuybackOrderItemService
+- name: MakeSecondOffer
+  description: Makes a second offer for the order item
+  source_operation: openapi/refurbed-merchant-api-openapi.json#MakeSecondOffer
+  service: BuybackOrderItemService
+- name: NotifyReturned
+  description: Notifies that the merchant has shipped the rejected item.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#NotifyReturned
+  service: BuybackOrderItemService
+- name: Reject
+  description: Marks order item as rejected to indicate that the received item is different from the seller's
+    description.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#Reject
+  service: BuybackOrderItemService
+- name: UploadShippingLabel
+  description: Issues shipping label information for a buyback order item
+  source_operation: openapi/refurbed-merchant-api-openapi.json#UploadShippingLabel
+  service: BuybackOrderItemService
+- name: ListBuybackOrders
+  description: Lists all buyback orders.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListBuybackOrders
+  service: BuybackOrderService
+- name: ListBuybackProducts
+  description: Lists products.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListBuybackProducts
+  service: BuybackProductService
+- name: ListBuybackSupplyboxes
+  description: Lists all supplyboxes.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListBuybackSupplyboxes
+  service: BuybackSupplyboxService
+- name: GetCatalogTemplates
+  description: Retrieves a list of attribute templates for the specified category type and optionally
+    a specific category.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetCatalogTemplates
+  service: CatalogService
+- name: GetCurrency
+  description: Gets a single supported currency.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetCurrency
+  service: CurrencyService
+- name: ListCurrencies
+  description: Lists all supported currencies.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListCurrencies
+  service: CurrencyService
+- name: BatchGetInstances
+  description: Batch gets single instances.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#BatchGetInstances
+  service: InstanceService
+- name: GetInstance
+  description: Gets a single instance.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetInstance
+  service: InstanceService
+- name: BatchCreateMarketOffer
+  description: Batch creates market offers / offer market prices of offers.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#BatchCreateMarketOffer
+  service: MarketOfferService
+- name: BatchDeleteMarketOffer
+  description: Batch deletes market offers / offer market prices of offers.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#BatchDeleteMarketOffer
+  service: MarketOfferService
+- name: BatchGetMarketOffer
+  description: Batch gets market offers / offer market prices of offers.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#BatchGetMarketOffer
+  service: MarketOfferService
+- name: BatchUpdateMarketOffer
+  description: Batch updates market offers / offer market prices of offers.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#BatchUpdateMarketOffer
+  service: MarketOfferService
+- name: CreateMarketOffer
+  description: Creates a single market offer / an offer market price of an offer.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#CreateMarketOffer
+  service: MarketOfferService
+- name: DeleteMarketOffer
+  description: Deletes a single market offer / an offer market price of an offer.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#DeleteMarketOffer
+  service: MarketOfferService
+- name: GetMarketOffer
+  description: Gets a single market offer.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetMarketOffer
+  service: MarketOfferService
+- name: ListMarketOffers
+  description: Lists all market offers.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListMarketOffers
+  service: MarketOfferService
+- name: ListMarketOffersByOffer
+  description: Lists all market offers of a specific offer.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListMarketOffersByOffer
+  service: MarketOfferService
+- name: UpdateMarketOffer
+  description: Updates a single market offer / an offer market price of an offer.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#UpdateMarketOffer
+  service: MarketOfferService
+- name: GetMarket
+  description: Gets a single market.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetMarket
+  service: MarketService
+- name: ListMarkets
+  description: Lists all markets.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListMarkets
+  service: MarketService
+- name: CreateMerchantAddress
+  description: Creates merchant's address
+  source_operation: openapi/refurbed-merchant-api-openapi.json#CreateMerchantAddress
+  service: MerchantService
+- name: DeleteMerchantAddress
+  description: Delete merchant's address
+  source_operation: openapi/refurbed-merchant-api-openapi.json#DeleteMerchantAddress
+  service: MerchantService
+- name: ListMerchantAddresses
+  description: Lists addresses defined for merchant
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListMerchantAddresses
+  service: MerchantService
+- name: UpdateMerchantAddress
+  description: Updates merchant's address
+  source_operation: openapi/refurbed-merchant-api-openapi.json#UpdateMerchantAddress
+  service: MerchantService
+- name: BatchCreateOffers
+  description: Batch creates offers.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#BatchCreateOffers
+  service: OfferService
+- name: BatchDeleteOffers
+  description: Batch deletes offers.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#BatchDeleteOffers
+  service: OfferService
+- name: BatchGetOffers
+  description: Batch gets single offers.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#BatchGetOffers
+  service: OfferService
+- name: BatchUpdateOffers
+  description: Batch updates offers.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#BatchUpdateOffers
+  service: OfferService
+- name: CreateOffer
+  description: Creates a single offer.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#CreateOffer
+  service: OfferService
+- name: DeleteOffer
+  description: Deletes a single offer.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#DeleteOffer
+  service: OfferService
+- name: GetOffer
+  description: Gets a single offer.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetOffer
+  service: OfferService
+- name: ListOffers
+  description: Lists all offers.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListOffers
+  service: OfferService
+- name: UpdateOffer
+  description: Updates a single offer.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#UpdateOffer
+  service: OfferService
+- name: ListOrderItemReturns
+  description: Lists returns with filtering, sorting, and pagination support.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListOrderItemReturns
+  service: OrderItemReturnService
+- name: BatchUpdateOrderItems
+  description: Batch updates order items.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#BatchUpdateOrderItems
+  service: OrderItemService
+- name: BatchUpdateOrderItemsState
+  description: Batch updates order items' state.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#BatchUpdateOrderItemsState
+  service: OrderItemService
+- name: CalculateRefundOrderItem
+  description: Calculate values for a refund of a single order item, i.e. using the RefundOrderItem method.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#CalculateRefundOrderItem
+  service: OrderItemService
+- name: GetOrderItem
+  description: Gets a single order item.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetOrderItem
+  service: OrderItemService
+- name: ListOrderItemsByOrder
+  description: Lists all order items of a specific order.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListOrderItemsByOrder
+  service: OrderItemService
+- name: RefundOrderItem
+  description: Refunds a single order item. Item needs to be refundable.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#RefundOrderItem
+  service: OrderItemService
+- name: UpdateOrderItem
+  description: Updates a single order item.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#UpdateOrderItem
+  service: OrderItemService
+- name: UpdateOrderItemState
+  description: Updates the state of a single order item.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#UpdateOrderItemState
+  service: OrderItemService
+- name: CalculateRefundOrder
+  description: Calculate values for a refund of all refundable items of an order at once, i.e. using the
+    RefundOrder method.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#CalculateRefundOrder
+  service: OrderService
+- name: CreateShippingLabel
+  description: Creates shipping label for an order
+  source_operation: openapi/refurbed-merchant-api-openapi.json#CreateShippingLabel
+  service: OrderService
+- name: DeleteOrderCommercialInvoice
+  description: Deletes the previously uploaded commercial invoice for an order.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#DeleteOrderCommercialInvoice
+  service: OrderService
+- name: DeleteOrderInvoice
+  description: Deletes the order's invoice. Order needs to be invoiceable.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#DeleteOrderInvoice
+  service: OrderService
+- name: GetOrder
+  description: Gets a single order using its identifier.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetOrder
+  service: OrderService
+- name: GetOrderCommercialInvoice
+  description: Returns the previously uploaded commercial invoice for an order.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetOrderCommercialInvoice
+  service: OrderService
+- name: GetOrderInvoice
+  description: Gets the order's invoice. The URL access token is valid for 24h.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetOrderInvoice
+  service: OrderService
+- name: ListOrders
+  description: Lists orders.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListOrders
+  service: OrderService
+- name: ListShippingLabels
+  description: Lists shipping labels for an order
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListShippingLabels
+  service: OrderService
+- name: RefundOrder
+  description: Refunds all refundable items of an order at once.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#RefundOrder
+  service: OrderService
+- name: SetOrderInvoiceStream
+  description: Uploads an invoice for an order.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#SetOrderInvoiceStream
+  service: OrderService
+- name: UpdateShippingLabelAddress
+  description: Updates the shipping label address for an order.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#UpdateShippingLabelAddress
+  service: OrderService
+- name: UploadOrderCommercialInvoice
+  description: Uploads a commercial invoice for an order.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#UploadOrderCommercialInvoice
+  service: OrderService
+- name: CreateShippingProfile
+  description: Creates a shipping profile.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#CreateShippingProfile
+  service: ShippingProfileService
+- name: DeleteShippingProfile
+  description: Deletes a shipping profile. Only shipping profiles marked as deletable can be deleted.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#DeleteShippingProfile
+  service: ShippingProfileService
+- name: GetShippingProfile
+  description: Gets a single shipping profile. If no version is defined, its current version is returned.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetShippingProfile
+  service: ShippingProfileService
+- name: ListAvailableCarriers
+  description: Lists available carriers for shipping profiles. Make sure to pre-fetch and cache the response
+    of this method to avoid ru
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListAvailableCarriers
+  service: ShippingProfileService
+- name: ListShippingProfiles
+  description: Lists all current shipping profiles.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListShippingProfiles
+  service: ShippingProfileService
+- name: UpdateShippingProfile
+  description: Updates a shipping profile.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#UpdateShippingProfile
+  service: ShippingProfileService
+- name: CreateTicket
+  description: Creates a new ticket.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#CreateTicket
+  service: TicketService
+- name: CreateTicketHelpRequest
+  description: Creates a help request for a given ticket.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#CreateTicketHelpRequest
+  service: TicketService
+- name: GenerateReturnShippingLabel
+  description: Generates a return shipping label and posts it as a message on the ticket. Call GetTicket
+    to load the ticket messages ag
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GenerateReturnShippingLabel
+  service: TicketService
+- name: GetTicket
+  description: Retrieves a single ticket by its ID, including its messages.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetTicket
+  service: TicketService
+- name: GetTicketHelpRequest
+  description: Retrieves details of a single help request by its ID, including the messages.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#GetTicketHelpRequest
+  service: TicketService
+- name: ListTicketHelpRequests
+  description: Lists all help requests for a given ticket.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListTicketHelpRequests
+  service: TicketService
+- name: ListTickets
+  description: Lists tickets.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#ListTickets
+  service: TicketService
+- name: RequestTopicChange
+  description: Requests a topic change for a ticket. If request is approved, the ticket topic is changed
+    to a generic topic, the caller
+  source_operation: openapi/refurbed-merchant-api-openapi.json#RequestTopicChange
+  service: TicketService
+- name: UpdateTicket
+  description: 'Updates the ticket by performing one or more of the following actions: - Assigning the
+    ticket to a user (by email) - Cha'
+  source_operation: openapi/refurbed-merchant-api-openapi.json#UpdateTicket
+  service: TicketService
+- name: UpdateTicketHelpRequest
+  description: Updates the ticket help request by adding a message to it.
+  source_operation: openapi/refurbed-merchant-api-openapi.json#UpdateTicketHelpRequest
+  service: TicketService
+- name: GetInstance
+  description: Gets a single instance.
+  source_operation: openapi/refurbed-affiliate-api-openapi.json#GetInstance
+  service: InstanceService
+- name: ListInstancesByProduct
+  description: Lists instances for a specific product.
+  source_operation: openapi/refurbed-affiliate-api-openapi.json#ListInstancesByProduct
+  service: InstanceService
+- name: GetMarket
+  description: Gets a single market.
+  source_operation: openapi/refurbed-affiliate-api-openapi.json#GetMarket
+  service: MarketService
+- name: ListMarkets
+  description: Lists all markets.
+  source_operation: openapi/refurbed-affiliate-api-openapi.json#ListMarkets
+  service: MarketService
+- name: GetProduct
+  description: Gets a single product.
+  source_operation: openapi/refurbed-affiliate-api-openapi.json#GetProduct
+  service: ProductService
+- name: ListProducts
+  description: Lists products.
+  source_operation: openapi/refurbed-affiliate-api-openapi.json#ListProducts
+  service: ProductService

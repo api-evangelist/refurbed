@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message TicketHelpRequestTopicEnum {
+  enum TicketHelpRequestTopic {
+    UNSPECIFIED = 0;
+    REFURBED_RESPONSIBILITY = 1;
+    CUSTOMER_COMMUNICATION = 2;
+    TECHNICAL_ISSUES = 3;
+    ACCOUNT_TAKEOVER = 4;
+    SHIPPING_AGREEMENT = 5;
+    LEGAL = 6;
+    INFORMATION_FOR_REFURBED = 7;
+    POTENTIAL_FRAUD_CASE = 8;
+    OTHER = 9;
+  }
+}

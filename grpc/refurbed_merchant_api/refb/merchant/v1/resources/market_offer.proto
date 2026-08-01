@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+import "refb/merchant/v1/common/market_offer_identifier.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/enums/offer_grading.proto";
+import "refb/merchant/v1/enums/offer_state.proto";
+import "refb/merchant/v1/enums/offer_taxation.proto";
+import "refb/merchant/v1/enums/offer_warranty.proto";
+import "refb/merchant/v1/resources/offer_market_price.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// A merchant's market offer. A market offer is a combination of an offer with
+// a specific offer market price.
+message MarketOffer {
+  option (google.api.resource) = {type: "refb.refurbed.merchant.v1/MarketOffer"};
+
+  // Primary key.
+  MarketOfferIdentifier id = 1;
+
+  // Version of this offer / offer market price.
+  int64 version = 2;
+
+  // Indicates whether this is the currently available version.
+  bool is_current = 3;
+
+  // When the offer was initially created.
+  google.protobuf.Timestamp created_at = 4;
+
+  // The refurbed instance id ("product variant") this offer is for.
+  int64 instance_id = 5;
+
+  // Human-readable name of the instance this offer is for.
+  string instance_name = 6;
+
+  // The offer's state.
+  OfferStateEnum.OfferState state = 7;
+
+  // The merchant's SKU.
+  //
+  // Max. length is 256 unicode characters. SKUs cannot have leading or trailing
+  // whitespace characters.
+  //
+  // Can be empty string for old offers that did not require SKU to be set.
+  string sku = 8;
+
+  // Grading of the item sold.
+  OfferGradingEnum.OfferGrading grading = 9;
+
+  // Warranty of the item sold.
+  OfferWarrantyEnum.OfferWarranty warranty = 10;
+
+  // The item's stock.
+  uint32 stock = 11;
+
+  // The shipping profile connected to this offer. This determines in what
+  // markets the offer is sold and what the shipping costs are.
+  int64 shipping_profile_id = 12;
+
+  // Name of shipping profile.
+  string shipping_profile_name = 13;
+
+  // An optional secondary shipping profile id. Can be used to offer express
+  // shipping next to standard shipping. Has to be different from the primary
+  // shipping profile.
+  optional int64 secondary_shipping_profile_id = 14;
+
+  // Name of secondary shipping profile. Only returned if secondary shipping
+  // profile is set.
+  optional string secondary_shipping_profile_name = 15;
+
+  // The taxation mode set for this offer.
+  OfferTaxationEnum.OfferTaxation taxation = 16;
+
+  // The taxation mode the offer uses. This is either the set offer taxation
+  // or the global taxation mode (merchant account settings) that overrides it.
+  OfferTaxationEnum.OfferTaxation real_taxation = 17;
+
+  // Currency of reference prices.
+  CurrencyCodeEnum.CurrencyCode reference_currency_code = 18;
+
+  // Reference gross price of this offer. The reference price is used to
+  // calculate prices if they are not defined for a market.
+  string reference_price = 19;
+
+  // Optional reference minimum price in market currency for automatic
+  // repricing. The reference minimum price is used to calculate minimum prices
+  // if they are not defined for a market.
+  optional string reference_min_price = 20;
+
+  // The market price.
+  OfferMarketPrice market_price = 21;
+}

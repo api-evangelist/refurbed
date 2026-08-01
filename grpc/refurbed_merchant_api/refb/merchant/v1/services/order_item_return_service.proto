@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/descriptor.proto";
+import "refb/merchant/v1/enums/sort_order.proto";
+import "refb/merchant/v1/filters/int64_filter.proto";
+import "refb/merchant/v1/filters/order_item_return_state_filter.proto";
+import "refb/merchant/v1/filters/string_filter.proto";
+import "refb/merchant/v1/filters/timestamp_range_filter.proto";
+import "refb/merchant/v1/paginations/int64_pagination.proto";
+import "refb/merchant/v1/resources/order_item_return.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Service to manage order item returns.
+service OrderItemReturnService {
+  // Lists returns with filtering, sorting, and pagination support.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - FAILED_PRECONDITION
+  //   - when the merchant does not exist for the authorized user
+  // - INVALID_ARGUMENT
+  //   - when pagination limit is too large (>100)
+  //   - when both "ending_before" and "starting_after" are specified in pagination
+  rpc ListOrderItemReturns(ListOrderItemReturnsRequest) returns (ListOrderItemReturnsResponse) {
+    option (permission) = "merchant.orderItemReturn:list";
+  }
+}
+
+message ListOrderItemReturnsRequest {
+  refb.merchant.v1.Int64Pagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  message Sort {
+    refb.merchant.v1.SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      ID = 0;
+      ORDER_ID = 1;
+      RETURN_INITIATED_AT = 2;
+      DELIVERED_AT = 3;
+      TRACKING_NUMBER = 4;
+    }
+  }
+
+  message Filter {
+    refb.merchant.v1.Int64Filter order_id = 1;
+    refb.merchant.v1.StringFilter order_item_identifier = 2;
+    refb.merchant.v1.TimestampRangeFilter return_initiated_at = 3;
+    OrderItemReturnStateFilter state = 4;
+    refb.merchant.v1.TimestampRangeFilter delivered_at = 5;
+    refb.merchant.v1.StringFilter tracking_number = 6;
+  }
+}
+
+message ListOrderItemReturnsResponse {
+  // The returns found.
+  repeated OrderItemReturn returns = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}

@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+import "refb/merchant/v1/enums/buyback_order_item_state.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/resources/address.proto";
+import "refb/merchant/v1/resources/buyback_bid.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// A buyback order.
+message BuybackOrder {
+  option (google.api.resource) = {type: "refb.refurbed.merchant.v1/Order"};
+
+  // Primary key.
+  int64 id = 1;
+
+  reserved 2; // Full name of the customer
+
+  // The address to return the item(s) in case of rejection of second offer
+  Address return_address = 3;
+
+  // When the order was created
+  google.protobuf.Timestamp created_at = 4;
+
+  // List of items to ship
+  repeated BuybackOrderItem order_items = 5;
+}
+
+// A buyback order item.
+message BuybackOrderItem {
+  // Primary key.
+  int64 id = 1;
+
+  // Primary key of the order this item belongs to.
+  int64 order_id = 2;
+
+  // Status of this item.
+  BuybackOrderItemStateEnum.BuybackOrderItemState state = 3;
+
+  // Currency for the price
+  CurrencyCodeEnum.CurrencyCode currency_code = 4;
+
+  // The amount the buyer has to pay if the item is accepted
+  string price = 5;
+
+  // The related market bid
+  BuybackMarketBidSummary bid = 6;
+
+  // Shipping tracking link, a valid HTTP(S) URL.
+  optional string shipping_tracking_url = 7;
+
+  optional string shipping_tracking_number = 8;
+
+  // Return tracking link, a valid HTTP(S) URL.
+  optional string return_tracking_url = 9;
+
+  optional string return_tracking_number = 10;
+}

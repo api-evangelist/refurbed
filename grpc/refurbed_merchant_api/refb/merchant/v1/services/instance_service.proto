@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "google/rpc/status.proto";
+import "refb/descriptor.proto";
+import "refb/merchant/v1/common/instance_identifier.proto";
+import "refb/merchant/v1/resources/instance.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Service to retrieve information about instances.
+service InstanceService {
+  // Gets a single instance.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the instance is not found
+  // - INVALID_ARGUMENT
+  //   - when invalid GTIN is provided
+  // - FAILED_PRECONDITION
+  //   - when multiple instances are found for the provided MPN
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc GetInstance(GetInstanceRequest) returns (GetInstanceResponse) {
+    option (permission) = "merchant.instance:view";
+  }
+
+  // Batch gets single instances.
+  //
+  // Known errors:
+  //  - identical to the GetInstance operation
+  rpc BatchGetInstances(BatchGetInstancesRequest) returns (BatchGetInstancesResponse) {
+    option (permission) = "merchant.instance:view";
+  }
+}
+
+message GetInstanceRequest {
+  // The identifier of the instance to get.
+  oneof identifier {
+    int64 id = 1;
+
+    // A GTIN-8, GTIN-12 or GTIN-13. Note that EAN-13 and UPC-A codes are GTINs.
+    string gtin = 2;
+
+    // Manufacturer Part Number.
+    string mpn = 3;
+  }
+}
+
+message GetInstanceResponse {
+  Instance instance = 1;
+}
+
+message BatchGetInstancesRequest {
+  // Instances to get. Between 1 and 50.
+  repeated Get instances = 1 [(google.api.field_behavior) = REQUIRED];
+
+  message Get {
+    // The identifier of the instance to get.
+    InstanceIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+  }
+}
+
+message BatchGetInstancesResponse {
+  // Results of the get operation. In request order.
+  repeated Result results = 1;
+
+  message Result {
+    google.rpc.Status status = 1;
+
+    // Retrieved instance. Set if status code is OK.
+    optional Instance instance = 2;
+  }
+}

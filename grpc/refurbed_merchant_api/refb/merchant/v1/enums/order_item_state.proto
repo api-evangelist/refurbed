@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OrderItemStateEnum {
+  enum OrderItemState {
+    UNSPECIFIED = 0;
+
+    // Order item was not handled yet. Next states: REJECTED, CANCELLED or
+    // ACCEPTED.
+    NEW = 1;
+
+    // Order item cannot be fulfilled. Final state.
+    REJECTED = 2;
+
+    // Order item was cancelled by the customer. Is like REJECTED but was
+    // requested by the customer. Final state.
+    CANCELLED = 3;
+
+    // Order item was accepted for fulfillment. Next states: CANCELLED or
+    // SHIPPED.
+    ACCEPTED = 4;
+
+    // Order item was shipped. The parcel tracking link needs to be set for this
+    // state to be set. The item identifier should be set, if possible. Possible
+    // final state. Next possible state, if necessary: RETURNED.
+    SHIPPED = 5;
+
+    // Order item was returned by the customer. Final state.
+    RETURNED = 6;
+  }
+}

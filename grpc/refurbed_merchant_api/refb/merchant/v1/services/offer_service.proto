@@ -1,0 +1,492 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "google/protobuf/empty.proto";
+import "google/rpc/status.proto";
+import "refb/descriptor.proto";
+import "refb/merchant/v1/common/instance_descriptor.proto";
+import "refb/merchant/v1/common/offer_identifier.proto";
+import "refb/merchant/v1/enums/battery_condition.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/enums/offer_grading.proto";
+import "refb/merchant/v1/enums/offer_taxation.proto";
+import "refb/merchant/v1/enums/offer_warranty.proto";
+import "refb/merchant/v1/enums/sort_order.proto";
+import "refb/merchant/v1/filters/battery_condition_filter.proto";
+import "refb/merchant/v1/filters/currency_code_filter.proto";
+import "refb/merchant/v1/filters/int64_filter.proto";
+import "refb/merchant/v1/filters/numeric_range_filter.proto";
+import "refb/merchant/v1/filters/offer_grading_filter.proto";
+import "refb/merchant/v1/filters/offer_sku_filter.proto";
+import "refb/merchant/v1/filters/offer_state_filter.proto";
+import "refb/merchant/v1/filters/offer_taxation_filter.proto";
+import "refb/merchant/v1/filters/offer_warranty_filter.proto";
+import "refb/merchant/v1/filters/optional_int64_filter.proto";
+import "refb/merchant/v1/filters/optional_numeric_range_filter.proto";
+import "refb/merchant/v1/filters/timestamp_range_filter.proto";
+import "refb/merchant/v1/filters/uint32_range_filter.proto";
+import "refb/merchant/v1/paginations/int64_pagination.proto";
+import "refb/merchant/v1/resources/offer.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Service to manage offers.
+service OfferService {
+  // Lists all offers.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when pagination limit is too large (>100)
+  //   - when both "ending_before" and "starting_after" are specified in pagination
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc ListOffers(ListOffersRequest) returns (ListOffersResponse) {
+    option (permission) = "merchant.offer:list";
+  }
+
+  // Gets a single offer.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the offer is not found
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc GetOffer(GetOfferRequest) returns (GetOfferResponse) {
+    option (permission) = "merchant.offer:view";
+  }
+
+  // Creates a single offer.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - ALREADY_EXISTS
+  //   - when an offer with the given SKU already exists
+  // - INVALID_ARGUMENT
+  //   - when the unknown instance is provided
+  //   - invalid input offer data is provided
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc CreateOffer(CreateOfferRequest) returns (CreateOfferResponse) {
+    option (permission) = "merchant.offer:create";
+  }
+
+  // Updates a single offer.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when offer is not found
+  // - INVALID_ARGUMENT
+  //   - when the unknown instance is provided
+  //   - invalid input offer data is provided
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc UpdateOffer(UpdateOfferRequest) returns (UpdateOfferResponse) {
+    option (permission) = "merchant.offer:update";
+  }
+
+  // Deletes a single offer.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when offer is not found
+  // - INVALID_ARGUMENT
+  //   - when the unknown instance is provided
+  //   - invalid input offer data is provided
+  // - RESOURCE_EXHAUSTED
+  //   - when rate limit is exceeded
+  rpc DeleteOffer(DeleteOfferRequest) returns (google.protobuf.Empty) {
+    option (permission) = "merchant.offer:delete";
+  }
+
+  // Batch gets single offers.
+  //
+  // Known errors:
+  //  - identical to the GetOffer operation
+  rpc BatchGetOffers(BatchGetOffersRequest) returns (BatchGetOffersResponse) {
+    option (permission) = "merchant.offer:view";
+  }
+
+  // Batch creates offers.
+  //
+  // Known errors:
+  //  - identical to the CreateOffer operation
+  rpc BatchCreateOffers(BatchCreateOffersRequest) returns (BatchCreateOffersResponse) {
+    option (permission) = "merchant.offer:create";
+  }
+
+  // Batch updates offers.
+  //
+  // Known errors:
+  //  - identical to the UpdateOffer operation
+  rpc BatchUpdateOffers(BatchUpdateOffersRequest) returns (BatchUpdateOffersResponse) {
+    option (permission) = "merchant.offer:update";
+  }
+
+  // Batch deletes offers.
+  //
+  // Known errors:
+  //  - identical to the DeleteOffer operation
+  rpc BatchDeleteOffers(BatchDeleteOffersRequest) returns (BatchDeleteOffersResponse) {
+    option (permission) = "merchant.offer:delete";
+  }
+}
+
+message ListOffersRequest {
+  Int64Pagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      ID = 0;
+      CREATED_AT = 1;
+      NAME = 2;
+      SKU = 3;
+      GRADING = 4;
+      WARRANTY = 5;
+      STOCK = 6;
+      TAXATION = 7;
+      REFERENCE_CURRENCY_CODE = 8;
+      REFERENCE_PRICE = 9;
+      REFERENCE_MIN_PRICE = 10;
+    }
+  }
+
+  message Filter {
+    Int64Filter id = 1;
+    TimestampRangeFilter created_at = 2;
+    Int64Filter instance_id = 3;
+    OfferStateFilter state = 4;
+    OfferNameFilter name = 5;
+    OfferSKUFilter sku = 6;
+    OfferGradingFilter grading = 7;
+    OfferWarrantyFilter warranty = 8;
+    UInt32RangeFilter stock = 9;
+    Int64Filter shipping_profile_id = 10;
+    OptionalInt64Filter secondary_shipping_profile_id = 11;
+    OfferTaxationFilter taxation = 12;
+    CurrencyCodeFilter reference_currency_code = 13;
+    NumericRangeFilter reference_price = 14;
+    OptionalNumericRangeFilter reference_min_price = 15;
+    BatteryConditionFilter battery_condition = 16;
+
+    message OfferNameFilter {
+      optional string matches = 1; // Full-text match.
+    }
+  }
+}
+
+message ListOffersResponse {
+  // The offers found.
+  repeated Offer offers = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}
+
+message GetOfferRequest {
+  // The identifier of the offer to get.
+  OfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+  reserved 2;
+}
+
+message GetOfferResponse {
+  Offer offer = 1;
+}
+
+// See offer for full documentation.
+message CreateOfferRequest {
+  // Identifier used for matching the offer with a refurbed instance.
+  oneof instance {
+    // The refurbed instance ID this offer should be created on.
+    int64 instance_id = 1;
+
+    // The GTIN-8, GTIN-12 or GTIN-13 of the instance the offer should be
+    // created on. Note that EAN-13 and UPC-A codes are GTINs.
+    //
+    // Using this identifier will create the offer in state UNVERIFIED.
+    string gtin = 2;
+
+    // The MPN of the instance the offer should be created on.
+    //
+    // Using this identifier will create the offer in state UNVERIFIED.
+    string mpn = 14;
+  }
+
+  string sku = 3 [(google.api.field_behavior) = REQUIRED];
+
+  OfferGradingEnum.OfferGrading grading = 4 [(google.api.field_behavior) = REQUIRED];
+
+  OfferWarrantyEnum.OfferWarranty warranty = 5 [(google.api.field_behavior) = REQUIRED];
+
+  uint32 stock = 6 [(google.api.field_behavior) = REQUIRED];
+
+  int64 shipping_profile_id = 7 [(google.api.field_behavior) = REQUIRED];
+
+  optional int64 secondary_shipping_profile_id = 8;
+
+  OfferTaxationEnum.OfferTaxation taxation = 9 [(google.api.field_behavior) = REQUIRED];
+
+  CurrencyCodeEnum.CurrencyCode reference_currency_code = 10 [(google.api.field_behavior) = REQUIRED];
+
+  string reference_price = 11 [(google.api.field_behavior) = REQUIRED];
+
+  optional string reference_min_price = 12;
+
+  // Market prices to create. This is equal to a batch MarketOfferService.CreateMarketOffer.
+  repeated CreateMarketPrice create_market_prices = 13;
+
+  optional BatteryConditionEnum.BatteryCondition battery_condition = 15;
+
+  message CreateMarketPrice {
+    string market_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+    CurrencyCodeEnum.CurrencyCode currency_code = 3 [(google.api.field_behavior) = REQUIRED];
+
+    string price = 4 [(google.api.field_behavior) = REQUIRED];
+
+    optional string min_price = 5;
+  }
+}
+
+message CreateOfferResponse {
+  Offer offer = 1;
+}
+
+// See offer for full documentation.
+message UpdateOfferRequest {
+  // The identifier of the offer to update.
+  OfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+  optional OfferGradingEnum.OfferGrading grading = 2;
+
+  optional OfferWarrantyEnum.OfferWarranty warranty = 3;
+
+  optional uint32 stock = 4;
+
+  optional int64 shipping_profile_id = 5;
+
+  oneof update_secondary_shipping_profile_id {
+    int64 secondary_shipping_profile_id = 6;
+    bool delete_secondary_shipping_profile_id = 7;
+  }
+
+  optional OfferTaxationEnum.OfferTaxation taxation = 8;
+
+  optional CurrencyCodeEnum.CurrencyCode reference_currency_code = 9;
+
+  optional string reference_price = 10;
+
+  oneof update_reference_min_price {
+    string reference_min_price = 11;
+    bool delete_reference_min_price = 12;
+  }
+}
+
+message UpdateOfferResponse {
+  Offer offer = 1;
+}
+
+message DeleteOfferRequest {
+  // The identifier of the offer to delete.
+  OfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message BatchGetOffersRequest {
+  // Offers to get. Between 1 and 50.
+  repeated Get offers = 1 [(google.api.field_behavior) = REQUIRED];
+
+  message Get {
+    // The identifier of the offer to get.
+    OfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+    reserved 2;
+  }
+}
+
+message BatchGetOffersResponse {
+  // Results of the get operation. In request order.
+  repeated Result results = 1;
+
+  message Result {
+    google.rpc.Status status = 1;
+
+    // Retrieved offer. Set if status code is OK.
+    optional Offer offer = 2;
+  }
+}
+
+// See offer for full documentation.
+message BatchCreateOffersRequest {
+  // Offers to create. Between 1 and 50.
+  repeated Create offers = 1 [(google.api.field_behavior) = REQUIRED];
+
+  message Create {
+    // Data used for matching the offer with a refurbed instance.
+    oneof instance {
+      // The refurbed instance ID this offer should be created on.
+      int64 instance_id = 1;
+
+      // The GTIN-8, GTIN-12 or GTIN-13 of the instance the offer should be
+      // created on. Note that EAN-13 and UPC-A codes are GTINs.
+      //
+      // Using this identifier will create the offer in state UNVERIFIED.
+      string gtin = 2;
+
+      // The MPN of the instance the offer should be created on.
+      //
+      // Using this identifier will create the offer in state UNVERIFIED.
+      string mpn = 14;
+
+      // The instance descriptor describes the instance an offer should be created on.
+      // If such instance can be unambiguously matched, the offer is created
+      // in state OK.
+      // Otherwise, an asynchronous approval process is started, and the offer
+      // is created in state PROCESSING.
+      InstanceDescriptor instance_descriptor = 99;
+    }
+
+    string sku = 3 [(google.api.field_behavior) = REQUIRED];
+
+    OfferGradingEnum.OfferGrading grading = 4 [(google.api.field_behavior) = REQUIRED];
+
+    OfferWarrantyEnum.OfferWarranty warranty = 5 [(google.api.field_behavior) = REQUIRED];
+
+    uint32 stock = 6 [(google.api.field_behavior) = REQUIRED];
+
+    int64 shipping_profile_id = 7 [(google.api.field_behavior) = REQUIRED];
+
+    optional int64 secondary_shipping_profile_id = 8;
+
+    OfferTaxationEnum.OfferTaxation taxation = 9 [(google.api.field_behavior) = REQUIRED];
+
+    CurrencyCodeEnum.CurrencyCode reference_currency_code = 10 [(google.api.field_behavior) = REQUIRED];
+
+    string reference_price = 11 [(google.api.field_behavior) = REQUIRED];
+
+    optional string reference_min_price = 12;
+
+    // Market prices to create. This is equal to a batch MarketOfferService.CreateMarketOffer.
+    repeated CreateMarketPrice create_market_prices = 13;
+
+    optional BatteryConditionEnum.BatteryCondition battery_condition = 15;
+
+    message CreateMarketPrice {
+      string market_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+      CurrencyCodeEnum.CurrencyCode currency_code = 3 [(google.api.field_behavior) = REQUIRED];
+
+      string price = 4 [(google.api.field_behavior) = REQUIRED];
+
+      optional string min_price = 5;
+    }
+  }
+}
+
+message BatchCreateOffersResponse {
+  // Results of the create operation. In request order.
+  repeated Result results = 1;
+
+  message Result {
+    google.rpc.Status status = 1;
+
+    // Created offer. Set if status code is OK.
+    optional Offer offer = 2;
+  }
+}
+
+// See offer for full documentation.
+message BatchUpdateOffersRequest {
+  // Offers to update. Between 1 and 50.
+  repeated Update offers = 1 [(google.api.field_behavior) = REQUIRED];
+
+  message Update {
+    // The identifier of the offer to update.
+    OfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+    optional OfferGradingEnum.OfferGrading grading = 2;
+
+    optional OfferWarrantyEnum.OfferWarranty warranty = 3;
+
+    optional uint32 stock = 4;
+
+    optional int64 shipping_profile_id = 5;
+
+    oneof update_secondary_shipping_profile_id {
+      int64 secondary_shipping_profile_id = 6;
+      bool delete_secondary_shipping_profile_id = 7;
+    }
+
+    optional OfferTaxationEnum.OfferTaxation taxation = 8;
+
+    optional CurrencyCodeEnum.CurrencyCode reference_currency_code = 9;
+
+    optional string reference_price = 10;
+
+    oneof update_reference_min_price {
+      string reference_min_price = 11;
+      bool delete_reference_min_price = 12;
+    }
+  }
+}
+
+message BatchUpdateOffersResponse {
+  // Results of the update operation. In request order.
+  repeated Result results = 1;
+
+  message Result {
+    google.rpc.Status status = 1;
+
+    // Updated offer. Set if status code is OK.
+    optional Offer offer = 2;
+  }
+}
+
+message BatchDeleteOffersRequest {
+  // Offers to delete. Between 1 and 50.
+  repeated Delete offers = 1 [(google.api.field_behavior) = REQUIRED];
+
+  message Delete {
+    // The identifier of the offer to delete.
+    OfferIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+  }
+}
+
+message BatchDeleteOffersResponse {
+  // Results of the delete operation. In request order.
+  repeated Result results = 1;
+
+  message Result {
+    google.rpc.Status status = 1;
+  }
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+message OfferGradingEnum {
+  // The grading of the item being sold.
+  enum OfferGrading {
+    UNSPECIFIED = 0;
+    A = 1;
+    B = 2;
+    C = 3;
+  }
+}

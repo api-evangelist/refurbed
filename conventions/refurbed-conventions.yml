@@ -1,0 +1,85 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  + openapi/refurbed-merchant-api-openapi.json
+summary: >-
+  Cross-cutting request/response semantics for the refurbed public APIs. Both
+  the Merchant API and the Affiliate Partner API are gRPC-first with an
+  equivalent HTTP/JSON (grpc-gateway) transport, share the same host and token
+  auth, and use cursor-based pagination and a gRPC status error envelope. No
+  documented idempotency-key mechanism.
+transport:
+  protocols: [gRPC, HTTP/JSON]
+  http_gateway: grpc-gateway (POST bodies mirror the gRPC request messages)
+  host: api.refurbed.com
+  port: 443
+  tls: required
+authentication:
+  style: static secret token
+  header: 'Authorization: Plain <token>'
+  grpc_metadata: authorization = "Plain <token>"
+  see: authentication/refurbed-authentication.yml
+pagination:
+  style: cursor
+  request_field: pagination
+  params:
+    - name: limit
+      description: Maximum number of records to return in the page.
+    - name: starting_after
+      description: Cursor — return records after this identifier (forward paging).
+    - name: ending_before
+      description: Cursor — return records before this identifier (backward paging).
+  response_field: has_more
+  notes: >-
+    List responses carry a boolean has_more indicating more records are
+    available. Cursor values are the resource identifiers of the typed
+    pagination message (e.g. Int64Pagination, StringPagination,
+    CurrencyCodePagination, MarketOfferIdentifierPagination).
+sorting:
+  request_field: sort
+  params: [by, order]
+  order_values: [ASC, DESC]
+filtering:
+  request_field: filter
+  style: typed filter messages (e.g. BoolFilter, MarketTypeFilter) with any_of / value
+idempotency:
+  supported: false
+  notes: >-
+    No Idempotency-Key header or idempotent-retry contract is documented. Batch
+    operations (BatchCreateOffers, BatchUpdateOrderItems, ...) are provided to
+    reduce request volume rather than as a retry-safety mechanism.
+batch_operations:
+  supported: true
+  examples: [BatchGetOffers, BatchCreateOffers, BatchUpdateOffers, BatchDeleteOffers, BatchGetInstances, BatchUpdateOrderItems, BatchUpdateOrderItemsState, BatchGetMarketOffer, BatchCreateMarketOffer, BatchUpdateMarketOffer, BatchDeleteMarketOffer]
+data_types:
+  monetary: >-
+    Monetary amounts and other exact-precision decimals (e.g. exchange rates)
+    are encoded as strings with a decimal point separator (e.g. "123.45").
+  monetary_precision: up to 2 decimal digits for monetary amounts
+  timestamps: RFC 3339 / google.protobuf.Timestamp
+versioning:
+  style: uri-path (proto package version)
+  current: v1
+  packages: [refb.merchant.v1, refb.partner.affiliate.v1]
+  see: lifecycle/refurbed-lifecycle.yml
+rate_limiting:
+  signaled: true
+  headers:
+    - name: X-RateLimit-Limit
+      meaning: how many requests you have already made in this time window
+    - name: X-RateLimit-Remaining
+      meaning: how many requests you have left in this time window
+    - name: X-RateLimit-Reset
+      meaning: when the time window resets, as a unix timestamp
+  see: rate-limits/refurbed-rate-limits.yml
+error_envelope:
+  format: grpc-status
+  shape: '{ code: int32 (google.rpc.Code), message: string, details: [] }'
+  schema: Status (google.rpc.Status via grpc-gateway)
+  see: errors/refurbed-error-codes.yml
+cross_links:
+  authentication: authentication/refurbed-authentication.yml
+  errors: errors/refurbed-error-codes.yml
+  lifecycle: lifecycle/refurbed-lifecycle.yml
+  rate_limits: rate-limits/refurbed-rate-limits.yml

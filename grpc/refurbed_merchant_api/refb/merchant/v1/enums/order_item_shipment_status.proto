@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OrderItemShipmentStatusEnum {
+  enum OrderItemShipmentStatus {
+    UNSPECIFIED = 0;
+
+    // Carrier has received request from shipper and is about to pick up the shipment.
+    INFO_RECEIVED = 1;
+
+    // Carrier has accepted or picked up shipment from shipper. The shipment is on the way.
+    IN_TRANSIT = 2;
+
+    // Carrier is about to deliver the shipment , or it is ready to pickup.
+    OUT_FOR_DELIVERY = 3;
+
+    // The package arrived at a pickup point near you and is available for pickup.
+    AVAILABLE_FOR_PICKUP = 4;
+
+    // The shipment was delivered successfully.
+    DELIVERED = 5;
+
+    // Carrier attempted to deliver but failed, and usually leaves a notice and will try to deliver again.
+    FAILED_ATTEMPT = 6;
+
+    // Custom hold, undelivered, returned shipment to sender or any shipping exceptions.
+    EXCEPTION = 7;
+  }
+}

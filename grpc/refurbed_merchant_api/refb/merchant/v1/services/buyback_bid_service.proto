@@ -1,0 +1,333 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "google/protobuf/empty.proto";
+import "refb/descriptor.proto";
+import "refb/merchant/v1/common/buyback_bid_identifier.proto";
+import "refb/merchant/v1/common/product_attribute.proto";
+import "refb/merchant/v1/enums/buyback_bid_grading.proto";
+import "refb/merchant/v1/enums/country_code.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/enums/sort_order.proto";
+import "refb/merchant/v1/filters/buyback_attribute_filter.proto";
+import "refb/merchant/v1/filters/buyback_bid_grading_filter.proto";
+import "refb/merchant/v1/filters/country_code_filter.proto";
+import "refb/merchant/v1/filters/currency_code_filter.proto";
+import "refb/merchant/v1/filters/int64_filter.proto";
+import "refb/merchant/v1/filters/optional_uint32_range_filter.proto";
+import "refb/merchant/v1/filters/string_set_contains_filter.proto";
+import "refb/merchant/v1/filters/text_search_filter.proto";
+import "refb/merchant/v1/paginations/int64_pagination.proto";
+import "refb/merchant/v1/resources/buyback_bid.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+service BuybackBidService {
+  // Lists all bids.
+  //
+  // Returns the current bid versions only.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - when pagination limit is too large (>100)
+  //   - when both "ending_before" and "starting_after" are specified in pagination
+  rpc ListBuybackBids(ListBuybackBidsRequest) returns (ListBuybackBidsResponse) {
+    option (permission) = "merchant.buybackBid:list";
+  }
+
+  // Creates a single bid.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - product does not exist
+  //   - set of attributes is incompatible for a product
+  //   - invalid input data is provided
+  // - ALREADY_EXISTS
+  //   - there's already an active bid for the given product, attributes and grade combination
+  rpc CreateBuybackBid(CreateBuybackBidRequest) returns (CreateBuybackBidResponse) {
+    option (permission) = "merchant.buybackBid:create";
+  }
+
+  // Adds a new price for a marketplace inside an existing bid
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - bid does not exist
+  //   - invalid input data is provided
+  // - ALREADY_EXISTS
+  //   - there's already an active bid for the given market
+  rpc CreateBuybackMarketBid(CreateBuybackMarketBidRequest) returns (CreateBuybackMarketBidResponse) {
+    option (permission) = "merchant.buybackBid:update";
+  }
+
+  // Sets the price for a marketplace for an existing bid.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - market bid does not exist
+  // - INVALID_ARGUMENT
+  //   - invalid input data is provided
+  rpc UpdateBuybackMarketBid(UpdateBuybackMarketBidRequest) returns (UpdateBuybackMarketBidResponse) {
+    option (permission) = "merchant.buybackBid:update";
+  }
+
+  // Deletes a price for a marketplace inside an existing bid.
+  //
+  // This is only allowed if the deletion doesn't result in a bid without any market prices.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - market bid does not exist
+  // - FAILED_PRECONDITION
+  //   - bid has only 1 market price remaining (i.e. bid requires manual deletion)
+  rpc DeleteBuybackMarketBid(DeleteBuybackMarketBidRequest) returns (google.protobuf.Empty) {
+    option (permission) = "merchant.buybackBid:update";
+  }
+
+  // Updates a single bid by setting its stock
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when bid is not found
+  // - INVALID_ARGUMENT
+  //   - invalid input data is provided
+  rpc UpdateBuybackBid(UpdateBuybackBidRequest) returns (UpdateBuybackBidResponse) {
+    option (permission) = "merchant.buybackBid:update";
+  }
+
+  // Deletes a single bid.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when bid is not found
+  // - INVALID_ARGUMENT
+  //   - invalid input data is provided
+  rpc DeleteBuybackBid(DeleteBuybackBidRequest) returns (google.protobuf.Empty) {
+    option (permission) = "merchant.buybackBid:delete";
+  }
+
+  // Gets a market bid available for making a second offer.
+  //
+  // To make a second offer, the merchant has to find a different market bid and update the order item accordingly.
+  // In order to get a market bid for the second offer, the merchant has to provide the order item ID that they intend to change,
+  // as well as all the details about the actual device they have received. Only the price valid at the time of order
+  // creation will be returned, to ensure fair competition and prevent merchants from lowering the price before
+  // making the second offer.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - INVALID_ARGUMENT
+  //   - invalid input data is provided
+  // - NOT_FOUND
+  //   - order item does not exist or it's not in "received" state
+  //   - an appropriate market bid cannot be found that was active at the time of order
+  rpc GetSecondOfferBuybackMarketBid(GetSecondOfferBuybackMarketBidRequest) returns (GetSecondOfferBuybackMarketBidResponse) {
+    option (permission) = "merchant.buybackBid:view";
+  }
+}
+
+message ListBuybackBidsRequest {
+  Int64Pagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      ID = 0;
+      PRODUCT_ID = 1;
+      GRADING = 2;
+      STOCK = 3;
+      PRODUCT_NAME = 4;
+      SKU = 5;
+    }
+  }
+
+  message Filter {
+    Int64Filter id = 1;
+    Int64Filter product_id = 2;
+    BuybackBidGradingFilter grading = 3;
+    OptionalUInt32RangeFilter stock = 4;
+    CountryCodeFilter market_code = 5 [(google.api.field_behavior) = REQUIRED];
+    CurrencyCodeFilter currency_code = 6 [(google.api.field_behavior) = REQUIRED];
+    TextSearchFilter product_name = 7;
+    BuybackAttributeFilter product_attribute = 8;
+    StringSetContainsFilter sku = 9;
+  }
+}
+
+message ListBuybackBidsResponse {
+  // The bids found.
+  repeated BuybackBid bids = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}
+
+message CreateBuybackBidRequest {
+  // The Product id
+  int64 product_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // List of attributes assigned to the product
+  repeated ProductAttribute attributes = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Stock to buy. If left undefined the stock will be considered unlimited
+  optional uint32 stock = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Grading for the desired product
+  BuybackBidGradingEnum.BuybackBidGrading grading = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // Market bids to create
+  repeated CreateBuybackMarketBid market_bids = 5 [(google.api.field_behavior) = REQUIRED];
+
+  // Bid SKU
+  optional string sku = 6;
+}
+
+message CreateBuybackMarketBid {
+  // Two-letter code indicating the market
+  CountryCodeEnum.CountryCode market_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Currency for the price
+  CurrencyCodeEnum.CurrencyCode currency_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Price as a string containing a decimal number
+  string price = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+message CreateBuybackBidResponse {
+  BuybackBid bid = 1;
+}
+
+message UpdateBuybackBidRequest {
+  // The identifier of the bid to update
+  //
+  // Accepts either bid ID or SKU.
+  BuybackBidIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Stock to buy. If left undefined the stock will be considered unlimited
+  optional uint32 stock = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message UpdateBuybackBidResponse {
+  BuybackBid bid = 1;
+}
+
+message CreateBuybackMarketBidRequest {
+  // The identifier of the bid
+  //
+  // Accepts either bid ID or SKU.
+  BuybackBidIdentifier bid_identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Two-letter code indicating the market
+  CountryCodeEnum.CountryCode market_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Currency for the price
+  CurrencyCodeEnum.CurrencyCode currency_code = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // Price as a string containing a decimal number
+  string price = 4 [(google.api.field_behavior) = REQUIRED];
+}
+
+message CreateBuybackMarketBidResponse {
+  BuybackMarketBid market_bid = 1;
+}
+
+message UpdateBuybackMarketBidRequest {
+  // The identifier of the bid
+  //
+  // Accepts either bid ID or SKU.
+  BuybackBidIdentifier bid_identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Two-letter code indicating the market of the market
+  CountryCodeEnum.CountryCode market_code = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Currency for the price
+  CurrencyCodeEnum.CurrencyCode currency_code = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // Price as a string containing a decimal number
+  string price = 4 [(google.api.field_behavior) = REQUIRED];
+}
+
+message UpdateBuybackMarketBidResponse {
+  BuybackMarketBid market_bid = 1;
+}
+
+message DeleteBuybackMarketBidRequest {
+  // The identifier of the bid
+  //
+  // Accepts either bid ID or SKU.
+  BuybackBidIdentifier bid_identifier = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Two-letter code indicating the market
+  CountryCodeEnum.CountryCode market_code = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message DeleteBuybackBidRequest {
+  // The identifier of the bid
+  //
+  // Accepts either bid ID or SKU.
+  BuybackBidIdentifier identifier = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetSecondOfferBuybackMarketBidRequest {
+  // The ID of the product received (may be the same as order item's product ID)
+  int64 order_item_id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // The product ID of the product received (may be the same as order item's product ID)
+  int64 product_id = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // The list of attributes of the product received (may be the same as order item's attributes)
+  repeated ProductAttribute attributes = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // The grading of the product received (same as order item's grading, if the product received doesn't have a
+  // different grading)
+  BuybackBidGradingEnum.BuybackBidGrading grading = 4 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetSecondOfferBuybackMarketBidResponse {
+  BuybackMarketBidSummary market_bid = 1;
+}

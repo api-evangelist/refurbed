@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// An instance.
+message Instance {
+  option (google.api.resource) = {type: "refb.merchant.v1/Instance"};
+
+  // Primary key.
+  int64 id = 1;
+
+  // Human-readable name.
+  string name = 2;
+}

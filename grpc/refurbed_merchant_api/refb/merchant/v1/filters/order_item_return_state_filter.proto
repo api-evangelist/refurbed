@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/order_item_return_state.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OrderItemReturnStateFilter {
+  repeated OrderItemReturnStateEnum.OrderItemReturnState any_of = 1;
+  repeated OrderItemReturnStateEnum.OrderItemReturnState none_of = 2;
+}

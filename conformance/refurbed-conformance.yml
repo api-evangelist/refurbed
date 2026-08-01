@@ -1,0 +1,40 @@
+generated: '2026-07-21'
+method: derived
+source: >-
+  openapi/refurbed-merchant-api-openapi.json,
+  openapi/refurbed-affiliate-api-openapi.json, grpc/ proto definitions
+standards:
+  - id: grpc
+    conforms: true
+    evidence: APIs are natively defined as gRPC services (refb.merchant.v1, refb.partner.affiliate.v1).
+  - id: protobuf
+    conforms: true
+    evidence: Full Protobuf service/message/enum definitions published in grpc/.
+  - id: openapi-2.0
+    conforms: true
+    evidence: Swagger 2.0 documents generated via protoc-gen-openapiv2 (api.swagger.json).
+  - id: grpc-status-errors
+    conforms: true
+    evidence: Errors returned as google.rpc.Status (code/message/details).
+  - id: oauth2
+    conforms: false
+    evidence: Auth is a static secret token (apiKey), not OAuth 2.0.
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Uses gRPC status envelope, not application/problem+json.
+  - id: cursor-pagination
+    conforms: true
+    evidence: Typed cursor pagination (limit/starting_after/ending_before + has_more).
+  - id: rate-limit-headers
+    conforms: true
+    evidence: X-RateLimit-Limit / X-RateLimit-Remaining / X-RateLimit-Reset documented.
+  - id: json-api
+    conforms: false
+  - id: fhir
+    conforms: false
+  - id: scim
+    conforms: false
+  - id: odata
+    conforms: false

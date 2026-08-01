@@ -1,0 +1,88 @@
+generated: '2026-07-21'
+method: derived
+source: >-
+  openapi/refurbed-merchant-api-openapi.json + grpc google/rpc/code.proto,
+  google/rpc/status.proto
+format: grpc-status
+envelope:
+  schema: Status
+  fields:
+    code: integer (google.rpc.Code enum value)
+    message: developer-facing English message
+    details: array of typed detail messages (google.protobuf.Any)
+notes: >-
+  Both public APIs are grpc-gateway services. Every operation's non-200
+  outcome is returned as a google.rpc.Status object (exposed as the "Status"
+  definition in the Swagger docs). Over HTTP the numeric HTTP status is the
+  grpc-gateway mapping of the gRPC code below. The API does not use RFC 9457
+  problem+json. The catalog below is the standard google.rpc.Code set that
+  this envelope draws from.
+codes:
+  - code: 0
+    status: OK
+    http: 200
+    meaning: Not an error; returned on success.
+  - code: 1
+    status: CANCELLED
+    http: 499
+    meaning: The operation was cancelled, typically by the caller.
+  - code: 2
+    status: UNKNOWN
+    http: 500
+    meaning: Unknown server error.
+  - code: 3
+    status: INVALID_ARGUMENT
+    http: 400
+    meaning: Client specified an invalid argument (e.g. malformed request field).
+  - code: 4
+    status: DEADLINE_EXCEEDED
+    http: 504
+    meaning: Deadline expired before the operation could complete.
+  - code: 5
+    status: NOT_FOUND
+    http: 404
+    meaning: A requested entity (offer, order, instance, ...) was not found.
+  - code: 6
+    status: ALREADY_EXISTS
+    http: 409
+    meaning: The entity a client attempted to create already exists.
+  - code: 7
+    status: PERMISSION_DENIED
+    http: 403
+    meaning: Caller does not have permission to execute the operation.
+  - code: 8
+    status: RESOURCE_EXHAUSTED
+    http: 429
+    meaning: A resource has been exhausted — e.g. rate limit reached (see X-RateLimit-* headers).
+  - code: 9
+    status: FAILED_PRECONDITION
+    http: 400
+    meaning: Operation rejected because the system is not in a state required for it.
+  - code: 10
+    status: ABORTED
+    http: 409
+    meaning: Operation aborted, typically due to a concurrency/version conflict.
+  - code: 11
+    status: OUT_OF_RANGE
+    http: 400
+    meaning: Operation attempted past the valid range.
+  - code: 12
+    status: UNIMPLEMENTED
+    http: 501
+    meaning: Operation is not implemented or supported.
+  - code: 13
+    status: INTERNAL
+    http: 500
+    meaning: Internal server error.
+  - code: 14
+    status: UNAVAILABLE
+    http: 503
+    meaning: Service is currently unavailable; safe to retry with backoff.
+  - code: 15
+    status: DATA_LOSS
+    http: 500
+    meaning: Unrecoverable data loss or corruption.
+  - code: 16
+    status: UNAUTHENTICATED
+    http: 401
+    meaning: Request lacks valid authentication credentials (missing/invalid token).

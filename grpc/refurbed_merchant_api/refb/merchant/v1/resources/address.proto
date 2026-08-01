@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "refb/merchant/v1/enums/address_entity.proto";
+import "refb/merchant/v1/enums/country_code.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message Address {
+  option (google.api.resource) = {type: "refb.merchant.v1/Address"};
+
+  string first_name = 1;
+
+  string family_name = 2;
+
+  AddressEntityEnum.AddressEntity entity = 3;
+
+  // The company name. Set for company addresses only.
+  optional string company_name = 16;
+
+  // The VAT identification number. Set for company *invoice* addresses only.
+  optional string company_vatin = 17;
+
+  // The VAT identification number. Set for personal *invoice* addresses only.
+  optional string personal_vatin = 18;
+
+  CountryCodeEnum.CountryCode country_code = 4;
+
+  string post_code = 5;
+
+  string town = 6;
+
+  string street_name = 7;
+
+  // The house number. This is optional as some countries know addresses
+  // without numbers.
+  optional string house_no = 8;
+
+  // An optional address supplement.
+  optional string supplement = 9;
+
+  string phone_number = 10;
+}

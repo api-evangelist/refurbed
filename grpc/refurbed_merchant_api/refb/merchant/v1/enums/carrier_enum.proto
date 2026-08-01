@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// CarrierEnum defines the available carriers for shipping label generation.
+// This will be deprecated in favor of the Carrier type.
+message CarrierEnum {
+  enum Carrier {
+    UNSPECIFIED = 0;
+    UPS = 1;
+    DHL_EXPRESS = 2;
+  }
+}

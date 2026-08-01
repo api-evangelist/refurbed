@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/buyback_bid_grading.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message BuybackBidGradingFilter {
+  repeated BuybackBidGradingEnum.BuybackBidGrading any_of = 1;
+  repeated BuybackBidGradingEnum.BuybackBidGrading none_of = 2;
+}

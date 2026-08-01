@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "refb/merchant/v1/enums/catalog_template_presence.proto";
+import "refb/merchant/v1/enums/catalog_template_value_type.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// CatalogTemplate is a series of constraints required to make an offer for an instance in a particular category
+message CatalogTemplate {
+  option (google.api.resource) = {type: "refb.merchant.v1/CatalogTemplate"};
+  repeated CatalogConstraint constraints = 1;
+
+  // The category id associated with this template.
+  int64 category_id = 2;
+
+  // The category name.
+  string category_name = 3;
+
+  // Child templates, set only if there are more specific template values.
+  repeated CatalogTemplate child_templates = 4;
+
+  // is incremented every time there is an update to catalog template and can be used to track if an update is needed
+  int64 version = 5;
+
+  message CatalogConstraint {
+    // English snake cased unique key used to identify attribute.
+    string attribute_key = 1;
+
+    // The attribute name in the specified language.
+    string attribute_name = 2;
+
+    PresenceEnum.Presence presence = 3;
+
+    // A list of known attribute values in the specified language, but not limited.
+    // Values other than these may also be submitted during offer creation.
+    repeated string known_values = 4;
+
+    optional string unit = 5;
+
+    ValueTypeEnum.ValueType value_type = 6;
+
+    // A short description in the language specified.
+    string description = 7;
+  }
+}

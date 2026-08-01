@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message TicketHelpRequestStatusEnum {
+  enum TicketHelpRequestStatus {
+    UNSPECIFIED = 0;
+    // Help request is open, awaiting a response from refurbed.
+    OPEN = 1;
+    // Help request is permanently closed and immutable.
+    CLOSED = 2;
+    // Refurbed has replied; the merchant should review.
+    PENDING = 3;
+    // Refurbed has resolved the help request; the merchant can still reply, unlike closed.
+    SOLVED = 4;
+  }
+}

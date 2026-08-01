@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/currency_code.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Paginates resources with currency code primary key.
+message CurrencyCodePagination {
+  // Limit on the number of results to be returned. Between 1 and 100.
+  // Default and maximum is 100.
+  optional uint32 limit = 1;
+
+  // Takes primary key of first or last resource in received list.
+  oneof cursor {
+    CurrencyCodeEnum.CurrencyCode ending_before = 2;
+    CurrencyCodeEnum.CurrencyCode starting_after = 3;
+  }
+}

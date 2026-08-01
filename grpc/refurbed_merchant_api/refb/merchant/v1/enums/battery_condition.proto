@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message BatteryConditionEnum {
+  enum BatteryCondition {
+    UNSPECIFIED = 0;
+    OPTIMAL = 1;
+    NEW = 2;
+  }
+}

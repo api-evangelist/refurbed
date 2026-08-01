@@ -1,0 +1,25 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://gitlab.com/refurbed-community/public-apis README (client generation),
+  registry checks (npm, PyPI, Go modules)
+summary: >-
+  refurbed does NOT publish a first-party client SDK to any package registry.
+  The documented integration path is to generate a gRPC/Protobuf client for your
+  language of choice from the published .proto definitions (min protoc 3.15),
+  or to request a pre-generated client from your refurbed contact. The
+  Merchant/Affiliate HTTP transport can also be consumed from the Swagger 2.0
+  documents. No official refurbed package was found on npm, PyPI, Maven, NuGet,
+  RubyGems, Packagist, crates.io, or pkg.go.dev.
+packages: []
+client_generation:
+  method: protoc
+  min_protoc: '3.15'
+  proto_source: grpc/ (published in this repo; upstream https://gitlab.com/refurbed-community/public-apis)
+  openapi_source:
+    - openapi/refurbed-merchant-api-openapi.json
+    - openapi/refurbed-affiliate-api-openapi.json
+  example: >-
+    docker run -u $(id -u):$(id -g) -v `pwd`/refurbed_merchant_api:/defs
+    namely/protoc-all -i . -d refb/ -l python
+  languages_supported: any protoc-supported language (Python example documented)

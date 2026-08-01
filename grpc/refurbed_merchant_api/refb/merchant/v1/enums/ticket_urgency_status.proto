@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message TicketUrgencyStatusEnum {
+  enum TicketUrgencyStatus {
+    UNSPECIFIED = 0;
+
+    // Refurbed customer service is monitoring each update and will support you and the customer if need be.
+    PANIC = 1;
+
+    // The ticket has been escalated to refurbed second-level team,
+    // and they are working with your agents and the customer to find the best solution for all parties.
+    URGENT = 2;
+  }
+}

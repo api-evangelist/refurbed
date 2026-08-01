@@ -1,22 +1,487 @@
 aid: refurbed
 name: Refurbed
-description: Refurbed is a company surfaced as a portfolio company of speedinvest and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Refurbed is a European online marketplace for professionally refurbished
+  electronics and other sustainable goods, headquartered in Vienna, Austria and
+  operating across Europe. Merchants sell refurbished phones, laptops, tablets,
+  wearables and more to consumers through the refurbed platform, and refurbed
+  exposes public partner APIs so merchants and affiliates can integrate
+  programmatically. The Merchant API lets sellers manage offers, prices, stock,
+  orders, returns, refunds, shipping profiles, tickets and buyback flows, while
+  the Affiliate Partner API exposes the marketplace catalog (markets, products,
+  instances and BuyBox data) for affiliates. Both APIs are offered as gRPC with
+  an equivalent HTTP/JSON transport, defined by published Protobuf and OpenAPI
+  (Swagger 2.0) specifications, and are authenticated with a secret token passed
+  in the Authorization header.
 url: https://raw.githubusercontent.com/api-evangelist/refurbed/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.refurbed.com/favicon.ico
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - speedinvest
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: has-public-api
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Marketplace
+- E-Commerce
+- Refurbished Electronics
+- Sustainability
+- Circular Economy
+- Retail
+- Merchant API
+- Affiliate
+- gRPC
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: refurbed:refurbed-buybackbidservice-api
+  name: Refurbed BuybackBidService API
+  description: The BuybackBidService API from Refurbed — 8 operation(s) for buybackbidservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - BuybackBidService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-buybackbidservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-buybackorderitemservice-api
+  name: Refurbed BuybackOrderItemService API
+  description: >-
+    The BuybackOrderItemService API from Refurbed — 6 operation(s) for buybackorderitemservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - BuybackOrderItemService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-buybackorderitemservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-buybackorderservice-api
+  name: Refurbed BuybackOrderService API
+  description: The BuybackOrderService API from Refurbed — 1 operation(s) for buybackorderservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - BuybackOrderService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-buybackorderservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-buybackproductservice-api
+  name: Refurbed BuybackProductService API
+  description: The BuybackProductService API from Refurbed — 1 operation(s) for buybackproductservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - BuybackProductService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-buybackproductservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-buybacksupplyboxservice-api
+  name: Refurbed BuybackSupplyboxService API
+  description: >-
+    The BuybackSupplyboxService API from Refurbed — 1 operation(s) for buybacksupplyboxservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - BuybackSupplyboxService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-buybacksupplyboxservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-catalogservice-api
+  name: Refurbed CatalogService API
+  description: The CatalogService API from Refurbed — 1 operation(s) for catalogservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - CatalogService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-catalogservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-currencyservice-api
+  name: Refurbed CurrencyService API
+  description: The CurrencyService API from Refurbed — 2 operation(s) for currencyservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - CurrencyService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-currencyservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-instanceservice-api
+  name: Refurbed InstanceService API
+  description: The InstanceService API from Refurbed — 4 operation(s) for instanceservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - InstanceService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-instanceservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-marketofferservice-api
+  name: Refurbed MarketOfferService API
+  description: The MarketOfferService API from Refurbed — 10 operation(s) for marketofferservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - MarketOfferService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-marketofferservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-marketservice-api
+  name: Refurbed MarketService API
+  description: The MarketService API from Refurbed — 4 operation(s) for marketservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - MarketService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-marketservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-merchantservice-api
+  name: Refurbed MerchantService API
+  description: The MerchantService API from Refurbed — 4 operation(s) for merchantservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - MerchantService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-merchantservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-offerservice-api
+  name: Refurbed OfferService API
+  description: The OfferService API from Refurbed — 9 operation(s) for offerservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - OfferService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-offerservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-orderitemreturnservice-api
+  name: Refurbed OrderItemReturnService API
+  description: >-
+    The OrderItemReturnService API from Refurbed — 1 operation(s) for orderitemreturnservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - OrderItemReturnService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-orderitemreturnservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-orderitemservice-api
+  name: Refurbed OrderItemService API
+  description: The OrderItemService API from Refurbed — 8 operation(s) for orderitemservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - OrderItemService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-orderitemservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-orderservice-api
+  name: Refurbed OrderService API
+  description: The OrderService API from Refurbed — 13 operation(s) for orderservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - OrderService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-orderservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-productservice-api
+  name: Refurbed ProductService API
+  description: The ProductService API from Refurbed — 2 operation(s) for productservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - ProductService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-productservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-shippingprofileservice-api
+  name: Refurbed ShippingProfileService API
+  description: >-
+    The ShippingProfileService API from Refurbed — 6 operation(s) for shippingprofileservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - ShippingProfileService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-shippingprofileservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+- aid: refurbed:refurbed-ticketservice-api
+  name: Refurbed TicketService API
+  description: The TicketService API from Refurbed — 10 operation(s) for ticketservice.
+  humanURL: >-
+    https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1
+  baseURL: https://api.refurbed.com
+  tags:
+  - TicketService
+  properties:
+  - type: OpenAPI
+    url: openapi/refurbed-ticketservice-api-openapi.yml
+  - type: Protobuf
+    url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+  - type: Protobuf
+    url: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/services
+  - type: Documentation
+    url: >-
+      https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/README.md
+common:
+- type: DomainSecurity
+  url: security/refurbed-domain-security.yml
+- type: Authentication
+  url: authentication/refurbed-authentication.yml
+- type: Website
+  url: https://www.refurbed.com
+- type: Documentation
+  url: https://gitlab.com/refurbed-community/public-apis
+- type: SourceCode
+  url: https://gitlab.com/refurbed-community/public-apis
+- type: GitHubOrganization
+  url: https://github.com/refurbed
+- type: Support
+  url: mailto:integrations@refurbed.com
+- type: APIReference
+  url: https://gitlab.com/refurbed-community/public-apis/-/tree/master/refurbed_merchant_api/refb/merchant/v1/services
+- type: GettingStarted
+  url: https://gitlab.com/refurbed-community/public-apis/-/blob/master/refurbed_merchant_api/refb/merchant/v1/README.md
+- type: Conventions
+  url: conventions/refurbed-conventions.yml
+- type: ErrorCatalog
+  url: errors/refurbed-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/refurbed-lifecycle.yml
+- type: RateLimits
+  url: rate-limits/refurbed-rate-limits.yml
+- type: Conformance
+  url: conformance/refurbed-conformance.yml
+- type: DataModel
+  url: data-model/refurbed-data-model.yml
+- type: MCPServer
+  url: mcp/refurbed-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/refurbed-llms.txt
+- type: Packages
+  url: packages/refurbed-packages.yml
+- type: Overlay
+  url: overlays/refurbed-merchant-overlay.yaml
+- type: Overlay
+  url: overlays/refurbed-affiliate-overlay.yaml
+- type: Protobuf
+  url: grpc/refurbed_merchant_api/refb/merchant/v1/services
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1

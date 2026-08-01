@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message BuybackOrderItemStateEnum {
+  // Represents the state of an order item
+  enum BuybackOrderItemState {
+    UNSPECIFIED = 0;
+
+    // New order. Next state: LABEL_SENT
+    ORDERED = 1;
+
+    // Order item is ready to be shipped. Next state: CANCELLED, RECEIVED.
+    LABEL_SENT = 2;
+
+    // Order item was never received. Final state.
+    CANCELLED = 3;
+
+    // Order item was received by the merchant. Next state: ACCEPTED, SECOND_OFFER, REJECTED
+    RECEIVED = 4;
+
+    // Order item was accepted for fulfillment. Final Status
+    ACCEPTED = 5;
+
+    // Order item was in worse conditions than expected, a second offer has been issued to the customer.
+    // Next state: ACCEPTED, REJECTED
+    SECOND_OFFER = 6;
+
+    // Order item was refused. Next state: RETURNED
+    REJECTED = 7;
+
+    // Order item was shipped back to customer. Final Status
+    RETURNED = 8;
+  }
+}

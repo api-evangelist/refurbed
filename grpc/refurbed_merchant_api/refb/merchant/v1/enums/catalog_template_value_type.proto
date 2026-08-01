@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Allowed types for specification values.
+message ValueTypeEnum {
+  enum ValueType {
+    UNSPECIFIED = 0;
+    INTEGER = 1;
+    DECIMAL = 2;
+    STRING = 3;
+  }
+}

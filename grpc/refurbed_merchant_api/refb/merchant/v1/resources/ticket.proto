@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+import "refb/merchant/v1/enums/country_code.proto";
+import "refb/merchant/v1/enums/ticket_sla_checkpoint_type.proto";
+import "refb/merchant/v1/enums/ticket_status.proto";
+import "refb/merchant/v1/enums/ticket_urgency_status.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// A customer support ticket.
+// Only stores metadata, such as status, order, etc.
+// Ticket messages can be retrieved only when calling GetTicket.
+message Ticket {
+  option (google.api.resource) = {type: "refb.merchant.v1/Ticket"};
+
+  // The ID of the ticket.
+  int64 id = 1;
+
+  // Status of the ticket.
+  TicketStatusEnum.TicketStatus status = 2;
+
+  // Urgency status of the ticket.
+  optional TicketUrgencyStatusEnum.TicketUrgencyStatus urgency_status = 3;
+
+  // Time of ticket creation.
+  google.protobuf.Timestamp created_at = 4;
+
+  // The order item the the ticket is related to
+  oneof order_item {
+    MarketplaceOrderItem marketplace_order_item = 5;
+    BuybackOrderItem buyback_order_item = 6;
+  }
+
+  // Ticket topic.
+  string topic_slug = 7;
+
+  // Country of the order associated to the ticket.
+  CountryCodeEnum.CountryCode country = 8;
+
+  // The customer who placed the order associated to the ticket.
+  Customer customer = 9;
+
+  // The user currently assigned to handle the ticket.
+  optional Assignee assignee = 10;
+
+  // Service Level Agreement (SLA) checkpoints associated with the ticket.
+  repeated SlaCheckpoint sla_checkpoints = 11;
+
+  // When the ticket was last updated.
+  google.protobuf.Timestamp updated_at = 12;
+
+  // Indicates whether the ticket requires action from the seller.
+  bool seller_action_needed = 13;
+
+  // Indicates whether the customer has panicked the ticket (requested help).
+  bool customer_panicked = 14;
+
+  // Notes that the merchant can add to the ticket for internal use. Only visible to the merchant.
+  string notes = 15;
+
+  // If the ticket is a follow-up ticket, this field contains the ID of the original ticket.
+  optional int64 follow_up_to_ticket_id = 16;
+
+  // Whether ticket topic change requests for the ticket are allowed.
+  bool topic_change_allowed = 17;
+
+  // Whether the ticket has at least one help request created by the merchant.
+  bool has_help_requests = 18;
+
+  message SlaCheckpoint {
+    TicketSlaCheckpointTypeEnum.TicketSlaCheckpointType checkpoint_type = 1;
+    google.protobuf.Timestamp at = 2;
+  }
+
+  message Assignee {
+    string email = 1;
+    string name = 2;
+  }
+
+  message Customer {
+    string email = 1;
+    string name = 2;
+  }
+
+  message MarketplaceOrderItem {
+    int64 order_item_id = 1;
+
+    int64 order_id = 2;
+
+    // Product and instance name combined, e.g., iPhone 12 | 64 GB | blue
+    string instance_name = 3;
+  }
+
+  message BuybackOrderItem {
+    int64 buyback_order_item_id = 1;
+
+    int64 buyback_order_id = 2;
+
+    // Product name and attributes combined, e.g., iPhone 12 | 64 GB
+    string product_variant_name = 3;
+  }
+}

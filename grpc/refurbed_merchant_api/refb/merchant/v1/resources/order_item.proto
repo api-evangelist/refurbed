@@ -1,0 +1,189 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "refb/merchant/v1/enums/battery_condition.proto";
+import "refb/merchant/v1/enums/country_code.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/enums/offer_grading.proto";
+import "refb/merchant/v1/enums/offer_warranty.proto";
+import "refb/merchant/v1/enums/order_item_shipment_status.proto";
+import "refb/merchant/v1/enums/order_item_shipment_substatus.proto";
+import "refb/merchant/v1/enums/order_item_state.proto";
+import "refb/merchant/v1/enums/order_item_taxation.proto";
+import "refb/merchant/v1/enums/refund_eligibility.proto";
+import "refb/merchant/v1/resources/order_item_identifier.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// An order item.
+message OrderItem {
+  option (google.api.resource) = {type: "refb.merchant.v1/OrderItem"};
+
+  // Primary key.
+  int64 id = 1;
+
+  // ID of the order this item belongs to.
+  int64 order_id = 40;
+
+  // Human-readable name of the item sold.
+  string name = 2;
+
+  // State of this item.
+  OrderItemStateEnum.OrderItemState state = 3;
+
+  // Merchant SKU of the item. This can be empty string as it is/was possible
+  // for the merchant to create offers without SKU in the refurbed merchant
+  // management interface.
+  string sku = 4;
+
+  // Currency the order item was charged in. Is always equal to the currency
+  // of the order.
+  CurrencyCodeEnum.CurrencyCode currency_code = 5;
+
+  // Currency the order item was settled it. This is the currency the merchant will
+  // be paid out in. Is always equal to the settlement currency of the order.
+  CurrencyCodeEnum.CurrencyCode settlement_currency_code = 6;
+
+  // The total amount the customer was charged for this item, in order
+  // currency. This is the sum of total paid and total refunded.
+  string total_charged = 7;
+
+  // The total amount the customer was charged for this item, in order
+  // settlement currency.
+  string settlement_total_charged = 8;
+
+  // Discount amount if coupon was applied to the order.
+  string total_discount = 24;
+
+  // Discount amount if coupon was applied to the order, in settlement currency.
+  string settlement_total_discount = 25;
+
+  // The dynamic price part of the amount the customer was charged
+  // ("dynamic pricing").
+  string total_charged_dynamic = 9;
+
+  // The dynamic price part of the amount the customer was charged, in order
+  // settlement currency.
+  string settlement_total_charged_dynamic = 10;
+
+  // The total amount the customer paid for this item plus discount value, in order currency. This
+  // value decreases on refund.
+  string total_paid = 11;
+
+  // The total amount the customer paid for this item plus discount value, in order settlement currency.
+  string settlement_total_paid = 12;
+
+  // The total amount the customer was refunded, in order currency.
+  string total_refunded = 13;
+
+  // The total amount the customer was refunded, in order settlement currency.
+  string settlement_total_refunded = 14;
+
+  // Total commission paid by the merchant, in order settlement currency.
+  string settlement_total_commission = 15;
+
+  // Base commission paid by the merchant, in order settlement currency.
+  string settlement_base_commission = 16;
+
+  // Payout commission paid by the merchant, in order settlement currency.
+  string settlement_payout_commission = 23;
+
+  // Payment commission paid by the merchant, in order settlement currency.
+  string settlement_payment_commission = 29;
+
+  // Dynamic commission paid by the merchant (commission of the dynamic part),
+  // in order settlement currency.
+  string settlement_dynamic_commission = 17;
+
+  // How this item was taxed.
+  OrderItemTaxationEnum.OrderItemTaxation taxation = 18;
+
+  // Indicates whether this item is currently refundable.
+  bool is_refundable = 19;
+
+  // Indicates whether this item is refundable, if not, why it's not.
+  RefundEligibilityEnum.RefundEligibility refund_eligibility = 26;
+
+  // Additional information about the item being sold.
+  oneof linked_data {
+    // Set if item was created from an offer.
+    OfferData offer_data = 20;
+  }
+
+  // Parcel tracking link. Needs to be a valid HTTP(S) URL.
+  optional string parcel_tracking_url = 21;
+
+  // Tracking link for the return parcel. Needs to be a valid HTTP(S) URL.
+  // Only provided if a return label for this order item has been issued.
+  optional string return_shipment_tracking_url = 31;
+
+  // IMEI (if smartphone) or serial number (other product categories) of the
+  // item shipped.
+  // Deprecated: use item_identifiers field instead.
+  optional string item_identifier = 22 [deprecated = true];
+
+  repeated OrderItemIdentifier item_identifiers = 39;
+
+  // The current shipment status of the order item.
+  optional OrderItemShipmentStatusEnum.OrderItemShipmentStatus shipment_status = 27;
+
+  // The current shipment substatus of the order item.
+  optional OrderItemShipmentSubstatusEnum.OrderItemShipmentSubstatus shipment_substatus = 28;
+
+  // Indicates whether the return process was started for an item by the customer.
+  // This concerns only returns where the customer generated a label themselves.
+  bool return_initiated = 30;
+
+  // Rate of the value-added tax (VAT) applied to the order item.
+  // Example: vat_rate = 20 stands for 20% VAT
+  string vat_rate = 32;
+
+  // The country VAT is calculated for.
+  CountryCodeEnum.CountryCode vat_country = 33;
+
+  // The amount of VAT the customer was charged for this item, in order currency.
+  string vat_charged = 34;
+
+  // The amount of VAT the customer was charged for this item, in settlement currency.
+  string settlement_vat_charged = 35;
+
+  // Net weight of this item, in kilograms.
+  optional float weight_kg = 36;
+
+  // Country where the item was manufactured.
+  optional CountryCodeEnum.CountryCode manufacturing_country = 37;
+
+  // HS (Harmonized System) code for customs classification.
+  //
+  // e.g. 8517.1300 for iPhones
+  optional string hs_code = 38;
+
+  message OfferData {
+    int64 offer_id = 1;
+
+    int64 offer_version = 2;
+
+    // Exchange rate applied to convert amounts from offer currency to order
+    // currency.
+    string offer_order_exchange_rate = 3;
+
+    // The offer warranty.
+    OfferWarrantyEnum.OfferWarranty offer_warranty = 4;
+
+    // The offer grading.
+    OfferGradingEnum.OfferGrading offer_grading = 5;
+
+    int64 shipping_profile_id = 6;
+
+    // Shipping profiles on old orders do not have proper version information
+    // attached to them. This is only set for newer orders.
+    optional int64 shipping_profile_version = 7;
+
+    // The shipping costs, in order currency.
+    string shipping_costs = 8;
+
+    optional BatteryConditionEnum.BatteryCondition battery_condition = 9;
+  }
+}

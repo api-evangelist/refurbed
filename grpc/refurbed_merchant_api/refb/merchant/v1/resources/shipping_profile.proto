@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+import "refb/merchant/v1/resources/merchant_address.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// A shipping profile defines from where a parcel will be shipped, and in what
+// markets it will be made available and under what conditions.
+message ShippingProfile {
+  option (google.api.resource) = {type: "refb.merchant.v1/ShippingProfile"};
+
+  // Primary key.
+  int64 id = 1;
+
+  // Version of the shipping profile.
+  int64 version = 2;
+
+  // Indicates whether this is the currently available (latest and non-deleted).
+  // version.
+  bool is_current = 3;
+
+  // When the shipping profile was created.
+  google.protobuf.Timestamp created_at = 4;
+
+  // Shipping profile name.
+  string name = 5;
+
+  // Code if the country market the parcel is being shipped from.
+  string source_country_market_code = 6;
+
+  // Name of the country market the parcel is being shipped from.
+  string source_country_market_name = 7;
+
+  // Address to use for estimating parcel delivery dates
+  //
+  // It must match the address the items are dispatched from.
+  // It has a non-operational ID field (a stub), so it cannot be used in API requests.
+  optional MerchantAddress source_address = 11;
+
+  // Indicates whether the shipping profile can be deleted. Will always be
+  // false on historic versions.
+  bool is_deletable = 8;
+
+  // Number of offers this shipping profile is assigned to. Has to be 0 for the
+  // shipping profile to be deletable. Set on current version only.
+  optional uint32 num_offers_assigned = 9;
+
+  // Destinations by market code.
+  repeated Destination destinations = 10 [(google.api.field_behavior) = UNORDERED_LIST];
+
+  message Destination {
+    option (google.api.resource) = {type: "refb.merchant.v1/ShippingDestination"};
+
+    // Code of the market the price is set for.
+    string market_code = 1;
+
+    // Name of the market the price is set for.
+    string market_name = 2;
+
+    // Indicates whether there exists a refurbed website for this market.
+    bool is_site_market = 3;
+
+    // Currency of the shipping costs the merchant set.
+    CurrencyCodeEnum.CurrencyCode currency_code = 4;
+
+    // Shipping costs to add to the offer price. This is merely for convenience;
+    // refurbed does not display any shipping costs to customers.
+    //
+    // Merchants are *not* allowed to show shipping costs in their invoices to
+    // customers.
+    string shipping_costs = 5;
+
+    // Native currency of the market. Only set for site markets.
+    optional CurrencyCodeEnum.CurrencyCode site_market_currency_code = 6;
+
+    // Shipping costs in the site market's currency. This is only set if market
+    // is a site market. Equal to shipping costs set by the merchant if the
+    // currencies match.
+    //
+    // This depends on the latest exchange rates and therefore is a snapshot
+    // in time. There is no guarantee that new orders will apply the same
+    // exchange rate.
+    optional string site_market_shipping_costs = 7;
+
+    // Minimum number of days the parcel delivery will take. Between 1 and 30.
+    uint32 min_delivery_days = 8;
+
+    // Maximum number of days the parcel delivery will take. Between min.
+    // delivery days and 30.
+    uint32 max_delivery_days = 9;
+
+    // Indicates if generating label for shipment for this destination is enabled
+    bool label_creation_enabled = 10;
+
+    // The slug of the carrier.
+    optional string carrier = 11;
+
+    // The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
+    optional uint32 dispatch_cutoff_hour = 12;
+  }
+}

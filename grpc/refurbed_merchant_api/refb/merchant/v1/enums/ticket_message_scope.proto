@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message TicketMessageScopeEnum {
+  enum TicketMessageScope {
+    UNSPECIFIED = 0;
+
+    // Messages visible to all parties (merchant, refurbed agents, customer).
+    PUBLIC = 1;
+
+    // Messages visible only to the merchant and refurbed agents.
+    INTERNAL = 2;
+  }
+}

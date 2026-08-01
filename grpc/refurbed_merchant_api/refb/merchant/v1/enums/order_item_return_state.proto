@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OrderItemReturnStateEnum {
+  enum OrderItemReturnState {
+    UNSPECIFIED = 0;
+
+    // Default case for unmatched scenarios
+    UNKNOWN = 1;
+
+    // The return is initiated but hasn't been shipped yet
+    INITIATED = 2;
+
+    // The return parcel is on the way, and not yet delivered
+    IN_TRANSIT = 3;
+
+    // The return parcel is delivered
+    DELIVERED = 4;
+
+    // Order item was refunded (partially/fully)
+    REFUNDED = 5;
+
+    // The return parcel is marked as delivered and the associated ticket is closed
+    CONCLUDED = 6;
+  }
+}

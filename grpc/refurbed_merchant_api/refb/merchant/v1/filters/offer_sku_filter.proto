@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OfferSKUFilter {
+  repeated string any_of = 1;
+  repeated string none_of = 2;
+  optional string contains = 3; // Partial/substring match.
+}

@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "google/protobuf/timestamp.proto";
+import "refb/merchant/v1/enums/order_item_return_state.proto";
+import "refb/merchant/v1/resources/order_item_identifier.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// OrderItemReturn represents return shipment of an order item.
+message OrderItemReturn {
+  option (google.api.resource) = {type: "refb.merchant.v1/OrderItemReturn"};
+
+  // ID of the return
+  int64 id = 1;
+
+  // Order ID of the item being returned
+  int64 order_id = 2;
+
+  // ID of the item being returned
+  int64 order_item_id = 3;
+
+  // Instance name of the item in English
+  string instance_name = 4;
+
+  // Deprecated: use item_identifiers field instead.
+  optional string order_item_identifier = 5 [deprecated = true];
+
+  // Item identifier (IMEI/serial number), as specified by merchant in order item details.
+  repeated OrderItemIdentifier item_identifiers = 14;
+
+  // When the return process was initiated
+  google.protobuf.Timestamp return_initiated_at = 6;
+
+  // The current state of the return
+  OrderItemReturnStateEnum.OrderItemReturnState state = 7;
+
+  // Delivered at (when the return parcel was delivered to the merchant)
+  //
+  // Empty if the parcel has not been delivered yet.
+  optional google.protobuf.Timestamp delivered_at = 8;
+
+  // The tracking number of the return parcel
+  string tracking_number = 9;
+
+  // The tracking URL of the return parcel
+  string tracking_url = 10;
+
+  // Ticket topic slug
+  //
+  // Not always present, and it might change over time.
+  optional string ticket_topic = 11;
+
+  // Link to the associated ticket
+  string ticket_url = 12;
+
+  // Is the item within trial period (order age <= 35 days ago)
+  bool item_within_trial_period = 13;
+}

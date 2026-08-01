@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message TextSearchFilter {
+  // Full-text match
+  string term = 1;
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/ticket_message_scope.proto";
+import "refb/merchant/v1/resources/ticket_message.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Represents a ticket message with a scope of visibility.
+message ScopedTicketMessage {
+  TicketMessage message = 1;
+
+  TicketMessageScopeEnum.TicketMessageScope scope = 2;
+}

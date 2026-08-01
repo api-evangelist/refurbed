@@ -1,0 +1,216 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "refb/descriptor.proto";
+import "refb/merchant/v1/resources/buyback_order.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Service to manage buyback order item state.
+service BuybackOrderItemService {
+  // Issues shipping label information for a buyback order item
+  //
+  // Transitions the order item from the `ordered` state to `label_sent`.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the buyback order item is not found or not in `ordered` state
+  // - FAILED_PRECONDITION
+  //   - when the buyback order item is not in a state that permits this action
+  // - INVALID_ARGUMENT
+  //   - when invalid arguments are provided
+  rpc UploadShippingLabel(BuybackOrderItemUploadShippingLabelRequest) returns (BuybackOrderItemUploadShippingLabelResponse) {
+    option (permission) = "merchant.buybackOrder:update";
+  }
+
+  // Notifies that the merchant has received the item shipped by the seller
+  //
+  // Transitions the order item from the `label_sent` state to `received`.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the buyback order item is not found or not in `label_sent` state
+  // - FAILED_PRECONDITION
+  //   - when the buyback order item is not in a state that permits this action
+  // - INVALID_ARGUMENT
+  //   - when invalid arguments are provided
+  rpc ConfirmReceived(BuybackOrderItemConfirmReceivedRequest) returns (BuybackOrderItemConfirmReceivedResponse) {
+    option (permission) = "merchant.buybackOrder:update";
+  }
+
+  // Marks order item as accepted to indicate that the received item matches the seller's description
+  //
+  // Transitions the order item from the `received` state to `accepted`.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the buyback order item is not found or not in `received` state
+  // - FAILED_PRECONDITION
+  //   - when the buyback order item is not in a state that permits this action
+  // - INVALID_ARGUMENT
+  //   - when invalid arguments are provided
+  rpc Accept(BuybackOrderItemAcceptRequest) returns (BuybackOrderItemAcceptResponse) {
+    option (permission) = "merchant.buybackOrder:update";
+  }
+
+  // Marks order item as rejected to indicate that the received item is different from the seller's description.
+  //
+  // Transitions the order item from the `received` state to `rejected`.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the buyback order item is not found or not in `received` state
+  // - FAILED_PRECONDITION
+  //   - when the buyback order item is not in a state that permits this action
+  // - INVALID_ARGUMENT
+  //   - when invalid arguments are provided
+  rpc Reject(BuybackOrderItemRejectRequest) returns (BuybackOrderItemRejectResponse) {
+    option (permission) = "merchant.buybackOrder:update";
+  }
+
+  // Makes a second offer for the order item
+  //
+  // It is to indicate that the order item is different from the seller's description,
+  // and the merchant is still considering buying it, albeit at a different price point.
+  //
+  // Transitions the order item from the `received` state to `second_offer`.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the buyback order item is not found or not in `received` state
+  // - FAILED_PRECONDITION
+  //   - when the buyback order item is not in a state that permits this action
+  //   - when the market bid isn't a valid second offer for the order item
+  // - INVALID_ARGUMENT
+  //   - when invalid arguments are provided
+  rpc MakeSecondOffer(BuybackOrderItemMakeSecondOfferRequest) returns (BuybackOrderItemMakeSecondOfferResponse) {
+    option (permission) = "merchant.buybackOrder:update";
+  }
+
+  // Notifies that the merchant has shipped the rejected item.
+  //
+  // Transitions the order item from the `rejected` state to `returned`.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  // - NOT_FOUND
+  //   - when the buyback order item is not found or not in `rejected` state
+  // - FAILED_PRECONDITION
+  //   - when the buyback order item is not in a state that permits this action
+  // - INVALID_ARGUMENT
+  //   - when invalid arguments are provided
+  rpc NotifyReturned(BuybackOrderItemNotifyReturnedRequest) returns (BuybackOrderItemNotifyReturnedResponse) {
+    option (permission) = "merchant.buybackOrder:update";
+  }
+}
+
+message BuybackOrderItemUploadShippingLabelRequest {
+  // The id of the buyback order item to update
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Parcel tracking number
+  string parcel_tracking_number = 2;
+
+  // Parcel tracking link
+  //
+  // Needs to be a valid HTTP(S) URL.
+  string parcel_tracking_url = 3;
+
+  // Shipping label file as raw bytes
+  //
+  // Needs to be a valid PDF.
+  bytes shipping_label_data = 4;
+}
+
+message BuybackOrderItemUploadShippingLabelResponse {
+  BuybackOrderItem order_item = 1;
+}
+
+message BuybackOrderItemConfirmReceivedRequest {
+  // The id of the buyback order item to update.
+  int64 id = 1;
+}
+
+message BuybackOrderItemConfirmReceivedResponse {
+  BuybackOrderItem order_item = 1;
+}
+
+message BuybackOrderItemAcceptRequest {
+  // The id of the buyback order item to update.
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message BuybackOrderItemAcceptResponse {
+  BuybackOrderItem order_item = 1;
+}
+
+message BuybackOrderItemRejectRequest {
+  // The id of the buyback order item to update.
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message BuybackOrderItemRejectResponse {
+  BuybackOrderItem order_item = 1;
+}
+
+message BuybackOrderItemMakeSecondOfferRequest {
+  // The id of the buyback order item to update.
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Id of the buyback market bid id to use for the offer
+  //
+  // The valid market bid id to use can be found using `BuybackBidService.GetSecondOfferBuybackMarketBid` endpoint.
+  int64 buyback_market_bid_id = 2;
+}
+
+message BuybackOrderItemMakeSecondOfferResponse {
+  BuybackOrderItem order_item = 1;
+}
+
+message BuybackOrderItemNotifyReturnedRequest {
+  // The id of the buyback order item to update.
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Parcel tracking number
+  string tracking_number = 2;
+
+  // Parcel tracking link
+  //
+  // Needs to be a valid HTTP(S) URL.
+  string tracking_url = 3;
+}
+
+message BuybackOrderItemNotifyReturnedResponse {
+  BuybackOrderItem order_item = 1;
+}

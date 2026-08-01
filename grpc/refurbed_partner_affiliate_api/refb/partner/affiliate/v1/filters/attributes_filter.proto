@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+message AttributesFilter {
+  repeated Expression all_of = 1;
+
+  // An attribute expression.
+  message Expression {
+    int64 attribute_id = 1;
+
+    oneof cond {
+      EnumValueCond cond_enum = 2;
+      NumericValueCond cond_numeric = 3;
+    }
+
+    // An enum attribute value condition.
+    message EnumValueCond {
+      optional string eq = 1;
+    }
+
+    // A numeric attribute value condition.
+    message NumericValueCond {
+      optional double eq = 1;
+    }
+  }
+}

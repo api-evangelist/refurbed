@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/offer_grading.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OfferGradingFilter {
+  repeated OfferGradingEnum.OfferGrading any_of = 1;
+  repeated OfferGradingEnum.OfferGrading none_of = 2;
+}

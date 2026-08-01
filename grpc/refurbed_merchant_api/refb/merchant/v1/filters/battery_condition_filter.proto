@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/battery_condition.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message BatteryConditionFilter {
+  repeated BatteryConditionEnum.BatteryCondition any_of = 1;
+  repeated BatteryConditionEnum.BatteryCondition none_of = 2;
+  optional bool is_set = 3;
+}

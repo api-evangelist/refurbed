@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Represents a message to be submitted to a ticket when creating a new ticket or adding a message to an existing ticket.
+// Also used for creating messages within ticket help requests.
+message TicketMessageSubmission {
+  // The HTML body of the message.
+  string body_html = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // File attachments.
+  repeated Attachment attachments = 2;
+
+  message Attachment {
+    // Name of the file.
+    string filename = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // Raw bytes of the file.
+    bytes data = 2 [(google.api.field_behavior) = REQUIRED];
+  }
+}

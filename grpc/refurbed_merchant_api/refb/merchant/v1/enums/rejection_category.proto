@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message RejectionCategoryEnum {
+  // Category that groups common rejection reasons together
+  enum RejectionCategory {
+    UNSPECIFIED = 0;
+
+    OTHER = 1;
+
+    // Some of the mandatory parameters to determine what product the offer describes are missing
+    MISSING_REQUIREMENTS = 2;
+
+    // Product configuration does not exist as per manufacturer specification
+    CONFIGURATION_DOES_NOT_EXIST = 3;
+
+    // Product described is not allowed to be sold due to platform rules
+    CONFIGURATION_NOT_ALLOWED = 4;
+
+    // Product no longer allowed on the platform
+    CONFIGURATION_NO_LONGER_SOLD = 5;
+
+    // Offer request contained property that is not permitted for this category (e.g. battery)
+    NOT_ALLOWED_OFFER_PROPERTY = 20;
+  }
+}

@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/buyback_attribute_type.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message BuybackAttribute {
+  // Attribute ID
+  int64 id = 1;
+
+  // Human-readable name.
+  string name = 2;
+
+  // Type for the attribute.
+  BuybackAttributeTypeEnum.BuybackAttributeType type = 3;
+
+  // Value of the attribute.
+  oneof value {
+    // Value is set if type is ENUM.
+    StringValue value_str = 4;
+
+    // Value is set if type is NUMERIC.
+    NumericValue value_num = 5;
+  }
+
+  message StringValue {
+    string value = 1;
+  }
+
+  message NumericValue {
+    double value = 1;
+    optional string unit = 2;
+  }
+}

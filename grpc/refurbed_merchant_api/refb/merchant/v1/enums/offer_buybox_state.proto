@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OfferBuyboxStateEnum {
+  enum OfferBuyboxState {
+    UNSPECIFIED = 0;
+
+    // Offer currently has the BuyBox.
+    WON = 1;
+
+    // Current offer configuration should win the BuyBox on next refresh.
+    SHOULD_WIN = 2;
+
+    // Offer currently does not have the BuyBox.
+    ELIGIBLE = 3;
+
+    // Offer currently does not have the BuyBox but another offer of this
+    // merchant does.
+    WON_ELSEWHERE = 4;
+
+    // Offer cannot reach the BuyBox at this time, e.g. because refurbed's
+    // BuyBox protection for this product is enabled and the offer's stock
+    // is too low.
+    INELIGIBLE = 5;
+  }
+}

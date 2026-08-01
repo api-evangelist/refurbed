@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OfferWarrantyEnum {
+  // The warranty the merchant provides to the customer. Only 12 months is supported.
+  enum OfferWarranty {
+    UNSPECIFIED = 0;
+    // 12 months.
+    M12 = 1;
+    // 18 months, deprecated. Only 12 months is supported for new offers.
+    M18 = 2 [deprecated = true];
+    // 24 months, deprecated. Only 12 months is supported for new offers.
+    M24 = 3 [deprecated = true];
+    // 30 months, deprecated. Only 12 months is supported for new offers.
+    M30 = 4 [deprecated = true];
+    // 36 months, deprecated. Only 12 months is supported for new offers.
+    M36 = 5 [deprecated = true];
+  }
+}

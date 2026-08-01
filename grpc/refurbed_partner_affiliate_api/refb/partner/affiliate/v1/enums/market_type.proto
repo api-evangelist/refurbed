@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+message MarketTypeEnum {
+  enum MarketType {
+    UNSPECIFIED = 0;
+
+    // Market represents a country, in which case its code is equal to the
+    // 2-letter ISO code of the country.
+    COUNTRY = 1;
+  }
+}

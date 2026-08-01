@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message TicketMessageSenderTypeEnum {
+  enum TicketMessageSenderType {
+    UNSPECIFIED = 0;
+    CUSTOMER = 1;
+    REFURBED = 2;
+    MERCHANT = 3;
+    SYSTEM = 4;
+  }
+}

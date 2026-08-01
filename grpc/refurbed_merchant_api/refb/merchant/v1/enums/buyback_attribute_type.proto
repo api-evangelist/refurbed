@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message BuybackAttributeTypeEnum {
+  enum BuybackAttributeType {
+    UNSPECIFIED = 0;
+
+    // An enumerated attribute has a string value, e.g. Colour = black.
+    ENUM = 1;
+
+    // A numeric attribute has a numeric value with an optional unit, e.g.
+    // Memory = 2 GB
+    NUMERIC = 2;
+  }
+}

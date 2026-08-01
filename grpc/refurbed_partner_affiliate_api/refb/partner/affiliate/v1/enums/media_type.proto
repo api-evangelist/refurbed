@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+message MediaTypeEnum {
+  enum MediaType {
+    UNSPECIFIED = 0;
+    IMAGE = 1;
+  }
+}

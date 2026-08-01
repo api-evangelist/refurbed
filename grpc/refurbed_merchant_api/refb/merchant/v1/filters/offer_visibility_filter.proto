@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/offer_visibility.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OfferVisibilityFilter {
+  repeated OfferVisibilityEnum.OfferVisibility any_of = 1;
+  repeated OfferVisibilityEnum.OfferVisibility none_of = 2;
+}

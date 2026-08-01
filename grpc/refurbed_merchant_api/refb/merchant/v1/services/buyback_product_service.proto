@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/descriptor.proto";
+import "refb/merchant/v1/enums/sort_order.proto";
+import "refb/merchant/v1/paginations/int64_pagination.proto";
+import "refb/merchant/v1/resources/product.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Service to search buyback products.
+service BuybackProductService {
+  // Lists products.
+  //
+  // Known errors:
+  // - UNAUTHENTICATED
+  //   - when no authorization header is sent
+  //   - when authorization header is malformed or invalid
+  // - PERMISSION_DENIED
+  //   - when the authorized user does not have permissions for this operation
+  rpc ListBuybackProducts(ListBuybackProductsRequest) returns (ListBuybackProductsResponse) {
+    option (permission) = "merchant.product:list";
+  }
+}
+
+message ListBuybackProductsRequest {
+  Int64Pagination pagination = 1;
+  Sort sort = 2;
+  Filter filter = 3;
+
+  message Sort {
+    SortOrderEnum.SortOrder order = 1;
+    By by = 2;
+
+    enum By {
+      ID = 0;
+    }
+  }
+
+  message Filter {
+    ProductNameFilter name = 1;
+
+    message ProductNameFilter {
+      optional string matches = 1; // Full-text match.
+    }
+  }
+}
+
+message ListBuybackProductsResponse {
+  // The products found.
+  repeated Product products = 1;
+
+  // Indicates whether there are more results available.
+  bool has_more = 2;
+}

@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "refb/merchant/v1/enums/country_code.proto";
+import "refb/merchant/v1/enums/merchant_address_type.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// MerchantAddress is the address from which the merchant dispatches shipments.
+// Used as the merchant's shipping address in the context of shipping label creation.
+message MerchantAddress {
+  option (google.api.resource) = {type: "refb.merchant.v1/MerchantAddress"};
+
+  int64 id = 1;
+
+  int64 version = 2;
+
+  // A user-defined label to identify or categorize the address, e.g. "Main Warehouse"
+  string label = 14;
+
+  optional string first_name = 3;
+
+  optional string family_name = 4;
+
+  string company_name = 5;
+
+  CountryCodeEnum.CountryCode country_code = 6;
+
+  string post_code = 7;
+
+  string town = 8;
+
+  string street_name = 9;
+
+  optional string house_no = 10;
+
+  optional string supplement = 11;
+
+  optional string phone_number = 12;
+
+  MerchantAddressTypeEnum.MerchantAddressType type = 13;
+}

@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "refb/descriptor.proto";
+import "refb/merchant/v1/enums/country_code.proto";
+import "refb/merchant/v1/enums/merchant_address_type.proto";
+import "refb/merchant/v1/resources/merchant_address.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// Service to manage own merchant.
+// Merchant id is decuded from the auth token
+service MerchantService {
+  // Lists addresses defined for merchant
+  rpc ListMerchantAddresses(ListMerchantAddressesRequest) returns (ListMerchantAddressesResponse) {
+    option (permission) = "merchant.address:list";
+  }
+
+  // Creates merchant's address
+  rpc CreateMerchantAddress(CreateMerchantAddressRequest) returns (CreateMerchantAddressResponse) {
+    option (permission) = "merchant.address:create";
+  }
+
+  // Updates merchant's address
+  rpc UpdateMerchantAddress(UpdateMerchantAddressRequest) returns (UpdateMerchantAddressResponse) {
+    option (permission) = "merchant.address:update";
+  }
+
+  // Delete merchant's address
+  rpc DeleteMerchantAddress(DeleteMerchantAddressRequest) returns (DeleteMerchantAddressResponse) {
+    option (permission) = "merchant.address:delete";
+  }
+}
+
+message ListMerchantAddressesRequest {
+  Filter filter = 1;
+
+  message Filter {
+    MerchantAddressTypeEnum.MerchantAddressType type = 1;
+  }
+}
+
+message ListMerchantAddressesResponse {
+  repeated MerchantAddress merchant_addresses = 1;
+}
+
+message CreateMerchantAddressRequest {
+  MerchantAddressTypeEnum.MerchantAddressType type = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // A user-defined label to identify or categorize the address, e.g. "Main Warehouse"
+  optional string label = 12 [(google.api.field_behavior) = OPTIONAL];
+
+  optional string first_name = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  optional string family_name = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  string company_name = 4 [(google.api.field_behavior) = REQUIRED];
+
+  CountryCodeEnum.CountryCode country_code = 5 [(google.api.field_behavior) = REQUIRED];
+
+  string post_code = 6 [(google.api.field_behavior) = REQUIRED];
+
+  string town = 7 [(google.api.field_behavior) = REQUIRED];
+
+  string street_name = 8 [(google.api.field_behavior) = REQUIRED];
+
+  string house_no = 9 [(google.api.field_behavior) = REQUIRED];
+
+  optional string supplement = 10 [(google.api.field_behavior) = OPTIONAL];
+
+  optional string phone_number = 11 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message CreateMerchantAddressResponse {
+  MerchantAddress merchant_address = 1;
+}
+
+message UpdateMerchantAddressRequest {
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+
+  optional string label = 12 [(google.api.field_behavior) = OPTIONAL];
+
+  optional string first_name = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  optional string family_name = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  optional string company_name = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  optional CountryCodeEnum.CountryCode country_code = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  optional string post_code = 6 [(google.api.field_behavior) = OPTIONAL];
+
+  optional string town = 7 [(google.api.field_behavior) = OPTIONAL];
+
+  optional string street_name = 8 [(google.api.field_behavior) = OPTIONAL];
+
+  optional string house_no = 9 [(google.api.field_behavior) = OPTIONAL];
+
+  optional string supplement = 10 [(google.api.field_behavior) = OPTIONAL];
+
+  optional string phone_number = 11 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message UpdateMerchantAddressResponse {
+  MerchantAddress merchant_address = 1;
+}
+
+message DeleteMerchantAddressRequest {
+  int64 id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message DeleteMerchantAddressResponse {}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "refb/merchant/v1/enums/offer_state.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message OfferStateFilter {
+  repeated OfferStateEnum.OfferState any_of = 1;
+  repeated OfferStateEnum.OfferState none_of = 2;
+}

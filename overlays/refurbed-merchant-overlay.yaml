@@ -1,0 +1,30 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Refurbed Merchant API
+  version: 1.0.0
+extends: openapi/refurbed-merchant-api-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enrichment:
+      provider: refurbed
+      api: refurbed-merchant-api
+      transports:
+      - gRPC
+      - HTTP/JSON
+      auth: 'apiKey (Authorization: Plain <token>)'
+      pagination: cursor (limit/starting_after/ending_before + has_more)
+      error_envelope: grpc-status (google.rpc.Status)
+      rate_limit_signaling:
+      - X-RateLimit-Limit
+      - X-RateLimit-Remaining
+      - X-RateLimit-Reset
+      source_repo: https://gitlab.com/refurbed-community/public-apis
+      related_artifacts:
+        authentication: authentication/refurbed-authentication.yml
+        conventions: conventions/refurbed-conventions.yml
+        errors: errors/refurbed-error-codes.yml
+        data_model: data-model/refurbed-data-model.yml
+- target: $.info
+  update:
+    x-apievangelist-rating: 4

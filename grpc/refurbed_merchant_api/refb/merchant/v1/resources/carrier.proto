@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message Carrier {
+  option (google.api.resource) = {type: "refb.merchant.v1/Carrier"};
+
+  // Name of the carrier. Only used for display purposes.
+  string name = 1;
+
+  // Slug of the carrier. Used in requests and responses to identify the carrier.
+  string slug = 2;
+}

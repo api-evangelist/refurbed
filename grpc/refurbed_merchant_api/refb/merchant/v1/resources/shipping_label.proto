@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "refb/merchant/v1/resources/merchant_address.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+// ShippingLabel represents a shipping label for parcel.
+message ShippingLabel {
+  option (google.api.resource) = {type: "refb.merchant.v1/ShippingLabel"};
+
+  // ID of shipping label
+  int64 id = 1;
+
+  // URLs to shipment labels for normal printer. These will expire.
+  NormalPrinterURLs normal_printer_urls = 2;
+
+  // URL to shipment label for label printer. This will expire.
+  string label_printer_url = 3;
+
+  // Tracking data related to generated label
+  TrackingData tracking_data = 4;
+
+  // Weight of the parcel
+  float parcel_weight = 5;
+
+  // Merchant address for related parcel dispatch.
+  MerchantAddress merchant_address = 6;
+
+  message NormalPrinterURLs {
+    string top_left = 1;
+    string top_right = 2;
+    string bottom_left = 3;
+    string bottom_right = 4;
+  }
+
+  message TrackingData {
+    string carrier = 1;
+    string tracking_number = 2;
+    string tracking_url = 3;
+  }
+}

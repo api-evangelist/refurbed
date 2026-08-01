@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/field_behavior.proto";
+import "refb/merchant/v1/enums/catalog_template_language.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message InstanceDescriptor {
+  // Language used for the attribute values.
+  TemplateLanguageCodeEnum.LanguageCode lang_code = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Name of the instance to create offer for as defined in merchant's inventory system.
+  // The name uses the language specified by `lang_code`.
+  string instance_name = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Refurbed category id.
+  int64 category_id = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // List of specification to be used to match an existing instance or create a new one.
+  // Specification keys, and valid values are defined by a specific template.
+  repeated Specification specification = 4;
+
+  // Optional set of additional details to be provided to assist the
+  // matching system effectively identify or narrow down the candidate
+  // instances to create offer on.
+  optional MatchingHints hints = 5;
+
+  message Specification {
+    // Key of a specification, always in English.
+    string key = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // Value of a specification in the language specified by `lang_code`.
+    // Valid format of a value is defined in a template.
+    string val = 2 [(google.api.field_behavior) = REQUIRED];
+  }
+
+  message MatchingHints {
+    // Refurbed product identifier.
+    // If provided, the matching system will only consider instances of this product,
+    // and new instances will also be created as variants of it.
+    optional int64 refb_product_id = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Identifier of category as per the Google Product Taxonomy, corresponding to
+    // https://www.google.com/basepages/producttype/taxonomy-with-ids.en-US.txt.
+    // Using Google Product Taxonomy will allow us to map the proper category the offer
+    // will be created in.
+    optional int64 google_category_id = 2 [(google.api.field_behavior) = OPTIONAL];
+
+    // The GTIN-8, GTIN-12 or GTIN-13 of the instance the offer should be
+    // created on. Note that EAN-13 and UPC-A codes are GTINs.
+    optional string gtin = 3 [(google.api.field_behavior) = OPTIONAL];
+
+    // The MPN of the instance the offer should be created on.
+    optional string mpn = 4 [(google.api.field_behavior) = OPTIONAL];
+  }
+}

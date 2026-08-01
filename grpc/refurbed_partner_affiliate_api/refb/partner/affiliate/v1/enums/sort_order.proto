@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+message SortOrderEnum {
+  enum SortOrder {
+    ASC = 0;
+    DESC = 1;
+  }
+}

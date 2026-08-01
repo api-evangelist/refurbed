@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package refb.partner.affiliate.v1;
+
+option go_package = "refurbed/grpc/generated/partner/affiliate/v1";
+
+message StringFilter {
+  repeated string any_of = 1;
+  repeated string none_of = 2;
+}

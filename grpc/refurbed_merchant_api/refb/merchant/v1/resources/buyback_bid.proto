@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package refb.merchant.v1;
+
+import "google/api/resource.proto";
+import "refb/merchant/v1/common/buyback_attribute.proto";
+import "refb/merchant/v1/enums/buyback_bid_grading.proto";
+import "refb/merchant/v1/enums/country_code.proto";
+import "refb/merchant/v1/enums/currency_code.proto";
+
+option go_package = "refurbed/grpc/generated/merchant/v1";
+
+message BuybackBid {
+  option (google.api.resource) = {type: "refb.merchant.v1/BuybackBid"};
+
+  // Primary key.
+  int64 id = 1;
+
+  // The product id
+  int64 product_id = 2;
+
+  // Human-readable name for the product.
+  string product_name = 3;
+
+  // List of attributes assigned to the product
+  repeated BuybackAttribute attributes = 4;
+
+  // Stock the merchant is willing to buy. If undefined it means unlimited
+  optional uint32 stock = 5;
+
+  // Grading for the desired product
+  BuybackBidGradingEnum.BuybackBidGrading grading = 6;
+
+  // Configured market bids. Unique by market code.
+  repeated BuybackMarketBid market_bids = 7;
+
+  // Bid SKU
+  optional string sku = 8;
+}
+
+message BuybackMarketBid {
+  option (google.api.resource) = {type: "refb.merchant.v1/BuybackMarketBid"};
+
+  // Bid ID
+  int64 bid_id = 1;
+
+  // Two-letter code indicating the market
+  CountryCodeEnum.CountryCode market_code = 2;
+
+  // Currency for the price
+  CurrencyCodeEnum.CurrencyCode currency_code = 3;
+
+  // Price as a string containing a decimal number
+  string price = 4;
+
+  // Bid SKU
+  optional string bid_sku = 5;
+}
+
+message BuybackMarketBidSummary {
+  option (google.api.resource) = {type: "refb.merchant.v1/BuybackMarketBidSummary"};
+
+  // Primary key
+  int64 id = 1;
+
+  // The product id
+  int64 product_id = 2;
+
+  // The user-friendly product_name
+  string product_name = 3;
+
+  // List of attributes assigned to the product
+  repeated BuybackAttribute attributes = 4;
+
+  // Two-letter code indicating the market
+  CountryCodeEnum.CountryCode market_code = 5;
+
+  // Grading for the desired product
+  BuybackBidGradingEnum.BuybackBidGrading grading = 6;
+
+  // Currency for the price
+  CurrencyCodeEnum.CurrencyCode currency_code = 7;
+
+  // The price
+  string price = 8;
+
+  // Bid ID
+  int64 bid_id = 9;
+
+  // Bid SKU
+  optional string bid_sku = 10;
+}
