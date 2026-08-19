@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService OfferService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OfferService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Batch creates offers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OfferService/BatchCreateOffers"
+          },
+          "docs": "Known errors:\n - identical to the CreateOffer operation"
+        },
+        {
+          "info": {
+            "name": "Batch deletes offers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OfferService/BatchDeleteOffers"
+          },
+          "docs": "Known errors:\n - identical to the DeleteOffer operation"
+        },
+        {
+          "info": {
+            "name": "Batch gets single offers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OfferService/BatchGetOffers"
+          },
+          "docs": "Known errors:\n - identical to the GetOffer operation"
+        },
+        {
+          "info": {
+            "name": "Batch updates offers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OfferService/BatchUpdateOffers"
+          },
+          "docs": "Known errors:\n - identical to the UpdateOffer operation"
+        },
+        {
+          "info": {
+            "name": "Creates a single offer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OfferService/CreateOffer"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- ALREADY_EXISTS\n  - when an offer with the given SKU already exists\n- INVALID_ARGUMENT\n  - when the unknown instance is provided\n  - invalid input offer data is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Deletes a single offer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OfferService/DeleteOffer"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when offer is not found\n- INVALID_ARGUMENT\n  - when the unknown instance is provided\n  - invalid input offer data is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Gets a single offer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OfferService/GetOffer"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the offer is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Lists all offers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OfferService/ListOffers"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Updates a single offer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OfferService/UpdateOffer"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when offer is not found\n- INVALID_ARGUMENT\n  - when the unknown instance is provided\n  - invalid input offer data is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

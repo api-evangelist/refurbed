@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService ShippingProfileService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ShippingProfileService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a shipping profile.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.ShippingProfileService/CreateShippingProfile"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when unknown source country market code is provided\n  - when unknown destination market code is provided\n  - when invalid shipping costs amount\n  - when unknown currency code is provided\n  - when invalid min/max delivery days\n- RESOURCE_EXHAUSTED\n  - when "
+        },
+        {
+          "info": {
+            "name": "Deletes a shipping profile.\nOnly shipping profiles marked as deletable can be deleted.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.ShippingProfileService/DeleteShippingProfile"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- FAILED_PRECONDITION\n  - when shipping profile has at least one active offer assigned\n- NOT_FOUND\n  - when shipping profile is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Gets a single shipping profile.\nIf no version is defined, its current version is returned.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.ShippingProfileService/GetShippingProfile"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the shipping profile is not found\n  - when the shipping profile has been deleted and no version is given as\n    parameter even though the individual historic versions are still\n    accessible\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Lists available carriers for shipping profiles.\nMake sure to pre-fetch and cache the response of this method to avoid running into rate-limits.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.ShippingProfileService/ListAvailableCarriers"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Lists all current shipping profiles.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.ShippingProfileService/ListShippingProfiles"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Updates a shipping profile.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.ShippingProfileService/UpdateShippingProfile"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when unknown source country market code is provided\n  - when unknown destination market code is provided\n  - when invalid shipping costs amount\n  - when unknown currency code is provided\n  - when invalid min/max delivery days\n- ALREADY_EXISTS\n  - when dest"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

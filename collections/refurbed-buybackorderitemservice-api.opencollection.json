@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService BuybackOrderItemService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BuybackOrderItemService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marks order item as accepted to indicate that the received item matches the seller's description",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackOrderItemService/Accept"
+          },
+          "docs": "Transitions the order item from the `received` state to `accepted`.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the buyback order item is not found or not in `received` state\n- FAILED_PRECONDITION\n  - when the buyback order item is not in a state that permits this action\n- INVALID_ARGUMENT\n  - when i"
+        },
+        {
+          "info": {
+            "name": "Notifies that the merchant has received the item shipped by the seller",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackOrderItemService/ConfirmReceived"
+          },
+          "docs": "Transitions the order item from the `label_sent` state to `received`.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the buyback order item is not found or not in `label_sent` state\n- FAILED_PRECONDITION\n  - when the buyback order item is not in a state that permits this action\n- INVALID_ARGUMENT\n  - wh"
+        },
+        {
+          "info": {
+            "name": "Makes a second offer for the order item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackOrderItemService/MakeSecondOffer"
+          },
+          "docs": "It is to indicate that the order item is different from the seller's description,\nand the merchant is still considering buying it, albeit at a different price point.\n\nTransitions the order item from the `received` state to `second_offer`.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the buyback order "
+        },
+        {
+          "info": {
+            "name": "Notifies that the merchant has shipped the rejected item.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackOrderItemService/NotifyReturned"
+          },
+          "docs": "Transitions the order item from the `rejected` state to `returned`.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the buyback order item is not found or not in `rejected` state\n- FAILED_PRECONDITION\n  - when the buyback order item is not in a state that permits this action\n- INVALID_ARGUMENT\n  - when i"
+        },
+        {
+          "info": {
+            "name": "Marks order item as rejected to indicate that the received item is different from the seller's description.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackOrderItemService/Reject"
+          },
+          "docs": "Transitions the order item from the `received` state to `rejected`.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the buyback order item is not found or not in `received` state\n- FAILED_PRECONDITION\n  - when the buyback order item is not in a state that permits this action\n- INVALID_ARGUMENT\n  - when i"
+        },
+        {
+          "info": {
+            "name": "Issues shipping label information for a buyback order item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackOrderItemService/UploadShippingLabel"
+          },
+          "docs": "Transitions the order item from the `ordered` state to `label_sent`.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the buyback order item is not found or not in `ordered` state\n- FAILED_PRECONDITION\n  - when the buyback order item is not in a state that permits this action\n- INVALID_ARGUMENT\n  - when i"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

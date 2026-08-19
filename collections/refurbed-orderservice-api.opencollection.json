@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService OrderService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OrderService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Calculate values for a refund of all refundable items of an order at once,\ni.e. using the RefundOrder method.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderService/CalculateRefundOrder"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n- INVALID_ARGUMENT\n  - invalid input refund data is provided\n- FAILED_PRECONDITION\n  - when order is not refundable\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Creates shipping label for an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderService/CreateShippingLabel"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n  - when merchant address is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Deletes the previously uploaded commercial invoice for an order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderService/DeleteOrderCommercialInvoice"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n  - when the commercial invoice was not uploaded\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Deletes the order's invoice. Order needs to be\ninvoiceable.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderService/DeleteOrderInvoice"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found for the merchant\n  - when no invoice is found in the order\n- FAILED_PRECONDITION\n  - when the order is not invoiceable\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Gets a single order using its identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderService/GetOrder"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Returns the previously uploaded commercial invoice for an order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderService/GetOrderCommercialInvoice"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n  - when the commercial invoice was not uploaded\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Gets the order's invoice. The URL access token is valid for 24h.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderService/GetOrderInvoice"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found for the merchant\n  - when no invoice is found in the order\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Lists orders.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderService/ListOrders"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Lists shipping labels for an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderService/ListShippingLabels"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n  - when merchant address is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Refunds all refundable items of an order at once.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderService/RefundOrder"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n- INVALID_ARGUMENT\n  - invalid input refund data is provided\n- FAILED_PRECONDITION\n  - when order is not refundable\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Uploads an invoice for an order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderService/SetOrderInvoiceStream"
+          },
+          "docs": "Overrides a possibly already existing invoice. Order needs to be\ninvoiceable.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found for the merchant\n- FAILED_PRECONDITION\n  - when the invoice exceeds the permitted size\n  - when the order is not invoiceable\n- INVALID_ARGUMENT\n  - when the"
+        },
+        {
+          "info": {
+            "name": "Updates the shipping label address for an order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderService/UpdateShippingLabelAddress"
+          },
+          "docs": "The shipping label address is used when creating shipping labels. This is\nuseful when the carrier rejects the original customer address and the merchant\nneeds to correct it.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- FAILED_PRECONDITION\n  - when shipping label address is not enabled for the merchant\n- NOT_FOUND\n  - wh"
+        },
+        {
+          "info": {
+            "name": "Uploads a commercial invoice for an order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderService/UploadOrderCommercialInvoice"
+          },
+          "docs": "This document is required for customs when shipping internationally (e.g., outside the EU), and must be provided\nbefore shipping the order. The document must be in PDF.\nIntra-EU orders (e.g., non-CH orders) are not eligible for commercial invoice upload.\nIf a commercial invoice was already uploaded, the call will return an error.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authori"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

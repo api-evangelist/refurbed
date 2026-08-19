@@ -1,0 +1,649 @@
+{
+  "item": [
+    {
+      "id": "9470593a-accb-4e48-9016-fc074f39832d",
+      "name": "MerchantService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0ca4b42e-f8af-4720-aef7-320942096421",
+          "name": "Creates merchant's address",
+          "request": {
+            "name": "Creates merchant's address",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.MerchantService",
+                "CreateMerchantAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_name\": \"<string>\",\n  \"post_code\": \"<string>\",\n  \"town\": \"<string>\",\n  \"street_name\": \"<string>\",\n  \"house_no\": \"<string>\",\n  \"type\": \"UNSPECIFIED\",\n  \"label\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"family_name\": \"<string>\",\n  \"country_code\": \"UNSPECIFIED\",\n  \"supplement\": \"<string>\",\n  \"phone_number\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bc520086-31fa-4a3e-bac9-deea4a7921de",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MerchantService",
+                    "CreateMerchantAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"<string>\",\n  \"post_code\": \"<string>\",\n  \"town\": \"<string>\",\n  \"street_name\": \"<string>\",\n  \"house_no\": \"<string>\",\n  \"type\": \"UNSPECIFIED\",\n  \"label\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"family_name\": \"<string>\",\n  \"country_code\": \"UNSPECIFIED\",\n  \"supplement\": \"<string>\",\n  \"phone_number\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"merchant_address\": {\n    \"id\": \"string\",\n    \"version\": \"string\",\n    \"label\": \"string\",\n    \"first_name\": \"string\",\n    \"family_name\": \"string\",\n    \"company_name\": \"string\",\n    \"country_code\": \"UNSPECIFIED\",\n    \"post_code\": \"string\",\n    \"town\": \"string\",\n    \"street_name\": \"string\",\n    \"house_no\": \"string\",\n    \"supplement\": \"string\",\n    \"phone_number\": \"string\",\n    \"type\": \"UNSPECIFIED\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8033e29-ac3e-42d5-b2ea-d70181b72b9b",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MerchantService",
+                    "CreateMerchantAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_name\": \"<string>\",\n  \"post_code\": \"<string>\",\n  \"town\": \"<string>\",\n  \"street_name\": \"<string>\",\n  \"house_no\": \"<string>\",\n  \"type\": \"UNSPECIFIED\",\n  \"label\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"family_name\": \"<string>\",\n  \"country_code\": \"UNSPECIFIED\",\n  \"supplement\": \"<string>\",\n  \"phone_number\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4756,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7465c2d6-b45c-437a-b740-7c115dda2225",
+          "name": "Delete merchant's address",
+          "request": {
+            "name": "Delete merchant's address",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.MerchantService",
+                "DeleteMerchantAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "082fbc1c-1b1c-4117-9b83-02d5dce8ca2f",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MerchantService",
+                    "DeleteMerchantAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfbd85da-e76a-4130-9196-aa2ca0fdcc74",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MerchantService",
+                    "DeleteMerchantAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7627,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50b0de54-20c4-4c5f-a88b-b461f37f8bcc",
+          "name": "Lists addresses defined for merchant",
+          "request": {
+            "name": "Lists addresses defined for merchant",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.MerchantService",
+                "ListMerchantAddresses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"type\": \"UNSPECIFIED\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7cf326f8-0cd8-4224-a1a4-91010645dc0f",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MerchantService",
+                    "ListMerchantAddresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"type\": \"UNSPECIFIED\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"merchant_addresses\": [\n    {\n      \"id\": \"string\",\n      \"version\": \"string\",\n      \"label\": \"string\",\n      \"first_name\": \"string\",\n      \"family_name\": \"string\",\n      \"company_name\": \"string\",\n      \"country_code\": \"UNSPECIFIED\",\n      \"post_code\": \"string\",\n      \"town\": \"string\",\n      \"street_name\": \"string\",\n      \"house_no\": \"string\",\n      \"supplement\": \"string\",\n      \"phone_number\": \"string\",\n      \"type\": \"UNSPECIFIED\"\n    },\n    {\n      \"id\": \"string\",\n      \"version\": \"string\",\n      \"label\": \"string\",\n      \"first_name\": \"string\",\n      \"family_name\": \"string\",\n      \"company_name\": \"string\",\n      \"country_code\": \"UNSPECIFIED\",\n      \"post_code\": \"string\",\n      \"town\": \"string\",\n      \"street_name\": \"string\",\n      \"house_no\": \"string\",\n      \"supplement\": \"string\",\n      \"phone_number\": \"string\",\n      \"type\": \"UNSPECIFIED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13ce319b-2bab-4efb-90f5-0d07e238ab04",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MerchantService",
+                    "ListMerchantAddresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"type\": \"UNSPECIFIED\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7627,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09064a28-1bf5-47b1-bb91-5c842f1eada7",
+          "name": "Updates merchant's address",
+          "request": {
+            "name": "Updates merchant's address",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.MerchantService",
+                "UpdateMerchantAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<int64>\",\n  \"label\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"family_name\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"country_code\": \"UNSPECIFIED\",\n  \"post_code\": \"<string>\",\n  \"town\": \"<string>\",\n  \"street_name\": \"<string>\",\n  \"house_no\": \"<string>\",\n  \"supplement\": \"<string>\",\n  \"phone_number\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cb45f161-b237-427e-988a-6d9bd7dcb44a",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MerchantService",
+                    "UpdateMerchantAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"label\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"family_name\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"country_code\": \"UNSPECIFIED\",\n  \"post_code\": \"<string>\",\n  \"town\": \"<string>\",\n  \"street_name\": \"<string>\",\n  \"house_no\": \"<string>\",\n  \"supplement\": \"<string>\",\n  \"phone_number\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"merchant_address\": {\n    \"id\": \"string\",\n    \"version\": \"string\",\n    \"label\": \"string\",\n    \"first_name\": \"string\",\n    \"family_name\": \"string\",\n    \"company_name\": \"string\",\n    \"country_code\": \"UNSPECIFIED\",\n    \"post_code\": \"string\",\n    \"town\": \"string\",\n    \"street_name\": \"string\",\n    \"house_no\": \"string\",\n    \"supplement\": \"string\",\n    \"phone_number\": \"string\",\n    \"type\": \"UNSPECIFIED\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7477eb0d-7c30-4767-b1eb-982ac0fbf60e",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MerchantService",
+                    "UpdateMerchantAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"label\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"family_name\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"country_code\": \"UNSPECIFIED\",\n  \"post_code\": \"<string>\",\n  \"town\": \"<string>\",\n  \"street_name\": \"<string>\",\n  \"house_no\": \"<string>\",\n  \"supplement\": \"<string>\",\n  \"phone_number\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7627,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.refurbed.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "41d5348d-1e8c-4624-9d7f-cbd7c302737f",
+    "name": "Affiliate Partner BuybackBidService MerchantService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).\n\nContact Support:\n Name: Refurbed Affiliate Partner Integrations Team\n Email: integrations@refurbed.com",
+      "type": "text/plain"
+    }
+  }
+}

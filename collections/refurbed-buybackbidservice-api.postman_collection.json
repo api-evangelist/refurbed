@@ -1,0 +1,1273 @@
+{
+  "item": [
+    {
+      "id": "3648b1a4-e3c7-45cc-91fa-dac387b72492",
+      "name": "BuybackBidService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "50357ab5-5815-408a-9e15-58e21b343b94",
+          "name": "Creates a single bid.",
+          "request": {
+            "name": "Creates a single bid.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - product does not exist\n  - set of attributes is incompatible for a product\n  - invalid input data is provided\n- ALREADY_EXISTS\n  - there's already an active bid for the given product, attributes and grade combination",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.BuybackBidService",
+                "CreateBuybackBid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": \"<int64>\",\n  \"attributes\": [\n    {\n      \"id\": \"<int64>\",\n      \"value_str\": \"<string>\",\n      \"value_num\": \"<double>\"\n    },\n    {\n      \"id\": \"<int64>\",\n      \"value_str\": \"<string>\",\n      \"value_num\": \"<double>\"\n    }\n  ],\n  \"market_bids\": [\n    {\n      \"price\": \"<string>\",\n      \"market_code\": \"UNSPECIFIED\",\n      \"currency_code\": \"UNSPECIFIED\"\n    },\n    {\n      \"price\": \"<string>\",\n      \"market_code\": \"UNSPECIFIED\",\n      \"currency_code\": \"UNSPECIFIED\"\n    }\n  ],\n  \"stock\": \"<long>\",\n  \"grading\": \"UNSPECIFIED\",\n  \"sku\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c06da29-29e1-448f-bdf8-8de953e9fe12",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "CreateBuybackBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product_id\": \"<int64>\",\n  \"attributes\": [\n    {\n      \"id\": \"<int64>\",\n      \"value_str\": \"<string>\",\n      \"value_num\": \"<double>\"\n    },\n    {\n      \"id\": \"<int64>\",\n      \"value_str\": \"<string>\",\n      \"value_num\": \"<double>\"\n    }\n  ],\n  \"market_bids\": [\n    {\n      \"price\": \"<string>\",\n      \"market_code\": \"UNSPECIFIED\",\n      \"currency_code\": \"UNSPECIFIED\"\n    },\n    {\n      \"price\": \"<string>\",\n      \"market_code\": \"UNSPECIFIED\",\n      \"currency_code\": \"UNSPECIFIED\"\n    }\n  ],\n  \"stock\": \"<long>\",\n  \"grading\": \"UNSPECIFIED\",\n  \"sku\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bid\": {\n    \"id\": \"string\",\n    \"product_id\": \"string\",\n    \"product_name\": \"string\",\n    \"attributes\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"UNSPECIFIED\",\n        \"value_str\": {\n          \"value\": \"string\"\n        },\n        \"value_num\": {\n          \"value\": 9796.17936713568,\n          \"unit\": \"string\"\n        }\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"UNSPECIFIED\",\n        \"value_str\": {\n          \"value\": \"string\"\n        },\n        \"value_num\": {\n          \"value\": 6303.751860699136,\n          \"unit\": \"string\"\n        }\n      }\n    ],\n    \"stock\": 754,\n    \"grading\": \"UNSPECIFIED\",\n    \"market_bids\": [\n      {\n        \"bid_id\": \"string\",\n        \"market_code\": \"UNSPECIFIED\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"string\",\n        \"bid_sku\": \"string\"\n      },\n      {\n        \"bid_id\": \"string\",\n        \"market_code\": \"UNSPECIFIED\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"string\",\n        \"bid_sku\": \"string\"\n      }\n    ],\n    \"sku\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1401a0fd-87fc-4f3a-996f-016d227f19d1",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "CreateBuybackBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product_id\": \"<int64>\",\n  \"attributes\": [\n    {\n      \"id\": \"<int64>\",\n      \"value_str\": \"<string>\",\n      \"value_num\": \"<double>\"\n    },\n    {\n      \"id\": \"<int64>\",\n      \"value_str\": \"<string>\",\n      \"value_num\": \"<double>\"\n    }\n  ],\n  \"market_bids\": [\n    {\n      \"price\": \"<string>\",\n      \"market_code\": \"UNSPECIFIED\",\n      \"currency_code\": \"UNSPECIFIED\"\n    },\n    {\n      \"price\": \"<string>\",\n      \"market_code\": \"UNSPECIFIED\",\n      \"currency_code\": \"UNSPECIFIED\"\n    }\n  ],\n  \"stock\": \"<long>\",\n  \"grading\": \"UNSPECIFIED\",\n  \"sku\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9892,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2829549a-f92f-494c-908f-36e71338a915",
+          "name": "Adds a new price for a marketplace inside an existing bid",
+          "request": {
+            "name": "Adds a new price for a marketplace inside an existing bid",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - bid does not exist\n  - invalid input data is provided\n- ALREADY_EXISTS\n  - there's already an active bid for the given market",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.BuybackBidService",
+                "CreateBuybackMarketBid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": \"<string>\",\n  \"bid_identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"market_code\": \"UNSPECIFIED\",\n  \"currency_code\": \"UNSPECIFIED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "98daba5b-7039-4f7f-82cf-8a636de73535",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "CreateBuybackMarketBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"price\": \"<string>\",\n  \"bid_identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"market_code\": \"UNSPECIFIED\",\n  \"currency_code\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"market_bid\": {\n    \"bid_id\": \"string\",\n    \"market_code\": \"UNSPECIFIED\",\n    \"currency_code\": \"UNSPECIFIED\",\n    \"price\": \"string\",\n    \"bid_sku\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da2d9e3a-fea3-4a41-b8f5-3fb8669e259f",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "CreateBuybackMarketBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"price\": \"<string>\",\n  \"bid_identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"market_code\": \"UNSPECIFIED\",\n  \"currency_code\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5283,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e47a3f2-2577-48a9-9249-9cf496ddee62",
+          "name": "Deletes a single bid.",
+          "request": {
+            "name": "Deletes a single bid.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when bid is not found\n- INVALID_ARGUMENT\n  - invalid input data is provided",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.BuybackBidService",
+                "DeleteBuybackBid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3af50480-8313-4aed-bd3c-06c983d29e27",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "DeleteBuybackBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71256b54-2eff-466e-924f-9196d0512b39",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "DeleteBuybackBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5283,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75be0a5d-66cd-4675-9a67-ef4b4996d322",
+          "name": "Deletes a price for a marketplace inside an existing bid.",
+          "request": {
+            "name": "Deletes a price for a marketplace inside an existing bid.",
+            "description": {
+              "content": "This is only allowed if the deletion doesn't result in a bid without any market prices.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - market bid does not exist\n- FAILED_PRECONDITION\n  - bid has only 1 market price remaining (i.e. bid requires manual deletion)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.BuybackBidService",
+                "DeleteBuybackMarketBid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bid_identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"market_code\": \"UNSPECIFIED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f335ae21-3d41-4007-a1a3-accfa4e84706",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "DeleteBuybackMarketBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bid_identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"market_code\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09c5d545-c6b5-4da2-8f5e-fe54688c9bcd",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "DeleteBuybackMarketBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bid_identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"market_code\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5283,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b95e1d3-864f-4a9d-a413-8c71c3ccb79f",
+          "name": "Gets a market bid available for making a second offer.",
+          "request": {
+            "name": "Gets a market bid available for making a second offer.",
+            "description": {
+              "content": "To make a second offer, the merchant has to find a different market bid and update the order item accordingly.\nIn order to get a market bid for the second offer, the merchant has to provide the order item ID that they intend to change,\nas well as all the details about the actual device they have received. Only the price valid at the time of order\ncreation will be returned, to ensure fair competition and prevent merchants from lowering the price before\nmaking the second offer.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - invalid input data is provided\n- NOT_FOUND\n  - order item does not exist or it's not in \"received\" state\n  - an appropriate market bid cannot be found that was active at the time of order",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.BuybackBidService",
+                "GetSecondOfferBuybackMarketBid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_item_id\": \"<int64>\",\n  \"product_id\": \"<int64>\",\n  \"attributes\": [\n    {\n      \"id\": \"<int64>\",\n      \"value_str\": \"<string>\",\n      \"value_num\": \"<double>\"\n    },\n    {\n      \"id\": \"<int64>\",\n      \"value_str\": \"<string>\",\n      \"value_num\": \"<double>\"\n    }\n  ],\n  \"grading\": \"UNSPECIFIED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "31ca0acd-f3d2-4077-9fbf-5095e110b23e",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "GetSecondOfferBuybackMarketBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_item_id\": \"<int64>\",\n  \"product_id\": \"<int64>\",\n  \"attributes\": [\n    {\n      \"id\": \"<int64>\",\n      \"value_str\": \"<string>\",\n      \"value_num\": \"<double>\"\n    },\n    {\n      \"id\": \"<int64>\",\n      \"value_str\": \"<string>\",\n      \"value_num\": \"<double>\"\n    }\n  ],\n  \"grading\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"market_bid\": {\n    \"id\": \"string\",\n    \"product_id\": \"string\",\n    \"product_name\": \"string\",\n    \"attributes\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"UNSPECIFIED\",\n        \"value_str\": {\n          \"value\": \"string\"\n        },\n        \"value_num\": {\n          \"value\": 3514.0478138717167,\n          \"unit\": \"string\"\n        }\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"UNSPECIFIED\",\n        \"value_str\": {\n          \"value\": \"string\"\n        },\n        \"value_num\": {\n          \"value\": 137.03142121005985,\n          \"unit\": \"string\"\n        }\n      }\n    ],\n    \"market_code\": \"UNSPECIFIED\",\n    \"grading\": \"UNSPECIFIED\",\n    \"currency_code\": \"UNSPECIFIED\",\n    \"price\": \"string\",\n    \"bid_id\": \"string\",\n    \"bid_sku\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "284da980-184c-4af0-82c9-c7b2d53e5b6f",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "GetSecondOfferBuybackMarketBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_item_id\": \"<int64>\",\n  \"product_id\": \"<int64>\",\n  \"attributes\": [\n    {\n      \"id\": \"<int64>\",\n      \"value_str\": \"<string>\",\n      \"value_num\": \"<double>\"\n    },\n    {\n      \"id\": \"<int64>\",\n      \"value_str\": \"<string>\",\n      \"value_num\": \"<double>\"\n    }\n  ],\n  \"grading\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5283,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7aadcf0a-4c26-400a-8536-0f77f1ee29a6",
+          "name": "Lists all bids.",
+          "request": {
+            "name": "Lists all bids.",
+            "description": {
+              "content": "Returns the current bid versions only.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.BuybackBidService",
+                "ListBuybackBids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"product_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"grading\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"stock\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<long>\",\n      \"ge\": \"<long>\",\n      \"any_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"none_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"le\": \"<long>\",\n      \"lt\": \"<long>\"\n    },\n    \"market_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"product_name\": {\n      \"term\": \"<string>\"\n    },\n    \"product_attribute\": {\n      \"attributes\": [\n        {\n          \"value_str\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"value_num\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"value_str\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"value_num\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba8096bd-f566-4bec-a042-2e0262da6f6d",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "ListBuybackBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"product_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"grading\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"stock\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<long>\",\n      \"ge\": \"<long>\",\n      \"any_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"none_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"le\": \"<long>\",\n      \"lt\": \"<long>\"\n    },\n    \"market_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"product_name\": {\n      \"term\": \"<string>\"\n    },\n    \"product_attribute\": {\n      \"attributes\": [\n        {\n          \"value_str\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"value_num\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"value_str\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"value_num\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bids\": [\n    {\n      \"id\": \"string\",\n      \"product_id\": \"string\",\n      \"product_name\": \"string\",\n      \"attributes\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"UNSPECIFIED\",\n          \"value_str\": {\n            \"value\": \"string\"\n          },\n          \"value_num\": {\n            \"value\": 1711.370101169819,\n            \"unit\": \"string\"\n          }\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"UNSPECIFIED\",\n          \"value_str\": {\n            \"value\": \"string\"\n          },\n          \"value_num\": {\n            \"value\": 2284.6593323555608,\n            \"unit\": \"string\"\n          }\n        }\n      ],\n      \"stock\": 1255,\n      \"grading\": \"UNSPECIFIED\",\n      \"market_bids\": [\n        {\n          \"bid_id\": \"string\",\n          \"market_code\": \"UNSPECIFIED\",\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"bid_sku\": \"string\"\n        },\n        {\n          \"bid_id\": \"string\",\n          \"market_code\": \"UNSPECIFIED\",\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"bid_sku\": \"string\"\n        }\n      ],\n      \"sku\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"product_id\": \"string\",\n      \"product_name\": \"string\",\n      \"attributes\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"UNSPECIFIED\",\n          \"value_str\": {\n            \"value\": \"string\"\n          },\n          \"value_num\": {\n            \"value\": 4287.478847924538,\n            \"unit\": \"string\"\n          }\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"UNSPECIFIED\",\n          \"value_str\": {\n            \"value\": \"string\"\n          },\n          \"value_num\": {\n            \"value\": 2798.2219344416417,\n            \"unit\": \"string\"\n          }\n        }\n      ],\n      \"stock\": 3455,\n      \"grading\": \"UNSPECIFIED\",\n      \"market_bids\": [\n        {\n          \"bid_id\": \"string\",\n          \"market_code\": \"UNSPECIFIED\",\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"bid_sku\": \"string\"\n        },\n        {\n          \"bid_id\": \"string\",\n          \"market_code\": \"UNSPECIFIED\",\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"bid_sku\": \"string\"\n        }\n      ],\n      \"sku\": \"string\"\n    }\n  ],\n  \"has_more\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77b52d7a-8790-454a-a357-2c8814cc42f4",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "ListBuybackBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"product_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"grading\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"stock\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<long>\",\n      \"ge\": \"<long>\",\n      \"any_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"none_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"le\": \"<long>\",\n      \"lt\": \"<long>\"\n    },\n    \"market_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"product_name\": {\n      \"term\": \"<string>\"\n    },\n    \"product_attribute\": {\n      \"attributes\": [\n        {\n          \"value_str\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"value_num\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"value_str\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"value_num\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5283,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cfceb811-2361-4476-b3c9-1a8a8c008412",
+          "name": "Updates a single bid by setting its stock",
+          "request": {
+            "name": "Updates a single bid by setting its stock",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when bid is not found\n- INVALID_ARGUMENT\n  - invalid input data is provided",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.BuybackBidService",
+                "UpdateBuybackBid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"stock\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1d02569a-201f-4cb9-a642-59663ec9b896",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "UpdateBuybackBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"stock\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bid\": {\n    \"id\": \"string\",\n    \"product_id\": \"string\",\n    \"product_name\": \"string\",\n    \"attributes\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"UNSPECIFIED\",\n        \"value_str\": {\n          \"value\": \"string\"\n        },\n        \"value_num\": {\n          \"value\": 8248.470148816632,\n          \"unit\": \"string\"\n        }\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"UNSPECIFIED\",\n        \"value_str\": {\n          \"value\": \"string\"\n        },\n        \"value_num\": {\n          \"value\": 5422.551392147829,\n          \"unit\": \"string\"\n        }\n      }\n    ],\n    \"stock\": 1050,\n    \"grading\": \"UNSPECIFIED\",\n    \"market_bids\": [\n      {\n        \"bid_id\": \"string\",\n        \"market_code\": \"UNSPECIFIED\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"string\",\n        \"bid_sku\": \"string\"\n      },\n      {\n        \"bid_id\": \"string\",\n        \"market_code\": \"UNSPECIFIED\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"string\",\n        \"bid_sku\": \"string\"\n      }\n    ],\n    \"sku\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec65ea7a-4cf7-4483-9c10-90f89ad8fcff",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "UpdateBuybackBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"stock\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5283,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f0b24c7-6a39-4c3c-914d-fa245cfac587",
+          "name": "Sets the price for a marketplace for an existing bid.",
+          "request": {
+            "name": "Sets the price for a marketplace for an existing bid.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - market bid does not exist\n- INVALID_ARGUMENT\n  - invalid input data is provided",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.BuybackBidService",
+                "UpdateBuybackMarketBid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": \"<string>\",\n  \"bid_identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"market_code\": \"UNSPECIFIED\",\n  \"currency_code\": \"UNSPECIFIED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d5157ea0-ff0e-4b37-8734-00e301f0ddfc",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "UpdateBuybackMarketBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"price\": \"<string>\",\n  \"bid_identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"market_code\": \"UNSPECIFIED\",\n  \"currency_code\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"market_bid\": {\n    \"bid_id\": \"string\",\n    \"market_code\": \"UNSPECIFIED\",\n    \"currency_code\": \"UNSPECIFIED\",\n    \"price\": \"string\",\n    \"bid_sku\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12e7144f-05b5-4592-8e40-b93b9e27ba20",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackBidService",
+                    "UpdateBuybackMarketBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"price\": \"<string>\",\n  \"bid_identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"market_code\": \"UNSPECIFIED\",\n  \"currency_code\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5283,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.refurbed.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3607b661-3250-4663-9f20-52bd66cc133c",
+    "name": "Affiliate Partner BuybackBidService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).\n\nContact Support:\n Name: Refurbed Affiliate Partner Integrations Team\n Email: integrations@refurbed.com",
+      "type": "text/plain"
+    }
+  }
+}

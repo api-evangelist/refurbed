@@ -1,0 +1,355 @@
+{
+  "item": [
+    {
+      "id": "d7c1070f-66a0-4d6f-84af-a42a4bedead7",
+      "name": "ProductService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "968bb4d8-52c1-4e93-8449-4417597220f7",
+          "name": "Gets a single product.",
+          "request": {
+            "name": "Gets a single product.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the product is not found",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.partner.affiliate.v1.ProductService",
+                "GetProduct"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"site_market_code\": \"<string>\",\n  \"id\": \"<int64>\",\n  \"back_link\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6e34b2c6-a191-43f1-a109-3508758d9a96",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.partner.affiliate.v1.ProductService",
+                    "GetProduct"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_market_code\": \"<string>\",\n  \"id\": \"<int64>\",\n  \"back_link\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"product\": {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"category_id\": \"string\",\n    \"category_path\": [\n      \"string\",\n      \"string\"\n    ],\n    \"attributes\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"UNSPECIFIED\",\n        \"value_str\": {\n          \"value\": \"string\"\n        },\n        \"value_num\": {\n          \"value\": 3922.98571948798,\n          \"unit\": \"string\"\n        }\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"UNSPECIFIED\",\n        \"value_str\": {\n          \"value\": \"string\"\n        },\n        \"value_num\": {\n          \"value\": 7552.318417468609,\n          \"unit\": \"string\"\n        }\n      }\n    ],\n    \"medias\": [\n      {\n        \"type\": \"UNSPECIFIED\",\n        \"url\": \"string\"\n      },\n      {\n        \"type\": \"UNSPECIFIED\",\n        \"url\": \"string\"\n      }\n    ],\n    \"buybox\": {\n      \"instance_id\": \"string\",\n      \"instance_name\": \"string\",\n      \"grading\": \"UNSPECIFIED\",\n      \"grading_name\": \"string\",\n      \"warranty\": \"UNSPECIFIED\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"price\": \"string\",\n      \"link\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "354f3043-199e-413a-b34c-a84c29fb0815",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.partner.affiliate.v1.ProductService",
+                    "GetProduct"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_market_code\": \"<string>\",\n  \"id\": \"<int64>\",\n  \"back_link\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 846,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72e4c1dd-c0ab-4d72-afee-4da0044028f3",
+          "name": "Lists products.",
+          "request": {
+            "name": "Lists products.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.partner.affiliate.v1.ProductService",
+                "ListProducts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"site_market_code\": \"<string>\",\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"POPULARITY\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"name\": {\n      \"matches\": \"<string>\"\n    },\n    \"category_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"is_recursive\": \"<boolean>\"\n    },\n    \"attributes\": {\n      \"all_of\": [\n        {\n          \"attribute_id\": \"<int64>\",\n          \"cond_enum\": {\n            \"eq\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cond_numeric\": {\n            \"eq\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"attribute_id\": \"<int64>\",\n          \"cond_enum\": {\n            \"eq\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cond_numeric\": {\n            \"eq\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    }\n  },\n  \"back_link\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5edd9628-218e-4b65-bcfb-f82e28214e76",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.partner.affiliate.v1.ProductService",
+                    "ListProducts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_market_code\": \"<string>\",\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"POPULARITY\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"name\": {\n      \"matches\": \"<string>\"\n    },\n    \"category_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"is_recursive\": \"<boolean>\"\n    },\n    \"attributes\": {\n      \"all_of\": [\n        {\n          \"attribute_id\": \"<int64>\",\n          \"cond_enum\": {\n            \"eq\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cond_numeric\": {\n            \"eq\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"attribute_id\": \"<int64>\",\n          \"cond_enum\": {\n            \"eq\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cond_numeric\": {\n            \"eq\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    }\n  },\n  \"back_link\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"products\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"category_id\": \"string\",\n      \"category_path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"UNSPECIFIED\",\n          \"value_str\": {\n            \"value\": \"string\"\n          },\n          \"value_num\": {\n            \"value\": 2449.3300539009488,\n            \"unit\": \"string\"\n          }\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"UNSPECIFIED\",\n          \"value_str\": {\n            \"value\": \"string\"\n          },\n          \"value_num\": {\n            \"value\": 5383.898771876149,\n            \"unit\": \"string\"\n          }\n        }\n      ],\n      \"medias\": [\n        {\n          \"type\": \"UNSPECIFIED\",\n          \"url\": \"string\"\n        },\n        {\n          \"type\": \"UNSPECIFIED\",\n          \"url\": \"string\"\n        }\n      ],\n      \"buybox\": {\n        \"instance_id\": \"string\",\n        \"instance_name\": \"string\",\n        \"grading\": \"UNSPECIFIED\",\n        \"grading_name\": \"string\",\n        \"warranty\": \"UNSPECIFIED\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"string\",\n        \"link\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"category_id\": \"string\",\n      \"category_path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attributes\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"UNSPECIFIED\",\n          \"value_str\": {\n            \"value\": \"string\"\n          },\n          \"value_num\": {\n            \"value\": 4808.765803284538,\n            \"unit\": \"string\"\n          }\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"UNSPECIFIED\",\n          \"value_str\": {\n            \"value\": \"string\"\n          },\n          \"value_num\": {\n            \"value\": 1100.9402699040238,\n            \"unit\": \"string\"\n          }\n        }\n      ],\n      \"medias\": [\n        {\n          \"type\": \"UNSPECIFIED\",\n          \"url\": \"string\"\n        },\n        {\n          \"type\": \"UNSPECIFIED\",\n          \"url\": \"string\"\n        }\n      ],\n      \"buybox\": {\n        \"instance_id\": \"string\",\n        \"instance_name\": \"string\",\n        \"grading\": \"UNSPECIFIED\",\n        \"grading_name\": \"string\",\n        \"warranty\": \"UNSPECIFIED\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"string\",\n        \"link\": \"string\"\n      }\n    }\n  ],\n  \"has_more\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "841a622d-dd1a-4968-b56f-b7000e0ded7f",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.partner.affiliate.v1.ProductService",
+                    "ListProducts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_market_code\": \"<string>\",\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"POPULARITY\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"name\": {\n      \"matches\": \"<string>\"\n    },\n    \"category_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"is_recursive\": \"<boolean>\"\n    },\n    \"attributes\": {\n      \"all_of\": [\n        {\n          \"attribute_id\": \"<int64>\",\n          \"cond_enum\": {\n            \"eq\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cond_numeric\": {\n            \"eq\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"attribute_id\": \"<int64>\",\n          \"cond_enum\": {\n            \"eq\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cond_numeric\": {\n            \"eq\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    }\n  },\n  \"back_link\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4842,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.refurbed.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "db9355d5-5ad7-44d9-8373-a7ee2767b3d4",
+    "name": "Affiliate Partner BuybackBidService ProductService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).\n\nContact Support:\n Name: Refurbed Affiliate Partner Integrations Team\n Email: integrations@refurbed.com",
+      "type": "text/plain"
+    }
+  }
+}

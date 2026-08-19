@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService TicketService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TicketService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a new ticket.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.TicketService/CreateTicket"
+          },
+          "docs": "Creates a new ticket."
+        },
+        {
+          "info": {
+            "name": "Creates a help request for a given ticket.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.TicketService/CreateTicketHelpRequest"
+          },
+          "docs": "Creates a help request for a given ticket."
+        },
+        {
+          "info": {
+            "name": "Generates a return shipping label and posts it as a message on the ticket.\nCall GetTicket to load the ticket messages again.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.TicketService/GenerateReturnShippingLabel"
+          },
+          "docs": "Generates a return shipping label and posts it as a message on the ticket.\nCall GetTicket to load the ticket messages again."
+        },
+        {
+          "info": {
+            "name": "Retrieves a single ticket by its ID, including its messages.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.TicketService/GetTicket"
+          },
+          "docs": "Retrieves a single ticket by its ID, including its messages."
+        },
+        {
+          "info": {
+            "name": "Retrieves details of a single help request by its ID, including the messages.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.TicketService/GetTicketHelpRequest"
+          },
+          "docs": "Retrieves details of a single help request by its ID, including the messages."
+        },
+        {
+          "info": {
+            "name": "Lists all help requests for a given ticket.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.TicketService/ListTicketHelpRequests"
+          },
+          "docs": "Lists all help requests for a given ticket."
+        },
+        {
+          "info": {
+            "name": "Lists tickets.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.TicketService/ListTickets"
+          },
+          "docs": "Lists tickets."
+        },
+        {
+          "info": {
+            "name": "Requests a topic change for a ticket.\nIf request is approved, the ticket topic is changed to a generic topic, the caller does\nnot specify the desired topic.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.TicketService/RequestTopicChange"
+          },
+          "docs": "Requests a topic change for a ticket.\nIf request is approved, the ticket topic is changed to a generic topic, the caller does\nnot specify the desired topic."
+        },
+        {
+          "info": {
+            "name": "Updates the ticket by performing one or more of the following actions:\n- Assigning the ticket to a user (by email)\n- Changing the ticket status\n- Adding a message to the ticket\n- Updating the notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.TicketService/UpdateTicket"
+          },
+          "docs": "Updates the ticket by performing one or more of the following actions:\n- Assigning the ticket to a user (by email)\n- Changing the ticket status\n- Adding a message to the ticket\n- Updating the notes"
+        },
+        {
+          "info": {
+            "name": "Updates the ticket help request by adding a message to it.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.TicketService/UpdateTicketHelpRequest"
+          },
+          "docs": "Updates the ticket help request by adding a message to it."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService CurrencyService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CurrencyService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a single supported currency.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.CurrencyService/GetCurrency"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when the currency code is invalid\n- NOT_FOUND\n  - when the currency is not found in our system\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Lists all supported currencies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.CurrencyService/ListCurrencies"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

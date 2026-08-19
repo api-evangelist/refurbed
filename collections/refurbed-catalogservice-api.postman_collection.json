@@ -1,0 +1,199 @@
+{
+  "item": [
+    {
+      "id": "fa7325d1-4339-498a-acbb-a5aa087c0021",
+      "name": "CatalogService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "300eb8a8-6eae-4825-9981-ee166d3c49fd",
+          "name": "Retrieves a list of attribute templates for the specified category type and\noptionally a specific category.",
+          "request": {
+            "name": "Retrieves a list of attribute templates for the specified category type and\noptionally a specific category.",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.CatalogService",
+                "GetCatalogTemplates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category_type\": \"UNSPECIFIED\",\n  \"category_id\": \"<int64>\",\n  \"lang_code\": \"UNSPECIFIED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cd70fc6f-c3ab-4eee-9f07-947d816f5b25",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.CatalogService",
+                    "GetCatalogTemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"category_type\": \"UNSPECIFIED\",\n  \"category_id\": \"<int64>\",\n  \"lang_code\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"templates\": [\n    {\n      \"constraints\": [\n        {\n          \"attribute_key\": \"string\",\n          \"attribute_name\": \"string\",\n          \"presence\": \"UNSPECIFIED\",\n          \"known_values\": [\n            \"string\",\n            \"string\"\n          ],\n          \"unit\": \"string\",\n          \"value_type\": \"UNSPECIFIED\",\n          \"description\": \"string\"\n        },\n        {\n          \"attribute_key\": \"string\",\n          \"attribute_name\": \"string\",\n          \"presence\": \"UNSPECIFIED\",\n          \"known_values\": [\n            \"string\",\n            \"string\"\n          ],\n          \"unit\": \"string\",\n          \"value_type\": \"UNSPECIFIED\",\n          \"description\": \"string\"\n        }\n      ],\n      \"category_id\": \"string\",\n      \"category_name\": \"string\",\n      \"child_templates\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/CatalogTemplate detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/CatalogTemplate detected>\"\n        }\n      ],\n      \"version\": \"string\"\n    },\n    {\n      \"constraints\": [\n        {\n          \"attribute_key\": \"string\",\n          \"attribute_name\": \"string\",\n          \"presence\": \"UNSPECIFIED\",\n          \"known_values\": [\n            \"string\",\n            \"string\"\n          ],\n          \"unit\": \"string\",\n          \"value_type\": \"UNSPECIFIED\",\n          \"description\": \"string\"\n        },\n        {\n          \"attribute_key\": \"string\",\n          \"attribute_name\": \"string\",\n          \"presence\": \"UNSPECIFIED\",\n          \"known_values\": [\n            \"string\",\n            \"string\"\n          ],\n          \"unit\": \"string\",\n          \"value_type\": \"UNSPECIFIED\",\n          \"description\": \"string\"\n        }\n      ],\n      \"category_id\": \"string\",\n      \"category_name\": \"string\",\n      \"child_templates\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/CatalogTemplate detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/CatalogTemplate detected>\"\n        }\n      ],\n      \"version\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da2369a9-5d6f-4b69-aa96-5324463ecc8e",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.CatalogService",
+                    "GetCatalogTemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"category_type\": \"UNSPECIFIED\",\n  \"category_id\": \"<int64>\",\n  \"lang_code\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4677,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.refurbed.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ab3b07dd-429c-48af-9eda-705c672d8b2c",
+    "name": "Affiliate Partner BuybackBidService CatalogService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).\n\nContact Support:\n Name: Refurbed Affiliate Partner Integrations Team\n Email: integrations@refurbed.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "item": [
+    {
+      "id": "70b3fdca-2d2e-4bbe-83f7-9291e2d43d82",
+      "name": "BuybackOrderService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ee821797-c26c-4068-b2ba-c6ad1bf7600d",
+          "name": "Lists all buyback orders.",
+          "request": {
+            "name": "Lists all buyback orders.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.BuybackOrderService",
+                "ListBuybackOrders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"product_name\": {\n      \"term\": \"<string>\"\n    },\n    \"product_attribute\": {\n      \"attributes\": [\n        {\n          \"value_str\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"value_num\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"value_str\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"value_num\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"created_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"shipping_tracking_number\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5430d711-93d9-4c5f-85d5-1fd4686b1e20",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackOrderService",
+                    "ListBuybackOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"product_name\": {\n      \"term\": \"<string>\"\n    },\n    \"product_attribute\": {\n      \"attributes\": [\n        {\n          \"value_str\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"value_num\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"value_str\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"value_num\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"created_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"shipping_tracking_number\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orders\": [\n    {\n      \"id\": \"string\",\n      \"return_address\": {\n        \"first_name\": \"string\",\n        \"family_name\": \"string\",\n        \"entity\": \"UNSPECIFIED\",\n        \"company_name\": \"string\",\n        \"company_vatin\": \"string\",\n        \"personal_vatin\": \"string\",\n        \"country_code\": \"UNSPECIFIED\",\n        \"post_code\": \"string\",\n        \"town\": \"string\",\n        \"street_name\": \"string\",\n        \"house_no\": \"string\",\n        \"supplement\": \"string\",\n        \"phone_number\": \"string\"\n      },\n      \"created_at\": \"2018-11-20T21:50:19.659Z\",\n      \"order_items\": [\n        {\n          \"id\": \"string\",\n          \"order_id\": \"string\",\n          \"state\": \"UNSPECIFIED\",\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"bid\": {\n            \"id\": \"string\",\n            \"product_id\": \"string\",\n            \"product_name\": \"string\",\n            \"attributes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"market_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"grading\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"price\": \"string\",\n            \"bid_id\": \"string\",\n            \"bid_sku\": \"string\"\n          },\n          \"shipping_tracking_url\": \"string\",\n          \"shipping_tracking_number\": \"string\",\n          \"return_tracking_url\": \"string\",\n          \"return_tracking_number\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"order_id\": \"string\",\n          \"state\": \"UNSPECIFIED\",\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"bid\": {\n            \"id\": \"string\",\n            \"product_id\": \"string\",\n            \"product_name\": \"string\",\n            \"attributes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"market_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"grading\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"price\": \"string\",\n            \"bid_id\": \"string\",\n            \"bid_sku\": \"string\"\n          },\n          \"shipping_tracking_url\": \"string\",\n          \"shipping_tracking_number\": \"string\",\n          \"return_tracking_url\": \"string\",\n          \"return_tracking_number\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"return_address\": {\n        \"first_name\": \"string\",\n        \"family_name\": \"string\",\n        \"entity\": \"UNSPECIFIED\",\n        \"company_name\": \"string\",\n        \"company_vatin\": \"string\",\n        \"personal_vatin\": \"string\",\n        \"country_code\": \"UNSPECIFIED\",\n        \"post_code\": \"string\",\n        \"town\": \"string\",\n        \"street_name\": \"string\",\n        \"house_no\": \"string\",\n        \"supplement\": \"string\",\n        \"phone_number\": \"string\"\n      },\n      \"created_at\": \"1957-01-18T18:22:24.136Z\",\n      \"order_items\": [\n        {\n          \"id\": \"string\",\n          \"order_id\": \"string\",\n          \"state\": \"UNSPECIFIED\",\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"bid\": {\n            \"id\": \"string\",\n            \"product_id\": \"string\",\n            \"product_name\": \"string\",\n            \"attributes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"market_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"grading\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"price\": \"string\",\n            \"bid_id\": \"string\",\n            \"bid_sku\": \"string\"\n          },\n          \"shipping_tracking_url\": \"string\",\n          \"shipping_tracking_number\": \"string\",\n          \"return_tracking_url\": \"string\",\n          \"return_tracking_number\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"order_id\": \"string\",\n          \"state\": \"UNSPECIFIED\",\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"bid\": {\n            \"id\": \"string\",\n            \"product_id\": \"string\",\n            \"product_name\": \"string\",\n            \"attributes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"market_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"grading\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"price\": \"string\",\n            \"bid_id\": \"string\",\n            \"bid_sku\": \"string\"\n          },\n          \"shipping_tracking_url\": \"string\",\n          \"shipping_tracking_number\": \"string\",\n          \"return_tracking_url\": \"string\",\n          \"return_tracking_number\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"has_more\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60e720fd-dfe8-44da-b5dd-822455855dba",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.BuybackOrderService",
+                    "ListBuybackOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"product_name\": {\n      \"term\": \"<string>\"\n    },\n    \"product_attribute\": {\n      \"attributes\": [\n        {\n          \"value_str\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"value_num\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"value_str\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"value_num\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"any_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"none_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"created_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"shipping_tracking_number\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7075,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.refurbed.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "63b906e2-4070-4a2a-8636-5004fc04519d",
+    "name": "Affiliate Partner BuybackBidService BuybackOrderService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).\n\nContact Support:\n Name: Refurbed Affiliate Partner Integrations Team\n Email: integrations@refurbed.com",
+      "type": "text/plain"
+    }
+  }
+}

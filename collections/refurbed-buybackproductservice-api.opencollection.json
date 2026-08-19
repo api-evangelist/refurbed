@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService BuybackProductService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BuybackProductService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists products.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackProductService/ListBuybackProducts"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

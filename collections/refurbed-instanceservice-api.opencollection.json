@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService InstanceService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "InstanceService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a single instance.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.partner.affiliate.v1.InstanceService/GetInstance"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the instance is not found\n- INVALID_ARGUMENT\n  - when invalid GTIN is provided"
+        },
+        {
+          "info": {
+            "name": "Lists instances for a specific product.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.partner.affiliate.v1.InstanceService/ListInstancesByProduct"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination"
+        },
+        {
+          "info": {
+            "name": "Batch gets single instances.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.InstanceService/BatchGetInstances"
+          },
+          "docs": "Known errors:\n - identical to the GetInstance operation"
+        },
+        {
+          "info": {
+            "name": "Gets a single instance.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.InstanceService/GetInstance"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the instance is not found\n- INVALID_ARGUMENT\n  - when invalid GTIN is provided\n- FAILED_PRECONDITION\n  - when multiple instances are found for the provided MPN\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

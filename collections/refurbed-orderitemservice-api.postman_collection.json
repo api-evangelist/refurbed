@@ -1,0 +1,1273 @@
+{
+  "item": [
+    {
+      "id": "12c5bf35-ddd5-4c80-9e9a-d2db76b3143f",
+      "name": "OrderItemService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3b47f729-5b75-4ce1-b832-804f353425e5",
+          "name": "Batch updates order items.",
+          "request": {
+            "name": "Batch updates order items.",
+            "description": {
+              "content": "Known errors: Errors are identical to the UpdateOrderItem operation per\neach individual order item update and:\n- INVALID_ARGUMENT\n  - when more than 50 updates are attempted",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderItemService",
+                "BatchUpdateOrderItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_items\": [\n    {\n      \"id\": \"<int64>\",\n      \"parcel_tracking_url\": \"<string>\",\n      \"item_identifier\": \"<string>\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"weight_kg\": \"<float>\",\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"<string>\",\n      \"parcel_carrier_tracking_number\": {\n        \"carrier\": \"<string>\",\n        \"tracking_number\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<int64>\",\n      \"parcel_tracking_url\": \"<string>\",\n      \"item_identifier\": \"<string>\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"weight_kg\": \"<float>\",\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"<string>\",\n      \"parcel_carrier_tracking_number\": {\n        \"carrier\": \"<string>\",\n        \"tracking_number\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e236f662-20d1-41e4-b99e-03dab6da4b8b",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "BatchUpdateOrderItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_items\": [\n    {\n      \"id\": \"<int64>\",\n      \"parcel_tracking_url\": \"<string>\",\n      \"item_identifier\": \"<string>\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"weight_kg\": \"<float>\",\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"<string>\",\n      \"parcel_carrier_tracking_number\": {\n        \"carrier\": \"<string>\",\n        \"tracking_number\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<int64>\",\n      \"parcel_tracking_url\": \"<string>\",\n      \"item_identifier\": \"<string>\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"weight_kg\": \"<float>\",\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"<string>\",\n      \"parcel_carrier_tracking_number\": {\n        \"carrier\": \"<string>\",\n        \"tracking_number\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"status\": {\n        \"code\": 7024,\n        \"message\": \"string\",\n        \"details\": [\n          {\n            \"@type\": \"string\",\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {}\n          },\n          {\n            \"@type\": \"string\",\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        ]\n      },\n      \"order_item\": {\n        \"id\": \"string\",\n        \"order_id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"UNSPECIFIED\",\n        \"sku\": \"string\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"settlement_currency_code\": \"UNSPECIFIED\",\n        \"total_charged\": \"string\",\n        \"settlement_total_charged\": \"string\",\n        \"total_discount\": \"string\",\n        \"settlement_total_discount\": \"string\",\n        \"total_charged_dynamic\": \"string\",\n        \"settlement_total_charged_dynamic\": \"string\",\n        \"total_paid\": \"string\",\n        \"settlement_total_paid\": \"string\",\n        \"total_refunded\": \"string\",\n        \"settlement_total_refunded\": \"string\",\n        \"settlement_total_commission\": \"string\",\n        \"settlement_base_commission\": \"string\",\n        \"settlement_payout_commission\": \"string\",\n        \"settlement_payment_commission\": \"string\",\n        \"settlement_dynamic_commission\": \"string\",\n        \"taxation\": \"UNSPECIFIED\",\n        \"is_refundable\": false,\n        \"refund_eligibility\": \"UNSPECIFIED\",\n        \"offer_data\": {\n          \"offer_id\": \"string\",\n          \"offer_version\": \"string\",\n          \"offer_order_exchange_rate\": \"string\",\n          \"offer_warranty\": \"UNSPECIFIED\",\n          \"offer_grading\": \"UNSPECIFIED\",\n          \"shipping_profile_id\": \"string\",\n          \"shipping_profile_version\": \"string\",\n          \"shipping_costs\": \"string\",\n          \"battery_condition\": \"UNSPECIFIED\"\n        },\n        \"parcel_tracking_url\": \"string\",\n        \"return_shipment_tracking_url\": \"string\",\n        \"item_identifier\": \"string\",\n        \"item_identifiers\": [\n          {\n            \"identifier_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          },\n          {\n            \"identifier_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          }\n        ],\n        \"shipment_status\": \"UNSPECIFIED\",\n        \"shipment_substatus\": \"UNSPECIFIED\",\n        \"return_initiated\": false,\n        \"vat_rate\": \"string\",\n        \"vat_country\": \"UNSPECIFIED\",\n        \"vat_charged\": \"string\",\n        \"settlement_vat_charged\": \"string\",\n        \"weight_kg\": 9441.494482244714,\n        \"manufacturing_country\": \"UNSPECIFIED\",\n        \"hs_code\": \"string\"\n      }\n    },\n    {\n      \"status\": {\n        \"code\": 9667,\n        \"message\": \"string\",\n        \"details\": [\n          {\n            \"@type\": \"string\"\n          },\n          {\n            \"@type\": \"string\",\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        ]\n      },\n      \"order_item\": {\n        \"id\": \"string\",\n        \"order_id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"UNSPECIFIED\",\n        \"sku\": \"string\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"settlement_currency_code\": \"UNSPECIFIED\",\n        \"total_charged\": \"string\",\n        \"settlement_total_charged\": \"string\",\n        \"total_discount\": \"string\",\n        \"settlement_total_discount\": \"string\",\n        \"total_charged_dynamic\": \"string\",\n        \"settlement_total_charged_dynamic\": \"string\",\n        \"total_paid\": \"string\",\n        \"settlement_total_paid\": \"string\",\n        \"total_refunded\": \"string\",\n        \"settlement_total_refunded\": \"string\",\n        \"settlement_total_commission\": \"string\",\n        \"settlement_base_commission\": \"string\",\n        \"settlement_payout_commission\": \"string\",\n        \"settlement_payment_commission\": \"string\",\n        \"settlement_dynamic_commission\": \"string\",\n        \"taxation\": \"UNSPECIFIED\",\n        \"is_refundable\": false,\n        \"refund_eligibility\": \"UNSPECIFIED\",\n        \"offer_data\": {\n          \"offer_id\": \"string\",\n          \"offer_version\": \"string\",\n          \"offer_order_exchange_rate\": \"string\",\n          \"offer_warranty\": \"UNSPECIFIED\",\n          \"offer_grading\": \"UNSPECIFIED\",\n          \"shipping_profile_id\": \"string\",\n          \"shipping_profile_version\": \"string\",\n          \"shipping_costs\": \"string\",\n          \"battery_condition\": \"UNSPECIFIED\"\n        },\n        \"parcel_tracking_url\": \"string\",\n        \"return_shipment_tracking_url\": \"string\",\n        \"item_identifier\": \"string\",\n        \"item_identifiers\": [\n          {\n            \"identifier_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          },\n          {\n            \"identifier_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          }\n        ],\n        \"shipment_status\": \"UNSPECIFIED\",\n        \"shipment_substatus\": \"UNSPECIFIED\",\n        \"return_initiated\": true,\n        \"vat_rate\": \"string\",\n        \"vat_country\": \"UNSPECIFIED\",\n        \"vat_charged\": \"string\",\n        \"settlement_vat_charged\": \"string\",\n        \"weight_kg\": 8848.781300830711,\n        \"manufacturing_country\": \"UNSPECIFIED\",\n        \"hs_code\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2bed461-0116-4b55-882f-30b7fdb9379a",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "BatchUpdateOrderItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_items\": [\n    {\n      \"id\": \"<int64>\",\n      \"parcel_tracking_url\": \"<string>\",\n      \"item_identifier\": \"<string>\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"weight_kg\": \"<float>\",\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"<string>\",\n      \"parcel_carrier_tracking_number\": {\n        \"carrier\": \"<string>\",\n        \"tracking_number\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<int64>\",\n      \"parcel_tracking_url\": \"<string>\",\n      \"item_identifier\": \"<string>\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"weight_kg\": \"<float>\",\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"<string>\",\n      \"parcel_carrier_tracking_number\": {\n        \"carrier\": \"<string>\",\n        \"tracking_number\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 846,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ff4e12b-cb37-41b9-9bd2-4798faa9316d",
+          "name": "Batch updates order items' state.",
+          "request": {
+            "name": "Batch updates order items' state.",
+            "description": {
+              "content": "Known errors: Errors are identical to the UpdateOrderItemState operation\nper each individual order item state update and:\n- INVALID_ARGUMENT\n  - when more than 50 updates are attempted",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderItemService",
+                "BatchUpdateOrderItemsState"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"updates\": [\n    {\n      \"id\": \"<int64>\",\n      \"state\": \"UNSPECIFIED\",\n      \"parcel_tracking_url\": \"<string>\",\n      \"item_identifier\": \"<string>\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"weight_kg\": \"<float>\",\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"<string>\",\n      \"parcel_carrier_tracking_number\": {\n        \"carrier\": \"<string>\",\n        \"tracking_number\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<int64>\",\n      \"state\": \"UNSPECIFIED\",\n      \"parcel_tracking_url\": \"<string>\",\n      \"item_identifier\": \"<string>\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"weight_kg\": \"<float>\",\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"<string>\",\n      \"parcel_carrier_tracking_number\": {\n        \"carrier\": \"<string>\",\n        \"tracking_number\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "176bea7d-e29b-44ae-ab36-94436bae97b3",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "BatchUpdateOrderItemsState"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updates\": [\n    {\n      \"id\": \"<int64>\",\n      \"state\": \"UNSPECIFIED\",\n      \"parcel_tracking_url\": \"<string>\",\n      \"item_identifier\": \"<string>\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"weight_kg\": \"<float>\",\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"<string>\",\n      \"parcel_carrier_tracking_number\": {\n        \"carrier\": \"<string>\",\n        \"tracking_number\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<int64>\",\n      \"state\": \"UNSPECIFIED\",\n      \"parcel_tracking_url\": \"<string>\",\n      \"item_identifier\": \"<string>\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"weight_kg\": \"<float>\",\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"<string>\",\n      \"parcel_carrier_tracking_number\": {\n        \"carrier\": \"<string>\",\n        \"tracking_number\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"status\": {\n        \"code\": 8110,\n        \"message\": \"string\",\n        \"details\": [\n          {\n            \"@type\": \"string\",\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {},\n            \"key_3\": {}\n          },\n          {\n            \"@type\": \"string\",\n            \"key_0\": {}\n          }\n        ]\n      },\n      \"order_item\": {\n        \"id\": \"string\",\n        \"order_id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"UNSPECIFIED\",\n        \"sku\": \"string\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"settlement_currency_code\": \"UNSPECIFIED\",\n        \"total_charged\": \"string\",\n        \"settlement_total_charged\": \"string\",\n        \"total_discount\": \"string\",\n        \"settlement_total_discount\": \"string\",\n        \"total_charged_dynamic\": \"string\",\n        \"settlement_total_charged_dynamic\": \"string\",\n        \"total_paid\": \"string\",\n        \"settlement_total_paid\": \"string\",\n        \"total_refunded\": \"string\",\n        \"settlement_total_refunded\": \"string\",\n        \"settlement_total_commission\": \"string\",\n        \"settlement_base_commission\": \"string\",\n        \"settlement_payout_commission\": \"string\",\n        \"settlement_payment_commission\": \"string\",\n        \"settlement_dynamic_commission\": \"string\",\n        \"taxation\": \"UNSPECIFIED\",\n        \"is_refundable\": false,\n        \"refund_eligibility\": \"UNSPECIFIED\",\n        \"offer_data\": {\n          \"offer_id\": \"string\",\n          \"offer_version\": \"string\",\n          \"offer_order_exchange_rate\": \"string\",\n          \"offer_warranty\": \"UNSPECIFIED\",\n          \"offer_grading\": \"UNSPECIFIED\",\n          \"shipping_profile_id\": \"string\",\n          \"shipping_profile_version\": \"string\",\n          \"shipping_costs\": \"string\",\n          \"battery_condition\": \"UNSPECIFIED\"\n        },\n        \"parcel_tracking_url\": \"string\",\n        \"return_shipment_tracking_url\": \"string\",\n        \"item_identifier\": \"string\",\n        \"item_identifiers\": [\n          {\n            \"identifier_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          },\n          {\n            \"identifier_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          }\n        ],\n        \"shipment_status\": \"UNSPECIFIED\",\n        \"shipment_substatus\": \"UNSPECIFIED\",\n        \"return_initiated\": false,\n        \"vat_rate\": \"string\",\n        \"vat_country\": \"UNSPECIFIED\",\n        \"vat_charged\": \"string\",\n        \"settlement_vat_charged\": \"string\",\n        \"weight_kg\": 6549.070935755671,\n        \"manufacturing_country\": \"UNSPECIFIED\",\n        \"hs_code\": \"string\"\n      }\n    },\n    {\n      \"status\": {\n        \"code\": 4545,\n        \"message\": \"string\",\n        \"details\": [\n          {\n            \"@type\": \"string\",\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {},\n            \"key_3\": {},\n            \"key_4\": {}\n          },\n          {\n            \"@type\": \"string\"\n          }\n        ]\n      },\n      \"order_item\": {\n        \"id\": \"string\",\n        \"order_id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"UNSPECIFIED\",\n        \"sku\": \"string\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"settlement_currency_code\": \"UNSPECIFIED\",\n        \"total_charged\": \"string\",\n        \"settlement_total_charged\": \"string\",\n        \"total_discount\": \"string\",\n        \"settlement_total_discount\": \"string\",\n        \"total_charged_dynamic\": \"string\",\n        \"settlement_total_charged_dynamic\": \"string\",\n        \"total_paid\": \"string\",\n        \"settlement_total_paid\": \"string\",\n        \"total_refunded\": \"string\",\n        \"settlement_total_refunded\": \"string\",\n        \"settlement_total_commission\": \"string\",\n        \"settlement_base_commission\": \"string\",\n        \"settlement_payout_commission\": \"string\",\n        \"settlement_payment_commission\": \"string\",\n        \"settlement_dynamic_commission\": \"string\",\n        \"taxation\": \"UNSPECIFIED\",\n        \"is_refundable\": true,\n        \"refund_eligibility\": \"UNSPECIFIED\",\n        \"offer_data\": {\n          \"offer_id\": \"string\",\n          \"offer_version\": \"string\",\n          \"offer_order_exchange_rate\": \"string\",\n          \"offer_warranty\": \"UNSPECIFIED\",\n          \"offer_grading\": \"UNSPECIFIED\",\n          \"shipping_profile_id\": \"string\",\n          \"shipping_profile_version\": \"string\",\n          \"shipping_costs\": \"string\",\n          \"battery_condition\": \"UNSPECIFIED\"\n        },\n        \"parcel_tracking_url\": \"string\",\n        \"return_shipment_tracking_url\": \"string\",\n        \"item_identifier\": \"string\",\n        \"item_identifiers\": [\n          {\n            \"identifier_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          },\n          {\n            \"identifier_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"<string>\"\n          }\n        ],\n        \"shipment_status\": \"UNSPECIFIED\",\n        \"shipment_substatus\": \"UNSPECIFIED\",\n        \"return_initiated\": false,\n        \"vat_rate\": \"string\",\n        \"vat_country\": \"UNSPECIFIED\",\n        \"vat_charged\": \"string\",\n        \"settlement_vat_charged\": \"string\",\n        \"weight_kg\": 7689.865284654292,\n        \"manufacturing_country\": \"UNSPECIFIED\",\n        \"hs_code\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "463f325e-8a18-4cd3-bec4-c85518d488fb",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "BatchUpdateOrderItemsState"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updates\": [\n    {\n      \"id\": \"<int64>\",\n      \"state\": \"UNSPECIFIED\",\n      \"parcel_tracking_url\": \"<string>\",\n      \"item_identifier\": \"<string>\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"weight_kg\": \"<float>\",\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"<string>\",\n      \"parcel_carrier_tracking_number\": {\n        \"carrier\": \"<string>\",\n        \"tracking_number\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<int64>\",\n      \"state\": \"UNSPECIFIED\",\n      \"parcel_tracking_url\": \"<string>\",\n      \"item_identifier\": \"<string>\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"weight_kg\": \"<float>\",\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"<string>\",\n      \"parcel_carrier_tracking_number\": {\n        \"carrier\": \"<string>\",\n        \"tracking_number\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 846,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "846c1656-a323-437b-9687-4d863bac224a",
+          "name": "Calculate values for a refund of a single order item, i.e. using the\nRefundOrderItem method.",
+          "request": {
+            "name": "Calculate values for a refund of a single order item, i.e. using the\nRefundOrderItem method.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order item is not found\n- INVALID_ARGUMENT\n  - invalid input refund data is provided\n- FAILED_PRECONDITION\n  - when order item is not refundable\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderItemService",
+                "CalculateRefundOrderItem"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<int64>\",\n  \"target_paid_amount\": \"<string>\",\n  \"currency_code\": \"UNSPECIFIED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7dab5c11-519d-4109-b317-f80a3f78122c",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "CalculateRefundOrderItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"target_paid_amount\": \"<string>\",\n  \"currency_code\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currency_code\": \"UNSPECIFIED\",\n  \"total_paid\": \"string\",\n  \"total_refunded\": \"string\",\n  \"refunded\": \"string\",\n  \"refunded_refurbed\": \"string\",\n  \"refunded_merchant\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ecfcf17-6f33-470f-9361-ebf01eb3edf7",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "CalculateRefundOrderItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"target_paid_amount\": \"<string>\",\n  \"currency_code\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 846,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8081c274-2593-416b-a965-ccaab1ce3365",
+          "name": "Gets a single order item.",
+          "request": {
+            "name": "Gets a single order item.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order item is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderItemService",
+                "GetOrderItem"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9bc45364-28da-4770-8301-f63f89bfcbd4",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "GetOrderItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"order_item\": {\n    \"id\": \"string\",\n    \"order_id\": \"string\",\n    \"name\": \"string\",\n    \"state\": \"UNSPECIFIED\",\n    \"sku\": \"string\",\n    \"currency_code\": \"UNSPECIFIED\",\n    \"settlement_currency_code\": \"UNSPECIFIED\",\n    \"total_charged\": \"string\",\n    \"settlement_total_charged\": \"string\",\n    \"total_discount\": \"string\",\n    \"settlement_total_discount\": \"string\",\n    \"total_charged_dynamic\": \"string\",\n    \"settlement_total_charged_dynamic\": \"string\",\n    \"total_paid\": \"string\",\n    \"settlement_total_paid\": \"string\",\n    \"total_refunded\": \"string\",\n    \"settlement_total_refunded\": \"string\",\n    \"settlement_total_commission\": \"string\",\n    \"settlement_base_commission\": \"string\",\n    \"settlement_payout_commission\": \"string\",\n    \"settlement_payment_commission\": \"string\",\n    \"settlement_dynamic_commission\": \"string\",\n    \"taxation\": \"UNSPECIFIED\",\n    \"is_refundable\": true,\n    \"refund_eligibility\": \"UNSPECIFIED\",\n    \"offer_data\": {\n      \"offer_id\": \"string\",\n      \"offer_version\": \"string\",\n      \"offer_order_exchange_rate\": \"string\",\n      \"offer_warranty\": \"UNSPECIFIED\",\n      \"offer_grading\": \"UNSPECIFIED\",\n      \"shipping_profile_id\": \"string\",\n      \"shipping_profile_version\": \"string\",\n      \"shipping_costs\": \"string\",\n      \"battery_condition\": \"UNSPECIFIED\"\n    },\n    \"parcel_tracking_url\": \"string\",\n    \"return_shipment_tracking_url\": \"string\",\n    \"item_identifier\": \"string\",\n    \"item_identifiers\": [\n      {\n        \"identifier_type\": \"UNSPECIFIED\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"identifier_type\": \"UNSPECIFIED\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"shipment_status\": \"UNSPECIFIED\",\n    \"shipment_substatus\": \"UNSPECIFIED\",\n    \"return_initiated\": true,\n    \"vat_rate\": \"string\",\n    \"vat_country\": \"UNSPECIFIED\",\n    \"vat_charged\": \"string\",\n    \"settlement_vat_charged\": \"string\",\n    \"weight_kg\": 6968.434891759389,\n    \"manufacturing_country\": \"UNSPECIFIED\",\n    \"hs_code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "beb615f2-e077-45b9-9fbc-455981ea41b3",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "GetOrderItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 846,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d34b61d-727b-4ba5-8fae-f1754a27b89e",
+          "name": "Lists all order items of a specific order.",
+          "request": {
+            "name": "Lists all order items of a specific order.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderItemService",
+                "ListOrderItemsByOrder"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<int64>\",\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"name\": {\n      \"matches\": \"<string>\"\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    },\n    \"currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"settlement_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"total_charged\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_charged\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_charged_dynamic\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_charged_dynamic\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_paid\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_paid\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_refunded\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_refunded\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_base_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_payout_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_payment_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_dynamic_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"taxation\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"is_refundable\": {\n      \"value\": \"<boolean>\"\n    },\n    \"is_parcel_tracking_url\": {\n      \"value\": \"<boolean>\"\n    },\n    \"is_item_identifier\": {\n      \"value\": \"<boolean>\"\n    },\n    \"linked_offer_data_offer_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"linked_offer_data_offer_warranty\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"linked_offer_data_offer_grading\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"linked_offer_data_shipping_profile_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d27acba9-4910-4a7b-948b-e95b6a13dc64",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "ListOrderItemsByOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\",\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"name\": {\n      \"matches\": \"<string>\"\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    },\n    \"currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"settlement_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"total_charged\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_charged\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_charged_dynamic\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_charged_dynamic\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_paid\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_paid\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_refunded\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_refunded\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_base_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_payout_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_payment_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_dynamic_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"taxation\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"is_refundable\": {\n      \"value\": \"<boolean>\"\n    },\n    \"is_parcel_tracking_url\": {\n      \"value\": \"<boolean>\"\n    },\n    \"is_item_identifier\": {\n      \"value\": \"<boolean>\"\n    },\n    \"linked_offer_data_offer_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"linked_offer_data_offer_warranty\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"linked_offer_data_offer_grading\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"linked_offer_data_shipping_profile_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"order_items\": [\n    {\n      \"id\": \"string\",\n      \"order_id\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"UNSPECIFIED\",\n      \"sku\": \"string\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"settlement_currency_code\": \"UNSPECIFIED\",\n      \"total_charged\": \"string\",\n      \"settlement_total_charged\": \"string\",\n      \"total_discount\": \"string\",\n      \"settlement_total_discount\": \"string\",\n      \"total_charged_dynamic\": \"string\",\n      \"settlement_total_charged_dynamic\": \"string\",\n      \"total_paid\": \"string\",\n      \"settlement_total_paid\": \"string\",\n      \"total_refunded\": \"string\",\n      \"settlement_total_refunded\": \"string\",\n      \"settlement_total_commission\": \"string\",\n      \"settlement_base_commission\": \"string\",\n      \"settlement_payout_commission\": \"string\",\n      \"settlement_payment_commission\": \"string\",\n      \"settlement_dynamic_commission\": \"string\",\n      \"taxation\": \"UNSPECIFIED\",\n      \"is_refundable\": true,\n      \"refund_eligibility\": \"UNSPECIFIED\",\n      \"offer_data\": {\n        \"offer_id\": \"string\",\n        \"offer_version\": \"string\",\n        \"offer_order_exchange_rate\": \"string\",\n        \"offer_warranty\": \"UNSPECIFIED\",\n        \"offer_grading\": \"UNSPECIFIED\",\n        \"shipping_profile_id\": \"string\",\n        \"shipping_profile_version\": \"string\",\n        \"shipping_costs\": \"string\",\n        \"battery_condition\": \"UNSPECIFIED\"\n      },\n      \"parcel_tracking_url\": \"string\",\n      \"return_shipment_tracking_url\": \"string\",\n      \"item_identifier\": \"string\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"shipment_status\": \"UNSPECIFIED\",\n      \"shipment_substatus\": \"UNSPECIFIED\",\n      \"return_initiated\": true,\n      \"vat_rate\": \"string\",\n      \"vat_country\": \"UNSPECIFIED\",\n      \"vat_charged\": \"string\",\n      \"settlement_vat_charged\": \"string\",\n      \"weight_kg\": 53.40393803497157,\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"order_id\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"UNSPECIFIED\",\n      \"sku\": \"string\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"settlement_currency_code\": \"UNSPECIFIED\",\n      \"total_charged\": \"string\",\n      \"settlement_total_charged\": \"string\",\n      \"total_discount\": \"string\",\n      \"settlement_total_discount\": \"string\",\n      \"total_charged_dynamic\": \"string\",\n      \"settlement_total_charged_dynamic\": \"string\",\n      \"total_paid\": \"string\",\n      \"settlement_total_paid\": \"string\",\n      \"total_refunded\": \"string\",\n      \"settlement_total_refunded\": \"string\",\n      \"settlement_total_commission\": \"string\",\n      \"settlement_base_commission\": \"string\",\n      \"settlement_payout_commission\": \"string\",\n      \"settlement_payment_commission\": \"string\",\n      \"settlement_dynamic_commission\": \"string\",\n      \"taxation\": \"UNSPECIFIED\",\n      \"is_refundable\": true,\n      \"refund_eligibility\": \"UNSPECIFIED\",\n      \"offer_data\": {\n        \"offer_id\": \"string\",\n        \"offer_version\": \"string\",\n        \"offer_order_exchange_rate\": \"string\",\n        \"offer_warranty\": \"UNSPECIFIED\",\n        \"offer_grading\": \"UNSPECIFIED\",\n        \"shipping_profile_id\": \"string\",\n        \"shipping_profile_version\": \"string\",\n        \"shipping_costs\": \"string\",\n        \"battery_condition\": \"UNSPECIFIED\"\n      },\n      \"parcel_tracking_url\": \"string\",\n      \"return_shipment_tracking_url\": \"string\",\n      \"item_identifier\": \"string\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"shipment_status\": \"UNSPECIFIED\",\n      \"shipment_substatus\": \"UNSPECIFIED\",\n      \"return_initiated\": false,\n      \"vat_rate\": \"string\",\n      \"vat_country\": \"UNSPECIFIED\",\n      \"vat_charged\": \"string\",\n      \"settlement_vat_charged\": \"string\",\n      \"weight_kg\": 4858.977476419038,\n      \"manufacturing_country\": \"UNSPECIFIED\",\n      \"hs_code\": \"string\"\n    }\n  ],\n  \"has_more\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9dc32714-1cb7-42df-983e-dafe5b59510a",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "ListOrderItemsByOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\",\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"name\": {\n      \"matches\": \"<string>\"\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    },\n    \"currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"settlement_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"total_charged\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_charged\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_charged_dynamic\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_charged_dynamic\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_paid\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_paid\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_refunded\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_refunded\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_base_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_payout_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_payment_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_dynamic_commission\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"taxation\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"is_refundable\": {\n      \"value\": \"<boolean>\"\n    },\n    \"is_parcel_tracking_url\": {\n      \"value\": \"<boolean>\"\n    },\n    \"is_item_identifier\": {\n      \"value\": \"<boolean>\"\n    },\n    \"linked_offer_data_offer_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"linked_offer_data_offer_warranty\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"linked_offer_data_offer_grading\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"linked_offer_data_shipping_profile_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 846,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50a1538e-107c-49f8-9e62-62392ddb2639",
+          "name": "Refunds a single order item. Item needs to be refundable.",
+          "request": {
+            "name": "Refunds a single order item. Item needs to be refundable.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order item is not found\n- INVALID_ARGUMENT\n  - invalid input refund data is provided\n- FAILED_PRECONDITION\n  - when order item is not refundable\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderItemService",
+                "RefundOrderItem"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<int64>\",\n  \"target_paid_amount\": \"<string>\",\n  \"currency_code\": \"UNSPECIFIED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d1fca4d3-522c-4c07-8b02-6e8e5a6f49e1",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "RefundOrderItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"target_paid_amount\": \"<string>\",\n  \"currency_code\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currency_code\": \"UNSPECIFIED\",\n  \"total_paid\": \"string\",\n  \"total_refunded\": \"string\",\n  \"refunded\": \"string\",\n  \"refunded_refurbed\": \"string\",\n  \"refunded_merchant\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff98026b-6da1-407a-ac07-075b18c64afc",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "RefundOrderItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"target_paid_amount\": \"<string>\",\n  \"currency_code\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 846,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a2b5fb6-daf1-4b32-b8ae-c2bb24d9093a",
+          "name": "Updates a single order item.",
+          "request": {
+            "name": "Updates a single order item.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the updated order item is not found\n- INVALID_ARGUMENT\n  - when invalid parcel tracking url is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderItemService",
+                "UpdateOrderItem"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<int64>\",\n  \"parcel_tracking_url\": \"<string>\",\n  \"item_identifier\": \"<string>\",\n  \"item_identifiers\": [\n    {\n      \"identifier_type\": \"UNSPECIFIED\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"identifier_type\": \"UNSPECIFIED\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"weight_kg\": \"<float>\",\n  \"manufacturing_country\": \"UNSPECIFIED\",\n  \"hs_code\": \"<string>\",\n  \"parcel_carrier_tracking_number\": {\n    \"carrier\": \"<string>\",\n    \"tracking_number\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e1bf1bae-4f08-4e54-8bcf-9ebdddae689f",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "UpdateOrderItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"parcel_tracking_url\": \"<string>\",\n  \"item_identifier\": \"<string>\",\n  \"item_identifiers\": [\n    {\n      \"identifier_type\": \"UNSPECIFIED\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"identifier_type\": \"UNSPECIFIED\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"weight_kg\": \"<float>\",\n  \"manufacturing_country\": \"UNSPECIFIED\",\n  \"hs_code\": \"<string>\",\n  \"parcel_carrier_tracking_number\": {\n    \"carrier\": \"<string>\",\n    \"tracking_number\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"order_item\": {\n    \"id\": \"string\",\n    \"order_id\": \"string\",\n    \"name\": \"string\",\n    \"state\": \"UNSPECIFIED\",\n    \"sku\": \"string\",\n    \"currency_code\": \"UNSPECIFIED\",\n    \"settlement_currency_code\": \"UNSPECIFIED\",\n    \"total_charged\": \"string\",\n    \"settlement_total_charged\": \"string\",\n    \"total_discount\": \"string\",\n    \"settlement_total_discount\": \"string\",\n    \"total_charged_dynamic\": \"string\",\n    \"settlement_total_charged_dynamic\": \"string\",\n    \"total_paid\": \"string\",\n    \"settlement_total_paid\": \"string\",\n    \"total_refunded\": \"string\",\n    \"settlement_total_refunded\": \"string\",\n    \"settlement_total_commission\": \"string\",\n    \"settlement_base_commission\": \"string\",\n    \"settlement_payout_commission\": \"string\",\n    \"settlement_payment_commission\": \"string\",\n    \"settlement_dynamic_commission\": \"string\",\n    \"taxation\": \"UNSPECIFIED\",\n    \"is_refundable\": true,\n    \"refund_eligibility\": \"UNSPECIFIED\",\n    \"offer_data\": {\n      \"offer_id\": \"string\",\n      \"offer_version\": \"string\",\n      \"offer_order_exchange_rate\": \"string\",\n      \"offer_warranty\": \"UNSPECIFIED\",\n      \"offer_grading\": \"UNSPECIFIED\",\n      \"shipping_profile_id\": \"string\",\n      \"shipping_profile_version\": \"string\",\n      \"shipping_costs\": \"string\",\n      \"battery_condition\": \"UNSPECIFIED\"\n    },\n    \"parcel_tracking_url\": \"string\",\n    \"return_shipment_tracking_url\": \"string\",\n    \"item_identifier\": \"string\",\n    \"item_identifiers\": [\n      {\n        \"identifier_type\": \"UNSPECIFIED\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"identifier_type\": \"UNSPECIFIED\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"shipment_status\": \"UNSPECIFIED\",\n    \"shipment_substatus\": \"UNSPECIFIED\",\n    \"return_initiated\": true,\n    \"vat_rate\": \"string\",\n    \"vat_country\": \"UNSPECIFIED\",\n    \"vat_charged\": \"string\",\n    \"settlement_vat_charged\": \"string\",\n    \"weight_kg\": 6968.434891759389,\n    \"manufacturing_country\": \"UNSPECIFIED\",\n    \"hs_code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d42b8acf-ff9d-49e5-9192-d3b6af6376e5",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "UpdateOrderItem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"parcel_tracking_url\": \"<string>\",\n  \"item_identifier\": \"<string>\",\n  \"item_identifiers\": [\n    {\n      \"identifier_type\": \"UNSPECIFIED\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"identifier_type\": \"UNSPECIFIED\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"weight_kg\": \"<float>\",\n  \"manufacturing_country\": \"UNSPECIFIED\",\n  \"hs_code\": \"<string>\",\n  \"parcel_carrier_tracking_number\": {\n    \"carrier\": \"<string>\",\n    \"tracking_number\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 846,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1418a8b2-b29b-4ca9-a670-4c9ab0bbb63b",
+          "name": "Updates the state of a single order item.",
+          "request": {
+            "name": "Updates the state of a single order item.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the updated order item is not found\n- INVALID_ARGUMENT\n  - when illegal state transition is attempted\n  - when no parcel tracking url is set when transitioning to SHIPPED state\n  - when invalid parcel tracking url is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderItemService",
+                "UpdateOrderItemState"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<int64>\",\n  \"state\": \"UNSPECIFIED\",\n  \"parcel_tracking_url\": \"<string>\",\n  \"item_identifier\": \"<string>\",\n  \"item_identifiers\": [\n    {\n      \"identifier_type\": \"UNSPECIFIED\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"identifier_type\": \"UNSPECIFIED\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"weight_kg\": \"<float>\",\n  \"manufacturing_country\": \"UNSPECIFIED\",\n  \"hs_code\": \"<string>\",\n  \"parcel_carrier_tracking_number\": {\n    \"carrier\": \"<string>\",\n    \"tracking_number\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "109a1b24-7a58-4552-9364-016d69193aec",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "UpdateOrderItemState"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"state\": \"UNSPECIFIED\",\n  \"parcel_tracking_url\": \"<string>\",\n  \"item_identifier\": \"<string>\",\n  \"item_identifiers\": [\n    {\n      \"identifier_type\": \"UNSPECIFIED\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"identifier_type\": \"UNSPECIFIED\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"weight_kg\": \"<float>\",\n  \"manufacturing_country\": \"UNSPECIFIED\",\n  \"hs_code\": \"<string>\",\n  \"parcel_carrier_tracking_number\": {\n    \"carrier\": \"<string>\",\n    \"tracking_number\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"order_item\": {\n    \"id\": \"string\",\n    \"order_id\": \"string\",\n    \"name\": \"string\",\n    \"state\": \"UNSPECIFIED\",\n    \"sku\": \"string\",\n    \"currency_code\": \"UNSPECIFIED\",\n    \"settlement_currency_code\": \"UNSPECIFIED\",\n    \"total_charged\": \"string\",\n    \"settlement_total_charged\": \"string\",\n    \"total_discount\": \"string\",\n    \"settlement_total_discount\": \"string\",\n    \"total_charged_dynamic\": \"string\",\n    \"settlement_total_charged_dynamic\": \"string\",\n    \"total_paid\": \"string\",\n    \"settlement_total_paid\": \"string\",\n    \"total_refunded\": \"string\",\n    \"settlement_total_refunded\": \"string\",\n    \"settlement_total_commission\": \"string\",\n    \"settlement_base_commission\": \"string\",\n    \"settlement_payout_commission\": \"string\",\n    \"settlement_payment_commission\": \"string\",\n    \"settlement_dynamic_commission\": \"string\",\n    \"taxation\": \"UNSPECIFIED\",\n    \"is_refundable\": true,\n    \"refund_eligibility\": \"UNSPECIFIED\",\n    \"offer_data\": {\n      \"offer_id\": \"string\",\n      \"offer_version\": \"string\",\n      \"offer_order_exchange_rate\": \"string\",\n      \"offer_warranty\": \"UNSPECIFIED\",\n      \"offer_grading\": \"UNSPECIFIED\",\n      \"shipping_profile_id\": \"string\",\n      \"shipping_profile_version\": \"string\",\n      \"shipping_costs\": \"string\",\n      \"battery_condition\": \"UNSPECIFIED\"\n    },\n    \"parcel_tracking_url\": \"string\",\n    \"return_shipment_tracking_url\": \"string\",\n    \"item_identifier\": \"string\",\n    \"item_identifiers\": [\n      {\n        \"identifier_type\": \"UNSPECIFIED\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"identifier_type\": \"UNSPECIFIED\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"shipment_status\": \"UNSPECIFIED\",\n    \"shipment_substatus\": \"UNSPECIFIED\",\n    \"return_initiated\": true,\n    \"vat_rate\": \"string\",\n    \"vat_country\": \"UNSPECIFIED\",\n    \"vat_charged\": \"string\",\n    \"settlement_vat_charged\": \"string\",\n    \"weight_kg\": 6968.434891759389,\n    \"manufacturing_country\": \"UNSPECIFIED\",\n    \"hs_code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "674680e2-b66a-4f5f-83c8-030c882116c5",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemService",
+                    "UpdateOrderItemState"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"state\": \"UNSPECIFIED\",\n  \"parcel_tracking_url\": \"<string>\",\n  \"item_identifier\": \"<string>\",\n  \"item_identifiers\": [\n    {\n      \"identifier_type\": \"UNSPECIFIED\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"identifier_type\": \"UNSPECIFIED\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"weight_kg\": \"<float>\",\n  \"manufacturing_country\": \"UNSPECIFIED\",\n  \"hs_code\": \"<string>\",\n  \"parcel_carrier_tracking_number\": {\n    \"carrier\": \"<string>\",\n    \"tracking_number\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 846,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.refurbed.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0ed94416-383b-4503-b7ca-2fc5d3049142",
+    "name": "Affiliate Partner BuybackBidService OrderItemService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).\n\nContact Support:\n Name: Refurbed Affiliate Partner Integrations Team\n Email: integrations@refurbed.com",
+      "type": "text/plain"
+    }
+  }
+}

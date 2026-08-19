@@ -1,0 +1,2038 @@
+{
+  "item": [
+    {
+      "id": "605304e8-815e-406a-94cf-78c5ebabd8e7",
+      "name": "OrderService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c2d81aad-e236-43ee-9c8b-fcbf681f3042",
+          "name": "Calculate values for a refund of all refundable items of an order at once,\ni.e. using the RefundOrder method.",
+          "request": {
+            "name": "Calculate values for a refund of all refundable items of an order at once,\ni.e. using the RefundOrder method.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n- INVALID_ARGUMENT\n  - invalid input refund data is provided\n- FAILED_PRECONDITION\n  - when order is not refundable\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderService",
+                "CalculateRefundOrder"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "621a97b8-ef5c-4904-b438-c54aea57ec0d",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "CalculateRefundOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currency_code\": \"UNSPECIFIED\",\n  \"total_paid\": \"string\",\n  \"total_refunded\": \"string\",\n  \"refunded\": \"string\",\n  \"refunded_refurbed\": \"string\",\n  \"refunded_merchant\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "065ce9ee-ad7f-4b2f-a020-bb19dfb48444",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "CalculateRefundOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5131,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "670f91d1-2a4d-4be6-9b8d-ff393ca64ca7",
+          "name": "Creates shipping label for an order",
+          "request": {
+            "name": "Creates shipping label for an order",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n  - when merchant address is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderService",
+                "CreateShippingLabel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<int64>\",\n  \"merchant_address_id\": \"<int64>\",\n  \"parcel_weight\": \"<float>\",\n  \"carrier\": \"UNSPECIFIED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "19f46080-821d-4fda-ab99-d6b0b45013ef",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "CreateShippingLabel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\",\n  \"merchant_address_id\": \"<int64>\",\n  \"parcel_weight\": \"<float>\",\n  \"carrier\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipping_label\": {\n    \"id\": \"string\",\n    \"normal_printer_urls\": {\n      \"top_left\": \"string\",\n      \"top_right\": \"string\",\n      \"bottom_left\": \"string\",\n      \"bottom_right\": \"string\"\n    },\n    \"label_printer_url\": \"string\",\n    \"tracking_data\": {\n      \"carrier\": \"string\",\n      \"tracking_number\": \"string\",\n      \"tracking_url\": \"string\"\n    },\n    \"parcel_weight\": 3309.0964582903925,\n    \"merchant_address\": {\n      \"id\": \"string\",\n      \"version\": \"string\",\n      \"label\": \"string\",\n      \"first_name\": \"string\",\n      \"family_name\": \"string\",\n      \"company_name\": \"string\",\n      \"country_code\": \"UNSPECIFIED\",\n      \"post_code\": \"string\",\n      \"town\": \"string\",\n      \"street_name\": \"string\",\n      \"house_no\": \"string\",\n      \"supplement\": \"string\",\n      \"phone_number\": \"string\",\n      \"type\": \"UNSPECIFIED\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6819f3ad-9ef8-42c9-9362-fd450db47a85",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "CreateShippingLabel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\",\n  \"merchant_address_id\": \"<int64>\",\n  \"parcel_weight\": \"<float>\",\n  \"carrier\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6359,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2467b201-b198-4e6d-93f2-2586f00d7e67",
+          "name": "Deletes the previously uploaded commercial invoice for an order.",
+          "request": {
+            "name": "Deletes the previously uploaded commercial invoice for an order.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n  - when the commercial invoice was not uploaded\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderService",
+                "DeleteOrderCommercialInvoice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "031b716c-d770-4a17-a52b-c370a2647bfd",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "DeleteOrderCommercialInvoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5940a638-4a73-4793-b395-dd3a3a1208a1",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "DeleteOrderCommercialInvoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6359,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2523d746-748e-489b-8ec1-264aee79b355",
+          "name": "Deletes the order's invoice. Order needs to be\ninvoiceable.",
+          "request": {
+            "name": "Deletes the order's invoice. Order needs to be\ninvoiceable.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found for the merchant\n  - when no invoice is found in the order\n- FAILED_PRECONDITION\n  - when the order is not invoiceable\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderService",
+                "DeleteOrderInvoice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c2812f5-6725-43e0-8d47-1c661295b1ef",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "DeleteOrderInvoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef4f82e3-8b1b-4a99-a270-4a1f2713c2a6",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "DeleteOrderInvoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6359,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38b90bbd-107f-489f-8840-47710a4db903",
+          "name": "Gets a single order using its identifier.",
+          "request": {
+            "name": "Gets a single order using its identifier.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderService",
+                "GetOrder"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b6a0fec4-aaa1-4127-92d3-c8b116a822e3",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "GetOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"order\": {\n    \"id\": \"string\",\n    \"released_at\": \"1998-07-02T00:58:09.578Z\",\n    \"state\": \"UNSPECIFIED\",\n    \"labels\": [\n      \"UNSPECIFIED\",\n      \"UNSPECIFIED\"\n    ],\n    \"customer_email\": \"string\",\n    \"shipping_address\": {\n      \"first_name\": \"string\",\n      \"family_name\": \"string\",\n      \"entity\": \"UNSPECIFIED\",\n      \"company_name\": \"string\",\n      \"company_vatin\": \"string\",\n      \"personal_vatin\": \"string\",\n      \"country_code\": \"UNSPECIFIED\",\n      \"post_code\": \"string\",\n      \"town\": \"string\",\n      \"street_name\": \"string\",\n      \"house_no\": \"string\",\n      \"supplement\": \"string\",\n      \"phone_number\": \"string\"\n    },\n    \"invoice_address\": {\n      \"first_name\": \"string\",\n      \"family_name\": \"string\",\n      \"entity\": \"UNSPECIFIED\",\n      \"company_name\": \"string\",\n      \"company_vatin\": \"string\",\n      \"personal_vatin\": \"string\",\n      \"country_code\": \"UNSPECIFIED\",\n      \"post_code\": \"string\",\n      \"town\": \"string\",\n      \"street_name\": \"string\",\n      \"house_no\": \"string\",\n      \"supplement\": \"string\",\n      \"phone_number\": \"string\"\n    },\n    \"currency_code\": \"UNSPECIFIED\",\n    \"settlement_currency_code\": \"UNSPECIFIED\",\n    \"settlement_exchange_rate\": \"string\",\n    \"total_charged\": \"string\",\n    \"settlement_total_charged\": \"string\",\n    \"total_discount\": \"string\",\n    \"settlement_total_discount\": \"string\",\n    \"total_paid\": \"string\",\n    \"settlement_total_paid\": \"string\",\n    \"total_refunded\": \"string\",\n    \"settlement_total_refunded\": \"string\",\n    \"total_vat_charged\": \"string\",\n    \"settlement_total_vat_charged\": \"string\",\n    \"is_refundable\": false,\n    \"refund_eligibility\": \"UNSPECIFIED\",\n    \"is_invoiceable\": true,\n    \"has_invoice\": true,\n    \"items\": [\n      {\n        \"id\": \"string\",\n        \"order_id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"UNSPECIFIED\",\n        \"sku\": \"string\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"settlement_currency_code\": \"UNSPECIFIED\",\n        \"total_charged\": \"string\",\n        \"settlement_total_charged\": \"string\",\n        \"total_discount\": \"string\",\n        \"settlement_total_discount\": \"string\",\n        \"total_charged_dynamic\": \"string\",\n        \"settlement_total_charged_dynamic\": \"string\",\n        \"total_paid\": \"string\",\n        \"settlement_total_paid\": \"string\",\n        \"total_refunded\": \"string\",\n        \"settlement_total_refunded\": \"string\",\n        \"settlement_total_commission\": \"string\",\n        \"settlement_base_commission\": \"string\",\n        \"settlement_payout_commission\": \"string\",\n        \"settlement_payment_commission\": \"string\",\n        \"settlement_dynamic_commission\": \"string\",\n        \"taxation\": \"UNSPECIFIED\",\n        \"is_refundable\": true,\n        \"refund_eligibility\": \"UNSPECIFIED\",\n        \"offer_data\": {\n          \"offer_id\": \"string\",\n          \"offer_version\": \"string\",\n          \"offer_order_exchange_rate\": \"string\",\n          \"offer_warranty\": \"UNSPECIFIED\",\n          \"offer_grading\": \"UNSPECIFIED\",\n          \"shipping_profile_id\": \"string\",\n          \"shipping_profile_version\": \"string\",\n          \"shipping_costs\": \"string\",\n          \"battery_condition\": \"UNSPECIFIED\"\n        },\n        \"parcel_tracking_url\": \"string\",\n        \"return_shipment_tracking_url\": \"string\",\n        \"item_identifier\": \"string\",\n        \"item_identifiers\": [\n          {\n            \"identifier_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"string\"\n          },\n          {\n            \"identifier_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"string\"\n          }\n        ],\n        \"shipment_status\": \"UNSPECIFIED\",\n        \"shipment_substatus\": \"UNSPECIFIED\",\n        \"return_initiated\": false,\n        \"vat_rate\": \"string\",\n        \"vat_country\": \"UNSPECIFIED\",\n        \"vat_charged\": \"string\",\n        \"settlement_vat_charged\": \"string\",\n        \"weight_kg\": 3545.7073560662366,\n        \"manufacturing_country\": \"UNSPECIFIED\",\n        \"hs_code\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"order_id\": \"string\",\n        \"name\": \"string\",\n        \"state\": \"UNSPECIFIED\",\n        \"sku\": \"string\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"settlement_currency_code\": \"UNSPECIFIED\",\n        \"total_charged\": \"string\",\n        \"settlement_total_charged\": \"string\",\n        \"total_discount\": \"string\",\n        \"settlement_total_discount\": \"string\",\n        \"total_charged_dynamic\": \"string\",\n        \"settlement_total_charged_dynamic\": \"string\",\n        \"total_paid\": \"string\",\n        \"settlement_total_paid\": \"string\",\n        \"total_refunded\": \"string\",\n        \"settlement_total_refunded\": \"string\",\n        \"settlement_total_commission\": \"string\",\n        \"settlement_base_commission\": \"string\",\n        \"settlement_payout_commission\": \"string\",\n        \"settlement_payment_commission\": \"string\",\n        \"settlement_dynamic_commission\": \"string\",\n        \"taxation\": \"UNSPECIFIED\",\n        \"is_refundable\": false,\n        \"refund_eligibility\": \"UNSPECIFIED\",\n        \"offer_data\": {\n          \"offer_id\": \"string\",\n          \"offer_version\": \"string\",\n          \"offer_order_exchange_rate\": \"string\",\n          \"offer_warranty\": \"UNSPECIFIED\",\n          \"offer_grading\": \"UNSPECIFIED\",\n          \"shipping_profile_id\": \"string\",\n          \"shipping_profile_version\": \"string\",\n          \"shipping_costs\": \"string\",\n          \"battery_condition\": \"UNSPECIFIED\"\n        },\n        \"parcel_tracking_url\": \"string\",\n        \"return_shipment_tracking_url\": \"string\",\n        \"item_identifier\": \"string\",\n        \"item_identifiers\": [\n          {\n            \"identifier_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"string\"\n          },\n          {\n            \"identifier_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": \"string\"\n          }\n        ],\n        \"shipment_status\": \"UNSPECIFIED\",\n        \"shipment_substatus\": \"UNSPECIFIED\",\n        \"return_initiated\": true,\n        \"vat_rate\": \"string\",\n        \"vat_country\": \"UNSPECIFIED\",\n        \"vat_charged\": \"string\",\n        \"settlement_vat_charged\": \"string\",\n        \"weight_kg\": 9402.189770414652,\n        \"manufacturing_country\": \"UNSPECIFIED\",\n        \"hs_code\": \"string\"\n      }\n    ],\n    \"shipping_label_address\": {\n      \"first_name\": \"string\",\n      \"family_name\": \"string\",\n      \"entity\": \"UNSPECIFIED\",\n      \"company_name\": \"string\",\n      \"company_vatin\": \"string\",\n      \"personal_vatin\": \"string\",\n      \"country_code\": \"UNSPECIFIED\",\n      \"post_code\": \"string\",\n      \"town\": \"string\",\n      \"street_name\": \"string\",\n      \"house_no\": \"string\",\n      \"supplement\": \"string\",\n      \"phone_number\": \"string\"\n    },\n    \"payment_method\": \"UNSPECIFIED\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0b1bbd9-5f21-45a0-80af-990cab1a6dcd",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "GetOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6359,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6732beb-26c4-4123-8ecc-d245c37d239e",
+          "name": "Returns the previously uploaded commercial invoice for an order.",
+          "request": {
+            "name": "Returns the previously uploaded commercial invoice for an order.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n  - when the commercial invoice was not uploaded\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderService",
+                "GetOrderCommercialInvoice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a3704bca-69a3-40ed-a58e-94d89dc34769",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "GetOrderCommercialInvoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"string\",\n  \"commercial_invoice_number\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6aa387eb-2ed0-4244-99c0-d557dabb4a06",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "GetOrderCommercialInvoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6359,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d5cb2b0-00ec-45c9-ab6e-b5d639b25610",
+          "name": "Gets the order's invoice. The URL access token is valid for 24h.",
+          "request": {
+            "name": "Gets the order's invoice. The URL access token is valid for 24h.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found for the merchant\n  - when no invoice is found in the order\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderService",
+                "GetOrderInvoice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dce7a538-fd75-4cda-bd28-b2d80d19c085",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "GetOrderInvoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "896f5b48-0691-4975-8a8e-4518b7b840c1",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "GetOrderInvoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6359,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b45b9ee8-64fc-488f-a5af-a7c8d91ee984",
+          "name": "Lists orders.",
+          "request": {
+            "name": "Lists orders.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderService",
+                "ListOrders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"released_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"labels\": {\n      \"all_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"customer_email\": {\n      \"eq\": \"<string>\",\n      \"contains\": \"<string>\"\n    },\n    \"address\": {\n      \"matches\": \"<string>\"\n    },\n    \"address_phone_number\": {\n      \"eq\": \"<string>\",\n      \"contains\": \"<string>\"\n    },\n    \"shipping_address_entity\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"shipping_address_country_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"invoice_address\": {\n      \"matches\": \"<string>\"\n    },\n    \"invoice_address_entity\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"invoice_address_vatin\": {\n      \"eq\": \"<string>\",\n      \"contains\": \"<string>\"\n    },\n    \"invoice_address_country_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"settlement_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"total_charged\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_charged\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_paid\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_paid\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_refunded\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_refunded\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"is_invoiceable\": {\n      \"value\": \"<boolean>\"\n    },\n    \"has_invoice\": {\n      \"value\": \"<boolean>\"\n    },\n    \"item_name\": {\n      \"matches\": \"<string>\"\n    },\n    \"item_sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    },\n    \"item_offer_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"is_return_initiated\": {\n      \"value\": \"<boolean>\"\n    },\n    \"is_return_shipment_label_used\": {\n      \"value\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8db1a050-51fc-4a60-88ae-d46daace5422",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "ListOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"released_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"labels\": {\n      \"all_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"customer_email\": {\n      \"eq\": \"<string>\",\n      \"contains\": \"<string>\"\n    },\n    \"address\": {\n      \"matches\": \"<string>\"\n    },\n    \"address_phone_number\": {\n      \"eq\": \"<string>\",\n      \"contains\": \"<string>\"\n    },\n    \"shipping_address_entity\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"shipping_address_country_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"invoice_address\": {\n      \"matches\": \"<string>\"\n    },\n    \"invoice_address_entity\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"invoice_address_vatin\": {\n      \"eq\": \"<string>\",\n      \"contains\": \"<string>\"\n    },\n    \"invoice_address_country_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"settlement_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"total_charged\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_charged\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_paid\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_paid\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_refunded\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_refunded\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"is_invoiceable\": {\n      \"value\": \"<boolean>\"\n    },\n    \"has_invoice\": {\n      \"value\": \"<boolean>\"\n    },\n    \"item_name\": {\n      \"matches\": \"<string>\"\n    },\n    \"item_sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    },\n    \"item_offer_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"is_return_initiated\": {\n      \"value\": \"<boolean>\"\n    },\n    \"is_return_shipment_label_used\": {\n      \"value\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orders\": [\n    {\n      \"id\": \"string\",\n      \"released_at\": \"2026-05-07T09:30:26.059Z\",\n      \"state\": \"UNSPECIFIED\",\n      \"labels\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"customer_email\": \"string\",\n      \"shipping_address\": {\n        \"first_name\": \"string\",\n        \"family_name\": \"string\",\n        \"entity\": \"UNSPECIFIED\",\n        \"company_name\": \"string\",\n        \"company_vatin\": \"string\",\n        \"personal_vatin\": \"string\",\n        \"country_code\": \"UNSPECIFIED\",\n        \"post_code\": \"string\",\n        \"town\": \"string\",\n        \"street_name\": \"string\",\n        \"house_no\": \"string\",\n        \"supplement\": \"string\",\n        \"phone_number\": \"string\"\n      },\n      \"invoice_address\": {\n        \"first_name\": \"string\",\n        \"family_name\": \"string\",\n        \"entity\": \"UNSPECIFIED\",\n        \"company_name\": \"string\",\n        \"company_vatin\": \"string\",\n        \"personal_vatin\": \"string\",\n        \"country_code\": \"UNSPECIFIED\",\n        \"post_code\": \"string\",\n        \"town\": \"string\",\n        \"street_name\": \"string\",\n        \"house_no\": \"string\",\n        \"supplement\": \"string\",\n        \"phone_number\": \"string\"\n      },\n      \"currency_code\": \"UNSPECIFIED\",\n      \"settlement_currency_code\": \"UNSPECIFIED\",\n      \"settlement_exchange_rate\": \"string\",\n      \"total_charged\": \"string\",\n      \"settlement_total_charged\": \"string\",\n      \"total_discount\": \"string\",\n      \"settlement_total_discount\": \"string\",\n      \"total_paid\": \"string\",\n      \"settlement_total_paid\": \"string\",\n      \"total_refunded\": \"string\",\n      \"settlement_total_refunded\": \"string\",\n      \"total_vat_charged\": \"string\",\n      \"settlement_total_vat_charged\": \"string\",\n      \"is_refundable\": false,\n      \"refund_eligibility\": \"UNSPECIFIED\",\n      \"is_invoiceable\": true,\n      \"has_invoice\": false,\n      \"items\": [\n        {\n          \"id\": \"string\",\n          \"order_id\": \"string\",\n          \"name\": \"string\",\n          \"state\": \"UNSPECIFIED\",\n          \"sku\": \"string\",\n          \"currency_code\": \"UNSPECIFIED\",\n          \"settlement_currency_code\": \"UNSPECIFIED\",\n          \"total_charged\": \"string\",\n          \"settlement_total_charged\": \"string\",\n          \"total_discount\": \"string\",\n          \"settlement_total_discount\": \"string\",\n          \"total_charged_dynamic\": \"string\",\n          \"settlement_total_charged_dynamic\": \"string\",\n          \"total_paid\": \"string\",\n          \"settlement_total_paid\": \"string\",\n          \"total_refunded\": \"string\",\n          \"settlement_total_refunded\": \"string\",\n          \"settlement_total_commission\": \"string\",\n          \"settlement_base_commission\": \"string\",\n          \"settlement_payout_commission\": \"string\",\n          \"settlement_payment_commission\": \"string\",\n          \"settlement_dynamic_commission\": \"string\",\n          \"taxation\": \"UNSPECIFIED\",\n          \"is_refundable\": false,\n          \"refund_eligibility\": \"UNSPECIFIED\",\n          \"offer_data\": {\n            \"offer_id\": \"string\",\n            \"offer_version\": \"string\",\n            \"offer_order_exchange_rate\": \"string\",\n            \"offer_warranty\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"offer_grading\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shipping_profile_id\": \"string\",\n            \"shipping_profile_version\": \"string\",\n            \"shipping_costs\": \"string\",\n            \"battery_condition\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"parcel_tracking_url\": \"string\",\n          \"return_shipment_tracking_url\": \"string\",\n          \"item_identifier\": \"string\",\n          \"item_identifiers\": [\n            {\n              \"identifier_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"identifier_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"shipment_status\": \"UNSPECIFIED\",\n          \"shipment_substatus\": \"UNSPECIFIED\",\n          \"return_initiated\": true,\n          \"vat_rate\": \"string\",\n          \"vat_country\": \"UNSPECIFIED\",\n          \"vat_charged\": \"string\",\n          \"settlement_vat_charged\": \"string\",\n          \"weight_kg\": 6719.430425759589,\n          \"manufacturing_country\": \"UNSPECIFIED\",\n          \"hs_code\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"order_id\": \"string\",\n          \"name\": \"string\",\n          \"state\": \"UNSPECIFIED\",\n          \"sku\": \"string\",\n          \"currency_code\": \"UNSPECIFIED\",\n          \"settlement_currency_code\": \"UNSPECIFIED\",\n          \"total_charged\": \"string\",\n          \"settlement_total_charged\": \"string\",\n          \"total_discount\": \"string\",\n          \"settlement_total_discount\": \"string\",\n          \"total_charged_dynamic\": \"string\",\n          \"settlement_total_charged_dynamic\": \"string\",\n          \"total_paid\": \"string\",\n          \"settlement_total_paid\": \"string\",\n          \"total_refunded\": \"string\",\n          \"settlement_total_refunded\": \"string\",\n          \"settlement_total_commission\": \"string\",\n          \"settlement_base_commission\": \"string\",\n          \"settlement_payout_commission\": \"string\",\n          \"settlement_payment_commission\": \"string\",\n          \"settlement_dynamic_commission\": \"string\",\n          \"taxation\": \"UNSPECIFIED\",\n          \"is_refundable\": true,\n          \"refund_eligibility\": \"UNSPECIFIED\",\n          \"offer_data\": {\n            \"offer_id\": \"string\",\n            \"offer_version\": \"string\",\n            \"offer_order_exchange_rate\": \"string\",\n            \"offer_warranty\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"offer_grading\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shipping_profile_id\": \"string\",\n            \"shipping_profile_version\": \"string\",\n            \"shipping_costs\": \"string\",\n            \"battery_condition\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"parcel_tracking_url\": \"string\",\n          \"return_shipment_tracking_url\": \"string\",\n          \"item_identifier\": \"string\",\n          \"item_identifiers\": [\n            {\n              \"identifier_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"identifier_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"shipment_status\": \"UNSPECIFIED\",\n          \"shipment_substatus\": \"UNSPECIFIED\",\n          \"return_initiated\": false,\n          \"vat_rate\": \"string\",\n          \"vat_country\": \"UNSPECIFIED\",\n          \"vat_charged\": \"string\",\n          \"settlement_vat_charged\": \"string\",\n          \"weight_kg\": 7199.574711145354,\n          \"manufacturing_country\": \"UNSPECIFIED\",\n          \"hs_code\": \"string\"\n        }\n      ],\n      \"shipping_label_address\": {\n        \"first_name\": \"string\",\n        \"family_name\": \"string\",\n        \"entity\": \"UNSPECIFIED\",\n        \"company_name\": \"string\",\n        \"company_vatin\": \"string\",\n        \"personal_vatin\": \"string\",\n        \"country_code\": \"UNSPECIFIED\",\n        \"post_code\": \"string\",\n        \"town\": \"string\",\n        \"street_name\": \"string\",\n        \"house_no\": \"string\",\n        \"supplement\": \"string\",\n        \"phone_number\": \"string\"\n      },\n      \"payment_method\": \"UNSPECIFIED\"\n    },\n    {\n      \"id\": \"string\",\n      \"released_at\": \"1955-10-28T12:04:13.458Z\",\n      \"state\": \"UNSPECIFIED\",\n      \"labels\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"customer_email\": \"string\",\n      \"shipping_address\": {\n        \"first_name\": \"string\",\n        \"family_name\": \"string\",\n        \"entity\": \"UNSPECIFIED\",\n        \"company_name\": \"string\",\n        \"company_vatin\": \"string\",\n        \"personal_vatin\": \"string\",\n        \"country_code\": \"UNSPECIFIED\",\n        \"post_code\": \"string\",\n        \"town\": \"string\",\n        \"street_name\": \"string\",\n        \"house_no\": \"string\",\n        \"supplement\": \"string\",\n        \"phone_number\": \"string\"\n      },\n      \"invoice_address\": {\n        \"first_name\": \"string\",\n        \"family_name\": \"string\",\n        \"entity\": \"UNSPECIFIED\",\n        \"company_name\": \"string\",\n        \"company_vatin\": \"string\",\n        \"personal_vatin\": \"string\",\n        \"country_code\": \"UNSPECIFIED\",\n        \"post_code\": \"string\",\n        \"town\": \"string\",\n        \"street_name\": \"string\",\n        \"house_no\": \"string\",\n        \"supplement\": \"string\",\n        \"phone_number\": \"string\"\n      },\n      \"currency_code\": \"UNSPECIFIED\",\n      \"settlement_currency_code\": \"UNSPECIFIED\",\n      \"settlement_exchange_rate\": \"string\",\n      \"total_charged\": \"string\",\n      \"settlement_total_charged\": \"string\",\n      \"total_discount\": \"string\",\n      \"settlement_total_discount\": \"string\",\n      \"total_paid\": \"string\",\n      \"settlement_total_paid\": \"string\",\n      \"total_refunded\": \"string\",\n      \"settlement_total_refunded\": \"string\",\n      \"total_vat_charged\": \"string\",\n      \"settlement_total_vat_charged\": \"string\",\n      \"is_refundable\": true,\n      \"refund_eligibility\": \"UNSPECIFIED\",\n      \"is_invoiceable\": false,\n      \"has_invoice\": true,\n      \"items\": [\n        {\n          \"id\": \"string\",\n          \"order_id\": \"string\",\n          \"name\": \"string\",\n          \"state\": \"UNSPECIFIED\",\n          \"sku\": \"string\",\n          \"currency_code\": \"UNSPECIFIED\",\n          \"settlement_currency_code\": \"UNSPECIFIED\",\n          \"total_charged\": \"string\",\n          \"settlement_total_charged\": \"string\",\n          \"total_discount\": \"string\",\n          \"settlement_total_discount\": \"string\",\n          \"total_charged_dynamic\": \"string\",\n          \"settlement_total_charged_dynamic\": \"string\",\n          \"total_paid\": \"string\",\n          \"settlement_total_paid\": \"string\",\n          \"total_refunded\": \"string\",\n          \"settlement_total_refunded\": \"string\",\n          \"settlement_total_commission\": \"string\",\n          \"settlement_base_commission\": \"string\",\n          \"settlement_payout_commission\": \"string\",\n          \"settlement_payment_commission\": \"string\",\n          \"settlement_dynamic_commission\": \"string\",\n          \"taxation\": \"UNSPECIFIED\",\n          \"is_refundable\": true,\n          \"refund_eligibility\": \"UNSPECIFIED\",\n          \"offer_data\": {\n            \"offer_id\": \"string\",\n            \"offer_version\": \"string\",\n            \"offer_order_exchange_rate\": \"string\",\n            \"offer_warranty\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"offer_grading\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shipping_profile_id\": \"string\",\n            \"shipping_profile_version\": \"string\",\n            \"shipping_costs\": \"string\",\n            \"battery_condition\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"parcel_tracking_url\": \"string\",\n          \"return_shipment_tracking_url\": \"string\",\n          \"item_identifier\": \"string\",\n          \"item_identifiers\": [\n            {\n              \"identifier_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"identifier_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"shipment_status\": \"UNSPECIFIED\",\n          \"shipment_substatus\": \"UNSPECIFIED\",\n          \"return_initiated\": true,\n          \"vat_rate\": \"string\",\n          \"vat_country\": \"UNSPECIFIED\",\n          \"vat_charged\": \"string\",\n          \"settlement_vat_charged\": \"string\",\n          \"weight_kg\": 7276.365190020738,\n          \"manufacturing_country\": \"UNSPECIFIED\",\n          \"hs_code\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"order_id\": \"string\",\n          \"name\": \"string\",\n          \"state\": \"UNSPECIFIED\",\n          \"sku\": \"string\",\n          \"currency_code\": \"UNSPECIFIED\",\n          \"settlement_currency_code\": \"UNSPECIFIED\",\n          \"total_charged\": \"string\",\n          \"settlement_total_charged\": \"string\",\n          \"total_discount\": \"string\",\n          \"settlement_total_discount\": \"string\",\n          \"total_charged_dynamic\": \"string\",\n          \"settlement_total_charged_dynamic\": \"string\",\n          \"total_paid\": \"string\",\n          \"settlement_total_paid\": \"string\",\n          \"total_refunded\": \"string\",\n          \"settlement_total_refunded\": \"string\",\n          \"settlement_total_commission\": \"string\",\n          \"settlement_base_commission\": \"string\",\n          \"settlement_payout_commission\": \"string\",\n          \"settlement_payment_commission\": \"string\",\n          \"settlement_dynamic_commission\": \"string\",\n          \"taxation\": \"UNSPECIFIED\",\n          \"is_refundable\": false,\n          \"refund_eligibility\": \"UNSPECIFIED\",\n          \"offer_data\": {\n            \"offer_id\": \"string\",\n            \"offer_version\": \"string\",\n            \"offer_order_exchange_rate\": \"string\",\n            \"offer_warranty\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"offer_grading\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"shipping_profile_id\": \"string\",\n            \"shipping_profile_version\": \"string\",\n            \"shipping_costs\": \"string\",\n            \"battery_condition\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"parcel_tracking_url\": \"string\",\n          \"return_shipment_tracking_url\": \"string\",\n          \"item_identifier\": \"string\",\n          \"item_identifiers\": [\n            {\n              \"identifier_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"identifier_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"shipment_status\": \"UNSPECIFIED\",\n          \"shipment_substatus\": \"UNSPECIFIED\",\n          \"return_initiated\": true,\n          \"vat_rate\": \"string\",\n          \"vat_country\": \"UNSPECIFIED\",\n          \"vat_charged\": \"string\",\n          \"settlement_vat_charged\": \"string\",\n          \"weight_kg\": 623.7073360420053,\n          \"manufacturing_country\": \"UNSPECIFIED\",\n          \"hs_code\": \"string\"\n        }\n      ],\n      \"shipping_label_address\": {\n        \"first_name\": \"string\",\n        \"family_name\": \"string\",\n        \"entity\": \"UNSPECIFIED\",\n        \"company_name\": \"string\",\n        \"company_vatin\": \"string\",\n        \"personal_vatin\": \"string\",\n        \"country_code\": \"UNSPECIFIED\",\n        \"post_code\": \"string\",\n        \"town\": \"string\",\n        \"street_name\": \"string\",\n        \"house_no\": \"string\",\n        \"supplement\": \"string\",\n        \"phone_number\": \"string\"\n      },\n      \"payment_method\": \"UNSPECIFIED\"\n    }\n  ],\n  \"has_more\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "126b883b-d44b-4470-87d1-8273f7b1aaf5",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "ListOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"released_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"labels\": {\n      \"all_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"customer_email\": {\n      \"eq\": \"<string>\",\n      \"contains\": \"<string>\"\n    },\n    \"address\": {\n      \"matches\": \"<string>\"\n    },\n    \"address_phone_number\": {\n      \"eq\": \"<string>\",\n      \"contains\": \"<string>\"\n    },\n    \"shipping_address_entity\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"shipping_address_country_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"invoice_address\": {\n      \"matches\": \"<string>\"\n    },\n    \"invoice_address_entity\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"invoice_address_vatin\": {\n      \"eq\": \"<string>\",\n      \"contains\": \"<string>\"\n    },\n    \"invoice_address_country_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"settlement_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"total_charged\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_charged\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_paid\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_paid\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"total_refunded\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"settlement_total_refunded\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"is_invoiceable\": {\n      \"value\": \"<boolean>\"\n    },\n    \"has_invoice\": {\n      \"value\": \"<boolean>\"\n    },\n    \"item_name\": {\n      \"matches\": \"<string>\"\n    },\n    \"item_sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    },\n    \"item_offer_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"is_return_initiated\": {\n      \"value\": \"<boolean>\"\n    },\n    \"is_return_shipment_label_used\": {\n      \"value\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6359,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "438c7e4c-7761-4d0d-b22e-7d15f6d72059",
+          "name": "Lists shipping labels for an order",
+          "request": {
+            "name": "Lists shipping labels for an order",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n  - when merchant address is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderService",
+                "ListShippingLabels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5a91ff97-7fb1-4e50-aff2-bf81872d966a",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "ListShippingLabels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipping_labels\": [\n    {\n      \"id\": \"string\",\n      \"normal_printer_urls\": {\n        \"top_left\": \"string\",\n        \"top_right\": \"string\",\n        \"bottom_left\": \"string\",\n        \"bottom_right\": \"string\"\n      },\n      \"label_printer_url\": \"string\",\n      \"tracking_data\": {\n        \"carrier\": \"string\",\n        \"tracking_number\": \"string\",\n        \"tracking_url\": \"string\"\n      },\n      \"parcel_weight\": 2531.4336923910987,\n      \"merchant_address\": {\n        \"id\": \"string\",\n        \"version\": \"string\",\n        \"label\": \"string\",\n        \"first_name\": \"string\",\n        \"family_name\": \"string\",\n        \"company_name\": \"string\",\n        \"country_code\": \"UNSPECIFIED\",\n        \"post_code\": \"string\",\n        \"town\": \"string\",\n        \"street_name\": \"string\",\n        \"house_no\": \"string\",\n        \"supplement\": \"string\",\n        \"phone_number\": \"string\",\n        \"type\": \"UNSPECIFIED\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"normal_printer_urls\": {\n        \"top_left\": \"string\",\n        \"top_right\": \"string\",\n        \"bottom_left\": \"string\",\n        \"bottom_right\": \"string\"\n      },\n      \"label_printer_url\": \"string\",\n      \"tracking_data\": {\n        \"carrier\": \"string\",\n        \"tracking_number\": \"string\",\n        \"tracking_url\": \"string\"\n      },\n      \"parcel_weight\": 2868.8416374934477,\n      \"merchant_address\": {\n        \"id\": \"string\",\n        \"version\": \"string\",\n        \"label\": \"string\",\n        \"first_name\": \"string\",\n        \"family_name\": \"string\",\n        \"company_name\": \"string\",\n        \"country_code\": \"UNSPECIFIED\",\n        \"post_code\": \"string\",\n        \"town\": \"string\",\n        \"street_name\": \"string\",\n        \"house_no\": \"string\",\n        \"supplement\": \"string\",\n        \"phone_number\": \"string\",\n        \"type\": \"UNSPECIFIED\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "767174cf-2621-4afc-9216-97877ae2a070",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "ListShippingLabels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6359,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50bb5bed-d277-47ec-833e-f4e0aa8856a4",
+          "name": "Refunds all refundable items of an order at once.",
+          "request": {
+            "name": "Refunds all refundable items of an order at once.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n- INVALID_ARGUMENT\n  - invalid input refund data is provided\n- FAILED_PRECONDITION\n  - when order is not refundable\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderService",
+                "RefundOrder"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e0bc1de8-3c20-4e12-9f14-b6a4326a19b7",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "RefundOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currency_code\": \"UNSPECIFIED\",\n  \"total_paid\": \"string\",\n  \"total_refunded\": \"string\",\n  \"refunded\": \"string\",\n  \"refunded_refurbed\": \"string\",\n  \"refunded_merchant\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "070089b2-d22c-49b5-8547-5e01be400ac7",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "RefundOrder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6359,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1e8fd84-f9be-43a9-bb79-da183671a20c",
+          "name": "Uploads an invoice for an order.",
+          "request": {
+            "name": "Uploads an invoice for an order.",
+            "description": {
+              "content": "Overrides a possibly already existing invoice. Order needs to be\ninvoiceable.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found for the merchant\n- FAILED_PRECONDITION\n  - when the invoice exceeds the permitted size\n  - when the order is not invoiceable\n- INVALID_ARGUMENT\n  - when the invoice format is not supported\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderService",
+                "SetOrderInvoiceStream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meta\": {\n    \"order_id\": \"<int64>\"\n  },\n  \"data\": \"<byte>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60c42839-1260-46d0-b57e-1e88e258bec9",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "SetOrderInvoiceStream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"order_id\": \"<int64>\"\n  },\n  \"data\": \"<byte>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"size\": \"string\",\n  \"crc32\": \"string\",\n  \"url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07faa64a-0740-4b69-a60b-0cb1337f4e8b",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "SetOrderInvoiceStream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"order_id\": \"<int64>\"\n  },\n  \"data\": \"<byte>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6359,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eff1784b-1c64-4e3e-8cc4-0e701a9a7c66",
+          "name": "Updates the shipping label address for an order.",
+          "request": {
+            "name": "Updates the shipping label address for an order.",
+            "description": {
+              "content": "The shipping label address is used when creating shipping labels. This is\nuseful when the carrier rejects the original customer address and the merchant\nneeds to correct it.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- FAILED_PRECONDITION\n  - when shipping label address is not enabled for the merchant\n- NOT_FOUND\n  - when the order is not found\n- INVALID_ARGUMENT\n  - when address fields are invalid\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderService",
+                "UpdateShippingLabelAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<int64>\",\n  \"address\": {\n    \"first_name\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"street_name\": \"<string>\",\n    \"town\": \"<string>\",\n    \"post_code\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"company\": \"<string>\",\n    \"house_no\": \"<string>\",\n    \"supplement\": \"<string>\",\n    \"country_code\": \"UNSPECIFIED\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0db6cd7a-0cac-4a5b-9755-0d320bf08e9c",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "UpdateShippingLabelAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\",\n  \"address\": {\n    \"first_name\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"street_name\": \"<string>\",\n    \"town\": \"<string>\",\n    \"post_code\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"company\": \"<string>\",\n    \"house_no\": \"<string>\",\n    \"supplement\": \"<string>\",\n    \"country_code\": \"UNSPECIFIED\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"address\": {\n    \"first_name\": \"string\",\n    \"family_name\": \"string\",\n    \"entity\": \"UNSPECIFIED\",\n    \"company_name\": \"string\",\n    \"company_vatin\": \"string\",\n    \"personal_vatin\": \"string\",\n    \"country_code\": \"UNSPECIFIED\",\n    \"post_code\": \"string\",\n    \"town\": \"string\",\n    \"street_name\": \"string\",\n    \"house_no\": \"string\",\n    \"supplement\": \"string\",\n    \"phone_number\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed1ae101-5aa4-46e0-be0c-1982fe7fb7c8",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "UpdateShippingLabelAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<int64>\",\n  \"address\": {\n    \"first_name\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"street_name\": \"<string>\",\n    \"town\": \"<string>\",\n    \"post_code\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"company\": \"<string>\",\n    \"house_no\": \"<string>\",\n    \"supplement\": \"<string>\",\n    \"country_code\": \"UNSPECIFIED\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6359,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d716c1a6-5356-4191-b27b-513a06d15ad5",
+          "name": "Uploads a commercial invoice for an order.",
+          "request": {
+            "name": "Uploads a commercial invoice for an order.",
+            "description": {
+              "content": "This document is required for customs when shipping internationally (e.g., outside the EU), and must be provided\nbefore shipping the order. The document must be in PDF.\nIntra-EU orders (e.g., non-CH orders) are not eligible for commercial invoice upload.\nIf a commercial invoice was already uploaded, the call will return an error.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order is not found\n- FAILED_PRECONDITION\n  - when the order is not eligible for commercial invoice upload\n  - when a commercial invoice was already uploaded for the order\n- INVALID_ARGUMENT\n  - when the commercial invoice format is not supported\n  - when the commercial invoice exceeds the permitted size\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderService",
+                "UploadOrderCommercialInvoice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meta\": {\n    \"order_id\": \"<int64>\",\n    \"commercial_invoice_number\": \"<string>\"\n  },\n  \"data\": \"<byte>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b8b67722-a0aa-46c2-9e4d-8548b890dfba",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "UploadOrderCommercialInvoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"order_id\": \"<int64>\",\n    \"commercial_invoice_number\": \"<string>\"\n  },\n  \"data\": \"<byte>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"size\": \"string\",\n  \"url\": \"string\",\n  \"commercial_invoice_number\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9944ea60-8dbd-416e-9d87-043d3ef37997",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderService",
+                    "UploadOrderCommercialInvoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"order_id\": \"<int64>\",\n    \"commercial_invoice_number\": \"<string>\"\n  },\n  \"data\": \"<byte>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6359,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.refurbed.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b415204a-0092-4ce7-9624-b20f0ddd54f2",
+    "name": "Affiliate Partner BuybackBidService OrderService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).\n\nContact Support:\n Name: Refurbed Affiliate Partner Integrations Team\n Email: integrations@refurbed.com",
+      "type": "text/plain"
+    }
+  }
+}

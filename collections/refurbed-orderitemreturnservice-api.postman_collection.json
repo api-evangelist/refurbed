@@ -1,0 +1,202 @@
+{
+  "item": [
+    {
+      "id": "f8ec57b5-26e8-44df-83ae-ff2ab02cfaa9",
+      "name": "OrderItemReturnService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2f45d639-d052-426d-80f4-5837aef67083",
+          "name": "Lists returns with filtering, sorting, and pagination support.",
+          "request": {
+            "name": "Lists returns with filtering, sorting, and pagination support.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- FAILED_PRECONDITION\n  - when the merchant does not exist for the authorized user\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.OrderItemReturnService",
+                "ListOrderItemReturns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"order_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"order_item_identifier\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"return_initiated_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"delivered_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"tracking_number\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d67e28d-1eab-4d6d-a2a8-c0640215210c",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemReturnService",
+                    "ListOrderItemReturns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"order_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"order_item_identifier\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"return_initiated_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"delivered_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"tracking_number\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"returns\": [\n    {\n      \"id\": \"string\",\n      \"order_id\": \"string\",\n      \"order_item_id\": \"string\",\n      \"instance_name\": \"string\",\n      \"order_item_identifier\": \"string\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"string\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"string\"\n        }\n      ],\n      \"return_initiated_at\": \"2008-08-14T19:01:54.077Z\",\n      \"state\": \"UNSPECIFIED\",\n      \"delivered_at\": \"1989-03-19T04:00:16.276Z\",\n      \"tracking_number\": \"string\",\n      \"tracking_url\": \"string\",\n      \"ticket_topic\": \"string\",\n      \"ticket_url\": \"string\",\n      \"item_within_trial_period\": false\n    },\n    {\n      \"id\": \"string\",\n      \"order_id\": \"string\",\n      \"order_item_id\": \"string\",\n      \"instance_name\": \"string\",\n      \"order_item_identifier\": \"string\",\n      \"item_identifiers\": [\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"string\"\n        },\n        {\n          \"identifier_type\": \"UNSPECIFIED\",\n          \"value\": \"string\"\n        }\n      ],\n      \"return_initiated_at\": \"2015-01-28T00:15:47.232Z\",\n      \"state\": \"UNSPECIFIED\",\n      \"delivered_at\": \"2022-06-09T17:44:43.525Z\",\n      \"tracking_number\": \"string\",\n      \"tracking_url\": \"string\",\n      \"ticket_topic\": \"string\",\n      \"ticket_url\": \"string\",\n      \"item_within_trial_period\": true\n    }\n  ],\n  \"has_more\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06fb4d5a-35ff-423f-b8a6-cbeb7867a8aa",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.OrderItemReturnService",
+                    "ListOrderItemReturns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"order_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"order_item_identifier\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"return_initiated_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"delivered_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"tracking_number\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3116,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.refurbed.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "76b03ae9-3624-427f-a9e7-c3fd012d0b8b",
+    "name": "Affiliate Partner BuybackBidService OrderItemReturnService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).\n\nContact Support:\n Name: Refurbed Affiliate Partner Integrations Team\n Email: integrations@refurbed.com",
+      "type": "text/plain"
+    }
+  }
+}

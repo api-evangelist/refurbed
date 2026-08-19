@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService CatalogService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CatalogService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of attribute templates for the specified category type and\noptionally a specific category.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.CatalogService/GetCatalogTemplates"
+          },
+          "docs": "Retrieves a list of attribute templates for the specified category type and\noptionally a specific category."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

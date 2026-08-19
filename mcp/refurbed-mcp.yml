@@ -381,3 +381,9 @@ tools:
   description: Lists products.
   source_operation: openapi/refurbed-affiliate-api-openapi.json#ListProducts
   service: ProductService
+deployment:
+  mode: none
+  verified: derived
+  tools: 91
+  checked: '2026-08-12'
+  source: catalog MCP census

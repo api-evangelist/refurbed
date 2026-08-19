@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService OrderItemService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OrderItemService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Batch updates order items.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderItemService/BatchUpdateOrderItems"
+          },
+          "docs": "Known errors: Errors are identical to the UpdateOrderItem operation per\neach individual order item update and:\n- INVALID_ARGUMENT\n  - when more than 50 updates are attempted"
+        },
+        {
+          "info": {
+            "name": "Batch updates order items' state.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderItemService/BatchUpdateOrderItemsState"
+          },
+          "docs": "Known errors: Errors are identical to the UpdateOrderItemState operation\nper each individual order item state update and:\n- INVALID_ARGUMENT\n  - when more than 50 updates are attempted"
+        },
+        {
+          "info": {
+            "name": "Calculate values for a refund of a single order item, i.e. using the\nRefundOrderItem method.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderItemService/CalculateRefundOrderItem"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order item is not found\n- INVALID_ARGUMENT\n  - invalid input refund data is provided\n- FAILED_PRECONDITION\n  - when order item is not refundable\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Gets a single order item.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderItemService/GetOrderItem"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order item is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Lists all order items of a specific order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderItemService/ListOrderItemsByOrder"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Refunds a single order item. Item needs to be refundable.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderItemService/RefundOrderItem"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the order item is not found\n- INVALID_ARGUMENT\n  - invalid input refund data is provided\n- FAILED_PRECONDITION\n  - when order item is not refundable\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Updates a single order item.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderItemService/UpdateOrderItem"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the updated order item is not found\n- INVALID_ARGUMENT\n  - when invalid parcel tracking url is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Updates the state of a single order item.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderItemService/UpdateOrderItemState"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the updated order item is not found\n- INVALID_ARGUMENT\n  - when illegal state transition is attempted\n  - when no parcel tracking url is set when transitioning to SHIPPED state\n  - when invalid parcel tracking url is provided\n- RESOURCE_EXHAUSTED\n  - when ra"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

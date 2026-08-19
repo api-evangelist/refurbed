@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService OrderItemReturnService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OrderItemReturnService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists returns with filtering, sorting, and pagination support.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.OrderItemReturnService/ListOrderItemReturns"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- FAILED_PRECONDITION\n  - when the merchant does not exist for the authorized user\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

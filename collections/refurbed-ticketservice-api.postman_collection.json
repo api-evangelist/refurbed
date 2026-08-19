@@ -1,0 +1,1549 @@
+{
+  "item": [
+    {
+      "id": "823cc55e-a04c-4535-8269-b7aa4bde5870",
+      "name": "TicketService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9af70d40-748c-4f87-bc0d-c5c17d514887",
+          "name": "Creates a new ticket.",
+          "request": {
+            "name": "Creates a new ticket.",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.TicketService",
+                "CreateTicket"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"topic\": \"<string>\",\n  \"order_item_identifier\": {\n    \"marketplace_order_item_id\": \"<int64>\",\n    \"buyback_order_item_id\": \"<int64>\"\n  },\n  \"message\": {\n    \"body_html\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      }\n    ]\n  },\n  \"notes\": \"<string>\",\n  \"follow_up_to_ticket_id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0a8c8e5a-f21b-4706-b66c-fbfde9dd82de",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "CreateTicket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"topic\": \"<string>\",\n  \"order_item_identifier\": {\n    \"marketplace_order_item_id\": \"<int64>\",\n    \"buyback_order_item_id\": \"<int64>\"\n  },\n  \"message\": {\n    \"body_html\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      }\n    ]\n  },\n  \"notes\": \"<string>\",\n  \"follow_up_to_ticket_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticket\": {\n    \"id\": \"string\",\n    \"status\": \"UNSPECIFIED\",\n    \"urgency_status\": \"UNSPECIFIED\",\n    \"created_at\": \"2015-10-26T13:40:17.595Z\",\n    \"marketplace_order_item\": {\n      \"order_item_id\": \"string\",\n      \"order_id\": \"string\",\n      \"instance_name\": \"string\"\n    },\n    \"buyback_order_item\": {\n      \"buyback_order_item_id\": \"string\",\n      \"buyback_order_id\": \"string\",\n      \"product_variant_name\": \"string\"\n    },\n    \"topic_slug\": \"string\",\n    \"country\": \"UNSPECIFIED\",\n    \"customer\": {\n      \"email\": \"string\",\n      \"name\": \"string\"\n    },\n    \"assignee\": {\n      \"email\": \"string\",\n      \"name\": \"string\"\n    },\n    \"sla_checkpoints\": [\n      {\n        \"checkpoint_type\": \"UNSPECIFIED\",\n        \"at\": \"1999-04-22T19:57:25.153Z\"\n      },\n      {\n        \"checkpoint_type\": \"UNSPECIFIED\",\n        \"at\": \"1955-03-15T04:14:57.907Z\"\n      }\n    ],\n    \"updated_at\": \"1960-04-29T22:51:36.599Z\",\n    \"seller_action_needed\": true,\n    \"customer_panicked\": false,\n    \"notes\": \"string\",\n    \"follow_up_to_ticket_id\": \"string\",\n    \"topic_change_allowed\": false,\n    \"has_help_requests\": false\n  },\n  \"messages\": [\n    {\n      \"message\": {\n        \"id\": \"string\",\n        \"body_html\": \"string\",\n        \"created_at\": \"2018-07-16T13:58:17.948Z\",\n        \"author\": {\n          \"type\": \"UNSPECIFIED\",\n          \"email\": \"string\",\n          \"name\": \"string\"\n        },\n        \"attachments\": [\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          },\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          }\n        ]\n      },\n      \"scope\": \"UNSPECIFIED\"\n    },\n    {\n      \"message\": {\n        \"id\": \"string\",\n        \"body_html\": \"string\",\n        \"created_at\": \"1981-07-17T12:54:37.048Z\",\n        \"author\": {\n          \"type\": \"UNSPECIFIED\",\n          \"email\": \"string\",\n          \"name\": \"string\"\n        },\n        \"attachments\": [\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          },\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          }\n        ]\n      },\n      \"scope\": \"UNSPECIFIED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd4a03f3-5c09-4c4d-ad07-234ef80c57fe",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "CreateTicket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"topic\": \"<string>\",\n  \"order_item_identifier\": {\n    \"marketplace_order_item_id\": \"<int64>\",\n    \"buyback_order_item_id\": \"<int64>\"\n  },\n  \"message\": {\n    \"body_html\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      }\n    ]\n  },\n  \"notes\": \"<string>\",\n  \"follow_up_to_ticket_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4711,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fec924e6-0d18-4c8a-8b8b-2e92a7a5a818",
+          "name": "Creates a help request for a given ticket.",
+          "request": {
+            "name": "Creates a help request for a given ticket.",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.TicketService",
+                "CreateTicketHelpRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticket_id\": \"<int64>\",\n  \"topic\": \"UNSPECIFIED\",\n  \"message\": {\n    \"body_html\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "774fbdb3-c2a5-4fa9-bbb3-2ab908a9bd83",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "CreateTicketHelpRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\",\n  \"topic\": \"UNSPECIFIED\",\n  \"message\": {\n    \"body_html\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help_request\": {\n    \"id\": \"string\",\n    \"ticket_id\": \"string\",\n    \"status\": \"UNSPECIFIED\",\n    \"topic\": \"UNSPECIFIED\",\n    \"created_at\": \"1963-08-14T02:12:13.879Z\"\n  },\n  \"messages\": [\n    {\n      \"id\": \"string\",\n      \"body_html\": \"string\",\n      \"created_at\": \"1949-02-25T11:40:57.848Z\",\n      \"author\": {\n        \"type\": \"UNSPECIFIED\",\n        \"email\": \"string\",\n        \"name\": \"string\"\n      },\n      \"attachments\": [\n        {\n          \"filename\": \"string\",\n          \"url\": \"string\",\n          \"content_type\": \"string\"\n        },\n        {\n          \"filename\": \"string\",\n          \"url\": \"string\",\n          \"content_type\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"body_html\": \"string\",\n      \"created_at\": \"1966-06-14T07:24:31.373Z\",\n      \"author\": {\n        \"type\": \"UNSPECIFIED\",\n        \"email\": \"string\",\n        \"name\": \"string\"\n      },\n      \"attachments\": [\n        {\n          \"filename\": \"string\",\n          \"url\": \"string\",\n          \"content_type\": \"string\"\n        },\n        {\n          \"filename\": \"string\",\n          \"url\": \"string\",\n          \"content_type\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72f04e87-bc71-4244-b2cd-69714ee3c17b",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "CreateTicketHelpRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\",\n  \"topic\": \"UNSPECIFIED\",\n  \"message\": {\n    \"body_html\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5258,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb340df4-5aaf-4870-8d11-a321b1a8d489",
+          "name": "Generates a return shipping label and posts it as a message on the ticket.\nCall GetTicket to load the ticket messages again.",
+          "request": {
+            "name": "Generates a return shipping label and posts it as a message on the ticket.\nCall GetTicket to load the ticket messages again.",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.TicketService",
+                "GenerateReturnShippingLabel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticket_id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d13ce65-2239-4852-8d71-49fc52238a51",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "GenerateReturnShippingLabel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c119ddef-8037-4699-9522-39fe1d1eb7f9",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "GenerateReturnShippingLabel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5258,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78901338-b3ee-4eba-85ab-ff354443bdf8",
+          "name": "Retrieves a single ticket by its ID, including its messages.",
+          "request": {
+            "name": "Retrieves a single ticket by its ID, including its messages.",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.TicketService",
+                "GetTicket"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticket_id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "64e04f4c-ccdc-493d-85b3-ae322c7d1840",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "GetTicket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticket\": {\n    \"id\": \"string\",\n    \"status\": \"UNSPECIFIED\",\n    \"urgency_status\": \"UNSPECIFIED\",\n    \"created_at\": \"1998-10-26T17:44:09.019Z\",\n    \"marketplace_order_item\": {\n      \"order_item_id\": \"string\",\n      \"order_id\": \"string\",\n      \"instance_name\": \"string\"\n    },\n    \"buyback_order_item\": {\n      \"buyback_order_item_id\": \"string\",\n      \"buyback_order_id\": \"string\",\n      \"product_variant_name\": \"string\"\n    },\n    \"topic_slug\": \"string\",\n    \"country\": \"UNSPECIFIED\",\n    \"customer\": {\n      \"email\": \"string\",\n      \"name\": \"string\"\n    },\n    \"assignee\": {\n      \"email\": \"string\",\n      \"name\": \"string\"\n    },\n    \"sla_checkpoints\": [\n      {\n        \"checkpoint_type\": \"UNSPECIFIED\",\n        \"at\": \"2005-12-12T05:46:43.386Z\"\n      },\n      {\n        \"checkpoint_type\": \"UNSPECIFIED\",\n        \"at\": \"1946-09-13T18:30:26.941Z\"\n      }\n    ],\n    \"updated_at\": \"1947-02-01T09:59:08.712Z\",\n    \"seller_action_needed\": false,\n    \"customer_panicked\": false,\n    \"notes\": \"string\",\n    \"follow_up_to_ticket_id\": \"string\",\n    \"topic_change_allowed\": true,\n    \"has_help_requests\": false\n  },\n  \"messages\": [\n    {\n      \"message\": {\n        \"id\": \"string\",\n        \"body_html\": \"string\",\n        \"created_at\": \"1990-08-31T05:56:54.185Z\",\n        \"author\": {\n          \"type\": \"UNSPECIFIED\",\n          \"email\": \"string\",\n          \"name\": \"string\"\n        },\n        \"attachments\": [\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          },\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          }\n        ]\n      },\n      \"scope\": \"UNSPECIFIED\"\n    },\n    {\n      \"message\": {\n        \"id\": \"string\",\n        \"body_html\": \"string\",\n        \"created_at\": \"2001-11-13T16:11:19.333Z\",\n        \"author\": {\n          \"type\": \"UNSPECIFIED\",\n          \"email\": \"string\",\n          \"name\": \"string\"\n        },\n        \"attachments\": [\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          },\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          }\n        ]\n      },\n      \"scope\": \"UNSPECIFIED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73cdc7c1-f081-4ead-ab81-f279b97de5d9",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "GetTicket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5258,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a1ba7a2-0952-4f5b-8e41-b6c12e9de80b",
+          "name": "Retrieves details of a single help request by its ID, including the messages.",
+          "request": {
+            "name": "Retrieves details of a single help request by its ID, including the messages.",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.TicketService",
+                "GetTicketHelpRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"help_request_id\": \"<int64>\",\n  \"ticket_id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dbb7ef29-2c89-45da-aa06-d4f75b94d5c5",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "GetTicketHelpRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"help_request_id\": \"<int64>\",\n  \"ticket_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help_request\": {\n    \"id\": \"string\",\n    \"ticket_id\": \"string\",\n    \"status\": \"UNSPECIFIED\",\n    \"topic\": \"UNSPECIFIED\",\n    \"created_at\": \"1963-08-14T02:12:13.879Z\"\n  },\n  \"messages\": [\n    {\n      \"id\": \"string\",\n      \"body_html\": \"string\",\n      \"created_at\": \"1949-02-25T11:40:57.848Z\",\n      \"author\": {\n        \"type\": \"UNSPECIFIED\",\n        \"email\": \"string\",\n        \"name\": \"string\"\n      },\n      \"attachments\": [\n        {\n          \"filename\": \"string\",\n          \"url\": \"string\",\n          \"content_type\": \"string\"\n        },\n        {\n          \"filename\": \"string\",\n          \"url\": \"string\",\n          \"content_type\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"body_html\": \"string\",\n      \"created_at\": \"1966-06-14T07:24:31.373Z\",\n      \"author\": {\n        \"type\": \"UNSPECIFIED\",\n        \"email\": \"string\",\n        \"name\": \"string\"\n      },\n      \"attachments\": [\n        {\n          \"filename\": \"string\",\n          \"url\": \"string\",\n          \"content_type\": \"string\"\n        },\n        {\n          \"filename\": \"string\",\n          \"url\": \"string\",\n          \"content_type\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa9d4801-d94f-46a2-9c06-07c082cca217",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "GetTicketHelpRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"help_request_id\": \"<int64>\",\n  \"ticket_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5258,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9dac432-f62a-49c7-88fd-c1c79d1c70b7",
+          "name": "Lists all help requests for a given ticket.",
+          "request": {
+            "name": "Lists all help requests for a given ticket.",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.TicketService",
+                "ListTicketHelpRequests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticket_id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c5d7ac7-5dc5-48a6-a969-310e82e9250d",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "ListTicketHelpRequests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help_requests\": [\n    {\n      \"id\": \"string\",\n      \"ticket_id\": \"string\",\n      \"status\": \"UNSPECIFIED\",\n      \"topic\": \"UNSPECIFIED\",\n      \"created_at\": \"1992-07-05T12:35:45.523Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"ticket_id\": \"string\",\n      \"status\": \"UNSPECIFIED\",\n      \"topic\": \"UNSPECIFIED\",\n      \"created_at\": \"1987-08-26T06:22:49.080Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33536734-f31b-45c0-895e-5fcac9e48ba8",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "ListTicketHelpRequests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5258,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53fa7bcd-7bc8-42fb-8115-d5fe133d2559",
+          "name": "Lists tickets.",
+          "request": {
+            "name": "Lists tickets.",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.TicketService",
+                "ListTickets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"CREATED_AT\"\n  },\n  \"filter\": {\n    \"ticket_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"assignee_user_email\": {\n      \"eq\": \"<string>\"\n    },\n    \"status\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"customer_email\": {\n      \"eq\": \"<string>\"\n    },\n    \"marketplace_order_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"marketplace_order_item_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"buyback_order_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"buyback_order_item_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"country\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"topic\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"urgency_status\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"customer_panicked\": {\n      \"value\": \"<boolean>\"\n    },\n    \"is_buyback\": {\n      \"value\": \"<boolean>\"\n    },\n    \"customer_name\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    },\n    \"seller_action_needed\": {\n      \"value\": \"<boolean>\"\n    },\n    \"has_help_requests\": {\n      \"value\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7fcb7ad5-ab23-4364-af3d-0699f84f518d",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "ListTickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"CREATED_AT\"\n  },\n  \"filter\": {\n    \"ticket_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"assignee_user_email\": {\n      \"eq\": \"<string>\"\n    },\n    \"status\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"customer_email\": {\n      \"eq\": \"<string>\"\n    },\n    \"marketplace_order_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"marketplace_order_item_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"buyback_order_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"buyback_order_item_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"country\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"topic\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"urgency_status\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"customer_panicked\": {\n      \"value\": \"<boolean>\"\n    },\n    \"is_buyback\": {\n      \"value\": \"<boolean>\"\n    },\n    \"customer_name\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    },\n    \"seller_action_needed\": {\n      \"value\": \"<boolean>\"\n    },\n    \"has_help_requests\": {\n      \"value\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tickets\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"UNSPECIFIED\",\n      \"urgency_status\": \"UNSPECIFIED\",\n      \"created_at\": \"2009-03-19T02:04:19.146Z\",\n      \"marketplace_order_item\": {\n        \"order_item_id\": \"string\",\n        \"order_id\": \"string\",\n        \"instance_name\": \"string\"\n      },\n      \"buyback_order_item\": {\n        \"buyback_order_item_id\": \"string\",\n        \"buyback_order_id\": \"string\",\n        \"product_variant_name\": \"string\"\n      },\n      \"topic_slug\": \"string\",\n      \"country\": \"UNSPECIFIED\",\n      \"customer\": {\n        \"email\": \"string\",\n        \"name\": \"string\"\n      },\n      \"assignee\": {\n        \"email\": \"string\",\n        \"name\": \"string\"\n      },\n      \"sla_checkpoints\": [\n        {\n          \"checkpoint_type\": \"UNSPECIFIED\",\n          \"at\": \"2019-02-21T21:08:46.868Z\"\n        },\n        {\n          \"checkpoint_type\": \"UNSPECIFIED\",\n          \"at\": \"1959-06-04T13:37:45.857Z\"\n        }\n      ],\n      \"updated_at\": \"1973-12-27T20:32:09.667Z\",\n      \"seller_action_needed\": false,\n      \"customer_panicked\": false,\n      \"notes\": \"string\",\n      \"follow_up_to_ticket_id\": \"string\",\n      \"topic_change_allowed\": false,\n      \"has_help_requests\": false\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"UNSPECIFIED\",\n      \"urgency_status\": \"UNSPECIFIED\",\n      \"created_at\": \"2007-09-11T13:51:25.648Z\",\n      \"marketplace_order_item\": {\n        \"order_item_id\": \"string\",\n        \"order_id\": \"string\",\n        \"instance_name\": \"string\"\n      },\n      \"buyback_order_item\": {\n        \"buyback_order_item_id\": \"string\",\n        \"buyback_order_id\": \"string\",\n        \"product_variant_name\": \"string\"\n      },\n      \"topic_slug\": \"string\",\n      \"country\": \"UNSPECIFIED\",\n      \"customer\": {\n        \"email\": \"string\",\n        \"name\": \"string\"\n      },\n      \"assignee\": {\n        \"email\": \"string\",\n        \"name\": \"string\"\n      },\n      \"sla_checkpoints\": [\n        {\n          \"checkpoint_type\": \"UNSPECIFIED\",\n          \"at\": \"2023-01-27T07:15:59.334Z\"\n        },\n        {\n          \"checkpoint_type\": \"UNSPECIFIED\",\n          \"at\": \"1947-04-12T05:07:19.675Z\"\n        }\n      ],\n      \"updated_at\": \"2006-10-06T13:21:39.516Z\",\n      \"seller_action_needed\": false,\n      \"customer_panicked\": true,\n      \"notes\": \"string\",\n      \"follow_up_to_ticket_id\": \"string\",\n      \"topic_change_allowed\": true,\n      \"has_help_requests\": false\n    }\n  ],\n  \"has_more\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b785e2c-538c-46be-964a-7a0a5100a320",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "ListTickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"CREATED_AT\"\n  },\n  \"filter\": {\n    \"ticket_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"assignee_user_email\": {\n      \"eq\": \"<string>\"\n    },\n    \"status\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"customer_email\": {\n      \"eq\": \"<string>\"\n    },\n    \"marketplace_order_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"marketplace_order_item_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"buyback_order_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"buyback_order_item_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"country\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"topic\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"urgency_status\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"customer_panicked\": {\n      \"value\": \"<boolean>\"\n    },\n    \"is_buyback\": {\n      \"value\": \"<boolean>\"\n    },\n    \"customer_name\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    },\n    \"seller_action_needed\": {\n      \"value\": \"<boolean>\"\n    },\n    \"has_help_requests\": {\n      \"value\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5258,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "693f736e-ee87-4504-92d8-dddfef3ccdc8",
+          "name": "Requests a topic change for a ticket.\nIf request is approved, the ticket topic is changed to a generic topic, the caller does\nnot specify the desired topic.",
+          "request": {
+            "name": "Requests a topic change for a ticket.\nIf request is approved, the ticket topic is changed to a generic topic, the caller does\nnot specify the desired topic.",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.TicketService",
+                "RequestTopicChange"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticket_id\": \"<int64>\",\n  \"message\": {\n    \"body_html\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      }\n    ]\n  },\n  \"attachment_exemption_reason\": \"UNSPECIFIED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "648a6cfb-555f-44df-81b6-a47977a947f2",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "RequestTopicChange"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\",\n  \"message\": {\n    \"body_html\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      }\n    ]\n  },\n  \"attachment_exemption_reason\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticket\": {\n    \"id\": \"string\",\n    \"status\": \"UNSPECIFIED\",\n    \"urgency_status\": \"UNSPECIFIED\",\n    \"created_at\": \"1998-10-26T17:44:09.019Z\",\n    \"marketplace_order_item\": {\n      \"order_item_id\": \"string\",\n      \"order_id\": \"string\",\n      \"instance_name\": \"string\"\n    },\n    \"buyback_order_item\": {\n      \"buyback_order_item_id\": \"string\",\n      \"buyback_order_id\": \"string\",\n      \"product_variant_name\": \"string\"\n    },\n    \"topic_slug\": \"string\",\n    \"country\": \"UNSPECIFIED\",\n    \"customer\": {\n      \"email\": \"string\",\n      \"name\": \"string\"\n    },\n    \"assignee\": {\n      \"email\": \"string\",\n      \"name\": \"string\"\n    },\n    \"sla_checkpoints\": [\n      {\n        \"checkpoint_type\": \"UNSPECIFIED\",\n        \"at\": \"2005-12-12T05:46:43.386Z\"\n      },\n      {\n        \"checkpoint_type\": \"UNSPECIFIED\",\n        \"at\": \"1946-09-13T18:30:26.941Z\"\n      }\n    ],\n    \"updated_at\": \"1947-02-01T09:59:08.712Z\",\n    \"seller_action_needed\": false,\n    \"customer_panicked\": false,\n    \"notes\": \"string\",\n    \"follow_up_to_ticket_id\": \"string\",\n    \"topic_change_allowed\": true,\n    \"has_help_requests\": false\n  },\n  \"messages\": [\n    {\n      \"message\": {\n        \"id\": \"string\",\n        \"body_html\": \"string\",\n        \"created_at\": \"1990-08-31T05:56:54.185Z\",\n        \"author\": {\n          \"type\": \"UNSPECIFIED\",\n          \"email\": \"string\",\n          \"name\": \"string\"\n        },\n        \"attachments\": [\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          },\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          }\n        ]\n      },\n      \"scope\": \"UNSPECIFIED\"\n    },\n    {\n      \"message\": {\n        \"id\": \"string\",\n        \"body_html\": \"string\",\n        \"created_at\": \"2001-11-13T16:11:19.333Z\",\n        \"author\": {\n          \"type\": \"UNSPECIFIED\",\n          \"email\": \"string\",\n          \"name\": \"string\"\n        },\n        \"attachments\": [\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          },\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          }\n        ]\n      },\n      \"scope\": \"UNSPECIFIED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de2e7854-63df-491c-bded-19ed62d07f32",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "RequestTopicChange"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\",\n  \"message\": {\n    \"body_html\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      }\n    ]\n  },\n  \"attachment_exemption_reason\": \"UNSPECIFIED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5258,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4ba5243-174c-45a6-bc66-974e2a703b13",
+          "name": "Updates the ticket by performing one or more of the following actions:\n- Assigning the ticket to a user (by email)\n- Changing the ticket status\n- Adding a message to the ticket\n- Updating the notes",
+          "request": {
+            "name": "Updates the ticket by performing one or more of the following actions:\n- Assigning the ticket to a user (by email)\n- Changing the ticket status\n- Adding a message to the ticket\n- Updating the notes",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.TicketService",
+                "UpdateTicket"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticket_id\": \"<int64>\",\n  \"new_message\": {\n    \"message\": {\n      \"body_html\": \"<string>\",\n      \"attachments\": [\n        {\n          \"filename\": \"<string>\",\n          \"data\": \"<byte>\"\n        },\n        {\n          \"filename\": \"<string>\",\n          \"data\": \"<byte>\"\n        }\n      ]\n    },\n    \"scope\": \"UNSPECIFIED\"\n  },\n  \"assignee_user_email\": \"<string>\",\n  \"unassign\": \"<boolean>\",\n  \"status\": \"UNSPECIFIED\",\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ab7ed815-93a4-4194-9e16-ebdaba3e02dd",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "UpdateTicket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\",\n  \"new_message\": {\n    \"message\": {\n      \"body_html\": \"<string>\",\n      \"attachments\": [\n        {\n          \"filename\": \"<string>\",\n          \"data\": \"<byte>\"\n        },\n        {\n          \"filename\": \"<string>\",\n          \"data\": \"<byte>\"\n        }\n      ]\n    },\n    \"scope\": \"UNSPECIFIED\"\n  },\n  \"assignee_user_email\": \"<string>\",\n  \"unassign\": \"<boolean>\",\n  \"status\": \"UNSPECIFIED\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticket\": {\n    \"id\": \"string\",\n    \"status\": \"UNSPECIFIED\",\n    \"urgency_status\": \"UNSPECIFIED\",\n    \"created_at\": \"1998-10-26T17:44:09.019Z\",\n    \"marketplace_order_item\": {\n      \"order_item_id\": \"string\",\n      \"order_id\": \"string\",\n      \"instance_name\": \"string\"\n    },\n    \"buyback_order_item\": {\n      \"buyback_order_item_id\": \"string\",\n      \"buyback_order_id\": \"string\",\n      \"product_variant_name\": \"string\"\n    },\n    \"topic_slug\": \"string\",\n    \"country\": \"UNSPECIFIED\",\n    \"customer\": {\n      \"email\": \"string\",\n      \"name\": \"string\"\n    },\n    \"assignee\": {\n      \"email\": \"string\",\n      \"name\": \"string\"\n    },\n    \"sla_checkpoints\": [\n      {\n        \"checkpoint_type\": \"UNSPECIFIED\",\n        \"at\": \"2005-12-12T05:46:43.386Z\"\n      },\n      {\n        \"checkpoint_type\": \"UNSPECIFIED\",\n        \"at\": \"1946-09-13T18:30:26.941Z\"\n      }\n    ],\n    \"updated_at\": \"1947-02-01T09:59:08.712Z\",\n    \"seller_action_needed\": false,\n    \"customer_panicked\": false,\n    \"notes\": \"string\",\n    \"follow_up_to_ticket_id\": \"string\",\n    \"topic_change_allowed\": true,\n    \"has_help_requests\": false\n  },\n  \"messages\": [\n    {\n      \"message\": {\n        \"id\": \"string\",\n        \"body_html\": \"string\",\n        \"created_at\": \"1990-08-31T05:56:54.185Z\",\n        \"author\": {\n          \"type\": \"UNSPECIFIED\",\n          \"email\": \"string\",\n          \"name\": \"string\"\n        },\n        \"attachments\": [\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          },\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          }\n        ]\n      },\n      \"scope\": \"UNSPECIFIED\"\n    },\n    {\n      \"message\": {\n        \"id\": \"string\",\n        \"body_html\": \"string\",\n        \"created_at\": \"2001-11-13T16:11:19.333Z\",\n        \"author\": {\n          \"type\": \"UNSPECIFIED\",\n          \"email\": \"string\",\n          \"name\": \"string\"\n        },\n        \"attachments\": [\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          },\n          {\n            \"filename\": \"string\",\n            \"url\": \"string\",\n            \"content_type\": \"string\"\n          }\n        ]\n      },\n      \"scope\": \"UNSPECIFIED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f64cfd80-bcde-480c-8c79-5b7b8b018c29",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "UpdateTicket"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\",\n  \"new_message\": {\n    \"message\": {\n      \"body_html\": \"<string>\",\n      \"attachments\": [\n        {\n          \"filename\": \"<string>\",\n          \"data\": \"<byte>\"\n        },\n        {\n          \"filename\": \"<string>\",\n          \"data\": \"<byte>\"\n        }\n      ]\n    },\n    \"scope\": \"UNSPECIFIED\"\n  },\n  \"assignee_user_email\": \"<string>\",\n  \"unassign\": \"<boolean>\",\n  \"status\": \"UNSPECIFIED\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5258,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b8b528c-2054-430d-976a-99d9efdcc014",
+          "name": "Updates the ticket help request by adding a message to it.",
+          "request": {
+            "name": "Updates the ticket help request by adding a message to it.",
+            "description": {},
+            "url": {
+              "path": [
+                "refb.merchant.v1.TicketService",
+                "UpdateTicketHelpRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ticket_id\": \"<int64>\",\n  \"help_request_id\": \"<int64>\",\n  \"new_message\": {\n    \"body_html\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6e0e0e30-707b-452a-bc62-ba9e7a43ff78",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "UpdateTicketHelpRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\",\n  \"help_request_id\": \"<int64>\",\n  \"new_message\": {\n    \"body_html\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"help_request\": {\n    \"id\": \"string\",\n    \"ticket_id\": \"string\",\n    \"status\": \"UNSPECIFIED\",\n    \"topic\": \"UNSPECIFIED\",\n    \"created_at\": \"1963-08-14T02:12:13.879Z\"\n  },\n  \"messages\": [\n    {\n      \"id\": \"string\",\n      \"body_html\": \"string\",\n      \"created_at\": \"1949-02-25T11:40:57.848Z\",\n      \"author\": {\n        \"type\": \"UNSPECIFIED\",\n        \"email\": \"string\",\n        \"name\": \"string\"\n      },\n      \"attachments\": [\n        {\n          \"filename\": \"string\",\n          \"url\": \"string\",\n          \"content_type\": \"string\"\n        },\n        {\n          \"filename\": \"string\",\n          \"url\": \"string\",\n          \"content_type\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"body_html\": \"string\",\n      \"created_at\": \"1966-06-14T07:24:31.373Z\",\n      \"author\": {\n        \"type\": \"UNSPECIFIED\",\n        \"email\": \"string\",\n        \"name\": \"string\"\n      },\n      \"attachments\": [\n        {\n          \"filename\": \"string\",\n          \"url\": \"string\",\n          \"content_type\": \"string\"\n        },\n        {\n          \"filename\": \"string\",\n          \"url\": \"string\",\n          \"content_type\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a824c7f-33fb-4725-9c6c-c46fba655b52",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.TicketService",
+                    "UpdateTicketHelpRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ticket_id\": \"<int64>\",\n  \"help_request_id\": \"<int64>\",\n  \"new_message\": {\n    \"body_html\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"data\": \"<byte>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5258,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.refurbed.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "add74100-ae52-4af9-a43e-cc5fb7563e32",
+    "name": "Affiliate Partner BuybackBidService TicketService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).\n\nContact Support:\n Name: Refurbed Affiliate Partner Integrations Team\n Email: integrations@refurbed.com",
+      "type": "text/plain"
+    }
+  }
+}

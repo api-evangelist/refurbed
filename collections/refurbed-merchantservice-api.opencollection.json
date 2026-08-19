@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService MerchantService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MerchantService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates merchant's address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MerchantService/CreateMerchantAddress"
+          },
+          "docs": "Creates merchant's address"
+        },
+        {
+          "info": {
+            "name": "Delete merchant's address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MerchantService/DeleteMerchantAddress"
+          },
+          "docs": "Delete merchant's address"
+        },
+        {
+          "info": {
+            "name": "Lists addresses defined for merchant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MerchantService/ListMerchantAddresses"
+          },
+          "docs": "Lists addresses defined for merchant"
+        },
+        {
+          "info": {
+            "name": "Updates merchant's address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MerchantService/UpdateMerchantAddress"
+          },
+          "docs": "Updates merchant's address"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

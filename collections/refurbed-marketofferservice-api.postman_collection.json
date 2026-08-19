@@ -1,0 +1,1579 @@
+{
+  "item": [
+    {
+      "id": "a759131a-421d-4fd5-b691-aa9f8113b19c",
+      "name": "MarketOfferService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "63494e98-636e-4ed6-950d-2264dcced179",
+          "name": "Batch creates market offers / offer market prices of offers.",
+          "request": {
+            "name": "Batch creates market offers / offer market prices of offers.",
+            "description": {
+              "content": "Known errors:\n - identical to the CreateMarketOffer operation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.MarketOfferService",
+                "BatchCreateMarketOffer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"market_offers\": [\n    {\n      \"identifier\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      },\n      \"market_price\": {\n        \"market_code\": \"<string>\",\n        \"price\": \"<string>\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"min_price\": \"<string>\"\n      }\n    },\n    {\n      \"identifier\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      },\n      \"market_price\": {\n        \"market_code\": \"<string>\",\n        \"price\": \"<string>\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"min_price\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c8d38626-58ae-4754-aafb-32a61aeec4b1",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "BatchCreateMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"market_offers\": [\n    {\n      \"identifier\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      },\n      \"market_price\": {\n        \"market_code\": \"<string>\",\n        \"price\": \"<string>\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"min_price\": \"<string>\"\n      }\n    },\n    {\n      \"identifier\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      },\n      \"market_price\": {\n        \"market_code\": \"<string>\",\n        \"price\": \"<string>\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"min_price\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"status\": {\n        \"code\": 2501,\n        \"message\": \"string\",\n        \"details\": [\n          {\n            \"@type\": \"string\"\n          },\n          {\n            \"@type\": \"string\"\n          }\n        ]\n      },\n      \"market_offer\": {\n        \"id\": {\n          \"market_code\": \"string\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"version\": \"string\",\n        \"is_current\": true,\n        \"created_at\": \"1961-01-08T05:22:45.569Z\",\n        \"instance_id\": \"string\",\n        \"instance_name\": \"string\",\n        \"state\": \"UNSPECIFIED\",\n        \"sku\": \"string\",\n        \"grading\": \"UNSPECIFIED\",\n        \"warranty\": \"UNSPECIFIED\",\n        \"stock\": 9281,\n        \"shipping_profile_id\": \"string\",\n        \"shipping_profile_name\": \"string\",\n        \"secondary_shipping_profile_id\": \"string\",\n        \"secondary_shipping_profile_name\": \"string\",\n        \"taxation\": \"UNSPECIFIED\",\n        \"real_taxation\": \"UNSPECIFIED\",\n        \"reference_currency_code\": \"UNSPECIFIED\",\n        \"reference_price\": \"string\",\n        \"reference_min_price\": \"string\",\n        \"market_price\": {\n          \"offer_id\": \"string\",\n          \"market_code\": \"string\",\n          \"market_name\": \"string\",\n          \"is_site_market\": true,\n          \"is_calculated\": true,\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"min_price\": \"string\",\n          \"site_market_currency_code\": \"UNSPECIFIED\",\n          \"site_market_price\": \"string\",\n          \"site_market_min_price\": \"string\",\n          \"visibility\": \"UNSPECIFIED\",\n          \"instance_buybox_state\": \"UNSPECIFIED\",\n          \"instance_buybox_info\": {\n            \"site_market_competitor_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"site_market_suggested_offer_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"site_market_suggested_offer_price_diff\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suggested_offer_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suggested_offer_price_diff\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"buybox_scope\": \"UNSPECIFIED\"\n        }\n      }\n    },\n    {\n      \"status\": {\n        \"code\": 8348,\n        \"message\": \"string\",\n        \"details\": [\n          {\n            \"@type\": \"string\",\n            \"key_0\": {}\n          },\n          {\n            \"@type\": \"string\",\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        ]\n      },\n      \"market_offer\": {\n        \"id\": {\n          \"market_code\": \"string\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"version\": \"string\",\n        \"is_current\": false,\n        \"created_at\": \"1956-04-13T06:37:02.188Z\",\n        \"instance_id\": \"string\",\n        \"instance_name\": \"string\",\n        \"state\": \"UNSPECIFIED\",\n        \"sku\": \"string\",\n        \"grading\": \"UNSPECIFIED\",\n        \"warranty\": \"UNSPECIFIED\",\n        \"stock\": 3375,\n        \"shipping_profile_id\": \"string\",\n        \"shipping_profile_name\": \"string\",\n        \"secondary_shipping_profile_id\": \"string\",\n        \"secondary_shipping_profile_name\": \"string\",\n        \"taxation\": \"UNSPECIFIED\",\n        \"real_taxation\": \"UNSPECIFIED\",\n        \"reference_currency_code\": \"UNSPECIFIED\",\n        \"reference_price\": \"string\",\n        \"reference_min_price\": \"string\",\n        \"market_price\": {\n          \"offer_id\": \"string\",\n          \"market_code\": \"string\",\n          \"market_name\": \"string\",\n          \"is_site_market\": true,\n          \"is_calculated\": true,\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"min_price\": \"string\",\n          \"site_market_currency_code\": \"UNSPECIFIED\",\n          \"site_market_price\": \"string\",\n          \"site_market_min_price\": \"string\",\n          \"visibility\": \"UNSPECIFIED\",\n          \"instance_buybox_state\": \"UNSPECIFIED\",\n          \"instance_buybox_info\": {\n            \"site_market_competitor_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"site_market_suggested_offer_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"site_market_suggested_offer_price_diff\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suggested_offer_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suggested_offer_price_diff\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"buybox_scope\": \"UNSPECIFIED\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c525a75a-60e4-4933-a048-a2990020b5c4",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "BatchCreateMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"market_offers\": [\n    {\n      \"identifier\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      },\n      \"market_price\": {\n        \"market_code\": \"<string>\",\n        \"price\": \"<string>\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"min_price\": \"<string>\"\n      }\n    },\n    {\n      \"identifier\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      },\n      \"market_price\": {\n        \"market_code\": \"<string>\",\n        \"price\": \"<string>\",\n        \"currency_code\": \"UNSPECIFIED\",\n        \"min_price\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6964,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d99a733f-73a3-4ca2-8462-15e1adb957a9",
+          "name": "Batch deletes market offers / offer market prices of offers.",
+          "request": {
+            "name": "Batch deletes market offers / offer market prices of offers.",
+            "description": {
+              "content": "Known errors:\n - identical to the DeleteMarketOffer operation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.MarketOfferService",
+                "BatchDeleteMarketOffer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"offers\": [\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f4b728e7-f9bc-4d29-87d4-d3fd2d04da8e",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "BatchDeleteMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offers\": [\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"status\": {\n        \"code\": 703,\n        \"message\": \"string\",\n        \"details\": [\n          {\n            \"@type\": \"string\",\n            \"key_0\": {},\n            \"key_1\": {}\n          },\n          {\n            \"@type\": \"string\",\n            \"key_0\": {}\n          }\n        ]\n      }\n    },\n    {\n      \"status\": {\n        \"code\": 435,\n        \"message\": \"string\",\n        \"details\": [\n          {\n            \"@type\": \"string\",\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {},\n            \"key_3\": {},\n            \"key_4\": {}\n          },\n          {\n            \"@type\": \"string\",\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {}\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cfd1f72-cb95-4e08-b3be-c4944e614eb4",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "BatchDeleteMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"offers\": [\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6964,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0df4502-cb73-4959-981d-cc98ec8719df",
+          "name": "Batch gets market offers / offer market prices of offers.",
+          "request": {
+            "name": "Batch gets market offers / offer market prices of offers.",
+            "description": {
+              "content": "Known errors:\n - identical to the GetMarketOffer operation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.MarketOfferService",
+                "BatchGetMarketOffer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"market_offers\": [\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ada642d8-94b2-4e9d-b7ef-3e3ce4427d5c",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "BatchGetMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"market_offers\": [\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"status\": {\n        \"code\": 1053,\n        \"message\": \"string\",\n        \"details\": [\n          {\n            \"@type\": \"string\"\n          },\n          {\n            \"@type\": \"string\",\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        ]\n      },\n      \"market_offer\": {\n        \"id\": {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"version\": \"string\",\n        \"is_current\": true,\n        \"created_at\": \"2015-05-07T04:48:37.957Z\",\n        \"instance_id\": \"string\",\n        \"instance_name\": \"string\",\n        \"state\": \"UNSPECIFIED\",\n        \"sku\": \"string\",\n        \"grading\": \"UNSPECIFIED\",\n        \"warranty\": \"UNSPECIFIED\",\n        \"stock\": 8353,\n        \"shipping_profile_id\": \"string\",\n        \"shipping_profile_name\": \"string\",\n        \"secondary_shipping_profile_id\": \"string\",\n        \"secondary_shipping_profile_name\": \"string\",\n        \"taxation\": \"UNSPECIFIED\",\n        \"real_taxation\": \"UNSPECIFIED\",\n        \"reference_currency_code\": \"UNSPECIFIED\",\n        \"reference_price\": \"string\",\n        \"reference_min_price\": \"string\",\n        \"market_price\": {\n          \"offer_id\": \"string\",\n          \"market_code\": \"string\",\n          \"market_name\": \"string\",\n          \"is_site_market\": false,\n          \"is_calculated\": true,\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"min_price\": \"string\",\n          \"site_market_currency_code\": \"UNSPECIFIED\",\n          \"site_market_price\": \"string\",\n          \"site_market_min_price\": \"string\",\n          \"visibility\": \"UNSPECIFIED\",\n          \"instance_buybox_state\": \"UNSPECIFIED\",\n          \"instance_buybox_info\": {\n            \"site_market_competitor_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"site_market_suggested_offer_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"site_market_suggested_offer_price_diff\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suggested_offer_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suggested_offer_price_diff\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"buybox_scope\": \"UNSPECIFIED\"\n        }\n      }\n    },\n    {\n      \"status\": {\n        \"code\": 9256,\n        \"message\": \"string\",\n        \"details\": [\n          {\n            \"@type\": \"string\"\n          },\n          {\n            \"@type\": \"string\",\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        ]\n      },\n      \"market_offer\": {\n        \"id\": {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"version\": \"string\",\n        \"is_current\": true,\n        \"created_at\": \"1995-07-17T16:15:18.263Z\",\n        \"instance_id\": \"string\",\n        \"instance_name\": \"string\",\n        \"state\": \"UNSPECIFIED\",\n        \"sku\": \"string\",\n        \"grading\": \"UNSPECIFIED\",\n        \"warranty\": \"UNSPECIFIED\",\n        \"stock\": 9128,\n        \"shipping_profile_id\": \"string\",\n        \"shipping_profile_name\": \"string\",\n        \"secondary_shipping_profile_id\": \"string\",\n        \"secondary_shipping_profile_name\": \"string\",\n        \"taxation\": \"UNSPECIFIED\",\n        \"real_taxation\": \"UNSPECIFIED\",\n        \"reference_currency_code\": \"UNSPECIFIED\",\n        \"reference_price\": \"string\",\n        \"reference_min_price\": \"string\",\n        \"market_price\": {\n          \"offer_id\": \"string\",\n          \"market_code\": \"string\",\n          \"market_name\": \"string\",\n          \"is_site_market\": true,\n          \"is_calculated\": true,\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"min_price\": \"string\",\n          \"site_market_currency_code\": \"UNSPECIFIED\",\n          \"site_market_price\": \"string\",\n          \"site_market_min_price\": \"string\",\n          \"visibility\": \"UNSPECIFIED\",\n          \"instance_buybox_state\": \"UNSPECIFIED\",\n          \"instance_buybox_info\": {\n            \"site_market_competitor_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"site_market_suggested_offer_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"site_market_suggested_offer_price_diff\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suggested_offer_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suggested_offer_price_diff\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"buybox_scope\": \"UNSPECIFIED\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e930b9c-c591-40e9-9d79-78650e112282",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "BatchGetMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"market_offers\": [\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6964,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "596adf0a-cf8d-42c7-870f-611bd22a866b",
+          "name": "Batch updates market offers / offer market prices of offers.",
+          "request": {
+            "name": "Batch updates market offers / offer market prices of offers.",
+            "description": {
+              "content": "Known errors:\n - identical to the UpdateMarketOffer operation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.MarketOfferService",
+                "BatchUpdateMarketOffer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"market_offers\": [\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      },\n      \"market_price\": {\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"<string>\",\n        \"min_price\": \"<string>\",\n        \"delete_min_price\": \"<boolean>\"\n      }\n    },\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      },\n      \"market_price\": {\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"<string>\",\n        \"min_price\": \"<string>\",\n        \"delete_min_price\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f71448e2-3c3d-4b66-bf59-1df7102dcbb8",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "BatchUpdateMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"market_offers\": [\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      },\n      \"market_price\": {\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"<string>\",\n        \"min_price\": \"<string>\",\n        \"delete_min_price\": \"<boolean>\"\n      }\n    },\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      },\n      \"market_price\": {\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"<string>\",\n        \"min_price\": \"<string>\",\n        \"delete_min_price\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"status\": {\n        \"code\": 3038,\n        \"message\": \"string\",\n        \"details\": [\n          {\n            \"@type\": \"string\",\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {}\n          },\n          {\n            \"@type\": \"string\"\n          }\n        ]\n      },\n      \"market_offer\": {\n        \"id\": {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"version\": \"string\",\n        \"is_current\": true,\n        \"created_at\": \"2026-04-13T14:38:55.405Z\",\n        \"instance_id\": \"string\",\n        \"instance_name\": \"string\",\n        \"state\": \"UNSPECIFIED\",\n        \"sku\": \"string\",\n        \"grading\": \"UNSPECIFIED\",\n        \"warranty\": \"UNSPECIFIED\",\n        \"stock\": 716,\n        \"shipping_profile_id\": \"string\",\n        \"shipping_profile_name\": \"string\",\n        \"secondary_shipping_profile_id\": \"string\",\n        \"secondary_shipping_profile_name\": \"string\",\n        \"taxation\": \"UNSPECIFIED\",\n        \"real_taxation\": \"UNSPECIFIED\",\n        \"reference_currency_code\": \"UNSPECIFIED\",\n        \"reference_price\": \"string\",\n        \"reference_min_price\": \"string\",\n        \"market_price\": {\n          \"offer_id\": \"string\",\n          \"market_code\": \"string\",\n          \"market_name\": \"string\",\n          \"is_site_market\": true,\n          \"is_calculated\": false,\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"min_price\": \"string\",\n          \"site_market_currency_code\": \"UNSPECIFIED\",\n          \"site_market_price\": \"string\",\n          \"site_market_min_price\": \"string\",\n          \"visibility\": \"UNSPECIFIED\",\n          \"instance_buybox_state\": \"UNSPECIFIED\",\n          \"instance_buybox_info\": {\n            \"site_market_competitor_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"site_market_suggested_offer_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"site_market_suggested_offer_price_diff\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suggested_offer_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suggested_offer_price_diff\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"buybox_scope\": \"UNSPECIFIED\"\n        }\n      }\n    },\n    {\n      \"status\": {\n        \"code\": 8033,\n        \"message\": \"string\",\n        \"details\": [\n          {\n            \"@type\": \"string\",\n            \"key_0\": {}\n          },\n          {\n            \"@type\": \"string\"\n          }\n        ]\n      },\n      \"market_offer\": {\n        \"id\": {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"version\": \"string\",\n        \"is_current\": false,\n        \"created_at\": \"1956-07-27T23:29:45.489Z\",\n        \"instance_id\": \"string\",\n        \"instance_name\": \"string\",\n        \"state\": \"UNSPECIFIED\",\n        \"sku\": \"string\",\n        \"grading\": \"UNSPECIFIED\",\n        \"warranty\": \"UNSPECIFIED\",\n        \"stock\": 493,\n        \"shipping_profile_id\": \"string\",\n        \"shipping_profile_name\": \"string\",\n        \"secondary_shipping_profile_id\": \"string\",\n        \"secondary_shipping_profile_name\": \"string\",\n        \"taxation\": \"UNSPECIFIED\",\n        \"real_taxation\": \"UNSPECIFIED\",\n        \"reference_currency_code\": \"UNSPECIFIED\",\n        \"reference_price\": \"string\",\n        \"reference_min_price\": \"string\",\n        \"market_price\": {\n          \"offer_id\": \"string\",\n          \"market_code\": \"string\",\n          \"market_name\": \"string\",\n          \"is_site_market\": false,\n          \"is_calculated\": false,\n          \"currency_code\": \"UNSPECIFIED\",\n          \"price\": \"string\",\n          \"min_price\": \"string\",\n          \"site_market_currency_code\": \"UNSPECIFIED\",\n          \"site_market_price\": \"string\",\n          \"site_market_min_price\": \"string\",\n          \"visibility\": \"UNSPECIFIED\",\n          \"instance_buybox_state\": \"UNSPECIFIED\",\n          \"instance_buybox_info\": {\n            \"site_market_competitor_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"site_market_suggested_offer_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"site_market_suggested_offer_price_diff\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suggested_offer_price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"suggested_offer_price_diff\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"buybox_scope\": \"UNSPECIFIED\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfc84499-1ef9-43e5-9899-7791cb4cda6b",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "BatchUpdateMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"market_offers\": [\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      },\n      \"market_price\": {\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"<string>\",\n        \"min_price\": \"<string>\",\n        \"delete_min_price\": \"<boolean>\"\n      }\n    },\n    {\n      \"identifier\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      },\n      \"market_price\": {\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"<string>\",\n        \"min_price\": \"<string>\",\n        \"delete_min_price\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6964,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70330ef3-74ca-4025-9ecc-4a3ee0022c6d",
+          "name": "Creates a single market offer / an offer market price of an offer.",
+          "request": {
+            "name": "Creates a single market offer / an offer market price of an offer.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- ALREADY_EXISTS\n  - when market offer already exists, i.e. market price is defined for\n    given offer and market combination\n- INVALID_ARGUMENT\n  - when the unknown offer is provided\n  - invalid market code is provided\n  - invalid input market offer data is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.MarketOfferService",
+                "CreateMarketOffer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"market_price\": {\n    \"market_code\": \"<string>\",\n    \"price\": \"<string>\",\n    \"currency_code\": \"UNSPECIFIED\",\n    \"min_price\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6db301d7-a72e-4eaf-8b8a-0c4e8494b5df",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "CreateMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"market_price\": {\n    \"market_code\": \"<string>\",\n    \"price\": \"<string>\",\n    \"currency_code\": \"UNSPECIFIED\",\n    \"min_price\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"market_offer\": {\n    \"id\": {\n      \"market_code\": \"<string>\",\n      \"offer_id\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      }\n    },\n    \"version\": \"string\",\n    \"is_current\": false,\n    \"created_at\": \"1972-08-23T09:49:34.364Z\",\n    \"instance_id\": \"string\",\n    \"instance_name\": \"string\",\n    \"state\": \"UNSPECIFIED\",\n    \"sku\": \"string\",\n    \"grading\": \"UNSPECIFIED\",\n    \"warranty\": \"UNSPECIFIED\",\n    \"stock\": 9965,\n    \"shipping_profile_id\": \"string\",\n    \"shipping_profile_name\": \"string\",\n    \"secondary_shipping_profile_id\": \"string\",\n    \"secondary_shipping_profile_name\": \"string\",\n    \"taxation\": \"UNSPECIFIED\",\n    \"real_taxation\": \"UNSPECIFIED\",\n    \"reference_currency_code\": \"UNSPECIFIED\",\n    \"reference_price\": \"string\",\n    \"reference_min_price\": \"string\",\n    \"market_price\": {\n      \"offer_id\": \"string\",\n      \"market_code\": \"string\",\n      \"market_name\": \"string\",\n      \"is_site_market\": false,\n      \"is_calculated\": true,\n      \"currency_code\": \"UNSPECIFIED\",\n      \"price\": \"string\",\n      \"min_price\": \"string\",\n      \"site_market_currency_code\": \"UNSPECIFIED\",\n      \"site_market_price\": \"string\",\n      \"site_market_min_price\": \"string\",\n      \"visibility\": \"UNSPECIFIED\",\n      \"instance_buybox_state\": \"UNSPECIFIED\",\n      \"instance_buybox_info\": {\n        \"site_market_competitor_price\": \"string\",\n        \"site_market_suggested_offer_price\": \"string\",\n        \"site_market_suggested_offer_price_diff\": \"string\",\n        \"suggested_offer_price\": \"string\",\n        \"suggested_offer_price_diff\": \"string\"\n      },\n      \"buybox_scope\": \"UNSPECIFIED\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8212ee3-2cb2-42d0-8f1a-b3fd740b75a7",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "CreateMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  },\n  \"market_price\": {\n    \"market_code\": \"<string>\",\n    \"price\": \"<string>\",\n    \"currency_code\": \"UNSPECIFIED\",\n    \"min_price\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6964,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d9cefbf0-75ec-41c8-8545-a721926f3b73",
+          "name": "Deletes a single market offer / an offer market price of an offer.",
+          "request": {
+            "name": "Deletes a single market offer / an offer market price of an offer.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when market offer does not exists\n- INVALID_ARGUMENT\n  - invalid market offer identifier is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.MarketOfferService",
+                "DeleteMarketOffer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": {\n    \"market_code\": \"<string>\",\n    \"offer_id\": {\n      \"id\": \"<int64>\",\n      \"sku\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be6d9f6c-deb9-49f7-bbcd-dc8383b86347",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "DeleteMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": {\n    \"market_code\": \"<string>\",\n    \"offer_id\": {\n      \"id\": \"<int64>\",\n      \"sku\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52d6c14b-aa52-4a2a-b423-03b581d25cb4",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "DeleteMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": {\n    \"market_code\": \"<string>\",\n    \"offer_id\": {\n      \"id\": \"<int64>\",\n      \"sku\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6964,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "712a2cfb-99c6-4aae-98b7-9978f2986af3",
+          "name": "Gets a single market offer.",
+          "request": {
+            "name": "Gets a single market offer.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the offer is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.MarketOfferService",
+                "GetMarketOffer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": {\n    \"market_code\": \"<string>\",\n    \"offer_id\": {\n      \"id\": \"<int64>\",\n      \"sku\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e847d44e-f2a6-4a70-87aa-be68cfdcc635",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "GetMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": {\n    \"market_code\": \"<string>\",\n    \"offer_id\": {\n      \"id\": \"<int64>\",\n      \"sku\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"market_offer\": {\n    \"id\": {\n      \"market_code\": \"<string>\",\n      \"offer_id\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      }\n    },\n    \"version\": \"string\",\n    \"is_current\": false,\n    \"created_at\": \"1972-08-23T09:49:34.364Z\",\n    \"instance_id\": \"string\",\n    \"instance_name\": \"string\",\n    \"state\": \"UNSPECIFIED\",\n    \"sku\": \"string\",\n    \"grading\": \"UNSPECIFIED\",\n    \"warranty\": \"UNSPECIFIED\",\n    \"stock\": 9965,\n    \"shipping_profile_id\": \"string\",\n    \"shipping_profile_name\": \"string\",\n    \"secondary_shipping_profile_id\": \"string\",\n    \"secondary_shipping_profile_name\": \"string\",\n    \"taxation\": \"UNSPECIFIED\",\n    \"real_taxation\": \"UNSPECIFIED\",\n    \"reference_currency_code\": \"UNSPECIFIED\",\n    \"reference_price\": \"string\",\n    \"reference_min_price\": \"string\",\n    \"market_price\": {\n      \"offer_id\": \"string\",\n      \"market_code\": \"string\",\n      \"market_name\": \"string\",\n      \"is_site_market\": false,\n      \"is_calculated\": true,\n      \"currency_code\": \"UNSPECIFIED\",\n      \"price\": \"string\",\n      \"min_price\": \"string\",\n      \"site_market_currency_code\": \"UNSPECIFIED\",\n      \"site_market_price\": \"string\",\n      \"site_market_min_price\": \"string\",\n      \"visibility\": \"UNSPECIFIED\",\n      \"instance_buybox_state\": \"UNSPECIFIED\",\n      \"instance_buybox_info\": {\n        \"site_market_competitor_price\": \"string\",\n        \"site_market_suggested_offer_price\": \"string\",\n        \"site_market_suggested_offer_price_diff\": \"string\",\n        \"suggested_offer_price\": \"string\",\n        \"suggested_offer_price_diff\": \"string\"\n      },\n      \"buybox_scope\": \"UNSPECIFIED\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb4a506a-0e99-404b-b0b3-ced3bf9611ad",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "GetMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": {\n    \"market_code\": \"<string>\",\n    \"offer_id\": {\n      \"id\": \"<int64>\",\n      \"sku\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6964,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9d97a64-da18-4591-83ed-7bad596a482a",
+          "name": "Lists all market offers.",
+          "request": {
+            "name": "Lists all market offers.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.MarketOfferService",
+                "ListMarketOffers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": {\n      \"market_code\": \"<string>\",\n      \"offer_id\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      }\n    },\n    \"starting_after\": {\n      \"market_code\": \"<string>\",\n      \"offer_id\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      }\n    }\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"none_of\": [\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"offer_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"created_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"instance_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"name\": {\n      \"matches\": \"<string>\"\n    },\n    \"sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    },\n    \"grading\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"warranty\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"stock\": {\n      \"gt\": \"<long>\",\n      \"ge\": \"<long>\",\n      \"any_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"none_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"le\": \"<long>\",\n      \"lt\": \"<long>\"\n    },\n    \"shipping_profile_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"secondary_shipping_profile_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"is_set\": \"<boolean>\"\n    },\n    \"taxation\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"reference_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"reference_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"reference_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_market_code\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"market_price_is_site_market\": {\n      \"value\": \"<boolean>\"\n    },\n    \"market_price_is_calculated\": {\n      \"value\": \"<boolean>\"\n    },\n    \"market_price_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_site_market_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_site_market_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_site_market_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_visibility\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_instance_buybox_state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_buybox_scope\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ce713fce-bb39-4d9b-954b-e86dacaedeb6",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "ListMarketOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": {\n      \"market_code\": \"<string>\",\n      \"offer_id\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      }\n    },\n    \"starting_after\": {\n      \"market_code\": \"<string>\",\n      \"offer_id\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      }\n    }\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"none_of\": [\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"offer_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"created_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"instance_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"name\": {\n      \"matches\": \"<string>\"\n    },\n    \"sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    },\n    \"grading\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"warranty\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"stock\": {\n      \"gt\": \"<long>\",\n      \"ge\": \"<long>\",\n      \"any_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"none_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"le\": \"<long>\",\n      \"lt\": \"<long>\"\n    },\n    \"shipping_profile_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"secondary_shipping_profile_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"is_set\": \"<boolean>\"\n    },\n    \"taxation\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"reference_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"reference_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"reference_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_market_code\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"market_price_is_site_market\": {\n      \"value\": \"<boolean>\"\n    },\n    \"market_price_is_calculated\": {\n      \"value\": \"<boolean>\"\n    },\n    \"market_price_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_site_market_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_site_market_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_site_market_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_visibility\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_instance_buybox_state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_buybox_scope\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"market_offers\": [\n    {\n      \"id\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      },\n      \"version\": \"string\",\n      \"is_current\": false,\n      \"created_at\": \"1961-09-29T11:03:35.195Z\",\n      \"instance_id\": \"string\",\n      \"instance_name\": \"string\",\n      \"state\": \"UNSPECIFIED\",\n      \"sku\": \"string\",\n      \"grading\": \"UNSPECIFIED\",\n      \"warranty\": \"UNSPECIFIED\",\n      \"stock\": 9887,\n      \"shipping_profile_id\": \"string\",\n      \"shipping_profile_name\": \"string\",\n      \"secondary_shipping_profile_id\": \"string\",\n      \"secondary_shipping_profile_name\": \"string\",\n      \"taxation\": \"UNSPECIFIED\",\n      \"real_taxation\": \"UNSPECIFIED\",\n      \"reference_currency_code\": \"UNSPECIFIED\",\n      \"reference_price\": \"string\",\n      \"reference_min_price\": \"string\",\n      \"market_price\": {\n        \"offer_id\": \"string\",\n        \"market_code\": \"string\",\n        \"market_name\": \"string\",\n        \"is_site_market\": false,\n        \"is_calculated\": false,\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"string\",\n        \"min_price\": \"string\",\n        \"site_market_currency_code\": \"UNSPECIFIED\",\n        \"site_market_price\": \"string\",\n        \"site_market_min_price\": \"string\",\n        \"visibility\": \"UNSPECIFIED\",\n        \"instance_buybox_state\": \"UNSPECIFIED\",\n        \"instance_buybox_info\": {\n          \"site_market_competitor_price\": \"string\",\n          \"site_market_suggested_offer_price\": \"string\",\n          \"site_market_suggested_offer_price_diff\": \"string\",\n          \"suggested_offer_price\": \"string\",\n          \"suggested_offer_price_diff\": \"string\"\n        },\n        \"buybox_scope\": \"UNSPECIFIED\"\n      }\n    },\n    {\n      \"id\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      },\n      \"version\": \"string\",\n      \"is_current\": false,\n      \"created_at\": \"1974-03-11T05:28:53.132Z\",\n      \"instance_id\": \"string\",\n      \"instance_name\": \"string\",\n      \"state\": \"UNSPECIFIED\",\n      \"sku\": \"string\",\n      \"grading\": \"UNSPECIFIED\",\n      \"warranty\": \"UNSPECIFIED\",\n      \"stock\": 9240,\n      \"shipping_profile_id\": \"string\",\n      \"shipping_profile_name\": \"string\",\n      \"secondary_shipping_profile_id\": \"string\",\n      \"secondary_shipping_profile_name\": \"string\",\n      \"taxation\": \"UNSPECIFIED\",\n      \"real_taxation\": \"UNSPECIFIED\",\n      \"reference_currency_code\": \"UNSPECIFIED\",\n      \"reference_price\": \"string\",\n      \"reference_min_price\": \"string\",\n      \"market_price\": {\n        \"offer_id\": \"string\",\n        \"market_code\": \"string\",\n        \"market_name\": \"string\",\n        \"is_site_market\": true,\n        \"is_calculated\": true,\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"string\",\n        \"min_price\": \"string\",\n        \"site_market_currency_code\": \"UNSPECIFIED\",\n        \"site_market_price\": \"string\",\n        \"site_market_min_price\": \"string\",\n        \"visibility\": \"UNSPECIFIED\",\n        \"instance_buybox_state\": \"UNSPECIFIED\",\n        \"instance_buybox_info\": {\n          \"site_market_competitor_price\": \"string\",\n          \"site_market_suggested_offer_price\": \"string\",\n          \"site_market_suggested_offer_price_diff\": \"string\",\n          \"suggested_offer_price\": \"string\",\n          \"suggested_offer_price_diff\": \"string\"\n        },\n        \"buybox_scope\": \"UNSPECIFIED\"\n      }\n    }\n  ],\n  \"has_more\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06d0e3d2-ad89-4ab0-9f9b-f75635205d8a",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "ListMarketOffers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": {\n      \"market_code\": \"<string>\",\n      \"offer_id\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      }\n    },\n    \"starting_after\": {\n      \"market_code\": \"<string>\",\n      \"offer_id\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      }\n    }\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"none_of\": [\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"offer_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"created_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"instance_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"name\": {\n      \"matches\": \"<string>\"\n    },\n    \"sku\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contains\": \"<string>\"\n    },\n    \"grading\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"warranty\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"stock\": {\n      \"gt\": \"<long>\",\n      \"ge\": \"<long>\",\n      \"any_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"none_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"le\": \"<long>\",\n      \"lt\": \"<long>\"\n    },\n    \"shipping_profile_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"secondary_shipping_profile_id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"is_set\": \"<boolean>\"\n    },\n    \"taxation\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"reference_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"reference_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"reference_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_market_code\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"market_price_is_site_market\": {\n      \"value\": \"<boolean>\"\n    },\n    \"market_price_is_calculated\": {\n      \"value\": \"<boolean>\"\n    },\n    \"market_price_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_site_market_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_site_market_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_site_market_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_visibility\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_instance_buybox_state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_buybox_scope\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6964,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "942160ca-4562-46b2-b54a-e44f3c62046f",
+          "name": "Lists all market offers of a specific offer.",
+          "request": {
+            "name": "Lists all market offers of a specific offer.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when offer identifier is not valid\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.MarketOfferService",
+                "ListMarketOffersByOffer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<string>\",\n    \"starting_after\": \"<string>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"none_of\": [\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"market_price_market_code\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"market_price_is_site_market\": {\n      \"value\": \"<boolean>\"\n    },\n    \"market_price_is_calculated\": {\n      \"value\": \"<boolean>\"\n    },\n    \"market_price_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_site_market_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_site_market_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_site_market_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_visibility\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_instance_buybox_state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_buybox_scope\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    }\n  },\n  \"offer_identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "63c326b5-f43a-4cbf-95b7-3ddedfea9c24",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "ListMarketOffersByOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<string>\",\n    \"starting_after\": \"<string>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"none_of\": [\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"market_price_market_code\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"market_price_is_site_market\": {\n      \"value\": \"<boolean>\"\n    },\n    \"market_price_is_calculated\": {\n      \"value\": \"<boolean>\"\n    },\n    \"market_price_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_site_market_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_site_market_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_site_market_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_visibility\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_instance_buybox_state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_buybox_scope\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    }\n  },\n  \"offer_identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"market_offers\": [\n    {\n      \"id\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      },\n      \"version\": \"string\",\n      \"is_current\": false,\n      \"created_at\": \"1961-09-29T11:03:35.195Z\",\n      \"instance_id\": \"string\",\n      \"instance_name\": \"string\",\n      \"state\": \"UNSPECIFIED\",\n      \"sku\": \"string\",\n      \"grading\": \"UNSPECIFIED\",\n      \"warranty\": \"UNSPECIFIED\",\n      \"stock\": 9887,\n      \"shipping_profile_id\": \"string\",\n      \"shipping_profile_name\": \"string\",\n      \"secondary_shipping_profile_id\": \"string\",\n      \"secondary_shipping_profile_name\": \"string\",\n      \"taxation\": \"UNSPECIFIED\",\n      \"real_taxation\": \"UNSPECIFIED\",\n      \"reference_currency_code\": \"UNSPECIFIED\",\n      \"reference_price\": \"string\",\n      \"reference_min_price\": \"string\",\n      \"market_price\": {\n        \"offer_id\": \"string\",\n        \"market_code\": \"string\",\n        \"market_name\": \"string\",\n        \"is_site_market\": false,\n        \"is_calculated\": false,\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"string\",\n        \"min_price\": \"string\",\n        \"site_market_currency_code\": \"UNSPECIFIED\",\n        \"site_market_price\": \"string\",\n        \"site_market_min_price\": \"string\",\n        \"visibility\": \"UNSPECIFIED\",\n        \"instance_buybox_state\": \"UNSPECIFIED\",\n        \"instance_buybox_info\": {\n          \"site_market_competitor_price\": \"string\",\n          \"site_market_suggested_offer_price\": \"string\",\n          \"site_market_suggested_offer_price_diff\": \"string\",\n          \"suggested_offer_price\": \"string\",\n          \"suggested_offer_price_diff\": \"string\"\n        },\n        \"buybox_scope\": \"UNSPECIFIED\"\n      }\n    },\n    {\n      \"id\": {\n        \"market_code\": \"<string>\",\n        \"offer_id\": {\n          \"id\": \"<int64>\",\n          \"sku\": \"<string>\"\n        }\n      },\n      \"version\": \"string\",\n      \"is_current\": false,\n      \"created_at\": \"1974-03-11T05:28:53.132Z\",\n      \"instance_id\": \"string\",\n      \"instance_name\": \"string\",\n      \"state\": \"UNSPECIFIED\",\n      \"sku\": \"string\",\n      \"grading\": \"UNSPECIFIED\",\n      \"warranty\": \"UNSPECIFIED\",\n      \"stock\": 9240,\n      \"shipping_profile_id\": \"string\",\n      \"shipping_profile_name\": \"string\",\n      \"secondary_shipping_profile_id\": \"string\",\n      \"secondary_shipping_profile_name\": \"string\",\n      \"taxation\": \"UNSPECIFIED\",\n      \"real_taxation\": \"UNSPECIFIED\",\n      \"reference_currency_code\": \"UNSPECIFIED\",\n      \"reference_price\": \"string\",\n      \"reference_min_price\": \"string\",\n      \"market_price\": {\n        \"offer_id\": \"string\",\n        \"market_code\": \"string\",\n        \"market_name\": \"string\",\n        \"is_site_market\": true,\n        \"is_calculated\": true,\n        \"currency_code\": \"UNSPECIFIED\",\n        \"price\": \"string\",\n        \"min_price\": \"string\",\n        \"site_market_currency_code\": \"UNSPECIFIED\",\n        \"site_market_price\": \"string\",\n        \"site_market_min_price\": \"string\",\n        \"visibility\": \"UNSPECIFIED\",\n        \"instance_buybox_state\": \"UNSPECIFIED\",\n        \"instance_buybox_info\": {\n          \"site_market_competitor_price\": \"string\",\n          \"site_market_suggested_offer_price\": \"string\",\n          \"site_market_suggested_offer_price_diff\": \"string\",\n          \"suggested_offer_price\": \"string\",\n          \"suggested_offer_price_diff\": \"string\"\n        },\n        \"buybox_scope\": \"UNSPECIFIED\"\n      }\n    }\n  ],\n  \"has_more\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22dcdb6c-49e7-4594-8aa9-b35403a0d0dc",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "ListMarketOffersByOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<string>\",\n    \"starting_after\": \"<string>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"none_of\": [\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"market_code\": \"<string>\",\n          \"offer_id\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    \"market_price_market_code\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"market_price_is_site_market\": {\n      \"value\": \"<boolean>\"\n    },\n    \"market_price_is_calculated\": {\n      \"value\": \"<boolean>\"\n    },\n    \"market_price_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_site_market_currency_code\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_site_market_price\": {\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_site_market_min_price\": {\n      \"is_set\": \"<boolean>\",\n      \"gt\": \"<string>\",\n      \"ge\": \"<string>\",\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"le\": \"<string>\",\n      \"lt\": \"<string>\"\n    },\n    \"market_price_visibility\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_instance_buybox_state\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    },\n    \"market_price_buybox_scope\": {\n      \"any_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ],\n      \"none_of\": [\n        \"UNSPECIFIED\",\n        \"UNSPECIFIED\"\n      ]\n    }\n  },\n  \"offer_identifier\": {\n    \"id\": \"<int64>\",\n    \"sku\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6964,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5eb3d8af-094c-4c88-9951-14c32712099b",
+          "name": "Updates a single market offer / an offer market price of an offer.",
+          "request": {
+            "name": "Updates a single market offer / an offer market price of an offer.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when market offer does not exists\n- INVALID_ARGUMENT\n  - when the unknown offer is provided\n  - invalid input market offer data is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.MarketOfferService",
+                "UpdateMarketOffer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": {\n    \"market_code\": \"<string>\",\n    \"offer_id\": {\n      \"id\": \"<int64>\",\n      \"sku\": \"<string>\"\n    }\n  },\n  \"market_price\": {\n    \"currency_code\": \"UNSPECIFIED\",\n    \"price\": \"<string>\",\n    \"min_price\": \"<string>\",\n    \"delete_min_price\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b99f416e-4860-4dd4-aef8-912f73cd4ed0",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "UpdateMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": {\n    \"market_code\": \"<string>\",\n    \"offer_id\": {\n      \"id\": \"<int64>\",\n      \"sku\": \"<string>\"\n    }\n  },\n  \"market_price\": {\n    \"currency_code\": \"UNSPECIFIED\",\n    \"price\": \"<string>\",\n    \"min_price\": \"<string>\",\n    \"delete_min_price\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"market_offer\": {\n    \"id\": {\n      \"market_code\": \"<string>\",\n      \"offer_id\": {\n        \"id\": \"<int64>\",\n        \"sku\": \"<string>\"\n      }\n    },\n    \"version\": \"string\",\n    \"is_current\": false,\n    \"created_at\": \"1972-08-23T09:49:34.364Z\",\n    \"instance_id\": \"string\",\n    \"instance_name\": \"string\",\n    \"state\": \"UNSPECIFIED\",\n    \"sku\": \"string\",\n    \"grading\": \"UNSPECIFIED\",\n    \"warranty\": \"UNSPECIFIED\",\n    \"stock\": 9965,\n    \"shipping_profile_id\": \"string\",\n    \"shipping_profile_name\": \"string\",\n    \"secondary_shipping_profile_id\": \"string\",\n    \"secondary_shipping_profile_name\": \"string\",\n    \"taxation\": \"UNSPECIFIED\",\n    \"real_taxation\": \"UNSPECIFIED\",\n    \"reference_currency_code\": \"UNSPECIFIED\",\n    \"reference_price\": \"string\",\n    \"reference_min_price\": \"string\",\n    \"market_price\": {\n      \"offer_id\": \"string\",\n      \"market_code\": \"string\",\n      \"market_name\": \"string\",\n      \"is_site_market\": false,\n      \"is_calculated\": true,\n      \"currency_code\": \"UNSPECIFIED\",\n      \"price\": \"string\",\n      \"min_price\": \"string\",\n      \"site_market_currency_code\": \"UNSPECIFIED\",\n      \"site_market_price\": \"string\",\n      \"site_market_min_price\": \"string\",\n      \"visibility\": \"UNSPECIFIED\",\n      \"instance_buybox_state\": \"UNSPECIFIED\",\n      \"instance_buybox_info\": {\n        \"site_market_competitor_price\": \"string\",\n        \"site_market_suggested_offer_price\": \"string\",\n        \"site_market_suggested_offer_price_diff\": \"string\",\n        \"suggested_offer_price\": \"string\",\n        \"suggested_offer_price_diff\": \"string\"\n      },\n      \"buybox_scope\": \"UNSPECIFIED\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c3b9b1f-beac-47c0-b49f-c361ac02093e",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.MarketOfferService",
+                    "UpdateMarketOffer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identifier\": {\n    \"market_code\": \"<string>\",\n    \"offer_id\": {\n      \"id\": \"<int64>\",\n      \"sku\": \"<string>\"\n    }\n  },\n  \"market_price\": {\n    \"currency_code\": \"UNSPECIFIED\",\n    \"price\": \"<string>\",\n    \"min_price\": \"<string>\",\n    \"delete_min_price\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6964,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\"\n    },\n    {\n      \"@type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.refurbed.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "473c59aa-24d6-4033-be37-0e4c1c05e749",
+    "name": "Affiliate Partner BuybackBidService MarketOfferService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).\n\nContact Support:\n Name: Refurbed Affiliate Partner Integrations Team\n Email: integrations@refurbed.com",
+      "type": "text/plain"
+    }
+  }
+}

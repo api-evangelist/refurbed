@@ -1,0 +1,967 @@
+{
+  "item": [
+    {
+      "id": "38c4288e-1810-4707-a91a-27ac87a44f22",
+      "name": "ShippingProfileService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9a06b7f9-11cc-498a-9627-992e8b2b9d27",
+          "name": "Creates a shipping profile.",
+          "request": {
+            "name": "Creates a shipping profile.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when unknown source country market code is provided\n  - when unknown destination market code is provided\n  - when invalid shipping costs amount\n  - when unknown currency code is provided\n  - when invalid min/max delivery days\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.ShippingProfileService",
+                "CreateShippingProfile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"source_country_market_code\": \"<string>\",\n  \"source_address\": {\n    \"company_name\": \"<string>\",\n    \"post_code\": \"<string>\",\n    \"town\": \"<string>\",\n    \"street_name\": \"<string>\",\n    \"house_no\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"country_code\": \"UNSPECIFIED\",\n    \"supplement\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"create_destinations\": [\n    {\n      \"market_code\": \"<string>\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    },\n    {\n      \"market_code\": \"<string>\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1754eb7d-b891-402f-b1a3-491dd04eec89",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.ShippingProfileService",
+                    "CreateShippingProfile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"source_country_market_code\": \"<string>\",\n  \"source_address\": {\n    \"company_name\": \"<string>\",\n    \"post_code\": \"<string>\",\n    \"town\": \"<string>\",\n    \"street_name\": \"<string>\",\n    \"house_no\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"country_code\": \"UNSPECIFIED\",\n    \"supplement\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"create_destinations\": [\n    {\n      \"market_code\": \"<string>\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    },\n    {\n      \"market_code\": \"<string>\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipping_profile\": {\n    \"id\": \"string\",\n    \"version\": \"string\",\n    \"is_current\": true,\n    \"created_at\": \"1959-06-16T05:05:24.395Z\",\n    \"name\": \"string\",\n    \"source_country_market_code\": \"string\",\n    \"source_country_market_name\": \"string\",\n    \"source_address\": {\n      \"id\": \"string\",\n      \"version\": \"string\",\n      \"label\": \"string\",\n      \"first_name\": \"string\",\n      \"family_name\": \"string\",\n      \"company_name\": \"string\",\n      \"country_code\": \"UNSPECIFIED\",\n      \"post_code\": \"string\",\n      \"town\": \"string\",\n      \"street_name\": \"string\",\n      \"house_no\": \"string\",\n      \"supplement\": \"string\",\n      \"phone_number\": \"string\",\n      \"type\": \"UNSPECIFIED\"\n    },\n    \"is_deletable\": true,\n    \"num_offers_assigned\": 931,\n    \"destinations\": [\n      {\n        \"market_code\": \"string\",\n        \"market_name\": \"string\",\n        \"is_site_market\": false,\n        \"currency_code\": \"UNSPECIFIED\",\n        \"shipping_costs\": \"string\",\n        \"site_market_currency_code\": \"UNSPECIFIED\",\n        \"site_market_shipping_costs\": \"string\",\n        \"min_delivery_days\": 6909,\n        \"max_delivery_days\": 9089,\n        \"label_creation_enabled\": true,\n        \"carrier\": \"string\",\n        \"dispatch_cutoff_hour\": 3393\n      },\n      {\n        \"market_code\": \"string\",\n        \"market_name\": \"string\",\n        \"is_site_market\": false,\n        \"currency_code\": \"UNSPECIFIED\",\n        \"shipping_costs\": \"string\",\n        \"site_market_currency_code\": \"UNSPECIFIED\",\n        \"site_market_shipping_costs\": \"string\",\n        \"min_delivery_days\": 8030,\n        \"max_delivery_days\": 9134,\n        \"label_creation_enabled\": false,\n        \"carrier\": \"string\",\n        \"dispatch_cutoff_hour\": 9978\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b294cca-6cac-4368-aad7-2cba8d884fda",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.ShippingProfileService",
+                    "CreateShippingProfile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"source_country_market_code\": \"<string>\",\n  \"source_address\": {\n    \"company_name\": \"<string>\",\n    \"post_code\": \"<string>\",\n    \"town\": \"<string>\",\n    \"street_name\": \"<string>\",\n    \"house_no\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"country_code\": \"UNSPECIFIED\",\n    \"supplement\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"create_destinations\": [\n    {\n      \"market_code\": \"<string>\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    },\n    {\n      \"market_code\": \"<string>\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 760,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1df8bb6-4da5-4e61-a804-fc7e5d14361a",
+          "name": "Deletes a shipping profile.\nOnly shipping profiles marked as deletable can be deleted.",
+          "request": {
+            "name": "Deletes a shipping profile.\nOnly shipping profiles marked as deletable can be deleted.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- FAILED_PRECONDITION\n  - when shipping profile has at least one active offer assigned\n- NOT_FOUND\n  - when shipping profile is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.ShippingProfileService",
+                "DeleteShippingProfile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7dded021-55b6-4024-ad92-c373c4237f4d",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.ShippingProfileService",
+                    "DeleteShippingProfile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c43bdd5-eef7-458d-a423-f9071088c43f",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.ShippingProfileService",
+                    "DeleteShippingProfile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1878,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b39dd86d-1d15-4039-929b-d3de5dff8a7a",
+          "name": "Gets a single shipping profile.\nIf no version is defined, its current version is returned.",
+          "request": {
+            "name": "Gets a single shipping profile.\nIf no version is defined, its current version is returned.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the shipping profile is not found\n  - when the shipping profile has been deleted and no version is given as\n    parameter even though the individual historic versions are still\n    accessible\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.ShippingProfileService",
+                "GetShippingProfile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<int64>\",\n  \"version\": \"<int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "15173767-f64d-49b4-89dc-6d95ee1bf34f",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.ShippingProfileService",
+                    "GetShippingProfile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"version\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipping_profile\": {\n    \"id\": \"string\",\n    \"version\": \"string\",\n    \"is_current\": false,\n    \"created_at\": \"2018-11-11T01:12:34.210Z\",\n    \"name\": \"string\",\n    \"source_country_market_code\": \"string\",\n    \"source_country_market_name\": \"string\",\n    \"source_address\": {\n      \"id\": \"string\",\n      \"version\": \"string\",\n      \"label\": \"string\",\n      \"first_name\": \"string\",\n      \"family_name\": \"string\",\n      \"company_name\": \"string\",\n      \"country_code\": \"UNSPECIFIED\",\n      \"post_code\": \"string\",\n      \"town\": \"string\",\n      \"street_name\": \"string\",\n      \"house_no\": \"string\",\n      \"supplement\": \"string\",\n      \"phone_number\": \"string\",\n      \"type\": \"UNSPECIFIED\"\n    },\n    \"is_deletable\": false,\n    \"num_offers_assigned\": 7529,\n    \"destinations\": [\n      {\n        \"market_code\": \"string\",\n        \"market_name\": \"string\",\n        \"is_site_market\": true,\n        \"currency_code\": \"UNSPECIFIED\",\n        \"shipping_costs\": \"string\",\n        \"site_market_currency_code\": \"UNSPECIFIED\",\n        \"site_market_shipping_costs\": \"string\",\n        \"min_delivery_days\": 5079,\n        \"max_delivery_days\": 5746,\n        \"label_creation_enabled\": false,\n        \"carrier\": \"string\",\n        \"dispatch_cutoff_hour\": 567\n      },\n      {\n        \"market_code\": \"string\",\n        \"market_name\": \"string\",\n        \"is_site_market\": true,\n        \"currency_code\": \"UNSPECIFIED\",\n        \"shipping_costs\": \"string\",\n        \"site_market_currency_code\": \"UNSPECIFIED\",\n        \"site_market_shipping_costs\": \"string\",\n        \"min_delivery_days\": 5520,\n        \"max_delivery_days\": 7182,\n        \"label_creation_enabled\": false,\n        \"carrier\": \"string\",\n        \"dispatch_cutoff_hour\": 8601\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e03cbede-24d8-49d3-8ad5-589efe297713",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.ShippingProfileService",
+                    "GetShippingProfile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"version\": \"<int64>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1878,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1efcec72-fcd1-47bc-9de9-8e123b50c094",
+          "name": "Lists available carriers for shipping profiles.\nMake sure to pre-fetch and cache the response of this method to avoid running into rate-limits.",
+          "request": {
+            "name": "Lists available carriers for shipping profiles.\nMake sure to pre-fetch and cache the response of this method to avoid running into rate-limits.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.ShippingProfileService",
+                "ListAvailableCarriers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e47a85d7-ce99-4ebe-b1e6-a0af041900d4",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.ShippingProfileService",
+                    "ListAvailableCarriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carriers\": [\n    {\n      \"name\": \"string\",\n      \"slug\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"slug\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18122a78-c43c-4787-ae99-9be42b9fd7bf",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.ShippingProfileService",
+                    "ListAvailableCarriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1878,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "021f4b43-95de-408f-b223-5b3a672141d3",
+          "name": "Lists all current shipping profiles.",
+          "request": {
+            "name": "Lists all current shipping profiles.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.ShippingProfileService",
+                "ListShippingProfiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"created_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"name\": {\n      \"contains\": \"<string>\"\n    },\n    \"source_country_market_code\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"destination_market_code\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"num_offers_assigned\": {\n      \"gt\": \"<long>\",\n      \"ge\": \"<long>\",\n      \"any_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"none_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"le\": \"<long>\",\n      \"lt\": \"<long>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "54350420-285e-4181-b99d-b2a96c962e31",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.ShippingProfileService",
+                    "ListShippingProfiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"created_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"name\": {\n      \"contains\": \"<string>\"\n    },\n    \"source_country_market_code\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"destination_market_code\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"num_offers_assigned\": {\n      \"gt\": \"<long>\",\n      \"ge\": \"<long>\",\n      \"any_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"none_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"le\": \"<long>\",\n      \"lt\": \"<long>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipping_profiles\": [\n    {\n      \"id\": \"string\",\n      \"version\": \"string\",\n      \"is_current\": true,\n      \"created_at\": \"1967-09-08T20:44:47.671Z\",\n      \"name\": \"string\",\n      \"source_country_market_code\": \"string\",\n      \"source_country_market_name\": \"string\",\n      \"source_address\": {\n        \"id\": \"string\",\n        \"version\": \"string\",\n        \"label\": \"string\",\n        \"first_name\": \"string\",\n        \"family_name\": \"string\",\n        \"company_name\": \"string\",\n        \"country_code\": \"UNSPECIFIED\",\n        \"post_code\": \"string\",\n        \"town\": \"string\",\n        \"street_name\": \"string\",\n        \"house_no\": \"string\",\n        \"supplement\": \"string\",\n        \"phone_number\": \"string\",\n        \"type\": \"UNSPECIFIED\"\n      },\n      \"is_deletable\": false,\n      \"num_offers_assigned\": 6703,\n      \"destinations\": [\n        {\n          \"market_code\": \"string\",\n          \"market_name\": \"string\",\n          \"is_site_market\": true,\n          \"currency_code\": \"UNSPECIFIED\",\n          \"shipping_costs\": \"string\",\n          \"site_market_currency_code\": \"UNSPECIFIED\",\n          \"site_market_shipping_costs\": \"string\",\n          \"min_delivery_days\": 9476,\n          \"max_delivery_days\": 2002,\n          \"label_creation_enabled\": true,\n          \"carrier\": \"string\",\n          \"dispatch_cutoff_hour\": 6346\n        },\n        {\n          \"market_code\": \"string\",\n          \"market_name\": \"string\",\n          \"is_site_market\": true,\n          \"currency_code\": \"UNSPECIFIED\",\n          \"shipping_costs\": \"string\",\n          \"site_market_currency_code\": \"UNSPECIFIED\",\n          \"site_market_shipping_costs\": \"string\",\n          \"min_delivery_days\": 689,\n          \"max_delivery_days\": 8744,\n          \"label_creation_enabled\": false,\n          \"carrier\": \"string\",\n          \"dispatch_cutoff_hour\": 6384\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"version\": \"string\",\n      \"is_current\": true,\n      \"created_at\": \"1994-09-27T09:39:11.397Z\",\n      \"name\": \"string\",\n      \"source_country_market_code\": \"string\",\n      \"source_country_market_name\": \"string\",\n      \"source_address\": {\n        \"id\": \"string\",\n        \"version\": \"string\",\n        \"label\": \"string\",\n        \"first_name\": \"string\",\n        \"family_name\": \"string\",\n        \"company_name\": \"string\",\n        \"country_code\": \"UNSPECIFIED\",\n        \"post_code\": \"string\",\n        \"town\": \"string\",\n        \"street_name\": \"string\",\n        \"house_no\": \"string\",\n        \"supplement\": \"string\",\n        \"phone_number\": \"string\",\n        \"type\": \"UNSPECIFIED\"\n      },\n      \"is_deletable\": true,\n      \"num_offers_assigned\": 9079,\n      \"destinations\": [\n        {\n          \"market_code\": \"string\",\n          \"market_name\": \"string\",\n          \"is_site_market\": true,\n          \"currency_code\": \"UNSPECIFIED\",\n          \"shipping_costs\": \"string\",\n          \"site_market_currency_code\": \"UNSPECIFIED\",\n          \"site_market_shipping_costs\": \"string\",\n          \"min_delivery_days\": 1012,\n          \"max_delivery_days\": 5181,\n          \"label_creation_enabled\": true,\n          \"carrier\": \"string\",\n          \"dispatch_cutoff_hour\": 9650\n        },\n        {\n          \"market_code\": \"string\",\n          \"market_name\": \"string\",\n          \"is_site_market\": true,\n          \"currency_code\": \"UNSPECIFIED\",\n          \"shipping_costs\": \"string\",\n          \"site_market_currency_code\": \"UNSPECIFIED\",\n          \"site_market_shipping_costs\": \"string\",\n          \"min_delivery_days\": 8962,\n          \"max_delivery_days\": 9795,\n          \"label_creation_enabled\": true,\n          \"carrier\": \"string\",\n          \"dispatch_cutoff_hour\": 1087\n        }\n      ]\n    }\n  ],\n  \"has_more\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "760cd9cf-20a2-49c5-9562-c76a8978f476",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.ShippingProfileService",
+                    "ListShippingProfiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pagination\": {\n    \"limit\": \"<long>\",\n    \"ending_before\": \"<int64>\",\n    \"starting_after\": \"<int64>\"\n  },\n  \"sort\": {\n    \"order\": \"ASC\",\n    \"by\": \"ID\"\n  },\n  \"filter\": {\n    \"id\": {\n      \"any_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ],\n      \"none_of\": [\n        \"<int64>\",\n        \"<int64>\"\n      ]\n    },\n    \"created_at\": {\n      \"gt\": \"<dateTime>\",\n      \"ge\": \"<dateTime>\",\n      \"any_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"none_of\": [\n        \"<dateTime>\",\n        \"<dateTime>\"\n      ],\n      \"le\": \"<dateTime>\",\n      \"lt\": \"<dateTime>\"\n    },\n    \"name\": {\n      \"contains\": \"<string>\"\n    },\n    \"source_country_market_code\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"destination_market_code\": {\n      \"any_of\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"none_of\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"num_offers_assigned\": {\n      \"gt\": \"<long>\",\n      \"ge\": \"<long>\",\n      \"any_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"none_of\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"le\": \"<long>\",\n      \"lt\": \"<long>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1878,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0de8d83c-b03d-4f5b-b61e-058244af4255",
+          "name": "Updates a shipping profile.",
+          "request": {
+            "name": "Updates a shipping profile.",
+            "description": {
+              "content": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when unknown source country market code is provided\n  - when unknown destination market code is provided\n  - when invalid shipping costs amount\n  - when unknown currency code is provided\n  - when invalid min/max delivery days\n- ALREADY_EXISTS\n  - when destination already exists for provided market code\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refb.merchant.v1.ShippingProfileService",
+                "UpdateShippingProfile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<int64>\",\n  \"name\": \"<string>\",\n  \"source_country_market_code\": \"<string>\",\n  \"source_address\": {\n    \"company_name\": \"<string>\",\n    \"post_code\": \"<string>\",\n    \"town\": \"<string>\",\n    \"street_name\": \"<string>\",\n    \"house_no\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"country_code\": \"UNSPECIFIED\",\n    \"supplement\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"create_destinations\": [\n    {\n      \"market_code\": \"<string>\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    },\n    {\n      \"market_code\": \"<string>\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    }\n  ],\n  \"update_destinations\": [\n    {\n      \"market_code\": \"<string>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    },\n    {\n      \"market_code\": \"<string>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    }\n  ],\n  \"delete_destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "92dcde88-7df3-4642-9a90-9f61b55baddb",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.ShippingProfileService",
+                    "UpdateShippingProfile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"name\": \"<string>\",\n  \"source_country_market_code\": \"<string>\",\n  \"source_address\": {\n    \"company_name\": \"<string>\",\n    \"post_code\": \"<string>\",\n    \"town\": \"<string>\",\n    \"street_name\": \"<string>\",\n    \"house_no\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"country_code\": \"UNSPECIFIED\",\n    \"supplement\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"create_destinations\": [\n    {\n      \"market_code\": \"<string>\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    },\n    {\n      \"market_code\": \"<string>\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    }\n  ],\n  \"update_destinations\": [\n    {\n      \"market_code\": \"<string>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    },\n    {\n      \"market_code\": \"<string>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    }\n  ],\n  \"delete_destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipping_profile\": {\n    \"id\": \"string\",\n    \"version\": \"string\",\n    \"is_current\": false,\n    \"created_at\": \"2018-11-11T01:12:34.210Z\",\n    \"name\": \"string\",\n    \"source_country_market_code\": \"string\",\n    \"source_country_market_name\": \"string\",\n    \"source_address\": {\n      \"id\": \"string\",\n      \"version\": \"string\",\n      \"label\": \"string\",\n      \"first_name\": \"string\",\n      \"family_name\": \"string\",\n      \"company_name\": \"string\",\n      \"country_code\": \"UNSPECIFIED\",\n      \"post_code\": \"string\",\n      \"town\": \"string\",\n      \"street_name\": \"string\",\n      \"house_no\": \"string\",\n      \"supplement\": \"string\",\n      \"phone_number\": \"string\",\n      \"type\": \"UNSPECIFIED\"\n    },\n    \"is_deletable\": false,\n    \"num_offers_assigned\": 7529,\n    \"destinations\": [\n      {\n        \"market_code\": \"string\",\n        \"market_name\": \"string\",\n        \"is_site_market\": true,\n        \"currency_code\": \"UNSPECIFIED\",\n        \"shipping_costs\": \"string\",\n        \"site_market_currency_code\": \"UNSPECIFIED\",\n        \"site_market_shipping_costs\": \"string\",\n        \"min_delivery_days\": 5079,\n        \"max_delivery_days\": 5746,\n        \"label_creation_enabled\": false,\n        \"carrier\": \"string\",\n        \"dispatch_cutoff_hour\": 567\n      },\n      {\n        \"market_code\": \"string\",\n        \"market_name\": \"string\",\n        \"is_site_market\": true,\n        \"currency_code\": \"UNSPECIFIED\",\n        \"shipping_costs\": \"string\",\n        \"site_market_currency_code\": \"UNSPECIFIED\",\n        \"site_market_shipping_costs\": \"string\",\n        \"min_delivery_days\": 5520,\n        \"max_delivery_days\": 7182,\n        \"label_creation_enabled\": false,\n        \"carrier\": \"string\",\n        \"dispatch_cutoff_hour\": 8601\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3e95d14-b994-470b-bdcd-b70fbfe3835d",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refb.merchant.v1.ShippingProfileService",
+                    "UpdateShippingProfile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<int64>\",\n  \"name\": \"<string>\",\n  \"source_country_market_code\": \"<string>\",\n  \"source_address\": {\n    \"company_name\": \"<string>\",\n    \"post_code\": \"<string>\",\n    \"town\": \"<string>\",\n    \"street_name\": \"<string>\",\n    \"house_no\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"family_name\": \"<string>\",\n    \"country_code\": \"UNSPECIFIED\",\n    \"supplement\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"create_destinations\": [\n    {\n      \"market_code\": \"<string>\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    },\n    {\n      \"market_code\": \"<string>\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    }\n  ],\n  \"update_destinations\": [\n    {\n      \"market_code\": \"<string>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    },\n    {\n      \"market_code\": \"<string>\",\n      \"currency_code\": \"UNSPECIFIED\",\n      \"shipping_costs\": \"<string>\",\n      \"min_delivery_days\": \"<long>\",\n      \"max_delivery_days\": \"<long>\",\n      \"label_creation_enabled\": \"<boolean>\",\n      \"carrier\": \"<string>\",\n      \"dispatch_cutoff_hour\": \"<long>\"\n    }\n  ],\n  \"delete_destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1878,\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"@type\": \"string\",\n      \"key_0\": {}\n    },\n    {\n      \"@type\": \"string\",\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.refurbed.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "85876dfe-8cc6-494c-a228-1575f53876b8",
+    "name": "Affiliate Partner BuybackBidService ShippingProfileService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The refurbed affiliate partner API allows to retrieve info about markets, products and instances including the buybox info (current price, grading, warranty).\n\nContact Support:\n Name: Refurbed Affiliate Partner Integrations Team\n Email: integrations@refurbed.com",
+      "type": "text/plain"
+    }
+  }
+}

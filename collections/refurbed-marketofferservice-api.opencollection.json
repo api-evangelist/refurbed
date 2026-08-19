@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService MarketOfferService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MarketOfferService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Batch creates market offers / offer market prices of offers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MarketOfferService/BatchCreateMarketOffer"
+          },
+          "docs": "Known errors:\n - identical to the CreateMarketOffer operation"
+        },
+        {
+          "info": {
+            "name": "Batch deletes market offers / offer market prices of offers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MarketOfferService/BatchDeleteMarketOffer"
+          },
+          "docs": "Known errors:\n - identical to the DeleteMarketOffer operation"
+        },
+        {
+          "info": {
+            "name": "Batch gets market offers / offer market prices of offers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MarketOfferService/BatchGetMarketOffer"
+          },
+          "docs": "Known errors:\n - identical to the GetMarketOffer operation"
+        },
+        {
+          "info": {
+            "name": "Batch updates market offers / offer market prices of offers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MarketOfferService/BatchUpdateMarketOffer"
+          },
+          "docs": "Known errors:\n - identical to the UpdateMarketOffer operation"
+        },
+        {
+          "info": {
+            "name": "Creates a single market offer / an offer market price of an offer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MarketOfferService/CreateMarketOffer"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- ALREADY_EXISTS\n  - when market offer already exists, i.e. market price is defined for\n    given offer and market combination\n- INVALID_ARGUMENT\n  - when the unknown offer is provided\n  - invalid market code is provided\n  - invalid input market offer data is provided\n- RESOURCE"
+        },
+        {
+          "info": {
+            "name": "Deletes a single market offer / an offer market price of an offer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MarketOfferService/DeleteMarketOffer"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when market offer does not exists\n- INVALID_ARGUMENT\n  - invalid market offer identifier is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Gets a single market offer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MarketOfferService/GetMarketOffer"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when the offer is not found\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Lists all market offers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MarketOfferService/ListMarketOffers"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Lists all market offers of a specific offer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MarketOfferService/ListMarketOffersByOffer"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when offer identifier is not valid\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        },
+        {
+          "info": {
+            "name": "Updates a single market offer / an offer market price of an offer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.MarketOfferService/UpdateMarketOffer"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when market offer does not exists\n- INVALID_ARGUMENT\n  - when the unknown offer is provided\n  - invalid input market offer data is provided\n- RESOURCE_EXHAUSTED\n  - when rate limit is exceeded"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

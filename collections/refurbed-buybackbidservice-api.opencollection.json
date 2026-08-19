@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Affiliate Partner BuybackBidService API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BuybackBidService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a single bid.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackBidService/CreateBuybackBid"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - product does not exist\n  - set of attributes is incompatible for a product\n  - invalid input data is provided\n- ALREADY_EXISTS\n  - there's already an active bid for the given product, attributes and grade combination"
+        },
+        {
+          "info": {
+            "name": "Adds a new price for a marketplace inside an existing bid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackBidService/CreateBuybackMarketBid"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - bid does not exist\n  - invalid input data is provided\n- ALREADY_EXISTS\n  - there's already an active bid for the given market"
+        },
+        {
+          "info": {
+            "name": "Deletes a single bid.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackBidService/DeleteBuybackBid"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when bid is not found\n- INVALID_ARGUMENT\n  - invalid input data is provided"
+        },
+        {
+          "info": {
+            "name": "Deletes a price for a marketplace inside an existing bid.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackBidService/DeleteBuybackMarketBid"
+          },
+          "docs": "This is only allowed if the deletion doesn't result in a bid without any market prices.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - market bid does not exist\n- FAILED_PRECONDITION\n  - bid has only 1 market price remaining (i.e. bid requires manual deletion)"
+        },
+        {
+          "info": {
+            "name": "Gets a market bid available for making a second offer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackBidService/GetSecondOfferBuybackMarketBid"
+          },
+          "docs": "To make a second offer, the merchant has to find a different market bid and update the order item accordingly.\nIn order to get a market bid for the second offer, the merchant has to provide the order item ID that they intend to change,\nas well as all the details about the actual device they have received. Only the price valid at the time of order\ncreation will be returned, to ensure fair competition and prevent merchants from lowering the price before\nmaking the second offer.\n\nKnown errors:\n- UN"
+        },
+        {
+          "info": {
+            "name": "Lists all bids.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackBidService/ListBuybackBids"
+          },
+          "docs": "Returns the current bid versions only.\n\nKnown errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- INVALID_ARGUMENT\n  - when pagination limit is too large (>100)\n  - when both \"ending_before\" and \"starting_after\" are specified in pagination"
+        },
+        {
+          "info": {
+            "name": "Updates a single bid by setting its stock",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackBidService/UpdateBuybackBid"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - when bid is not found\n- INVALID_ARGUMENT\n  - invalid input data is provided"
+        },
+        {
+          "info": {
+            "name": "Sets the price for a marketplace for an existing bid.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/refb.merchant.v1.BuybackBidService/UpdateBuybackMarketBid"
+          },
+          "docs": "Known errors:\n- UNAUTHENTICATED\n  - when no authorization header is sent\n  - when authorization header is malformed or invalid\n- PERMISSION_DENIED\n  - when the authorized user does not have permissions for this operation\n- NOT_FOUND\n  - market bid does not exist\n- INVALID_ARGUMENT\n  - invalid input data is provided"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
