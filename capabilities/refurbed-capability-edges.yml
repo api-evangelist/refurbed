@@ -1,0 +1,27 @@
+slug: refurbed
+provider: Refurbed
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Retail & Consumer Goods
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: TicketService
+  spec_file: refurbed-ticketservice-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.72
+  evidence: '"CreateTicket  Creates a new ticket"; "UpdateTicket  ... Assigning the ticket to a user (by
+    email) - Changing the ticket status - Adding a messa"; schemas "TicketMessage", "SlaCheckpoint", "Assignee",
+    "TicketUrgencyStatus"'
+  reason: Case/ticket handling with messages, assignment, urgency and SLA checkpoints tied to marketplace
+    order items — inbound customer contact handling and resolution. Some ambiguity between inquiry and
+    complaint sub-capabilities.
