@@ -1,28 +1,13 @@
 {
   "provider": "refurbed",
   "sources": [
-    "refurbed-buybackbidservice-api-openapi.yml",
-    "refurbed-buybackorderitemservice-api-openapi.yml",
-    "refurbed-buybackorderservice-api-openapi.yml",
-    "refurbed-buybackproductservice-api-openapi.yml",
-    "refurbed-buybacksupplyboxservice-api-openapi.yml",
-    "refurbed-catalogservice-api-openapi.yml",
-    "refurbed-currencyservice-api-openapi.yml",
-    "refurbed-instanceservice-api-openapi.yml",
-    "refurbed-marketofferservice-api-openapi.yml",
-    "refurbed-marketservice-api-openapi.yml",
-    "refurbed-merchantservice-api-openapi.yml",
-    "refurbed-offerservice-api-openapi.yml",
-    "refurbed-orderitemreturnservice-api-openapi.yml",
-    "refurbed-orderitemservice-api-openapi.yml",
-    "refurbed-orderservice-api-openapi.yml",
-    "refurbed-productservice-api-openapi.yml",
-    "refurbed-shippingprofileservice-api-openapi.yml",
-    "refurbed-ticketservice-api-openapi.yml",
-    "grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/api.swagger.json",
-    "grpc/refurbed_merchant_api/refb/merchant/v1/api.swagger.json"
+    "_original/api.swagger.json",
+    "_original/api.swagger_2.json"
   ],
   "outputs": [
+    "refurbed-instanceservice-api-openapi.yml",
+    "refurbed-marketservice-api-openapi.yml",
+    "refurbed-productservice-api-openapi.yml",
     "refurbed-buybackbidservice-api-openapi.yml",
     "refurbed-buybackorderitemservice-api-openapi.yml",
     "refurbed-buybackorderservice-api-openapi.yml",
@@ -30,27 +15,47 @@
     "refurbed-buybacksupplyboxservice-api-openapi.yml",
     "refurbed-catalogservice-api-openapi.yml",
     "refurbed-currencyservice-api-openapi.yml",
-    "refurbed-instanceservice-api-openapi.yml",
     "refurbed-marketofferservice-api-openapi.yml",
-    "refurbed-marketservice-api-openapi.yml",
     "refurbed-merchantservice-api-openapi.yml",
     "refurbed-offerservice-api-openapi.yml",
     "refurbed-orderitemreturnservice-api-openapi.yml",
     "refurbed-orderitemservice-api-openapi.yml",
     "refurbed-orderservice-api-openapi.yml",
-    "refurbed-productservice-api-openapi.yml",
     "refurbed-shippingprofileservice-api-openapi.yml",
     "refurbed-ticketservice-api-openapi.yml"
   ],
-  "archived": [
-    "archived grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/api.swagger.json",
-    "archived grpc/refurbed_merchant_api/refb/merchant/v1/api.swagger.json"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
-    "discovered stray spec: grpc/refurbed_partner_affiliate_api/refb/partner/affiliate/v1/api.swagger.json",
-    "discovered stray spec: grpc/refurbed_merchant_api/refb/merchant/v1/api.swagger.json"
+    "2 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "api.swagger.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "api.swagger_2.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "tag 'InstanceService' spans 2 source specs (api.swagger.json, api.swagger_2.json): per-path servers applied",
+    "tag 'MarketService' spans 2 source specs (api.swagger.json, api.swagger_2.json): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "_original/refurbed-merchant-api-openapi.json: archived document superseded by a larger archived document",
+    "_original/refurbed-affiliate-api-openapi.json: archived document superseded by a larger archived document",
+    "refurbed-buybackbidservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-buybackorderitemservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-buybackorderservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-buybackproductservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-buybacksupplyboxservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-catalogservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-currencyservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-instanceservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-marketofferservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-marketservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-merchantservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-offerservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-orderitemreturnservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-orderitemservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-orderservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-productservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-shippingprofileservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "refurbed-ticketservice-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
