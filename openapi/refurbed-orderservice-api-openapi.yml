@@ -674,6 +674,527 @@ paths:
         required: true
 components:
   schemas:
+    OrderState:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - NEW
+      - REJECTED
+      - CANCELLED
+      - ACCEPTED
+      - SHIPPED
+      - RETURNED
+      - FULFILLED
+      - UNFULFILLED
+      - PARTIALLY_FULFILLED
+      default: UNSPECIFIED
+      description: "Order states are calculated based on the individual order item states.\n\n - NEW: Order was not handled yet. At least one order item has state NEW.\n - REJECTED: Order was rejected (cannot be fulfilled). All order items have state\nREJECTED.\n - CANCELLED: Order was cancelled. All order items have state CANCELLED.\n - ACCEPTED: Order was accepted. At least one order item has state ACCEPTED, and none\nof the other items still have state NEW.\n - SHIPPED: Order was fully shipped. All order items have state SHIPPED.\n - RETURNED: Order was fully returned. All order items have state RETURNED.\n - FULFILLED: Order was fulfilled. Order has only items with both SHIPPED and RETURNED.\n - UNFULFILLED: Order was unfulfilled. Order has only items with both REJECTED and CANCELLED.\n - PARTIALLY_FULFILLED: Order was partially fulfilled. Order has items with both fulfilled (SHIPPED, RETURNED)\nand unfulfilled (REJECTED, CANCELLED) states."
+    CarrierEnum.Carrier:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - UPS
+      - DHL_EXPRESS
+      default: UNSPECIFIED
+    MerchantAddressType:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - DELIVERY
+      - RETURN
+      default: UNSPECIFIED
+    TrackingData:
+      type: object
+      properties:
+        carrier:
+          type: string
+        tracking_number:
+          type: string
+        tracking_url:
+          type: string
+    NormalPrinterURLs:
+      type: object
+      properties:
+        top_left:
+          type: string
+        top_right:
+          type: string
+        bottom_left:
+          type: string
+        bottom_right:
+          type: string
+    UploadOrderCommercialInvoiceRequest:
+      type: array
+      format: array
+      example:
+      - meta:
+          order_id: '123'
+          commercial_invoice_number: INV-123
+      - data: base64encodedbinary
+      properties:
+        meta:
+          $ref: '#/components/schemas/UploadOrderCommercialInvoiceRequest.Meta'
+        data:
+          type: string
+          format: byte
+          description: File data in PDF format. Can be at most 1MB (1024^2 bytes).
+      description: 'Send first message with Meta set, then other messages with chunked data to stream.
+
+        Max total data size is 2MB (2 * 1024^2 bytes).'
+    AddressEntityFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressEntity'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressEntity'
+    DeleteOrderCommercialInvoiceRequest:
+      type: object
+      properties:
+        order_id:
+          type: string
+          format: int64
+          required:
+          - order_id
+      required:
+      - order_id
+    UploadOrderCommercialInvoiceRequest.Meta:
+      type: object
+      properties:
+        order_id:
+          type: string
+          format: int64
+          title: Order ID
+          required:
+          - order_id
+        commercial_invoice_number:
+          type: string
+          title: Commercial invoice number, as indicated on the document
+          required:
+          - commercial_invoice_number
+      required:
+      - order_id
+      - commercial_invoice_number
+    AddressEntity:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - MALE
+      - FEMALE
+      - COMPANY
+      default: UNSPECIFIED
+    UpdateShippingLabelAddressResponse:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/v1.Address'
+    BatteryCondition:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - OPTIMAL
+      - NEW
+      default: UNSPECIFIED
+    ListOrdersRequest.Sort:
+      type: object
+      properties:
+        order:
+          $ref: '#/components/schemas/SortOrder'
+        by:
+          $ref: '#/components/schemas/ListOrdersRequest.Sort.By'
+    MerchantAddress:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+        version:
+          type: string
+          format: int64
+        label:
+          type: string
+          title: A user-defined label to identify or categorize the address, e.g. "Main Warehouse"
+        first_name:
+          type:
+          - string
+          - 'null'
+        family_name:
+          type:
+          - string
+          - 'null'
+        company_name:
+          type: string
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        post_code:
+          type: string
+        town:
+          type: string
+        street_name:
+          type: string
+        house_no:
+          type:
+          - string
+          - 'null'
+        supplement:
+          type:
+          - string
+          - 'null'
+        phone_number:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/MerchantAddressType'
+      description: 'MerchantAddress is the address from which the merchant dispatches shipments.
+
+        Used as the merchant''s shipping address in the context of shipping label creation.'
+    NumericRangeFilter:
+      type: object
+      properties:
+        gt:
+          type:
+          - string
+          - 'null'
+        ge:
+          type:
+          - string
+          - 'null'
+        any_of:
+          type: array
+          items:
+            type: string
+        none_of:
+          type: array
+          items:
+            type: string
+        le:
+          type:
+          - string
+          - 'null'
+        lt:
+          type:
+          - string
+          - 'null'
+      description: 'Numeric range filter is used for decimal numbers. It is especially
+
+        used for monetary amounts and other quantities where exactness is required.'
+    SortOrder:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      default: ASC
+    GetOrderCommercialInvoiceResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          description: URL to invoice file. This will expire.
+        commercial_invoice_number:
+          type: string
+          description: Commercial invoice number, as indicated on the document.
+    OfferSKUFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
+        none_of:
+          type: array
+          items:
+            type: string
+        contains:
+          type:
+          - string
+          - 'null'
+    UpdateShippingLabelAddressRequest:
+      type: object
+      properties:
+        order_id:
+          type: string
+          format: int64
+          required:
+          - order_id
+        address:
+          $ref: '#/components/schemas/UpdateShippingLabelAddressRequest.Address'
+      required:
+      - order_id
+    UploadOrderCommercialInvoiceResponse:
+      type: object
+      properties:
+        size:
+          type: string
+          format: int64
+          description: Size of uploaded invoice in bytes.
+        url:
+          type: string
+          description: URL to invoice file. This will expire.
+        commercial_invoice_number:
+          type: string
+          description: Commercial invoice number, as indicated on the document.
+    GetOrderInvoiceRequest:
+      type: object
+      properties:
+        order_id:
+          type: string
+          format: int64
+          required:
+          - order_id
+      required:
+      - order_id
+    RefundOrderRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          description: The id of the order to fully refund.
+          required:
+          - id
+      required:
+      - id
+    SetOrderInvoiceResponse:
+      type: object
+      properties:
+        size:
+          type: string
+          format: int64
+          description: Size of uploaded invoice in bytes.
+        crc32:
+          type: string
+          description: Uses the IEEE polynomial (0xedb88320).
+          title: Hex string representation of CRC32 checksum
+        url:
+          type: string
+          description: URL to invoice file. This will expire.
+    OrderAddressFilter:
+      type: object
+      properties:
+        matches:
+          type:
+          - string
+          - 'null'
+    CountryCodeFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryCode'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryCode'
+    OrderItemState:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - NEW
+      - REJECTED
+      - CANCELLED
+      - ACCEPTED
+      - SHIPPED
+      - RETURNED
+      default: UNSPECIFIED
+      description: " - NEW: Order item was not handled yet. Next states: REJECTED, CANCELLED or\nACCEPTED.\n - REJECTED: Order item cannot be fulfilled. Final state.\n - CANCELLED: Order item was cancelled by the customer. Is like REJECTED but was\nrequested by the customer. Final state.\n - ACCEPTED: Order item was accepted for fulfillment. Next states: CANCELLED or\nSHIPPED.\n - SHIPPED: Order item was shipped. The parcel tracking link needs to be set for this\nstate to be set. The item identifier should be set, if possible. Possible\nfinal state. Next possible state, if necessary: RETURNED.\n - RETURNED: Order item was returned by the customer. Final state."
+    CreateShippingLabelResponse:
+      type: object
+      properties:
+        shipping_label:
+          $ref: '#/components/schemas/ShippingLabel'
+    OfferData:
+      type: object
+      properties:
+        offer_id:
+          type: string
+          format: int64
+        offer_version:
+          type: string
+          format: int64
+        offer_order_exchange_rate:
+          type: string
+          description: 'Exchange rate applied to convert amounts from offer currency to order
+
+            currency.'
+        offer_warranty:
+          $ref: '#/components/schemas/OfferWarranty'
+          description: The offer warranty.
+        offer_grading:
+          $ref: '#/components/schemas/OfferGrading'
+          description: The offer grading.
+        shipping_profile_id:
+          type: string
+          format: int64
+        shipping_profile_version:
+          type:
+          - string
+          - 'null'
+          format: int64
+          description: 'Shipping profiles on old orders do not have proper version information
+
+            attached to them. This is only set for newer orders.'
+        shipping_costs:
+          type: string
+          description: The shipping costs, in order currency.
+        battery_condition:
+          $ref: '#/components/schemas/BatteryCondition'
+    Status:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: 'A developer-facing error message, which should be in English. Any
+
+            user-facing error message should be localized and sent in the
+
+            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Any'
+          description: 'A list of messages that carry the error details.  There is a common set of
+
+            message types for APIs to use.'
+      description: 'The `Status` type defines a logical error model that is suitable for
+
+        different programming environments, including REST APIs and RPC APIs. It is
+
+        used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
+        three pieces of data: error code, error message, and error details.
+
+
+        You can find out more about this error model and how to work with it in the
+
+        [API Design Guide](https://cloud.google.com/apis/design/errors).'
+    OrderAddressVATINFilter:
+      type: object
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+        contains:
+          type:
+          - string
+          - 'null'
+    Int64Filter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
+            format: int64
+        none_of:
+          type: array
+          items:
+            type: string
+            format: int64
+    CalculateRefundOrderRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          description: The id of the order to calculate a full refund values for.
+          required:
+          - id
+      required:
+      - id
+    GetOrderCommercialInvoiceRequest:
+      type: object
+      properties:
+        order_id:
+          type: string
+          format: int64
+          required:
+          - order_id
+      required:
+      - order_id
+    Any:
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+      additionalProperties: {}
+      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+    ListOrdersRequest.Filter.OrderItemNameFilter:
+      type: object
+      properties:
+        matches:
+          type:
+          - string
+          - 'null'
+    RefundEligibility:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - ELIGIBLE
+      - INELIGIBLE_UNKNOWN
+      - INELIGIBLE_PERIOD_EXPIRED
+      - INELIGIBLE_ALREADY_REFUNDED
+      - INELIGIBLE_UNCAPTURED_PAYMENT
+      - INELIGIBLE_NO_TICKET
+      default: UNSPECIFIED
+      description: " - ELIGIBLE: Refunds are allowed.\n - INELIGIBLE_UNKNOWN: Refunds are not allowed for an unspecified reason.\n - INELIGIBLE_PERIOD_EXPIRED: Refunds are not allowed because the order was created long ago.\n - INELIGIBLE_ALREADY_REFUNDED: Refunds are not allowed because everything the customer paid has already been refunded.\n - INELIGIBLE_UNCAPTURED_PAYMENT: Refunds are not allowed because Refurbed doesn't have the payment guaranteed yet.\n - INELIGIBLE_NO_TICKET: Refunds are not allowed because no relevant Zendesk ticket exists."
+    v1.Address:
+      type: object
+      properties:
+        first_name:
+          type: string
+        family_name:
+          type: string
+        entity:
+          $ref: '#/components/schemas/AddressEntity'
+        company_name:
+          type:
+          - string
+          - 'null'
+          description: The company name. Set for company addresses only.
+        company_vatin:
+          type:
+          - string
+          - 'null'
+          description: The VAT identification number. Set for company *invoice* addresses only.
+        personal_vatin:
+          type:
+          - string
+          - 'null'
+          description: The VAT identification number. Set for personal *invoice* addresses only.
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        post_code:
+          type: string
+        town:
+          type: string
+        street_name:
+          type: string
+        house_no:
+          type:
+          - string
+          - 'null'
+          description: 'The house number. This is optional as some countries know addresses
+
+            without numbers.'
+        supplement:
+          type:
+          - string
+          - 'null'
+          description: An optional address supplement.
+        phone_number:
+          type: string
     OrderItem:
       type: object
       properties:
@@ -845,358 +1366,88 @@ components:
 
             e.g. 8517.1300 for iPhones'
       description: An order item.
-    OrderItemShipmentSubstatus:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - INFO_RECEIVED
-      - LABEL_CREATED_NO_UPDATES_YET
-      - IN_TRANSIT
-      - OUT_FOR_DELIVERY
-      - AVAILABLE_FOR_PICKUP
-      - DELIVERED
-      - PICKED_UP_BY_CUSTOMER
-      - SIGN_BY_CUSTOMER
-      - NEW_ATTEMPT_OF_DELIVERY
-      - ADDRESS_ISSUES
-      - RETURN_TO_SENDER
-      - DELIVERY_FAILED
-      - ORDER_DELAYED
-      - ORDER_DAMAGED
-      - ORDER_LOST
-      default: UNSPECIFIED
-      description: " - INFO_RECEIVED: The carrier received a request from the shipper and is about to pick up the shipment.\n - LABEL_CREATED_NO_UPDATES_YET: The order has been processed/packaged, but not scanned at a shipping location yet.\n - IN_TRANSIT: Shipment on the way.\n - OUT_FOR_DELIVERY: The package is out for delivery.\n - AVAILABLE_FOR_PICKUP: The package arrived at a pickup point near you and is available for pickup.\n - DELIVERED: Shipment delivered successfully.\n - PICKED_UP_BY_CUSTOMER: Package picked up by the customer.\n - SIGN_BY_CUSTOMER: Package delivered to and signed by the customer.\n - NEW_ATTEMPT_OF_DELIVERY: The delivery of the package failed due to some reason. Courier usually leaves a notice and will try to deliver again.\n - ADDRESS_ISSUES: Package not delivered due to incorrect recipient address.\n - RETURN_TO_SENDER: The package is on its way back to the sender.\n - DELIVERY_FAILED: Delivery of the package failed due to some shipping exception.\n - ORDER_DELAYED: Package delayed due to some unforeseen reasons.\n - ORDER_DAMAGED: Shipment damaged.\n - ORDER_LOST: Delivery of the package failed as it got lost."
-    CalculateRefundOrderResponse:
+    ListOrdersRequest:
       type: object
       properties:
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-          description: Currency of the refund. This matches the order / order item currency.
-        total_paid:
-          type: string
-          description: New total paid of the order.
-        total_refunded:
-          type: string
-          description: Total refunded amount.
-        refunded:
-          type: string
-          description: Refunded amount.
-        refunded_refurbed:
-          type: string
-          description: Part that refurbed refunded.
-        refunded_merchant:
-          type: string
-          description: Part that the merchant refunded.
-    GetOrderResponse:
-      type: object
-      properties:
-        order:
-          $ref: '#/components/schemas/Order'
-    Order:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: Primary key.
-        released_at:
-          type: string
-          format: date-time
-          description: When the order was released to the merchant.
-        state:
-          $ref: '#/components/schemas/OrderState'
-          description: 'The order state. To understand the flow, please read the documentation of
-
-            the individual order states and order item states.'
-        labels:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLabel'
-          description: Order labels.
-        customer_email:
-          type: string
-          description: The customer's email address.
-        shipping_address:
-          $ref: '#/components/schemas/v1.Address'
-          description: The shipping address.
-        invoice_address:
-          $ref: '#/components/schemas/v1.Address'
-          description: The invoice address.
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-          description: Currency the order was charged in.
-        settlement_currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-          description: 'Currency the order was settled it. This is the currency the merchant will
-
-            be paid out in.'
-        settlement_exchange_rate:
-          type: string
-          description: 'Exchange rate applied to convert amounts from currency to settlement
-
-            currency.'
-        total_charged:
-          type: string
-          description: 'The total amount the customer was charged. This is the sum of all of the
-
-            order item''s total charged values; it is also the sum of total paid and
-
-            total refunded.'
-        settlement_total_charged:
-          type: string
-          description: The total amount the customer was charged, in settlement currency.
-        total_discount:
-          type: string
-          description: Discount amount if coupon was applied to the order.
-        settlement_total_discount:
-          type: string
-          description: Discount amount if coupon was applied to the order, in settlement currency.
-        total_paid:
-          type: string
-          description: 'The total amount the user paid for this order. This is the sum of all the
-
-            order item''s total paid values plus discount values.'
-        settlement_total_paid:
-          type: string
-          description: The total amount the user paid for this order plus discount value in settlement currency.
-        total_refunded:
-          type: string
-          description: 'The total amount the customer was refunded. This is the sum of all of the
-
-            order item''s total refunded values.'
-        settlement_total_refunded:
-          type: string
-          description: The total amount the customer was refunded, in settlement currency.
-        total_vat_charged:
-          type: string
-          description: The total amount of VAT the customer was charged for, in order currency.
-        settlement_total_vat_charged:
-          type: string
-          description: The total amount of VAT the customer was charged for, in settlement currency.
-        is_refundable:
-          type: boolean
-          description: Indicates whether this order is currently refundable.
-        refund_eligibility:
-          $ref: '#/components/schemas/RefundEligibility'
-          description: Indicates whether this order is eligible for a refund, if not, why it's not.
-        is_invoiceable:
-          type: boolean
-          description: 'Indicates whether an invoice can be uploaded. Will turn false ~30 days
-
-            after order release.'
-        has_invoice:
-          type: boolean
-          description: Indicates whether an invoice was uploaded.
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItem'
-          description: All items of this order.
-        shipping_label_address:
-          $ref: '#/components/schemas/v1.Address'
-          description: Shipping label address used for label creation.
-        payment_method:
-          $ref: '#/components/schemas/PaymentMethod'
-          description: Payment method used to charge the customer.
-      description: An order.
-    UploadOrderCommercialInvoiceResponse:
-      type: object
-      properties:
-        size:
-          type: string
-          format: int64
-          description: Size of uploaded invoice in bytes.
-        url:
-          type: string
-          description: URL to invoice file. This will expire.
-        commercial_invoice_number:
-          type: string
-          description: Commercial invoice number, as indicated on the document.
-    CreateShippingLabelResponse:
-      type: object
-      properties:
-        shipping_label:
-          $ref: '#/components/schemas/ShippingLabel'
-    OrderItemState:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - NEW
-      - REJECTED
-      - CANCELLED
-      - ACCEPTED
-      - SHIPPED
-      - RETURNED
-      default: UNSPECIFIED
-      description: " - NEW: Order item was not handled yet. Next states: REJECTED, CANCELLED or\nACCEPTED.\n - REJECTED: Order item cannot be fulfilled. Final state.\n - CANCELLED: Order item was cancelled by the customer. Is like REJECTED but was\nrequested by the customer. Final state.\n - ACCEPTED: Order item was accepted for fulfillment. Next states: CANCELLED or\nSHIPPED.\n - SHIPPED: Order item was shipped. The parcel tracking link needs to be set for this\nstate to be set. The item identifier should be set, if possible. Possible\nfinal state. Next possible state, if necessary: RETURNED.\n - RETURNED: Order item was returned by the customer. Final state."
-    GetOrderInvoiceRequest:
-      type: object
-      properties:
-        order_id:
-          type: string
-          format: int64
-          required:
-          - order_id
-      required:
-      - order_id
-    SetOrderInvoiceRequest:
-      type: array
-      format: array
-      example:
-      - meta:
-          order_id: '123'
-      - data: base64encodedbinary
-      properties:
-        meta:
-          $ref: '#/components/schemas/SetOrderInvoiceRequest.Meta'
-        data:
-          type: string
-          format: byte
-          description: File data in PDF format. Can be at most 1MB (1024^2 bytes).
-      description: 'Send first message with Meta set, then other messages with chunked data to stream.
-
-        Max total data size is 2MB (2 * 1024^2 bytes).'
-    Int64Pagination:
-      type: object
-      properties:
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Limit on the number of results to be returned. Between 1 and 100.
-
-            Default and maximum is 100.'
-        ending_before:
-          type: string
-          format: int64
-        starting_after:
-          type: string
-          format: int64
-      description: Paginates resources with int64 primary key.
-    Int64Filter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            type: string
-            format: int64
-        none_of:
-          type: array
-          items:
-            type: string
-            format: int64
-    OrderItemIdentifierType:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - IMEI
-      - SERIAL_NUMBER
-      default: UNSPECIFIED
-    TimestampRangeFilter:
-      type: object
-      properties:
-        gt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        ge:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        any_of:
-          type: array
-          items:
-            type: string
-            format: date-time
-        none_of:
-          type: array
-          items:
-            type: string
-            format: date-time
-        le:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        lt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-    OrderLabel:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - PROCESSING
-      - PARTIALLY_REJECTED
-      - PARTIALLY_CANCELLED
-      - PARTIALLY_SHIPPED
-      - PARTIALLY_RETURNED
-      - MISSING_PARCEL_TRACKING_URLS
-      - MISSING_ITEM_IDENTIFIERS
-      default: UNSPECIFIED
-      description: "Labels are additional indicators set next to the order state. They can be\nfiltered by.\n\n - PROCESSING: Set if the items' states of an order are neither all state NEW, nor all\na final state.\n - PARTIALLY_REJECTED: Set if at least one order item (but not all) has state REJECTED.\n - PARTIALLY_CANCELLED: Set if at least one order item (but not all) has state CANCELLED.\n - PARTIALLY_SHIPPED: Set if at least one order item (but not all) has state SHIPPED.\n - PARTIALLY_RETURNED: Set if at least one order item (but not all) has state RETURNED.\n - MISSING_PARCEL_TRACKING_URLS: Set if at least one order item does not have parcel tracking url set.\n - MISSING_ITEM_IDENTIFIERS: Set if at least one order item does not have item identifier set."
-    v1.Address:
+        pagination:
+          $ref: '#/components/schemas/Int64Pagination'
+        sort:
+          $ref: '#/components/schemas/ListOrdersRequest.Sort'
+        filter:
+          $ref: '#/components/schemas/ListOrdersRequest.Filter'
+    UpdateShippingLabelAddressRequest.Address:
       type: object
       properties:
         first_name:
           type: string
+          required:
+          - first_name
         family_name:
           type: string
-        entity:
-          $ref: '#/components/schemas/AddressEntity'
-        company_name:
+          required:
+          - family_name
+        company:
           type:
           - string
           - 'null'
-          description: The company name. Set for company addresses only.
-        company_vatin:
-          type:
-          - string
-          - 'null'
-          description: The VAT identification number. Set for company *invoice* addresses only.
-        personal_vatin:
-          type:
-          - string
-          - 'null'
-          description: The VAT identification number. Set for personal *invoice* addresses only.
-        country_code:
-          $ref: '#/components/schemas/CountryCode'
-        post_code:
-          type: string
-        town:
-          type: string
         street_name:
           type: string
+          required:
+          - street_name
         house_no:
           type:
           - string
           - 'null'
-          description: 'The house number. This is optional as some countries know addresses
-
-            without numbers.'
         supplement:
           type:
           - string
           - 'null'
-          description: An optional address supplement.
-        phone_number:
+        town:
           type: string
-    GetOrderRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: The id of the order to get.
           required:
-          - id
+          - town
+        post_code:
+          type: string
+          required:
+          - post_code
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        phone:
+          type: string
+          required:
+          - phone
       required:
-      - id
+      - first_name
+      - family_name
+      - street_name
+      - town
+      - post_code
+      - phone
+    PaymentMethod:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - SOFORT
+      - PAYPAL
+      - CASHPRESSO
+      - STRIPE_DIGITAL_WALLET
+      - STRIPE_CARDS
+      - STRIPE_EPS
+      - STRIPE_GIRO_PAY
+      - STRIPE_IDEAL
+      - STRIPE_MOBILE_PAY
+      - STRIPE_P24
+      - STRIPE_SOFORT
+      - STRIPE_KLARNA
+      - STRIPE_SWISH
+      - STRIPE_MBWAY
+      - STRIPE_REVOLUT_PAY
+      - STRIPE_MONDU
+      - BRAINTREE_PAYPAL
+      - BRAINTREE_SATISPAY
+      - BRAINTREE_CARDS
+      - BRAINTREE_BANCONTACT
+      default: UNSPECIFIED
     CurrencyCode:
       type: string
       enum:
@@ -1380,171 +1631,64 @@ components:
       - ZWL
       default: UNSPECIFIED
       description: "Currency codes as specified in ISO 4217.\n\n - AED: XTS = 963; // Code reserved for testing purposes."
-    OrderAddressFilter:
-      type: object
-      properties:
-        matches:
-          type:
-          - string
-          - 'null'
-    GetOrderCommercialInvoiceRequest:
-      type: object
-      properties:
-        order_id:
-          type: string
-          format: int64
-          required:
-          - order_id
-      required:
-      - order_id
-    UpdateShippingLabelAddressRequest.Address:
-      type: object
-      properties:
-        first_name:
-          type: string
-          required:
-          - first_name
-        family_name:
-          type: string
-          required:
-          - family_name
-        company:
-          type:
-          - string
-          - 'null'
-        street_name:
-          type: string
-          required:
-          - street_name
-        house_no:
-          type:
-          - string
-          - 'null'
-        supplement:
-          type:
-          - string
-          - 'null'
-        town:
-          type: string
-          required:
-          - town
-        post_code:
-          type: string
-          required:
-          - post_code
-        country_code:
-          $ref: '#/components/schemas/CountryCode'
-        phone:
-          type: string
-          required:
-          - phone
-      required:
-      - first_name
-      - family_name
-      - street_name
-      - town
-      - post_code
-      - phone
-    Any:
-      type: object
-      properties:
-        '@type':
-          type: string
-          description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
-      additionalProperties: {}
-      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
-    ListOrdersRequest.Sort:
-      type: object
-      properties:
-        order:
-          $ref: '#/components/schemas/SortOrder'
-        by:
-          $ref: '#/components/schemas/ListOrdersRequest.Sort.By'
-    OfferData:
-      type: object
-      properties:
-        offer_id:
-          type: string
-          format: int64
-        offer_version:
-          type: string
-          format: int64
-        offer_order_exchange_rate:
-          type: string
-          description: 'Exchange rate applied to convert amounts from offer currency to order
-
-            currency.'
-        offer_warranty:
-          $ref: '#/components/schemas/OfferWarranty'
-          description: The offer warranty.
-        offer_grading:
-          $ref: '#/components/schemas/OfferGrading'
-          description: The offer grading.
-        shipping_profile_id:
-          type: string
-          format: int64
-        shipping_profile_version:
-          type:
-          - string
-          - 'null'
-          format: int64
-          description: 'Shipping profiles on old orders do not have proper version information
-
-            attached to them. This is only set for newer orders.'
-        shipping_costs:
-          type: string
-          description: The shipping costs, in order currency.
-        battery_condition:
-          $ref: '#/components/schemas/BatteryCondition'
-    OrderLabelCollectionFilter:
-      type: object
-      properties:
-        all_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLabel'
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLabel'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLabel'
-    OrderItemIdentifier:
-      type: object
-      properties:
-        identifier_type:
-          $ref: '#/components/schemas/OrderItemIdentifierType'
-        value:
-          type: string
-    OrderItemTaxation:
+    OrderLabel:
       type: string
       enum:
       - UNSPECIFIED
-      - GROSS
-      - MARGINAL
-      - NET
+      - PROCESSING
+      - PARTIALLY_REJECTED
+      - PARTIALLY_CANCELLED
+      - PARTIALLY_SHIPPED
+      - PARTIALLY_RETURNED
+      - MISSING_PARCEL_TRACKING_URLS
+      - MISSING_ITEM_IDENTIFIERS
       default: UNSPECIFIED
-    AddressEntity:
+      description: "Labels are additional indicators set next to the order state. They can be\nfiltered by.\n\n - PROCESSING: Set if the items' states of an order are neither all state NEW, nor all\na final state.\n - PARTIALLY_REJECTED: Set if at least one order item (but not all) has state REJECTED.\n - PARTIALLY_CANCELLED: Set if at least one order item (but not all) has state CANCELLED.\n - PARTIALLY_SHIPPED: Set if at least one order item (but not all) has state SHIPPED.\n - PARTIALLY_RETURNED: Set if at least one order item (but not all) has state RETURNED.\n - MISSING_PARCEL_TRACKING_URLS: Set if at least one order item does not have parcel tracking url set.\n - MISSING_ITEM_IDENTIFIERS: Set if at least one order item does not have item identifier set."
+    OrderItemShipmentSubstatus:
       type: string
       enum:
       - UNSPECIFIED
-      - MALE
-      - FEMALE
-      - COMPANY
+      - INFO_RECEIVED
+      - LABEL_CREATED_NO_UPDATES_YET
+      - IN_TRANSIT
+      - OUT_FOR_DELIVERY
+      - AVAILABLE_FOR_PICKUP
+      - DELIVERED
+      - PICKED_UP_BY_CUSTOMER
+      - SIGN_BY_CUSTOMER
+      - NEW_ATTEMPT_OF_DELIVERY
+      - ADDRESS_ISSUES
+      - RETURN_TO_SENDER
+      - DELIVERY_FAILED
+      - ORDER_DELAYED
+      - ORDER_DAMAGED
+      - ORDER_LOST
       default: UNSPECIFIED
-    UploadOrderCommercialInvoiceRequest:
+      description: " - INFO_RECEIVED: The carrier received a request from the shipper and is about to pick up the shipment.\n - LABEL_CREATED_NO_UPDATES_YET: The order has been processed/packaged, but not scanned at a shipping location yet.\n - IN_TRANSIT: Shipment on the way.\n - OUT_FOR_DELIVERY: The package is out for delivery.\n - AVAILABLE_FOR_PICKUP: The package arrived at a pickup point near you and is available for pickup.\n - DELIVERED: Shipment delivered successfully.\n - PICKED_UP_BY_CUSTOMER: Package picked up by the customer.\n - SIGN_BY_CUSTOMER: Package delivered to and signed by the customer.\n - NEW_ATTEMPT_OF_DELIVERY: The delivery of the package failed due to some reason. Courier usually leaves a notice and will try to deliver again.\n - ADDRESS_ISSUES: Package not delivered due to incorrect recipient address.\n - RETURN_TO_SENDER: The package is on its way back to the sender.\n - DELIVERY_FAILED: Delivery of the package failed due to some shipping exception.\n - ORDER_DELAYED: Package delayed due to some unforeseen reasons.\n - ORDER_DAMAGED: Shipment damaged.\n - ORDER_LOST: Delivery of the package failed as it got lost."
+    OrderItemIdentifierType:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - IMEI
+      - SERIAL_NUMBER
+      default: UNSPECIFIED
+    ListShippingLabelsResponse:
+      type: object
+      properties:
+        shipping_labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShippingLabel'
+    SetOrderInvoiceRequest:
       type: array
       format: array
       example:
       - meta:
           order_id: '123'
-          commercial_invoice_number: INV-123
       - data: base64encodedbinary
       properties:
         meta:
-          $ref: '#/components/schemas/UploadOrderCommercialInvoiceRequest.Meta'
+          $ref: '#/components/schemas/SetOrderInvoiceRequest.Meta'
         data:
           type: string
           format: byte
@@ -1552,38 +1696,6 @@ components:
       description: 'Send first message with Meta set, then other messages with chunked data to stream.
 
         Max total data size is 2MB (2 * 1024^2 bytes).'
-    SetOrderInvoiceResponse:
-      type: object
-      properties:
-        size:
-          type: string
-          format: int64
-          description: Size of uploaded invoice in bytes.
-        crc32:
-          type: string
-          description: Uses the IEEE polynomial (0xedb88320).
-          title: Hex string representation of CRC32 checksum
-        url:
-          type: string
-          description: URL to invoice file. This will expire.
-    MerchantAddressType:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - DELIVERY
-      - RETURN
-      default: UNSPECIFIED
-    OfferWarranty:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - M12
-      - M18
-      - M24
-      - M30
-      - M36
-      default: UNSPECIFIED
-      description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
     OrderCustomerEmailFilter:
       type: object
       properties:
@@ -1595,21 +1707,172 @@ components:
           type:
           - string
           - 'null'
-    OfferSKUFilter:
+    CreateShippingLabelRequest:
+      type: object
+      properties:
+        order_id:
+          type: string
+          format: int64
+          description: The id of the order for which to generate shipping labels.
+          required:
+          - order_id
+        merchant_address_id:
+          type: string
+          format: int64
+          description: The id of the merchant address.
+          required:
+          - merchant_address_id
+        parcel_weight:
+          type: number
+          format: float
+          title: The weight of the parcel that labels are generated for
+          required:
+          - parcel_weight
+        carrier:
+          $ref: '#/components/schemas/CarrierEnum.Carrier'
+          title: Carrier that should be used to create shipping label
+      required:
+      - order_id
+      - merchant_address_id
+      - parcel_weight
+    ListOrdersResponse:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+          description: The orders found.
+        has_more:
+          type: boolean
+          description: Indicates whether there are more results available.
+    ListOrdersRequest.Sort.By:
+      type: string
+      enum:
+      - ID
+      - RELEASED_AT
+      - CUSTOMER_EMAIL
+      - CURRENCY_CODE
+      - SETTLEMENT_CURRENCY_CODE
+      - TOTAL_CHARGED
+      - SETTLEMENT_TOTAL_CHARGED
+      - TOTAL_PAID
+      - SETTLEMENT_TOTAL_PAID
+      - TOTAL_REFUNDED
+      - SETTLEMENT_TOTAL_REFUNDED
+      default: ID
+    CalculateRefundOrderResponse:
+      type: object
+      properties:
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+          description: Currency of the refund. This matches the order / order item currency.
+        total_paid:
+          type: string
+          description: New total paid of the order.
+        total_refunded:
+          type: string
+          description: Total refunded amount.
+        refunded:
+          type: string
+          description: Refunded amount.
+        refunded_refurbed:
+          type: string
+          description: Part that refurbed refunded.
+        refunded_merchant:
+          type: string
+          description: Part that the merchant refunded.
+    ListShippingLabelsRequest:
+      type: object
+      properties:
+        order_id:
+          type: string
+          format: int64
+          description: The id of the order for which to list shipping labels.
+          required:
+          - order_id
+      required:
+      - order_id
+    OfferGrading:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - A
+      - B
+      - C
+      - AA
+      default: UNSPECIFIED
+      description: 'The grading of the item being sold.
+
+
+        Please consult the refurbed seller guide and quality charta to learn about
+
+        refurbed''s grading requirements.'
+    GetOrderRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          description: The id of the order to get.
+          required:
+          - id
+      required:
+      - id
+    DeleteOrderInvoiceRequest:
+      type: object
+      properties:
+        order_id:
+          type: string
+          format: int64
+          required:
+          - order_id
+      required:
+      - order_id
+    GetOrderResponse:
+      type: object
+      properties:
+        order:
+          $ref: '#/components/schemas/Order'
+    BoolFilter:
+      type: object
+      properties:
+        value:
+          type:
+          - boolean
+          - 'null'
+    OrderStateFilter:
       type: object
       properties:
         any_of:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/OrderState'
         none_of:
           type: array
           items:
-            type: string
-        contains:
-          type:
-          - string
-          - 'null'
+            $ref: '#/components/schemas/OrderState'
+    CurrencyCodeFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyCode'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyCode'
+    SetOrderInvoiceRequest.Meta:
+      type: object
+      properties:
+        order_id:
+          type: string
+          format: int64
+          required:
+          - order_id
+      required:
+      - order_id
     ListOrdersRequest.Filter:
       type: object
       properties:
@@ -1669,141 +1932,6 @@ components:
           $ref: '#/components/schemas/BoolFilter'
         is_return_shipment_label_used:
           $ref: '#/components/schemas/BoolFilter'
-    UpdateShippingLabelAddressResponse:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/v1.Address'
-    ListOrdersRequest.Filter.OrderItemNameFilter:
-      type: object
-      properties:
-        matches:
-          type:
-          - string
-          - 'null'
-    TrackingData:
-      type: object
-      properties:
-        carrier:
-          type: string
-        tracking_number:
-          type: string
-        tracking_url:
-          type: string
-    UpdateShippingLabelAddressRequest:
-      type: object
-      properties:
-        order_id:
-          type: string
-          format: int64
-          required:
-          - order_id
-        address:
-          $ref: '#/components/schemas/UpdateShippingLabelAddressRequest.Address'
-      required:
-      - order_id
-    OrderItemShipmentStatus:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - INFO_RECEIVED
-      - IN_TRANSIT
-      - OUT_FOR_DELIVERY
-      - AVAILABLE_FOR_PICKUP
-      - DELIVERED
-      - FAILED_ATTEMPT
-      - EXCEPTION
-      default: UNSPECIFIED
-      description: " - INFO_RECEIVED: Carrier has received request from shipper and is about to pick up the shipment.\n - IN_TRANSIT: Carrier has accepted or picked up shipment from shipper. The shipment is on the way.\n - OUT_FOR_DELIVERY: Carrier is about to deliver the shipment , or it is ready to pickup.\n - AVAILABLE_FOR_PICKUP: The package arrived at a pickup point near you and is available for pickup.\n - DELIVERED: The shipment was delivered successfully.\n - FAILED_ATTEMPT: Carrier attempted to deliver but failed, and usually leaves a notice and will try to deliver again.\n - EXCEPTION: Custom hold, undelivered, returned shipment to sender or any shipping exceptions."
-    RefundOrderRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: The id of the order to fully refund.
-          required:
-          - id
-      required:
-      - id
-    NumericRangeFilter:
-      type: object
-      properties:
-        gt:
-          type:
-          - string
-          - 'null'
-        ge:
-          type:
-          - string
-          - 'null'
-        any_of:
-          type: array
-          items:
-            type: string
-        none_of:
-          type: array
-          items:
-            type: string
-        le:
-          type:
-          - string
-          - 'null'
-        lt:
-          type:
-          - string
-          - 'null'
-      description: 'Numeric range filter is used for decimal numbers. It is especially
-
-        used for monetary amounts and other quantities where exactness is required.'
-    ListOrdersRequest.Sort.By:
-      type: string
-      enum:
-      - ID
-      - RELEASED_AT
-      - CUSTOMER_EMAIL
-      - CURRENCY_CODE
-      - SETTLEMENT_CURRENCY_CODE
-      - TOTAL_CHARGED
-      - SETTLEMENT_TOTAL_CHARGED
-      - TOTAL_PAID
-      - SETTLEMENT_TOTAL_PAID
-      - TOTAL_REFUNDED
-      - SETTLEMENT_TOTAL_REFUNDED
-      default: ID
-    CarrierEnum.Carrier:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - UPS
-      - DHL_EXPRESS
-      default: UNSPECIFIED
-    CurrencyCodeFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrencyCode'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrencyCode'
-    OrderState:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - NEW
-      - REJECTED
-      - CANCELLED
-      - ACCEPTED
-      - SHIPPED
-      - RETURNED
-      - FULFILLED
-      - UNFULFILLED
-      - PARTIALLY_FULFILLED
-      default: UNSPECIFIED
-      description: "Order states are calculated based on the individual order item states.\n\n - NEW: Order was not handled yet. At least one order item has state NEW.\n - REJECTED: Order was rejected (cannot be fulfilled). All order items have state\nREJECTED.\n - CANCELLED: Order was cancelled. All order items have state CANCELLED.\n - ACCEPTED: Order was accepted. At least one order item has state ACCEPTED, and none\nof the other items still have state NEW.\n - SHIPPED: Order was fully shipped. All order items have state SHIPPED.\n - RETURNED: Order was fully returned. All order items have state RETURNED.\n - FULFILLED: Order was fulfilled. Order has only items with both SHIPPED and RETURNED.\n - UNFULFILLED: Order was unfulfilled. Order has only items with both REJECTED and CANCELLED.\n - PARTIALLY_FULFILLED: Order was partially fulfilled. Order has items with both fulfilled (SHIPPED, RETURNED)\nand unfulfilled (REJECTED, CANCELLED) states."
     ShippingLabel:
       type: object
       properties:
@@ -1828,27 +1956,25 @@ components:
           $ref: '#/components/schemas/MerchantAddress'
           description: Merchant address for related parcel dispatch.
       description: ShippingLabel represents a shipping label for parcel.
-    DeleteOrderInvoiceRequest:
+    OrderItemTaxation:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - GROSS
+      - MARGINAL
+      - NET
+      default: UNSPECIFIED
+    OrderAddressPhoneNumberFilter:
       type: object
       properties:
-        order_id:
-          type: string
-          format: int64
-          required:
-          - order_id
-      required:
-      - order_id
-    AddressEntityFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/AddressEntity'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/AddressEntity'
+        eq:
+          type:
+          - string
+          - 'null'
+        contains:
+          type:
+          - string
+          - 'null'
     CountryCode:
       type: string
       enum:
@@ -2104,234 +2230,119 @@ components:
       - ZM
       default: UNSPECIFIED
       description: Alpha-2 country codes as specified in ISO 3166-1.
-    NormalPrinterURLs:
-      type: object
-      properties:
-        top_left:
-          type: string
-        top_right:
-          type: string
-        bottom_left:
-          type: string
-        bottom_right:
-          type: string
-    CalculateRefundOrderRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: The id of the order to calculate a full refund values for.
-          required:
-          - id
-      required:
-      - id
-    SortOrder:
-      type: string
-      enum:
-      - ASC
-      - DESC
-      default: ASC
-    SetOrderInvoiceRequest.Meta:
-      type: object
-      properties:
-        order_id:
-          type: string
-          format: int64
-          required:
-          - order_id
-      required:
-      - order_id
-    UploadOrderCommercialInvoiceRequest.Meta:
-      type: object
-      properties:
-        order_id:
-          type: string
-          format: int64
-          title: Order ID
-          required:
-          - order_id
-        commercial_invoice_number:
-          type: string
-          title: Commercial invoice number, as indicated on the document
-          required:
-          - commercial_invoice_number
-      required:
-      - order_id
-      - commercial_invoice_number
-    PaymentMethod:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - SOFORT
-      - PAYPAL
-      - CASHPRESSO
-      - STRIPE_DIGITAL_WALLET
-      - STRIPE_CARDS
-      - STRIPE_EPS
-      - STRIPE_GIRO_PAY
-      - STRIPE_IDEAL
-      - STRIPE_MOBILE_PAY
-      - STRIPE_P24
-      - STRIPE_SOFORT
-      - STRIPE_KLARNA
-      - STRIPE_SWISH
-      - STRIPE_MBWAY
-      - STRIPE_REVOLUT_PAY
-      - STRIPE_MONDU
-      - BRAINTREE_PAYPAL
-      - BRAINTREE_SATISPAY
-      - BRAINTREE_CARDS
-      - BRAINTREE_BANCONTACT
-      default: UNSPECIFIED
-    OfferGrading:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - A
-      - B
-      - C
-      - AA
-      default: UNSPECIFIED
-      description: 'The grading of the item being sold.
-
-
-        Please consult the refurbed seller guide and quality charta to learn about
-
-        refurbed''s grading requirements.'
-    OrderAddressVATINFilter:
-      type: object
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-        contains:
-          type:
-          - string
-          - 'null'
-    RefundEligibility:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - ELIGIBLE
-      - INELIGIBLE_UNKNOWN
-      - INELIGIBLE_PERIOD_EXPIRED
-      - INELIGIBLE_ALREADY_REFUNDED
-      - INELIGIBLE_UNCAPTURED_PAYMENT
-      - INELIGIBLE_NO_TICKET
-      default: UNSPECIFIED
-      description: " - ELIGIBLE: Refunds are allowed.\n - INELIGIBLE_UNKNOWN: Refunds are not allowed for an unspecified reason.\n - INELIGIBLE_PERIOD_EXPIRED: Refunds are not allowed because the order was created long ago.\n - INELIGIBLE_ALREADY_REFUNDED: Refunds are not allowed because everything the customer paid has already been refunded.\n - INELIGIBLE_UNCAPTURED_PAYMENT: Refunds are not allowed because Refurbed doesn't have the payment guaranteed yet.\n - INELIGIBLE_NO_TICKET: Refunds are not allowed because no relevant Zendesk ticket exists."
-    CountryCodeFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/CountryCode'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/CountryCode'
     GetOrderInvoiceResponse:
       type: object
       properties:
         url:
           type: string
           description: URL to invoice file. This will expire.
-    ListShippingLabelsResponse:
-      type: object
-      properties:
-        shipping_labels:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShippingLabel'
-    MerchantAddress:
+    Order:
       type: object
       properties:
         id:
           type: string
           format: int64
-        version:
+          description: Primary key.
+        released_at:
           type: string
-          format: int64
-        label:
-          type: string
-          title: A user-defined label to identify or categorize the address, e.g. "Main Warehouse"
-        first_name:
-          type:
-          - string
-          - 'null'
-        family_name:
-          type:
-          - string
-          - 'null'
-        company_name:
-          type: string
-        country_code:
-          $ref: '#/components/schemas/CountryCode'
-        post_code:
-          type: string
-        town:
-          type: string
-        street_name:
-          type: string
-        house_no:
-          type:
-          - string
-          - 'null'
-        supplement:
-          type:
-          - string
-          - 'null'
-        phone_number:
-          type:
-          - string
-          - 'null'
-        type:
-          $ref: '#/components/schemas/MerchantAddressType'
-      description: 'MerchantAddress is the address from which the merchant dispatches shipments.
+          format: date-time
+          description: When the order was released to the merchant.
+        state:
+          $ref: '#/components/schemas/OrderState'
+          description: 'The order state. To understand the flow, please read the documentation of
 
-        Used as the merchant''s shipping address in the context of shipping label creation.'
-    CreateShippingLabelRequest:
-      type: object
-      properties:
-        order_id:
+            the individual order states and order item states.'
+        labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLabel'
+          description: Order labels.
+        customer_email:
           type: string
-          format: int64
-          description: The id of the order for which to generate shipping labels.
-          required:
-          - order_id
-        merchant_address_id:
+          description: The customer's email address.
+        shipping_address:
+          $ref: '#/components/schemas/v1.Address'
+          description: The shipping address.
+        invoice_address:
+          $ref: '#/components/schemas/v1.Address'
+          description: The invoice address.
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+          description: Currency the order was charged in.
+        settlement_currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+          description: 'Currency the order was settled it. This is the currency the merchant will
+
+            be paid out in.'
+        settlement_exchange_rate:
           type: string
-          format: int64
-          description: The id of the merchant address.
-          required:
-          - merchant_address_id
-        parcel_weight:
-          type: number
-          format: float
-          title: The weight of the parcel that labels are generated for
-          required:
-          - parcel_weight
-        carrier:
-          $ref: '#/components/schemas/CarrierEnum.Carrier'
-          title: Carrier that should be used to create shipping label
-      required:
-      - order_id
-      - merchant_address_id
-      - parcel_weight
-    OrderAddressPhoneNumberFilter:
-      type: object
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-        contains:
-          type:
-          - string
-          - 'null'
+          description: 'Exchange rate applied to convert amounts from currency to settlement
+
+            currency.'
+        total_charged:
+          type: string
+          description: 'The total amount the customer was charged. This is the sum of all of the
+
+            order item''s total charged values; it is also the sum of total paid and
+
+            total refunded.'
+        settlement_total_charged:
+          type: string
+          description: The total amount the customer was charged, in settlement currency.
+        total_discount:
+          type: string
+          description: Discount amount if coupon was applied to the order.
+        settlement_total_discount:
+          type: string
+          description: Discount amount if coupon was applied to the order, in settlement currency.
+        total_paid:
+          type: string
+          description: 'The total amount the user paid for this order. This is the sum of all the
+
+            order item''s total paid values plus discount values.'
+        settlement_total_paid:
+          type: string
+          description: The total amount the user paid for this order plus discount value in settlement currency.
+        total_refunded:
+          type: string
+          description: 'The total amount the customer was refunded. This is the sum of all of the
+
+            order item''s total refunded values.'
+        settlement_total_refunded:
+          type: string
+          description: The total amount the customer was refunded, in settlement currency.
+        total_vat_charged:
+          type: string
+          description: The total amount of VAT the customer was charged for, in order currency.
+        settlement_total_vat_charged:
+          type: string
+          description: The total amount of VAT the customer was charged for, in settlement currency.
+        is_refundable:
+          type: boolean
+          description: Indicates whether this order is currently refundable.
+        refund_eligibility:
+          $ref: '#/components/schemas/RefundEligibility'
+          description: Indicates whether this order is eligible for a refund, if not, why it's not.
+        is_invoiceable:
+          type: boolean
+          description: 'Indicates whether an invoice can be uploaded. Will turn false ~30 days
+
+            after order release.'
+        has_invoice:
+          type: boolean
+          description: Indicates whether an invoice was uploaded.
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+          description: All items of this order.
+        shipping_label_address:
+          $ref: '#/components/schemas/v1.Address'
+          description: Shipping label address used for label creation.
+        payment_method:
+          $ref: '#/components/schemas/PaymentMethod'
+          description: Payment method used to charge the customer.
+      description: An order.
     RefundOrderResponse:
       type: object
       properties:
@@ -2353,114 +2364,103 @@ components:
         refunded_merchant:
           type: string
           description: Part that the merchant refunded.
-    ListOrdersResponse:
+    OrderItemIdentifier:
       type: object
       properties:
-        orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/Order'
-          description: The orders found.
-        has_more:
-          type: boolean
-          description: Indicates whether there are more results available.
-    BatteryCondition:
+        identifier_type:
+          $ref: '#/components/schemas/OrderItemIdentifierType'
+        value:
+          type: string
+    OfferWarranty:
       type: string
       enum:
       - UNSPECIFIED
-      - OPTIMAL
-      - NEW
+      - M12
+      - M18
+      - M24
+      - M30
+      - M36
       default: UNSPECIFIED
-    OrderStateFilter:
+      description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
+    TimestampRangeFilter:
       type: object
       properties:
+        gt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        ge:
+          type:
+          - string
+          - 'null'
+          format: date-time
         any_of:
           type: array
           items:
-            $ref: '#/components/schemas/OrderState'
+            type: string
+            format: date-time
         none_of:
           type: array
           items:
-            $ref: '#/components/schemas/OrderState'
-    ListOrdersRequest:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Int64Pagination'
-        sort:
-          $ref: '#/components/schemas/ListOrdersRequest.Sort'
-        filter:
-          $ref: '#/components/schemas/ListOrdersRequest.Filter'
-    BoolFilter:
-      type: object
-      properties:
-        value:
+            type: string
+            format: date-time
+        le:
           type:
-          - boolean
+          - string
           - 'null'
-    DeleteOrderCommercialInvoiceRequest:
+          format: date-time
+        lt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    OrderLabelCollectionFilter:
       type: object
       properties:
-        order_id:
-          type: string
-          format: int64
-          required:
-          - order_id
-      required:
-      - order_id
-    Status:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
-        message:
-          type: string
-          description: 'A developer-facing error message, which should be in English. Any
-
-            user-facing error message should be localized and sent in the
-
-            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
-        details:
+        all_of:
           type: array
           items:
-            $ref: '#/components/schemas/Any'
-          description: 'A list of messages that carry the error details.  There is a common set of
-
-            message types for APIs to use.'
-      description: 'The `Status` type defines a logical error model that is suitable for
-
-        different programming environments, including REST APIs and RPC APIs. It is
-
-        used by [gRPC](https://github.com/grpc). Each `Status` message contains
-
-        three pieces of data: error code, error message, and error details.
-
-
-        You can find out more about this error model and how to work with it in the
-
-        [API Design Guide](https://cloud.google.com/apis/design/errors).'
-    ListShippingLabelsRequest:
+            $ref: '#/components/schemas/OrderLabel'
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLabel'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLabel'
+    Int64Pagination:
       type: object
       properties:
-        order_id:
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+            Default and maximum is 100.'
+        ending_before:
           type: string
           format: int64
-          description: The id of the order for which to list shipping labels.
-          required:
-          - order_id
-      required:
-      - order_id
-    GetOrderCommercialInvoiceResponse:
-      type: object
-      properties:
-        url:
+        starting_after:
           type: string
-          description: URL to invoice file. This will expire.
-        commercial_invoice_number:
-          type: string
-          description: Commercial invoice number, as indicated on the document.
+          format: int64
+      description: Paginates resources with int64 primary key.
+    OrderItemShipmentStatus:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - INFO_RECEIVED
+      - IN_TRANSIT
+      - OUT_FOR_DELIVERY
+      - AVAILABLE_FOR_PICKUP
+      - DELIVERED
+      - FAILED_ATTEMPT
+      - EXCEPTION
+      default: UNSPECIFIED
+      description: " - INFO_RECEIVED: Carrier has received request from shipper and is about to pick up the shipment.\n - IN_TRANSIT: Carrier has accepted or picked up shipment from shipper. The shipment is on the way.\n - OUT_FOR_DELIVERY: Carrier is about to deliver the shipment , or it is ready to pickup.\n - AVAILABLE_FOR_PICKUP: The package arrived at a pickup point near you and is available for pickup.\n - DELIVERED: The shipment was delivered successfully.\n - FAILED_ATTEMPT: Carrier attempted to deliver but failed, and usually leaves a notice and will try to deliver again.\n - EXCEPTION: Custom hold, undelivered, returned shipment to sender or any shipping exceptions."
   securitySchemes:
     APIKeyAuth:
       type: apiKey

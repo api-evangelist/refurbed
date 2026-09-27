@@ -160,7 +160,7 @@ paths:
         - RESOURCE_EXHAUSTED
 
         - when rate limit is exceeded'
-      operationId: GetInstance
+      operationId: postRefbMerchantV1InstanceServiceGetInstance
       responses:
         '200':
           description: A successful response.
@@ -182,10 +182,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetInstanceRequest_2'
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: GetInstance
     servers:
     - url: https://api.refurbed.com
 components:
   schemas:
+    GetInstanceResponse:
+      type: object
+      properties:
+        instance:
+          $ref: '#/components/schemas/Instance'
+          description: The instance retrieved.
     Buybox:
       type: object
       properties:
@@ -220,6 +228,14 @@ components:
 
             parameter will be included in the link.'
       description: A Buybox.
+    InstanceIDFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
+            format: int64
     Expression:
       type: object
       properties:
@@ -231,97 +247,114 @@ components:
         cond_numeric:
           $ref: '#/components/schemas/NumericValueCond'
       description: An attribute expression.
-    Instance:
+    Media:
       type: object
       properties:
-        id:
+        type:
+          $ref: '#/components/schemas/MediaType'
+          description: Type of the media.
+        url:
           type: string
-          format: int64
-          description: Primary key.
-        name:
-          type: string
-          description: Human-readable name.
-        product_id:
-          type: string
-          format: int64
-          description: Identifier of product this instance is linked with.
-        category_id:
-          type: string
-          format: int64
-          description: Identifier of category this instance is linked with.
-        category_path:
-          type: array
-          items:
-            type: string
-          description: Human-readable names of category hierarchy path (e.g. ["Smartphones", "Apple"]).
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attribute'
-          description: List of attributes assigned to this instance including product attributes.
-        medias:
-          type: array
-          items:
-            $ref: '#/components/schemas/Media'
-          description: 'List of media assigned to this instance including the instance''s product
-
-            media.'
-        buybox:
-          $ref: '#/components/schemas/Buybox'
-          description: 'Buybox data, defines the price and conditions (grading, warranty) by which
-
-            this instance is sold.'
-      description: An instance.
-    InstanceIDFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            type: string
-            format: int64
-    ListInstancesByProductResponse:
-      type: object
-      properties:
-        instances:
-          type: array
-          items:
-            $ref: '#/components/schemas/Instance'
-          description: The instances found.
-        has_more:
-          type: boolean
-          description: Indicates whether there are more results available.
-    InstanceNameFilter:
-      type: object
-      properties:
-        matches:
-          type:
-          - string
-          - 'null'
-    Int64Pagination:
-      type: object
-      properties:
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Limit on the number of results to be returned. Between 1 and 100.
-
-            Default and maximum is 100.'
-        ending_before:
-          type: string
-          format: int64
-        starting_after:
-          type: string
-          format: int64
-      description: Paginates resources with int64 primary key.
+          description: URL to the media.
+      description: A media.
+    SortOrder:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      default: ASC
     MediaType:
       type: string
       enum:
       - UNSPECIFIED
       - IMAGE
       default: UNSPECIFIED
+    ListInstancesByProductRequest.Filter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/InstanceIDFilter'
+        name:
+          $ref: '#/components/schemas/InstanceNameFilter'
+        attributes:
+          $ref: '#/components/schemas/AttributesFilter'
+    EnumValueCond:
+      type: object
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+      description: An enum attribute value condition.
+    NumericValue:
+      type: object
+      properties:
+        value:
+          type: number
+          format: double
+        unit:
+          type:
+          - string
+          - 'null'
+    Status:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Any'
+    Any:
+      type: object
+      properties:
+        '@type':
+          type: string
+      additionalProperties: {}
+    ListInstancesByProductRequest.Sort:
+      type: object
+      properties:
+        order:
+          $ref: '#/components/schemas/SortOrder'
+        by:
+          $ref: '#/components/schemas/ListInstancesByProductRequest.Sort.By'
+    GetInstanceRequest:
+      type: object
+      properties:
+        site_market_code:
+          type: string
+          description: The code of a site market where the instance is sold.
+          required:
+          - site_market_code
+        id:
+          type: string
+          format: int64
+        gtin:
+          type: string
+          description: A GTIN-8, GTIN-12 or GTIN-13. Note that EAN-13 and UPC-A codes are GTINs.
+        back_link:
+          type:
+          - string
+          - 'null'
+          description: 'URL linking back to partner''s site.
+
+
+            If provided, it is used to populate a query parameter for instance
+
+            buybox link.'
+      required:
+      - site_market_code
+    AttributeType:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - ENUM
+      - NUMERIC
+      default: UNSPECIFIED
+      description: "A type of an attribute.\n\n - ENUM: An enumerated attribute has a string value, e.g. Colour = black.\n - NUMERIC: A numeric attribute has a numeric value with an optional unit, e.g.\nMemory = 2 GB"
     CurrencyCode:
       type: string
       enum:
@@ -505,47 +538,22 @@ components:
       - ZWL
       default: UNSPECIFIED
       description: "Currency codes as specified in ISO 4217.\n\n - AED: XTS = 963; // Code reserved for testing purposes."
-    ListInstancesByProductRequest.Filter:
+    AttributesFilter:
       type: object
       properties:
-        id:
-          $ref: '#/components/schemas/InstanceIDFilter'
-        name:
-          $ref: '#/components/schemas/InstanceNameFilter'
-        attributes:
-          $ref: '#/components/schemas/AttributesFilter'
-    Any:
-      type: object
-      properties:
-        '@type':
-          type: string
-      additionalProperties: {}
-    Media:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/MediaType'
-          description: Type of the media.
-        url:
-          type: string
-          description: URL to the media.
-      description: A media.
-    NumericValueCond:
-      type: object
-      properties:
-        eq:
-          type:
-          - number
-          - 'null'
-          format: double
-      description: A numeric attribute value condition.
-    ListInstancesByProductRequest.Sort.By:
+        all_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/Expression'
+    OfferGrading:
       type: string
       enum:
-      - ID
-      - PRICE
-      - NAME
-      default: ID
+      - UNSPECIFIED
+      - A
+      - B
+      - C
+      default: UNSPECIFIED
+      description: The grading of the item being sold.
     Attribute:
       type: object
       properties:
@@ -566,55 +574,11 @@ components:
           $ref: '#/components/schemas/NumericValue'
           description: Value is set if type is NUMERIC.
       description: An Attribute.
-    OfferWarranty:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - M12
-      - M18
-      - M24
-      - M30
-      - M36
-      default: UNSPECIFIED
-      description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
-    ListInstancesByProductRequest.Sort:
-      type: object
-      properties:
-        order:
-          $ref: '#/components/schemas/SortOrder'
-        by:
-          $ref: '#/components/schemas/ListInstancesByProductRequest.Sort.By'
-    GetInstanceResponse:
-      type: object
-      properties:
-        instance:
-          $ref: '#/components/schemas/Instance'
-          description: The instance retrieved.
-    AttributesFilter:
-      type: object
-      properties:
-        all_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/Expression'
-    AttributeType:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - ENUM
-      - NUMERIC
-      default: UNSPECIFIED
-      description: "A type of an attribute.\n\n - ENUM: An enumerated attribute has a string value, e.g. Colour = black.\n - NUMERIC: A numeric attribute has a numeric value with an optional unit, e.g.\nMemory = 2 GB"
-    NumericValue:
+    StringValue:
       type: object
       properties:
         value:
-          type: number
-          format: double
-        unit:
-          type:
-          - string
-          - 'null'
+          type: string
     ListInstancesByProductRequest:
       type: object
       properties:
@@ -648,72 +612,115 @@ components:
       required:
       - site_market_code
       - product_id
-    SortOrder:
-      type: string
-      enum:
-      - ASC
-      - DESC
-      default: ASC
-    EnumValueCond:
+    NumericValueCond:
       type: object
       properties:
         eq:
           type:
-          - string
+          - number
           - 'null'
-      description: An enum attribute value condition.
-    OfferGrading:
+          format: double
+      description: A numeric attribute value condition.
+    ListInstancesByProductRequest.Sort.By:
+      type: string
+      enum:
+      - ID
+      - PRICE
+      - NAME
+      default: ID
+    ListInstancesByProductResponse:
+      type: object
+      properties:
+        instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Instance'
+          description: The instances found.
+        has_more:
+          type: boolean
+          description: Indicates whether there are more results available.
+    OfferWarranty:
       type: string
       enum:
       - UNSPECIFIED
-      - A
-      - B
-      - C
+      - M12
+      - M18
+      - M24
+      - M30
+      - M36
       default: UNSPECIFIED
-      description: The grading of the item being sold.
-    StringValue:
+      description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
+    Instance:
       type: object
       properties:
-        value:
-          type: string
-    GetInstanceRequest:
-      type: object
-      properties:
-        site_market_code:
-          type: string
-          description: The code of a site market where the instance is sold.
-          required:
-          - site_market_code
         id:
           type: string
           format: int64
-        gtin:
+          description: Primary key.
+        name:
           type: string
-          description: A GTIN-8, GTIN-12 or GTIN-13. Note that EAN-13 and UPC-A codes are GTINs.
-        back_link:
+          description: Human-readable name.
+        product_id:
+          type: string
+          format: int64
+          description: Identifier of product this instance is linked with.
+        category_id:
+          type: string
+          format: int64
+          description: Identifier of category this instance is linked with.
+        category_path:
+          type: array
+          items:
+            type: string
+          description: Human-readable names of category hierarchy path (e.g. ["Smartphones", "Apple"]).
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+          description: List of attributes assigned to this instance including product attributes.
+        medias:
+          type: array
+          items:
+            $ref: '#/components/schemas/Media'
+          description: 'List of media assigned to this instance including the instance''s product
+
+            media.'
+        buybox:
+          $ref: '#/components/schemas/Buybox'
+          description: 'Buybox data, defines the price and conditions (grading, warranty) by which
+
+            this instance is sold.'
+      description: An instance.
+    Int64Pagination:
+      type: object
+      properties:
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+            Default and maximum is 100.'
+        ending_before:
+          type: string
+          format: int64
+        starting_after:
+          type: string
+          format: int64
+      description: Paginates resources with int64 primary key.
+    InstanceNameFilter:
+      type: object
+      properties:
+        matches:
           type:
           - string
           - 'null'
-          description: 'URL linking back to partner''s site.
-
-
-            If provided, it is used to populate a query parameter for instance
-
-            buybox link.'
-      required:
-      - site_market_code
-    Status:
+    GetInstanceResponse_2:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/Any'
+        instance:
+          $ref: '#/components/schemas/Instance_2'
     InstanceIdentifier:
       type: object
       properties:
@@ -728,6 +735,65 @@ components:
           type: string
           description: Manufacturer Part Number.
       description: Identifier of an instance.
+    BatchGetInstancesResponse.Result:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status_2'
+        instance:
+          $ref: '#/components/schemas/Instance_2'
+          description: Retrieved instance. Set if status code is OK.
+    BatchGetInstancesRequest.Get:
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/InstanceIdentifier'
+          description: The identifier of the instance to get.
+    BatchGetInstancesRequest:
+      type: object
+      properties:
+        instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchGetInstancesRequest.Get'
+          description: Instances to get. Between 1 and 50.
+          required:
+          - instances
+      required:
+      - instances
+    Status_2:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: 'A developer-facing error message, which should be in English. Any
+
+            user-facing error message should be localized and sent in the
+
+            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Any_2'
+          description: 'A list of messages that carry the error details.  There is a common set of
+
+            message types for APIs to use.'
+      description: 'The `Status` type defines a logical error model that is suitable for
+
+        different programming environments, including REST APIs and RPC APIs. It is
+
+        used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
+        three pieces of data: error code, error message, and error details.
+
+
+        You can find out more about this error model and how to work with it in the
+
+        [API Design Guide](https://cloud.google.com/apis/design/errors).'
     Any_2:
       type: object
       properties:
@@ -767,70 +833,6 @@ components:
         mpn:
           type: string
           description: Manufacturer Part Number.
-    BatchGetInstancesRequest:
-      type: object
-      properties:
-        instances:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchGetInstancesRequest.Get'
-          description: Instances to get. Between 1 and 50.
-          required:
-          - instances
-      required:
-      - instances
-    BatchGetInstancesResponse.Result:
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/Status_2'
-        instance:
-          $ref: '#/components/schemas/Instance_2'
-          description: Retrieved instance. Set if status code is OK.
-    BatchGetInstancesRequest.Get:
-      type: object
-      properties:
-        identifier:
-          $ref: '#/components/schemas/InstanceIdentifier'
-          description: The identifier of the instance to get.
-    Status_2:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
-        message:
-          type: string
-          description: 'A developer-facing error message, which should be in English. Any
-
-            user-facing error message should be localized and sent in the
-
-            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/Any_2'
-          description: 'A list of messages that carry the error details.  There is a common set of
-
-            message types for APIs to use.'
-      description: 'The `Status` type defines a logical error model that is suitable for
-
-        different programming environments, including REST APIs and RPC APIs. It is
-
-        used by [gRPC](https://github.com/grpc). Each `Status` message contains
-
-        three pieces of data: error code, error message, and error details.
-
-
-        You can find out more about this error model and how to work with it in the
-
-        [API Design Guide](https://cloud.google.com/apis/design/errors).'
-    GetInstanceResponse_2:
-      type: object
-      properties:
-        instance:
-          $ref: '#/components/schemas/Instance_2'
   securitySchemes:
     APIKeyAuth:
       type: apiKey

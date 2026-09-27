@@ -307,20 +307,38 @@ paths:
         required: true
 components:
   schemas:
-    ShippingProfileNameFilter:
+    MerchantAddressType:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - DELIVERY
+      - RETURN
+      default: UNSPECIFIED
+    v1.Carrier:
       type: object
       properties:
-        contains:
-          type:
-          - string
-          - 'null'
-    ListShippingProfilesRequest.Sort:
+        name:
+          type: string
+          description: Name of the carrier. Only used for display purposes.
+        slug:
+          type: string
+          description: Slug of the carrier. Used in requests and responses to identify the carrier.
+    ListShippingProfilesRequest:
       type: object
       properties:
-        order:
-          $ref: '#/components/schemas/SortOrder'
-        by:
-          $ref: '#/components/schemas/ListShippingProfilesRequest.Sort.By'
+        pagination:
+          $ref: '#/components/schemas/Int64Pagination'
+        sort:
+          $ref: '#/components/schemas/ListShippingProfilesRequest.Sort'
+        filter:
+          $ref: '#/components/schemas/ListShippingProfilesRequest.Filter'
+    ListAvailableCarriersResponse:
+      type: object
+      properties:
+        carriers:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1.Carrier'
     Int64Pagination:
       type: object
       properties:
@@ -339,6 +357,293 @@ components:
           type: string
           format: int64
       description: Paginates resources with int64 primary key.
+    UpdateDestination:
+      type: object
+      properties:
+        market_code:
+          type: string
+          required:
+          - market_code
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        shipping_costs:
+          type:
+          - string
+          - 'null'
+        min_delivery_days:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        max_delivery_days:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        label_creation_enabled:
+          type:
+          - boolean
+          - 'null'
+        carrier:
+          type:
+          - string
+          - 'null'
+          description: Carrier slug, obtained from ListAvailableCarriers RPC.
+        dispatch_cutoff_hour:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
+      required:
+      - market_code
+    MerchantAddress:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+        version:
+          type: string
+          format: int64
+        label:
+          type: string
+          title: A user-defined label to identify or categorize the address, e.g. "Main Warehouse"
+        first_name:
+          type:
+          - string
+          - 'null'
+        family_name:
+          type:
+          - string
+          - 'null'
+        company_name:
+          type: string
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        post_code:
+          type: string
+        town:
+          type: string
+        street_name:
+          type: string
+        house_no:
+          type:
+          - string
+          - 'null'
+        supplement:
+          type:
+          - string
+          - 'null'
+        phone_number:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/MerchantAddressType'
+      description: 'MerchantAddress is the address from which the merchant dispatches shipments.
+
+        Used as the merchant''s shipping address in the context of shipping label creation.'
+    SortOrder:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      default: ASC
+    CreateShippingProfileRequest.Address:
+      type: object
+      properties:
+        first_name:
+          type:
+          - string
+          - 'null'
+        family_name:
+          type:
+          - string
+          - 'null'
+        company_name:
+          type: string
+          required:
+          - company_name
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        post_code:
+          type: string
+          required:
+          - post_code
+        town:
+          type: string
+          required:
+          - town
+        street_name:
+          type: string
+          required:
+          - street_name
+        house_no:
+          type: string
+          required:
+          - house_no
+        supplement:
+          type:
+          - string
+          - 'null'
+        phone_number:
+          type:
+          - string
+          - 'null'
+      required:
+      - company_name
+      - post_code
+      - town
+      - street_name
+      - house_no
+    UpdateShippingProfileRequest.Address:
+      type: object
+      properties:
+        first_name:
+          type:
+          - string
+          - 'null'
+        family_name:
+          type:
+          - string
+          - 'null'
+        company_name:
+          type: string
+          required:
+          - company_name
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        post_code:
+          type: string
+          required:
+          - post_code
+        town:
+          type: string
+          required:
+          - town
+        street_name:
+          type: string
+          required:
+          - street_name
+        house_no:
+          type: string
+          required:
+          - house_no
+        supplement:
+          type:
+          - string
+          - 'null'
+        phone_number:
+          type:
+          - string
+          - 'null'
+      required:
+      - company_name
+      - post_code
+      - town
+      - street_name
+      - house_no
+    Status:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: 'A developer-facing error message, which should be in English. Any
+
+            user-facing error message should be localized and sent in the
+
+            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Any'
+          description: 'A list of messages that carry the error details.  There is a common set of
+
+            message types for APIs to use.'
+      description: 'The `Status` type defines a logical error model that is suitable for
+
+        different programming environments, including REST APIs and RPC APIs. It is
+
+        used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
+        three pieces of data: error code, error message, and error details.
+
+
+        You can find out more about this error model and how to work with it in the
+
+        [API Design Guide](https://cloud.google.com/apis/design/errors).'
+    Any:
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+      additionalProperties: {}
+      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+    UpdateShippingProfileRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          required:
+          - id
+        name:
+          type:
+          - string
+          - 'null'
+        source_country_market_code:
+          type:
+          - string
+          - 'null'
+          description: 'Deprecated: use source_address instead.'
+        source_address:
+          $ref: '#/components/schemas/UpdateShippingProfileRequest.Address'
+          description: Address to use for estimating parcel delivery dates.
+        create_destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateShippingProfileRequest.CreateDestination'
+          description: Destinations to create.
+        update_destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateDestination'
+          description: Destinations to update.
+        delete_destinations:
+          type: array
+          items:
+            type: string
+          description: Destinations to delete. Takes a list of market codes.
+      description: See shipping profile for full documentation.
+      required:
+      - id
+    ListShippingProfilesResponse:
+      type: object
+      properties:
+        shipping_profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShippingProfile'
+          description: The shipping profiles found.
+        has_more:
+          type: boolean
+          description: Indicates whether there are more results available.
+    ListShippingProfilesRequest.Sort.By:
+      type: string
+      enum:
+      - ID
+      - CREATED_AT
+      - NAME
+      - SOURCE_COUNTRY_MARKET_CODE
+      - NUM_OFFERS_ASSIGNED
+      - SOURCE_COUNTRY_MARKET_NAME
+      default: ID
     Int64Filter:
       type: object
       properties:
@@ -352,59 +657,6 @@ components:
           items:
             type: string
             format: int64
-    ListShippingProfilesRequest.Filter:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/Int64Filter'
-        created_at:
-          $ref: '#/components/schemas/TimestampRangeFilter'
-        name:
-          $ref: '#/components/schemas/ShippingProfileNameFilter'
-        source_country_market_code:
-          $ref: '#/components/schemas/StringFilter'
-        destination_market_code:
-          $ref: '#/components/schemas/StringFilter'
-        num_offers_assigned:
-          $ref: '#/components/schemas/UInt32RangeFilter'
-    TimestampRangeFilter:
-      type: object
-      properties:
-        gt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        ge:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        any_of:
-          type: array
-          items:
-            type: string
-            format: date-time
-        none_of:
-          type: array
-          items:
-            type: string
-            format: date-time
-        le:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        lt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-    GetShippingProfileResponse:
-      type: object
-      properties:
-        shipping_profile:
-          $ref: '#/components/schemas/ShippingProfile'
     CurrencyCode:
       type: string
       enum:
@@ -588,219 +840,6 @@ components:
       - ZWL
       default: UNSPECIFIED
       description: "Currency codes as specified in ISO 4217.\n\n - AED: XTS = 963; // Code reserved for testing purposes."
-    UpdateShippingProfileRequest.CreateDestination:
-      type: object
-      properties:
-        market_code:
-          type: string
-          required:
-          - market_code
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-        shipping_costs:
-          type: string
-          required:
-          - shipping_costs
-        min_delivery_days:
-          type: integer
-          format: int64
-          required:
-          - min_delivery_days
-        max_delivery_days:
-          type: integer
-          format: int64
-          required:
-          - max_delivery_days
-        label_creation_enabled:
-          type:
-          - boolean
-          - 'null'
-        carrier:
-          type:
-          - string
-          - 'null'
-          description: Carrier slug, obtained from ListAvailableCarriers RPC.
-        dispatch_cutoff_hour:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
-      required:
-      - market_code
-      - shipping_costs
-      - min_delivery_days
-      - max_delivery_days
-    Any:
-      type: object
-      properties:
-        '@type':
-          type: string
-          description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
-      additionalProperties: {}
-      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
-    UInt32RangeFilter:
-      type: object
-      properties:
-        gt:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        ge:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        any_of:
-          type: array
-          items:
-            type: integer
-            format: int64
-        none_of:
-          type: array
-          items:
-            type: integer
-            format: int64
-        le:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        lt:
-          type:
-          - integer
-          - 'null'
-          format: int64
-    CreateShippingProfileRequest.CreateDestination:
-      type: object
-      properties:
-        market_code:
-          type: string
-          required:
-          - market_code
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-        shipping_costs:
-          type: string
-          required:
-          - shipping_costs
-        min_delivery_days:
-          type: integer
-          format: int64
-          required:
-          - min_delivery_days
-        max_delivery_days:
-          type: integer
-          format: int64
-          required:
-          - max_delivery_days
-        label_creation_enabled:
-          type:
-          - boolean
-          - 'null'
-        carrier:
-          type:
-          - string
-          - 'null'
-          description: Carrier slug, obtained from ListAvailableCarriers RPC.
-        dispatch_cutoff_hour:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
-      required:
-      - market_code
-      - shipping_costs
-      - min_delivery_days
-      - max_delivery_days
-    MerchantAddressType:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - DELIVERY
-      - RETURN
-      default: UNSPECIFIED
-    ListAvailableCarriersResponse:
-      type: object
-      properties:
-        carriers:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1.Carrier'
-    UpdateShippingProfileResponse:
-      type: object
-      properties:
-        shipping_profile:
-          $ref: '#/components/schemas/ShippingProfile'
-    UpdateShippingProfileRequest.Address:
-      type: object
-      properties:
-        first_name:
-          type:
-          - string
-          - 'null'
-        family_name:
-          type:
-          - string
-          - 'null'
-        company_name:
-          type: string
-          required:
-          - company_name
-        country_code:
-          $ref: '#/components/schemas/CountryCode'
-        post_code:
-          type: string
-          required:
-          - post_code
-        town:
-          type: string
-          required:
-          - town
-        street_name:
-          type: string
-          required:
-          - street_name
-        house_no:
-          type: string
-          required:
-          - house_no
-        supplement:
-          type:
-          - string
-          - 'null'
-        phone_number:
-          type:
-          - string
-          - 'null'
-      required:
-      - company_name
-      - post_code
-      - town
-      - street_name
-      - house_no
-    ListShippingProfilesResponse:
-      type: object
-      properties:
-        shipping_profiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShippingProfile'
-          description: The shipping profiles found.
-        has_more:
-          type: boolean
-          description: Indicates whether there are more results available.
-    ListShippingProfilesRequest:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Int64Pagination'
-        sort:
-          $ref: '#/components/schemas/ListShippingProfilesRequest.Sort'
-        filter:
-          $ref: '#/components/schemas/ListShippingProfilesRequest.Filter'
     Destination:
       type: object
       properties:
@@ -869,6 +908,189 @@ components:
           - 'null'
           format: int64
           description: The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
+    CreateShippingProfileRequest.CreateDestination:
+      type: object
+      properties:
+        market_code:
+          type: string
+          required:
+          - market_code
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        shipping_costs:
+          type: string
+          required:
+          - shipping_costs
+        min_delivery_days:
+          type: integer
+          format: int64
+          required:
+          - min_delivery_days
+        max_delivery_days:
+          type: integer
+          format: int64
+          required:
+          - max_delivery_days
+        label_creation_enabled:
+          type:
+          - boolean
+          - 'null'
+        carrier:
+          type:
+          - string
+          - 'null'
+          description: Carrier slug, obtained from ListAvailableCarriers RPC.
+        dispatch_cutoff_hour:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
+      required:
+      - market_code
+      - shipping_costs
+      - min_delivery_days
+      - max_delivery_days
+    UpdateShippingProfileRequest.CreateDestination:
+      type: object
+      properties:
+        market_code:
+          type: string
+          required:
+          - market_code
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        shipping_costs:
+          type: string
+          required:
+          - shipping_costs
+        min_delivery_days:
+          type: integer
+          format: int64
+          required:
+          - min_delivery_days
+        max_delivery_days:
+          type: integer
+          format: int64
+          required:
+          - max_delivery_days
+        label_creation_enabled:
+          type:
+          - boolean
+          - 'null'
+        carrier:
+          type:
+          - string
+          - 'null'
+          description: Carrier slug, obtained from ListAvailableCarriers RPC.
+        dispatch_cutoff_hour:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
+      required:
+      - market_code
+      - shipping_costs
+      - min_delivery_days
+      - max_delivery_days
+    TimestampRangeFilter:
+      type: object
+      properties:
+        gt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        ge:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        any_of:
+          type: array
+          items:
+            type: string
+            format: date-time
+        none_of:
+          type: array
+          items:
+            type: string
+            format: date-time
+        le:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        lt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    CreateShippingProfileRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          required:
+          - name
+        source_country_market_code:
+          type:
+          - string
+          - 'null'
+          description: 'Deprecated: use source_address instead.'
+          required:
+          - source_country_market_code
+        source_address:
+          $ref: '#/components/schemas/CreateShippingProfileRequest.Address'
+          description: Address to use for estimating parcel delivery dates.
+        create_destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateShippingProfileRequest.CreateDestination'
+          description: Destinations to create.
+      description: See shipping profile for full documentation.
+      required:
+      - name
+      - source_country_market_code
+    UpdateShippingProfileResponse:
+      type: object
+      properties:
+        shipping_profile:
+          $ref: '#/components/schemas/ShippingProfile'
+    UInt32RangeFilter:
+      type: object
+      properties:
+        gt:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        ge:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        any_of:
+          type: array
+          items:
+            type: integer
+            format: int64
+        none_of:
+          type: array
+          items:
+            type: integer
+            format: int64
+        le:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        lt:
+          type:
+          - integer
+          - 'null'
+          format: int64
     StringFilter:
       type: object
       properties:
@@ -880,6 +1102,79 @@ components:
           type: array
           items:
             type: string
+    ShippingProfileNameFilter:
+      type: object
+      properties:
+        contains:
+          type:
+          - string
+          - 'null'
+    DeleteShippingProfileRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          required:
+          - id
+      required:
+      - id
+    ShippingProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          description: Primary key.
+        version:
+          type: string
+          format: int64
+          description: Version of the shipping profile.
+        is_current:
+          type: boolean
+          description: 'Indicates whether this is the currently available (latest and non-deleted).
+
+            version.'
+        created_at:
+          type: string
+          format: date-time
+          description: When the shipping profile was created.
+        name:
+          type: string
+          description: Shipping profile name.
+        source_country_market_code:
+          type: string
+          description: Code if the country market the parcel is being shipped from.
+        source_country_market_name:
+          type: string
+          description: Name of the country market the parcel is being shipped from.
+        source_address:
+          $ref: '#/components/schemas/MerchantAddress'
+          description: 'It must match the address the items are dispatched from.
+
+            It has a non-operational ID field (a stub), so it cannot be used in API requests.'
+          title: Address to use for estimating parcel delivery dates
+        is_deletable:
+          type: boolean
+          description: 'Indicates whether the shipping profile can be deleted. Will always be
+
+            false on historic versions.'
+        num_offers_assigned:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Number of offers this shipping profile is assigned to. Has to be 0 for the
+
+            shipping profile to be deletable. Set on current version only.'
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Destination'
+          description: Destinations by market code.
+      description: 'A shipping profile defines from where a parcel will be shipped, and in what
+
+        markets it will be made available and under what conditions.'
     CountryCode:
       type: string
       enum:
@@ -1135,111 +1430,13 @@ components:
       - ZM
       default: UNSPECIFIED
       description: Alpha-2 country codes as specified in ISO 3166-1.
-    SortOrder:
-      type: string
-      enum:
-      - ASC
-      - DESC
-      default: ASC
-    CreateShippingProfileResponse:
+    ListShippingProfilesRequest.Sort:
       type: object
       properties:
-        shipping_profile:
-          $ref: '#/components/schemas/ShippingProfile'
-    CreateShippingProfileRequest.Address:
-      type: object
-      properties:
-        first_name:
-          type:
-          - string
-          - 'null'
-        family_name:
-          type:
-          - string
-          - 'null'
-        company_name:
-          type: string
-          required:
-          - company_name
-        country_code:
-          $ref: '#/components/schemas/CountryCode'
-        post_code:
-          type: string
-          required:
-          - post_code
-        town:
-          type: string
-          required:
-          - town
-        street_name:
-          type: string
-          required:
-          - street_name
-        house_no:
-          type: string
-          required:
-          - house_no
-        supplement:
-          type:
-          - string
-          - 'null'
-        phone_number:
-          type:
-          - string
-          - 'null'
-      required:
-      - company_name
-      - post_code
-      - town
-      - street_name
-      - house_no
-    MerchantAddress:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-        version:
-          type: string
-          format: int64
-        label:
-          type: string
-          title: A user-defined label to identify or categorize the address, e.g. "Main Warehouse"
-        first_name:
-          type:
-          - string
-          - 'null'
-        family_name:
-          type:
-          - string
-          - 'null'
-        company_name:
-          type: string
-        country_code:
-          $ref: '#/components/schemas/CountryCode'
-        post_code:
-          type: string
-        town:
-          type: string
-        street_name:
-          type: string
-        house_no:
-          type:
-          - string
-          - 'null'
-        supplement:
-          type:
-          - string
-          - 'null'
-        phone_number:
-          type:
-          - string
-          - 'null'
-        type:
-          $ref: '#/components/schemas/MerchantAddressType'
-      description: 'MerchantAddress is the address from which the merchant dispatches shipments.
-
-        Used as the merchant''s shipping address in the context of shipping label creation.'
+        order:
+          $ref: '#/components/schemas/SortOrder'
+        by:
+          $ref: '#/components/schemas/ListShippingProfilesRequest.Sort.By'
     GetShippingProfileRequest:
       type: object
       properties:
@@ -1257,228 +1454,31 @@ components:
           description: Shipping profile version. Assumes "current", if not set.
       required:
       - id
-    ListShippingProfilesRequest.Sort.By:
-      type: string
-      enum:
-      - ID
-      - CREATED_AT
-      - NAME
-      - SOURCE_COUNTRY_MARKET_CODE
-      - NUM_OFFERS_ASSIGNED
-      - SOURCE_COUNTRY_MARKET_NAME
-      default: ID
-    UpdateDestination:
+    GetShippingProfileResponse:
       type: object
       properties:
-        market_code:
-          type: string
-          required:
-          - market_code
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-        shipping_costs:
-          type:
-          - string
-          - 'null'
-        min_delivery_days:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        max_delivery_days:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        label_creation_enabled:
-          type:
-          - boolean
-          - 'null'
-        carrier:
-          type:
-          - string
-          - 'null'
-          description: Carrier slug, obtained from ListAvailableCarriers RPC.
-        dispatch_cutoff_hour:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: The cutoff hour (1-23) for order fulfillment. Orders placed before it are to be fulfilled on the same day.
-      required:
-      - market_code
-    DeleteShippingProfileRequest:
+        shipping_profile:
+          $ref: '#/components/schemas/ShippingProfile'
+    CreateShippingProfileResponse:
+      type: object
+      properties:
+        shipping_profile:
+          $ref: '#/components/schemas/ShippingProfile'
+    ListShippingProfilesRequest.Filter:
       type: object
       properties:
         id:
-          type: string
-          format: int64
-          required:
-          - id
-      required:
-      - id
-    v1.Carrier:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the carrier. Only used for display purposes.
-        slug:
-          type: string
-          description: Slug of the carrier. Used in requests and responses to identify the carrier.
-    ShippingProfile:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: Primary key.
-        version:
-          type: string
-          format: int64
-          description: Version of the shipping profile.
-        is_current:
-          type: boolean
-          description: 'Indicates whether this is the currently available (latest and non-deleted).
-
-            version.'
+          $ref: '#/components/schemas/Int64Filter'
         created_at:
-          type: string
-          format: date-time
-          description: When the shipping profile was created.
+          $ref: '#/components/schemas/TimestampRangeFilter'
         name:
-          type: string
-          description: Shipping profile name.
+          $ref: '#/components/schemas/ShippingProfileNameFilter'
         source_country_market_code:
-          type: string
-          description: Code if the country market the parcel is being shipped from.
-        source_country_market_name:
-          type: string
-          description: Name of the country market the parcel is being shipped from.
-        source_address:
-          $ref: '#/components/schemas/MerchantAddress'
-          description: 'It must match the address the items are dispatched from.
-
-            It has a non-operational ID field (a stub), so it cannot be used in API requests.'
-          title: Address to use for estimating parcel delivery dates
-        is_deletable:
-          type: boolean
-          description: 'Indicates whether the shipping profile can be deleted. Will always be
-
-            false on historic versions.'
+          $ref: '#/components/schemas/StringFilter'
+        destination_market_code:
+          $ref: '#/components/schemas/StringFilter'
         num_offers_assigned:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Number of offers this shipping profile is assigned to. Has to be 0 for the
-
-            shipping profile to be deletable. Set on current version only.'
-        destinations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Destination'
-          description: Destinations by market code.
-      description: 'A shipping profile defines from where a parcel will be shipped, and in what
-
-        markets it will be made available and under what conditions.'
-    Status:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
-        message:
-          type: string
-          description: 'A developer-facing error message, which should be in English. Any
-
-            user-facing error message should be localized and sent in the
-
-            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/Any'
-          description: 'A list of messages that carry the error details.  There is a common set of
-
-            message types for APIs to use.'
-      description: 'The `Status` type defines a logical error model that is suitable for
-
-        different programming environments, including REST APIs and RPC APIs. It is
-
-        used by [gRPC](https://github.com/grpc). Each `Status` message contains
-
-        three pieces of data: error code, error message, and error details.
-
-
-        You can find out more about this error model and how to work with it in the
-
-        [API Design Guide](https://cloud.google.com/apis/design/errors).'
-    UpdateShippingProfileRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          required:
-          - id
-        name:
-          type:
-          - string
-          - 'null'
-        source_country_market_code:
-          type:
-          - string
-          - 'null'
-          description: 'Deprecated: use source_address instead.'
-        source_address:
-          $ref: '#/components/schemas/UpdateShippingProfileRequest.Address'
-          description: Address to use for estimating parcel delivery dates.
-        create_destinations:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateShippingProfileRequest.CreateDestination'
-          description: Destinations to create.
-        update_destinations:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateDestination'
-          description: Destinations to update.
-        delete_destinations:
-          type: array
-          items:
-            type: string
-          description: Destinations to delete. Takes a list of market codes.
-      description: See shipping profile for full documentation.
-      required:
-      - id
-    CreateShippingProfileRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          required:
-          - name
-        source_country_market_code:
-          type:
-          - string
-          - 'null'
-          description: 'Deprecated: use source_address instead.'
-          required:
-          - source_country_market_code
-        source_address:
-          $ref: '#/components/schemas/CreateShippingProfileRequest.Address'
-          description: Address to use for estimating parcel delivery dates.
-        create_destinations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateShippingProfileRequest.CreateDestination'
-          description: Destinations to create.
-      description: See shipping profile for full documentation.
-      required:
-      - name
-      - source_country_market_code
+          $ref: '#/components/schemas/UInt32RangeFilter'
   securitySchemes:
     APIKeyAuth:
       type: apiKey

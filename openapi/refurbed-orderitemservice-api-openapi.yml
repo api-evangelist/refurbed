@@ -373,6 +373,510 @@ paths:
         required: true
 components:
   schemas:
+    ListOrderItemsByOrderRequest.Filter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Int64Filter'
+        name:
+          $ref: '#/components/schemas/ListOrderItemsByOrderRequest.Filter.OrderItemNameFilter'
+        state:
+          $ref: '#/components/schemas/OrderItemStateFilter'
+        sku:
+          $ref: '#/components/schemas/OfferSKUFilter'
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCodeFilter'
+        settlement_currency_code:
+          $ref: '#/components/schemas/CurrencyCodeFilter'
+        total_charged:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        settlement_total_charged:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        total_charged_dynamic:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        settlement_total_charged_dynamic:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        total_paid:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        settlement_total_paid:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        total_refunded:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        settlement_total_refunded:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        settlement_total_commission:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        settlement_base_commission:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        settlement_payout_commission:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        settlement_payment_commission:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        settlement_dynamic_commission:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        taxation:
+          $ref: '#/components/schemas/OrderItemTaxationFilter'
+        is_refundable:
+          $ref: '#/components/schemas/BoolFilter'
+        is_parcel_tracking_url:
+          $ref: '#/components/schemas/BoolFilter'
+        is_item_identifier:
+          $ref: '#/components/schemas/BoolFilter'
+        linked_offer_data_offer_id:
+          $ref: '#/components/schemas/Int64Filter'
+        linked_offer_data_offer_warranty:
+          $ref: '#/components/schemas/OfferWarrantyFilter'
+        linked_offer_data_offer_grading:
+          $ref: '#/components/schemas/OfferGradingFilter'
+        linked_offer_data_shipping_profile_id:
+          $ref: '#/components/schemas/Int64Filter'
+    ListOrderItemsByOrderResponse:
+      type: object
+      properties:
+        order_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+          description: The order items found.
+        has_more:
+          type: boolean
+          description: Indicates whether there are more results available.
+    ListOrderItemsByOrderRequest:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Int64Pagination'
+        sort:
+          $ref: '#/components/schemas/ListOrderItemsByOrderRequest.Sort'
+        filter:
+          $ref: '#/components/schemas/ListOrderItemsByOrderRequest.Filter'
+        order_id:
+          type: string
+          format: int64
+          required:
+          - order_id
+      required:
+      - order_id
+    BatchUpdateOrderItemsRequest:
+      type: object
+      properties:
+        order_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchUpdateOrderItemsRequest.Update'
+          description: Order items to update. Between 1 and 50.
+          required:
+          - order_items
+      required:
+      - order_items
+    BatteryCondition:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - OPTIMAL
+      - NEW
+      default: UNSPECIFIED
+    CalculateRefundOrderItemResponse:
+      type: object
+      properties:
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+          description: Currency of the refund. This matches the order / order item currency.
+        total_paid:
+          type: string
+          description: New total paid of the order item.
+        total_refunded:
+          type: string
+          description: Total refunded amount.
+        refunded:
+          type: string
+          description: Refunded amount.
+        refunded_refurbed:
+          type: string
+          description: Part that refurbed refunded.
+        refunded_merchant:
+          type: string
+          description: Part that the merchant refunded.
+    ListOrderItemsByOrderRequest.Filter.OrderItemNameFilter:
+      type: object
+      properties:
+        matches:
+          type:
+          - string
+          - 'null'
+    BatchUpdateOrderItemsStateRequest.Update:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          description: The id of the order item to refund.
+          required:
+          - id
+        state:
+          $ref: '#/components/schemas/OrderItemState'
+        parcel_tracking_url:
+          type:
+          - string
+          - 'null'
+          description: Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
+        item_identifier:
+          type:
+          - string
+          - 'null'
+          description: 'IMEI (if smartphone) or serial number (other product categories) of the
+
+            item shipped.
+
+            Deprecated: use item_identifiers field instead.'
+        item_identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemIdentifier'
+        weight_kg:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Net weight of this item, in kilograms.
+        manufacturing_country:
+          $ref: '#/components/schemas/CountryCode'
+          description: Country where the item was manufactured.
+        hs_code:
+          type:
+          - string
+          - 'null'
+          description: 'HS (Harmonized System) code for customs classification.
+
+
+            e.g. 8517.1300 for iPhones'
+        parcel_carrier_tracking_number:
+          $ref: '#/components/schemas/CarrierTrackingNumber'
+          description: Carrier + tracking number pair.
+      required:
+      - id
+    NumericRangeFilter:
+      type: object
+      properties:
+        gt:
+          type:
+          - string
+          - 'null'
+        ge:
+          type:
+          - string
+          - 'null'
+        any_of:
+          type: array
+          items:
+            type: string
+        none_of:
+          type: array
+          items:
+            type: string
+        le:
+          type:
+          - string
+          - 'null'
+        lt:
+          type:
+          - string
+          - 'null'
+      description: 'Numeric range filter is used for decimal numbers. It is especially
+
+        used for monetary amounts and other quantities where exactness is required.'
+    SortOrder:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      default: ASC
+    OfferSKUFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
+        none_of:
+          type: array
+          items:
+            type: string
+        contains:
+          type:
+          - string
+          - 'null'
+    ListOrderItemsByOrderRequest.Sort:
+      type: object
+      properties:
+        order:
+          $ref: '#/components/schemas/SortOrder'
+        by:
+          $ref: '#/components/schemas/ListOrderItemsByOrderRequest.Sort.By'
+    BatchUpdateOrderItemsRequest.Update:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          description: The id of the order item to update.
+          required:
+          - id
+        parcel_tracking_url:
+          type:
+          - string
+          - 'null'
+          description: Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
+        item_identifier:
+          type:
+          - string
+          - 'null'
+          description: 'IMEI (if smartphone) or serial number (other product categories) of the
+
+            item shipped.
+
+            Deprecated: use item_identifiers field instead.'
+        item_identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemIdentifier'
+        weight_kg:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Net weight of this item, in kilograms.
+        manufacturing_country:
+          $ref: '#/components/schemas/CountryCode'
+          description: Country where the item was manufactured.
+        hs_code:
+          type:
+          - string
+          - 'null'
+          description: 'HS (Harmonized System) code for customs classification.
+
+
+            e.g. 8517.1300 for iPhones'
+        parcel_carrier_tracking_number:
+          $ref: '#/components/schemas/CarrierTrackingNumber'
+          description: Carrier + tracking number pair.
+      required:
+      - id
+    UpdateOrderItemStateRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          description: The id of the order item to update.
+          required:
+          - id
+        state:
+          $ref: '#/components/schemas/OrderItemState'
+          description: The new state to set.
+        parcel_tracking_url:
+          type:
+          - string
+          - 'null'
+          description: Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
+        item_identifier:
+          type:
+          - string
+          - 'null'
+          description: 'IMEI (if smartphone) or serial number (other product categories) of the
+
+            item shipped.
+
+            Deprecated: use item_identifiers field instead.'
+        item_identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemIdentifier'
+        weight_kg:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Net weight of this item, in kilograms.
+        manufacturing_country:
+          $ref: '#/components/schemas/CountryCode'
+          description: Country where the item was manufactured.
+        hs_code:
+          type:
+          - string
+          - 'null'
+          description: 'HS (Harmonized System) code for customs classification.
+
+
+            e.g. 8517.1300 for iPhones'
+        parcel_carrier_tracking_number:
+          $ref: '#/components/schemas/CarrierTrackingNumber'
+          description: Carrier + tracking number pair.
+      required:
+      - id
+    BatchUpdateOrderItemsStateResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchUpdateOrderItemsStateResponse.Result'
+          description: Results of the update operation. In request order.
+    BatchUpdateOrderItemsStateResponse.Result:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+        order_item:
+          $ref: '#/components/schemas/OrderItem'
+          description: Updated order item. Set if status code is OK.
+    OrderItemState:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - NEW
+      - REJECTED
+      - CANCELLED
+      - ACCEPTED
+      - SHIPPED
+      - RETURNED
+      default: UNSPECIFIED
+      description: " - NEW: Order item was not handled yet. Next states: REJECTED, CANCELLED or\nACCEPTED.\n - REJECTED: Order item cannot be fulfilled. Final state.\n - CANCELLED: Order item was cancelled by the customer. Is like REJECTED but was\nrequested by the customer. Final state.\n - ACCEPTED: Order item was accepted for fulfillment. Next states: CANCELLED or\nSHIPPED.\n - SHIPPED: Order item was shipped. The parcel tracking link needs to be set for this\nstate to be set. The item identifier should be set, if possible. Possible\nfinal state. Next possible state, if necessary: RETURNED.\n - RETURNED: Order item was returned by the customer. Final state."
+    OrderItemStateFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemState'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemState'
+    OfferData:
+      type: object
+      properties:
+        offer_id:
+          type: string
+          format: int64
+        offer_version:
+          type: string
+          format: int64
+        offer_order_exchange_rate:
+          type: string
+          description: 'Exchange rate applied to convert amounts from offer currency to order
+
+            currency.'
+        offer_warranty:
+          $ref: '#/components/schemas/OfferWarranty'
+          description: The offer warranty.
+        offer_grading:
+          $ref: '#/components/schemas/OfferGrading'
+          description: The offer grading.
+        shipping_profile_id:
+          type: string
+          format: int64
+        shipping_profile_version:
+          type:
+          - string
+          - 'null'
+          format: int64
+          description: 'Shipping profiles on old orders do not have proper version information
+
+            attached to them. This is only set for newer orders.'
+        shipping_costs:
+          type: string
+          description: The shipping costs, in order currency.
+        battery_condition:
+          $ref: '#/components/schemas/BatteryCondition'
+    Status:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: 'A developer-facing error message, which should be in English. Any
+
+            user-facing error message should be localized and sent in the
+
+            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Any'
+          description: 'A list of messages that carry the error details.  There is a common set of
+
+            message types for APIs to use.'
+      description: 'The `Status` type defines a logical error model that is suitable for
+
+        different programming environments, including REST APIs and RPC APIs. It is
+
+        used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
+        three pieces of data: error code, error message, and error details.
+
+
+        You can find out more about this error model and how to work with it in the
+
+        [API Design Guide](https://cloud.google.com/apis/design/errors).'
+    OfferGradingFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferGrading'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferGrading'
+    Any:
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+      additionalProperties: {}
+      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+    Int64Filter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
+            format: int64
+        none_of:
+          type: array
+          items:
+            type: string
+            format: int64
+    GetOrderItemRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          description: The id of the order item to get.
+          required:
+          - id
+      required:
+      - id
+    RefundEligibility:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - ELIGIBLE
+      - INELIGIBLE_UNKNOWN
+      - INELIGIBLE_PERIOD_EXPIRED
+      - INELIGIBLE_ALREADY_REFUNDED
+      - INELIGIBLE_UNCAPTURED_PAYMENT
+      - INELIGIBLE_NO_TICKET
+      default: UNSPECIFIED
+      description: " - ELIGIBLE: Refunds are allowed.\n - INELIGIBLE_UNKNOWN: Refunds are not allowed for an unspecified reason.\n - INELIGIBLE_PERIOD_EXPIRED: Refunds are not allowed because the order was created long ago.\n - INELIGIBLE_ALREADY_REFUNDED: Refunds are not allowed because everything the customer paid has already been refunded.\n - INELIGIBLE_UNCAPTURED_PAYMENT: Refunds are not allowed because Refurbed doesn't have the payment guaranteed yet.\n - INELIGIBLE_NO_TICKET: Refunds are not allowed because no relevant Zendesk ticket exists."
     OrderItem:
       type: object
       properties:
@@ -544,337 +1048,48 @@ components:
 
             e.g. 8517.1300 for iPhones'
       description: An order item.
-    BatchUpdateOrderItemsResponse.Result:
+    CarrierTrackingNumber:
       type: object
       properties:
-        status:
-          $ref: '#/components/schemas/Status'
-        order_item:
-          $ref: '#/components/schemas/OrderItem'
-          description: Updated order item. Set if status code is OK.
-    OrderItemShipmentSubstatus:
+        carrier:
+          type: string
+          description: Carrier slug, obtained from ListAvailableCarriers RPC.
+        tracking_number:
+          type: string
+          description: Tracking number belonging to that carrier.
+    ListOrderItemsByOrderRequest.Sort.By:
       type: string
       enum:
-      - UNSPECIFIED
-      - INFO_RECEIVED
-      - LABEL_CREATED_NO_UPDATES_YET
-      - IN_TRANSIT
-      - OUT_FOR_DELIVERY
-      - AVAILABLE_FOR_PICKUP
-      - DELIVERED
-      - PICKED_UP_BY_CUSTOMER
-      - SIGN_BY_CUSTOMER
-      - NEW_ATTEMPT_OF_DELIVERY
-      - ADDRESS_ISSUES
-      - RETURN_TO_SENDER
-      - DELIVERY_FAILED
-      - ORDER_DELAYED
-      - ORDER_DAMAGED
-      - ORDER_LOST
-      default: UNSPECIFIED
-      description: " - INFO_RECEIVED: The carrier received a request from the shipper and is about to pick up the shipment.\n - LABEL_CREATED_NO_UPDATES_YET: The order has been processed/packaged, but not scanned at a shipping location yet.\n - IN_TRANSIT: Shipment on the way.\n - OUT_FOR_DELIVERY: The package is out for delivery.\n - AVAILABLE_FOR_PICKUP: The package arrived at a pickup point near you and is available for pickup.\n - DELIVERED: Shipment delivered successfully.\n - PICKED_UP_BY_CUSTOMER: Package picked up by the customer.\n - SIGN_BY_CUSTOMER: Package delivered to and signed by the customer.\n - NEW_ATTEMPT_OF_DELIVERY: The delivery of the package failed due to some reason. Courier usually leaves a notice and will try to deliver again.\n - ADDRESS_ISSUES: Package not delivered due to incorrect recipient address.\n - RETURN_TO_SENDER: The package is on its way back to the sender.\n - DELIVERY_FAILED: Delivery of the package failed due to some shipping exception.\n - ORDER_DELAYED: Package delayed due to some unforeseen reasons.\n - ORDER_DAMAGED: Shipment damaged.\n - ORDER_LOST: Delivery of the package failed as it got lost."
-    BatchUpdateOrderItemsStateRequest.Update:
+      - ID
+      - NAME
+      - STATE
+      - SKU
+      - CURRENCY_CODE
+      - SETTLEMENT_CURRENCY_CODE
+      - TOTAL_CHARGED
+      - SETTLEMENT_TOTAL_CHARGED
+      - TOTAL_CHARGED_DYNAMIC
+      - SETTLEMENT_TOTAL_CHARGED_DYNAMIC
+      - TOTAL_PAID
+      - SETTLEMENT_TOTAL_PAID
+      - TOTAL_REFUNDED
+      - SETTLEMENT_TOTAL_REFUNDED
+      - SETTLEMENT_TOTAL_COMMISSION
+      - SETTLEMENT_BASE_COMMISSION
+      - SETTLEMENT_PAYOUT_COMMISSION
+      - SETTLEMENT_PAYMENT_COMMISSION
+      - SETTLEMENT_DYNAMIC_COMMISSION
+      - TAXATION
+      - IS_REFUNDABLE
+      default: ID
+    BatchUpdateOrderItemsResponse:
       type: object
       properties:
-        id:
-          type: string
-          format: int64
-          description: The id of the order item to refund.
-          required:
-          - id
-        state:
-          $ref: '#/components/schemas/OrderItemState'
-        parcel_tracking_url:
-          type:
-          - string
-          - 'null'
-          description: Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
-        item_identifier:
-          type:
-          - string
-          - 'null'
-          description: 'IMEI (if smartphone) or serial number (other product categories) of the
-
-            item shipped.
-
-            Deprecated: use item_identifiers field instead.'
-        item_identifiers:
+        results:
           type: array
           items:
-            $ref: '#/components/schemas/OrderItemIdentifier'
-        weight_kg:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Net weight of this item, in kilograms.
-        manufacturing_country:
-          $ref: '#/components/schemas/CountryCode'
-          description: Country where the item was manufactured.
-        hs_code:
-          type:
-          - string
-          - 'null'
-          description: 'HS (Harmonized System) code for customs classification.
-
-
-            e.g. 8517.1300 for iPhones'
-        parcel_carrier_tracking_number:
-          $ref: '#/components/schemas/CarrierTrackingNumber'
-          description: Carrier + tracking number pair.
-      required:
-      - id
-    CalculateRefundOrderItemRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: The id of the order item to calculate item refund values for.
-          required:
-          - id
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-          description: Currency to refund. This needs to match the order / order item currency.
-        target_paid_amount:
-          type: string
-          description: 'The desired paid amount of this order item. Example: if the customer paid
-
-            100EUR and the merchant wants to refund 10EUR, the target-paid-amount would
-
-            be 90. 0 for a full refund.'
-          required:
-          - target_paid_amount
-      required:
-      - id
-      - target_paid_amount
-    UpdateOrderItemRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: The id of the order item to update.
-          required:
-          - id
-        parcel_tracking_url:
-          type:
-          - string
-          - 'null'
-          description: Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
-        item_identifier:
-          type:
-          - string
-          - 'null'
-          description: 'IMEI (if smartphone) or serial number (other product categories) of the
-
-            item shipped.
-
-            Deprecated: use item_identifiers field instead.'
-        item_identifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItemIdentifier'
-        weight_kg:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Net weight of this item, in kilograms.
-        manufacturing_country:
-          $ref: '#/components/schemas/CountryCode'
-          description: Country where the item was manufactured.
-        hs_code:
-          type:
-          - string
-          - 'null'
-          description: 'HS (Harmonized System) code for customs classification.
-
-
-            e.g. 8517.1300 for iPhones'
-        parcel_carrier_tracking_number:
-          $ref: '#/components/schemas/CarrierTrackingNumber'
-          description: Carrier + tracking number pair.
-      required:
-      - id
-    UpdateOrderItemResponse:
-      type: object
-      properties:
-        order_item:
-          $ref: '#/components/schemas/OrderItem'
-    OrderItemState:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - NEW
-      - REJECTED
-      - CANCELLED
-      - ACCEPTED
-      - SHIPPED
-      - RETURNED
-      default: UNSPECIFIED
-      description: " - NEW: Order item was not handled yet. Next states: REJECTED, CANCELLED or\nACCEPTED.\n - REJECTED: Order item cannot be fulfilled. Final state.\n - CANCELLED: Order item was cancelled by the customer. Is like REJECTED but was\nrequested by the customer. Final state.\n - ACCEPTED: Order item was accepted for fulfillment. Next states: CANCELLED or\nSHIPPED.\n - SHIPPED: Order item was shipped. The parcel tracking link needs to be set for this\nstate to be set. The item identifier should be set, if possible. Possible\nfinal state. Next possible state, if necessary: RETURNED.\n - RETURNED: Order item was returned by the customer. Final state."
-    OfferGradingFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferGrading'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferGrading'
-    UpdateOrderItemStateRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: The id of the order item to update.
-          required:
-          - id
-        state:
-          $ref: '#/components/schemas/OrderItemState'
-          description: The new state to set.
-        parcel_tracking_url:
-          type:
-          - string
-          - 'null'
-          description: Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
-        item_identifier:
-          type:
-          - string
-          - 'null'
-          description: 'IMEI (if smartphone) or serial number (other product categories) of the
-
-            item shipped.
-
-            Deprecated: use item_identifiers field instead.'
-        item_identifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItemIdentifier'
-        weight_kg:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Net weight of this item, in kilograms.
-        manufacturing_country:
-          $ref: '#/components/schemas/CountryCode'
-          description: Country where the item was manufactured.
-        hs_code:
-          type:
-          - string
-          - 'null'
-          description: 'HS (Harmonized System) code for customs classification.
-
-
-            e.g. 8517.1300 for iPhones'
-        parcel_carrier_tracking_number:
-          $ref: '#/components/schemas/CarrierTrackingNumber'
-          description: Carrier + tracking number pair.
-      required:
-      - id
-    OrderItemTaxationFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItemTaxation'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItemTaxation'
-    Int64Pagination:
-      type: object
-      properties:
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Limit on the number of results to be returned. Between 1 and 100.
-
-            Default and maximum is 100.'
-        ending_before:
-          type: string
-          format: int64
-        starting_after:
-          type: string
-          format: int64
-      description: Paginates resources with int64 primary key.
-    Int64Filter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            type: string
-            format: int64
-        none_of:
-          type: array
-          items:
-            type: string
-            format: int64
-    BatchUpdateOrderItemsRequest.Update:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: The id of the order item to update.
-          required:
-          - id
-        parcel_tracking_url:
-          type:
-          - string
-          - 'null'
-          description: Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
-        item_identifier:
-          type:
-          - string
-          - 'null'
-          description: 'IMEI (if smartphone) or serial number (other product categories) of the
-
-            item shipped.
-
-            Deprecated: use item_identifiers field instead.'
-        item_identifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItemIdentifier'
-        weight_kg:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Net weight of this item, in kilograms.
-        manufacturing_country:
-          $ref: '#/components/schemas/CountryCode'
-          description: Country where the item was manufactured.
-        hs_code:
-          type:
-          - string
-          - 'null'
-          description: 'HS (Harmonized System) code for customs classification.
-
-
-            e.g. 8517.1300 for iPhones'
-        parcel_carrier_tracking_number:
-          $ref: '#/components/schemas/CarrierTrackingNumber'
-          description: Carrier + tracking number pair.
-      required:
-      - id
-    OrderItemIdentifierType:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - IMEI
-      - SERIAL_NUMBER
-      default: UNSPECIFIED
+            $ref: '#/components/schemas/BatchUpdateOrderItemsResponse.Result'
+          description: Results of the update operation. In request order.
     CurrencyCode:
       type: string
       enum:
@@ -1058,117 +1273,34 @@ components:
       - ZWL
       default: UNSPECIFIED
       description: "Currency codes as specified in ISO 4217.\n\n - AED: XTS = 963; // Code reserved for testing purposes."
-    ListOrderItemsByOrderRequest:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Int64Pagination'
-        sort:
-          $ref: '#/components/schemas/ListOrderItemsByOrderRequest.Sort'
-        filter:
-          $ref: '#/components/schemas/ListOrderItemsByOrderRequest.Filter'
-        order_id:
-          type: string
-          format: int64
-          required:
-          - order_id
-      required:
-      - order_id
-    Any:
-      type: object
-      properties:
-        '@type':
-          type: string
-          description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
-      additionalProperties: {}
-      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
-    ListOrderItemsByOrderRequest.Filter.OrderItemNameFilter:
-      type: object
-      properties:
-        matches:
-          type:
-          - string
-          - 'null'
-    OfferData:
-      type: object
-      properties:
-        offer_id:
-          type: string
-          format: int64
-        offer_version:
-          type: string
-          format: int64
-        offer_order_exchange_rate:
-          type: string
-          description: 'Exchange rate applied to convert amounts from offer currency to order
-
-            currency.'
-        offer_warranty:
-          $ref: '#/components/schemas/OfferWarranty'
-          description: The offer warranty.
-        offer_grading:
-          $ref: '#/components/schemas/OfferGrading'
-          description: The offer grading.
-        shipping_profile_id:
-          type: string
-          format: int64
-        shipping_profile_version:
-          type:
-          - string
-          - 'null'
-          format: int64
-          description: 'Shipping profiles on old orders do not have proper version information
-
-            attached to them. This is only set for newer orders.'
-        shipping_costs:
-          type: string
-          description: The shipping costs, in order currency.
-        battery_condition:
-          $ref: '#/components/schemas/BatteryCondition'
-    BatchUpdateOrderItemsStateResponse.Result:
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/Status'
-        order_item:
-          $ref: '#/components/schemas/OrderItem'
-          description: Updated order item. Set if status code is OK.
-    OrderItemIdentifier:
-      type: object
-      properties:
-        identifier_type:
-          $ref: '#/components/schemas/OrderItemIdentifierType'
-        value:
-          type: string
-    OrderItemTaxation:
+    OrderItemIdentifierType:
       type: string
       enum:
       - UNSPECIFIED
-      - GROSS
-      - MARGINAL
-      - NET
+      - IMEI
+      - SERIAL_NUMBER
       default: UNSPECIFIED
-    RefundOrderItemResponse:
-      type: object
-      properties:
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-          description: Currency of the refund. This matches the order / order item currency.
-        total_paid:
-          type: string
-          description: New total paid of the order item.
-        total_refunded:
-          type: string
-          description: Total refunded amount.
-        refunded:
-          type: string
-          description: Refunded amount.
-        refunded_refurbed:
-          type: string
-          description: Part that refurbed refunded.
-        refunded_merchant:
-          type: string
-          description: Part that the merchant refunded.
+    OrderItemShipmentSubstatus:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - INFO_RECEIVED
+      - LABEL_CREATED_NO_UPDATES_YET
+      - IN_TRANSIT
+      - OUT_FOR_DELIVERY
+      - AVAILABLE_FOR_PICKUP
+      - DELIVERED
+      - PICKED_UP_BY_CUSTOMER
+      - SIGN_BY_CUSTOMER
+      - NEW_ATTEMPT_OF_DELIVERY
+      - ADDRESS_ISSUES
+      - RETURN_TO_SENDER
+      - DELIVERY_FAILED
+      - ORDER_DELAYED
+      - ORDER_DAMAGED
+      - ORDER_LOST
+      default: UNSPECIFIED
+      description: " - INFO_RECEIVED: The carrier received a request from the shipper and is about to pick up the shipment.\n - LABEL_CREATED_NO_UPDATES_YET: The order has been processed/packaged, but not scanned at a shipping location yet.\n - IN_TRANSIT: Shipment on the way.\n - OUT_FOR_DELIVERY: The package is out for delivery.\n - AVAILABLE_FOR_PICKUP: The package arrived at a pickup point near you and is available for pickup.\n - DELIVERED: Shipment delivered successfully.\n - PICKED_UP_BY_CUSTOMER: Package picked up by the customer.\n - SIGN_BY_CUSTOMER: Package delivered to and signed by the customer.\n - NEW_ATTEMPT_OF_DELIVERY: The delivery of the package failed due to some reason. Courier usually leaves a notice and will try to deliver again.\n - ADDRESS_ISSUES: Package not delivered due to incorrect recipient address.\n - RETURN_TO_SENDER: The package is on its way back to the sender.\n - DELIVERY_FAILED: Delivery of the package failed due to some shipping exception.\n - ORDER_DELAYED: Package delayed due to some unforeseen reasons.\n - ORDER_DAMAGED: Shipment damaged.\n - ORDER_LOST: Delivery of the package failed as it got lost."
     OfferWarrantyFilter:
       type: object
       properties:
@@ -1180,198 +1312,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OfferWarranty'
-    OfferWarranty:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - M12
-      - M18
-      - M24
-      - M30
-      - M36
-      default: UNSPECIFIED
-      description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
-    ListOrderItemsByOrderResponse:
-      type: object
-      properties:
-        order_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItem'
-          description: The order items found.
-        has_more:
-          type: boolean
-          description: Indicates whether there are more results available.
-    OfferSKUFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            type: string
-        none_of:
-          type: array
-          items:
-            type: string
-        contains:
-          type:
-          - string
-          - 'null'
-    ListOrderItemsByOrderRequest.Sort.By:
-      type: string
-      enum:
-      - ID
-      - NAME
-      - STATE
-      - SKU
-      - CURRENCY_CODE
-      - SETTLEMENT_CURRENCY_CODE
-      - TOTAL_CHARGED
-      - SETTLEMENT_TOTAL_CHARGED
-      - TOTAL_CHARGED_DYNAMIC
-      - SETTLEMENT_TOTAL_CHARGED_DYNAMIC
-      - TOTAL_PAID
-      - SETTLEMENT_TOTAL_PAID
-      - TOTAL_REFUNDED
-      - SETTLEMENT_TOTAL_REFUNDED
-      - SETTLEMENT_TOTAL_COMMISSION
-      - SETTLEMENT_BASE_COMMISSION
-      - SETTLEMENT_PAYOUT_COMMISSION
-      - SETTLEMENT_PAYMENT_COMMISSION
-      - SETTLEMENT_DYNAMIC_COMMISSION
-      - TAXATION
-      - IS_REFUNDABLE
-      default: ID
-    GetOrderItemRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: The id of the order item to get.
-          required:
-          - id
-      required:
-      - id
-    BatchUpdateOrderItemsResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchUpdateOrderItemsResponse.Result'
-          description: Results of the update operation. In request order.
-    OrderItemShipmentStatus:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - INFO_RECEIVED
-      - IN_TRANSIT
-      - OUT_FOR_DELIVERY
-      - AVAILABLE_FOR_PICKUP
-      - DELIVERED
-      - FAILED_ATTEMPT
-      - EXCEPTION
-      default: UNSPECIFIED
-      description: " - INFO_RECEIVED: Carrier has received request from shipper and is about to pick up the shipment.\n - IN_TRANSIT: Carrier has accepted or picked up shipment from shipper. The shipment is on the way.\n - OUT_FOR_DELIVERY: Carrier is about to deliver the shipment , or it is ready to pickup.\n - AVAILABLE_FOR_PICKUP: The package arrived at a pickup point near you and is available for pickup.\n - DELIVERED: The shipment was delivered successfully.\n - FAILED_ATTEMPT: Carrier attempted to deliver but failed, and usually leaves a notice and will try to deliver again.\n - EXCEPTION: Custom hold, undelivered, returned shipment to sender or any shipping exceptions."
-    NumericRangeFilter:
-      type: object
-      properties:
-        gt:
-          type:
-          - string
-          - 'null'
-        ge:
-          type:
-          - string
-          - 'null'
-        any_of:
-          type: array
-          items:
-            type: string
-        none_of:
-          type: array
-          items:
-            type: string
-        le:
-          type:
-          - string
-          - 'null'
-        lt:
-          type:
-          - string
-          - 'null'
-      description: 'Numeric range filter is used for decimal numbers. It is especially
-
-        used for monetary amounts and other quantities where exactness is required.'
-    CurrencyCodeFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrencyCode'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrencyCode'
-    ListOrderItemsByOrderRequest.Filter:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/Int64Filter'
-        name:
-          $ref: '#/components/schemas/ListOrderItemsByOrderRequest.Filter.OrderItemNameFilter'
-        state:
-          $ref: '#/components/schemas/OrderItemStateFilter'
-        sku:
-          $ref: '#/components/schemas/OfferSKUFilter'
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCodeFilter'
-        settlement_currency_code:
-          $ref: '#/components/schemas/CurrencyCodeFilter'
-        total_charged:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        settlement_total_charged:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        total_charged_dynamic:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        settlement_total_charged_dynamic:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        total_paid:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        settlement_total_paid:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        total_refunded:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        settlement_total_refunded:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        settlement_total_commission:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        settlement_base_commission:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        settlement_payout_commission:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        settlement_payment_commission:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        settlement_dynamic_commission:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        taxation:
-          $ref: '#/components/schemas/OrderItemTaxationFilter'
-        is_refundable:
-          $ref: '#/components/schemas/BoolFilter'
-        is_parcel_tracking_url:
-          $ref: '#/components/schemas/BoolFilter'
-        is_item_identifier:
-          $ref: '#/components/schemas/BoolFilter'
-        linked_offer_data_offer_id:
-          $ref: '#/components/schemas/Int64Filter'
-        linked_offer_data_offer_warranty:
-          $ref: '#/components/schemas/OfferWarrantyFilter'
-        linked_offer_data_offer_grading:
-          $ref: '#/components/schemas/OfferGradingFilter'
-        linked_offer_data_shipping_profile_id:
-          $ref: '#/components/schemas/Int64Filter'
     RefundOrderItemRequest:
       type: object
       properties:
@@ -1396,6 +1336,163 @@ components:
       required:
       - id
       - target_paid_amount
+    UpdateOrderItemRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          description: The id of the order item to update.
+          required:
+          - id
+        parcel_tracking_url:
+          type:
+          - string
+          - 'null'
+          description: Must be a valid HTTP(S) URL. Cannot be unset, can be overwritten with valid value.
+        item_identifier:
+          type:
+          - string
+          - 'null'
+          description: 'IMEI (if smartphone) or serial number (other product categories) of the
+
+            item shipped.
+
+            Deprecated: use item_identifiers field instead.'
+        item_identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemIdentifier'
+        weight_kg:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Net weight of this item, in kilograms.
+        manufacturing_country:
+          $ref: '#/components/schemas/CountryCode'
+          description: Country where the item was manufactured.
+        hs_code:
+          type:
+          - string
+          - 'null'
+          description: 'HS (Harmonized System) code for customs classification.
+
+
+            e.g. 8517.1300 for iPhones'
+        parcel_carrier_tracking_number:
+          $ref: '#/components/schemas/CarrierTrackingNumber'
+          description: Carrier + tracking number pair.
+      required:
+      - id
+    BatchUpdateOrderItemsStateRequest:
+      type: object
+      properties:
+        updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchUpdateOrderItemsStateRequest.Update'
+          description: Order items to update. Between 1 and 50.
+          required:
+          - updates
+      required:
+      - updates
+    BoolFilter:
+      type: object
+      properties:
+        value:
+          type:
+          - boolean
+          - 'null'
+    OfferGrading:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - A
+      - B
+      - C
+      - AA
+      default: UNSPECIFIED
+      description: 'The grading of the item being sold.
+
+
+        Please consult the refurbed seller guide and quality charta to learn about
+
+        refurbed''s grading requirements.'
+    UpdateOrderItemResponse:
+      type: object
+      properties:
+        order_item:
+          $ref: '#/components/schemas/OrderItem'
+    BatchUpdateOrderItemsResponse.Result:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+        order_item:
+          $ref: '#/components/schemas/OrderItem'
+          description: Updated order item. Set if status code is OK.
+    UpdateOrderItemStateResponse:
+      type: object
+      properties:
+        order_item:
+          $ref: '#/components/schemas/OrderItem'
+    CurrencyCodeFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyCode'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyCode'
+    RefundOrderItemResponse:
+      type: object
+      properties:
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+          description: Currency of the refund. This matches the order / order item currency.
+        total_paid:
+          type: string
+          description: New total paid of the order item.
+        total_refunded:
+          type: string
+          description: Total refunded amount.
+        refunded:
+          type: string
+          description: Refunded amount.
+        refunded_refurbed:
+          type: string
+          description: Part that refurbed refunded.
+        refunded_merchant:
+          type: string
+          description: Part that the merchant refunded.
+    GetOrderItemResponse:
+      type: object
+      properties:
+        order_item:
+          $ref: '#/components/schemas/OrderItem'
+    OrderItemTaxation:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - GROSS
+      - MARGINAL
+      - NET
+      default: UNSPECIFIED
+    OrderItemTaxationFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemTaxation'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemTaxation'
     CountryCode:
       type: string
       enum:
@@ -1651,176 +1748,79 @@ components:
       - ZM
       default: UNSPECIFIED
       description: Alpha-2 country codes as specified in ISO 3166-1.
-    SortOrder:
-      type: string
-      enum:
-      - ASC
-      - DESC
-      default: ASC
-    BatchUpdateOrderItemsRequest:
+    OrderItemIdentifier:
       type: object
       properties:
-        order_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchUpdateOrderItemsRequest.Update'
-          description: Order items to update. Between 1 and 50.
-          required:
-          - order_items
-      required:
-      - order_items
-    OfferGrading:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - A
-      - B
-      - C
-      - AA
-      default: UNSPECIFIED
-      description: 'The grading of the item being sold.
-
-
-        Please consult the refurbed seller guide and quality charta to learn about
-
-        refurbed''s grading requirements.'
-    RefundEligibility:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - ELIGIBLE
-      - INELIGIBLE_UNKNOWN
-      - INELIGIBLE_PERIOD_EXPIRED
-      - INELIGIBLE_ALREADY_REFUNDED
-      - INELIGIBLE_UNCAPTURED_PAYMENT
-      - INELIGIBLE_NO_TICKET
-      default: UNSPECIFIED
-      description: " - ELIGIBLE: Refunds are allowed.\n - INELIGIBLE_UNKNOWN: Refunds are not allowed for an unspecified reason.\n - INELIGIBLE_PERIOD_EXPIRED: Refunds are not allowed because the order was created long ago.\n - INELIGIBLE_ALREADY_REFUNDED: Refunds are not allowed because everything the customer paid has already been refunded.\n - INELIGIBLE_UNCAPTURED_PAYMENT: Refunds are not allowed because Refurbed doesn't have the payment guaranteed yet.\n - INELIGIBLE_NO_TICKET: Refunds are not allowed because no relevant Zendesk ticket exists."
-    CarrierTrackingNumber:
-      type: object
-      properties:
-        carrier:
-          type: string
-          description: Carrier slug, obtained from ListAvailableCarriers RPC.
-        tracking_number:
-          type: string
-          description: Tracking number belonging to that carrier.
-    GetOrderItemResponse:
-      type: object
-      properties:
-        order_item:
-          $ref: '#/components/schemas/OrderItem'
-    OrderItemStateFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItemState'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItemState'
-    BatchUpdateOrderItemsStateResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchUpdateOrderItemsStateResponse.Result'
-          description: Results of the update operation. In request order.
-    UpdateOrderItemStateResponse:
-      type: object
-      properties:
-        order_item:
-          $ref: '#/components/schemas/OrderItem'
-    BatchUpdateOrderItemsStateRequest:
-      type: object
-      properties:
-        updates:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchUpdateOrderItemsStateRequest.Update'
-          description: Order items to update. Between 1 and 50.
-          required:
-          - updates
-      required:
-      - updates
-    BoolFilter:
-      type: object
-      properties:
+        identifier_type:
+          $ref: '#/components/schemas/OrderItemIdentifierType'
         value:
-          type:
-          - boolean
-          - 'null'
-    Status:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
-        message:
           type: string
-          description: 'A developer-facing error message, which should be in English. Any
-
-            user-facing error message should be localized and sent in the
-
-            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/Any'
-          description: 'A list of messages that carry the error details.  There is a common set of
-
-            message types for APIs to use.'
-      description: 'The `Status` type defines a logical error model that is suitable for
-
-        different programming environments, including REST APIs and RPC APIs. It is
-
-        used by [gRPC](https://github.com/grpc). Each `Status` message contains
-
-        three pieces of data: error code, error message, and error details.
-
-
-        You can find out more about this error model and how to work with it in the
-
-        [API Design Guide](https://cloud.google.com/apis/design/errors).'
-    ListOrderItemsByOrderRequest.Sort:
-      type: object
-      properties:
-        order:
-          $ref: '#/components/schemas/SortOrder'
-        by:
-          $ref: '#/components/schemas/ListOrderItemsByOrderRequest.Sort.By'
-    BatteryCondition:
+    OfferWarranty:
       type: string
       enum:
       - UNSPECIFIED
-      - OPTIMAL
-      - NEW
+      - M12
+      - M18
+      - M24
+      - M30
+      - M36
       default: UNSPECIFIED
-    CalculateRefundOrderItemResponse:
+      description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
+    Int64Pagination:
       type: object
       properties:
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+            Default and maximum is 100.'
+        ending_before:
+          type: string
+          format: int64
+        starting_after:
+          type: string
+          format: int64
+      description: Paginates resources with int64 primary key.
+    CalculateRefundOrderItemRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          description: The id of the order item to calculate item refund values for.
+          required:
+          - id
         currency_code:
           $ref: '#/components/schemas/CurrencyCode'
-          description: Currency of the refund. This matches the order / order item currency.
-        total_paid:
+          description: Currency to refund. This needs to match the order / order item currency.
+        target_paid_amount:
           type: string
-          description: New total paid of the order item.
-        total_refunded:
-          type: string
-          description: Total refunded amount.
-        refunded:
-          type: string
-          description: Refunded amount.
-        refunded_refurbed:
-          type: string
-          description: Part that refurbed refunded.
-        refunded_merchant:
-          type: string
-          description: Part that the merchant refunded.
+          description: 'The desired paid amount of this order item. Example: if the customer paid
+
+            100EUR and the merchant wants to refund 10EUR, the target-paid-amount would
+
+            be 90. 0 for a full refund.'
+          required:
+          - target_paid_amount
+      required:
+      - id
+      - target_paid_amount
+    OrderItemShipmentStatus:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - INFO_RECEIVED
+      - IN_TRANSIT
+      - OUT_FOR_DELIVERY
+      - AVAILABLE_FOR_PICKUP
+      - DELIVERED
+      - FAILED_ATTEMPT
+      - EXCEPTION
+      default: UNSPECIFIED
+      description: " - INFO_RECEIVED: Carrier has received request from shipper and is about to pick up the shipment.\n - IN_TRANSIT: Carrier has accepted or picked up shipment from shipper. The shipment is on the way.\n - OUT_FOR_DELIVERY: Carrier is about to deliver the shipment , or it is ready to pickup.\n - AVAILABLE_FOR_PICKUP: The package arrived at a pickup point near you and is available for pickup.\n - DELIVERED: The shipment was delivered successfully.\n - FAILED_ATTEMPT: Carrier attempted to deliver but failed, and usually leaves a notice and will try to deliver again.\n - EXCEPTION: Custom hold, undelivered, returned shipment to sender or any shipping exceptions."
   securitySchemes:
     APIKeyAuth:
       type: apiKey
