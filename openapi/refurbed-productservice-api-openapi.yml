@@ -97,160 +97,26 @@ paths:
         required: true
 components:
   schemas:
-    ListProductsRequest.Sort:
-      type: object
-      properties:
-        order:
-          $ref: '#/components/schemas/SortOrder'
-        by:
-          $ref: '#/components/schemas/ListProductsRequest.Sort.By'
-    ListProductsRequest.Filter:
+    Attribute:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/ProductIDFilter'
-        name:
-          $ref: '#/components/schemas/ProductNameFilter'
-        category_id:
-          $ref: '#/components/schemas/CategoryFilter'
-        attributes:
-          $ref: '#/components/schemas/AttributesFilter'
-    ListProductsRequest:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Int64Pagination'
-        sort:
-          $ref: '#/components/schemas/ListProductsRequest.Sort'
-        filter:
-          $ref: '#/components/schemas/ListProductsRequest.Filter'
-        site_market_code:
-          type: string
-          description: The code of a site market where the products are sold.
-          required:
-          - site_market_code
-        back_link:
-          type:
-          - string
-          - 'null'
-          description: 'URL linking back to partner''s site.
-
-
-            If provided, it is used to populate a query parameter for each
-
-            product buybox link.'
-      required:
-      - site_market_code
-    Expression:
-      type: object
-      properties:
-        attribute_id:
           type: string
           format: int64
-        cond_enum:
-          $ref: '#/components/schemas/EnumValueCond'
-        cond_numeric:
-          $ref: '#/components/schemas/NumericValueCond'
-      description: An attribute expression.
-    ProductIDFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            type: string
-            format: int64
-    Media:
-      type: object
-      properties:
+          description: Primary key.
+        name:
+          type: string
+          description: Human-readable name.
         type:
-          $ref: '#/components/schemas/MediaType'
-          description: Type of the media.
-        url:
-          type: string
-          description: URL to the media.
-      description: A media.
-    SortOrder:
-      type: string
-      enum:
-      - ASC
-      - DESC
-      default: ASC
-    ListProductsResponse:
-      type: object
-      properties:
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-          description: The products found.
-        has_more:
-          type: boolean
-          description: Indicates whether there are more results available.
-    MediaType:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - IMAGE
-      default: UNSPECIFIED
-    ProductNameFilter:
-      type: object
-      properties:
-        matches:
-          type:
-          - string
-          - 'null'
-    EnumValueCond:
-      type: object
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-      description: An enum attribute value condition.
-    NumericValue:
-      type: object
-      properties:
-        value:
-          type: number
-          format: double
-        unit:
-          type:
-          - string
-          - 'null'
-    Status:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/Any'
-    Any:
-      type: object
-      properties:
-        '@type':
-          type: string
-      additionalProperties: {}
-    AttributeType:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - ENUM
-      - NUMERIC
-      default: UNSPECIFIED
-      description: "A type of an attribute.\n\n - ENUM: An enumerated attribute has a string value, e.g. Colour = black.\n - NUMERIC: A numeric attribute has a numeric value with an optional unit, e.g.\nMemory = 2 GB"
-    ListProductsRequest.Sort.By:
-      type: string
-      enum:
-      - POPULARITY
-      - PRICE
-      default: POPULARITY
-      description: " - POPULARITY: Sort by popularity.\n\nNOTE: ASC and DESC will return the same result.\n - PRICE: Sort by price."
+          $ref: '#/components/schemas/AttributeType'
+          description: Type fo the attribute.
+        value_str:
+          $ref: '#/components/schemas/StringValue'
+          description: Value is set if type is ENUM.
+        value_num:
+          $ref: '#/components/schemas/NumericValue'
+          description: Value is set if type is NUMERIC.
+      description: An Attribute.
     CurrencyCode:
       type: string
       enum:
@@ -434,6 +300,132 @@ components:
       - ZWL
       default: UNSPECIFIED
       description: "Currency codes as specified in ISO 4217.\n\n - AED: XTS = 963; // Code reserved for testing purposes."
+    MediaType:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - IMAGE
+      default: UNSPECIFIED
+    Int64Pagination:
+      type: object
+      properties:
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+            Default and maximum is 100.'
+        ending_before:
+          type: string
+          format: int64
+        starting_after:
+          type: string
+          format: int64
+      description: Paginates resources with int64 primary key.
+    Any:
+      type: object
+      properties:
+        '@type':
+          type: string
+      additionalProperties: {}
+    ListProductsRequest.Filter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/ProductIDFilter'
+        name:
+          $ref: '#/components/schemas/ProductNameFilter'
+        category_id:
+          $ref: '#/components/schemas/CategoryFilter'
+        attributes:
+          $ref: '#/components/schemas/AttributesFilter'
+    Expression:
+      type: object
+      properties:
+        attribute_id:
+          type: string
+          format: int64
+        cond_enum:
+          $ref: '#/components/schemas/EnumValueCond'
+        cond_numeric:
+          $ref: '#/components/schemas/NumericValueCond'
+      description: An attribute expression.
+    OfferGrading:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - A
+      - B
+      - C
+      default: UNSPECIFIED
+      description: The grading of the item being sold.
+    CategoryFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
+            format: int64
+        is_recursive:
+          type: boolean
+          description: 'If set to true selected category and all its subcategories will
+
+            be considered recursively.'
+    Status:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Any'
+    AttributesFilter:
+      type: object
+      properties:
+        all_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/Expression'
+    Media:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/MediaType'
+          description: Type of the media.
+        url:
+          type: string
+          description: URL to the media.
+      description: A media.
+    EnumValueCond:
+      type: object
+      properties:
+        eq:
+          type:
+          - string
+          - 'null'
+      description: An enum attribute value condition.
+    ListProductsRequest.Sort.By:
+      type: string
+      enum:
+      - POPULARITY
+      - PRICE
+      default: POPULARITY
+      description: " - POPULARITY: Sort by popularity.\n\nNOTE: ASC and DESC will return the same result.\n - PRICE: Sort by price."
+    AttributeType:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - ENUM
+      - NUMERIC
+      default: UNSPECIFIED
+      description: "A type of an attribute.\n\n - ENUM: An enumerated attribute has a string value, e.g. Colour = black.\n - NUMERIC: A numeric attribute has a numeric value with an optional unit, e.g.\nMemory = 2 GB"
     Product:
       type: object
       properties:
@@ -469,131 +461,23 @@ components:
 
             this best instance for a given product is sold.'
       description: A product.
-    AttributesFilter:
+    ListProductsRequest.Sort:
       type: object
       properties:
-        all_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/Expression'
-    OfferGrading:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - A
-      - B
-      - C
-      default: UNSPECIFIED
-      description: The grading of the item being sold.
-    Attribute:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: Primary key.
-        name:
-          type: string
-          description: Human-readable name.
-        type:
-          $ref: '#/components/schemas/AttributeType'
-          description: Type fo the attribute.
-        value_str:
-          $ref: '#/components/schemas/StringValue'
-          description: Value is set if type is ENUM.
-        value_num:
-          $ref: '#/components/schemas/NumericValue'
-          description: Value is set if type is NUMERIC.
-      description: An Attribute.
-    StringValue:
+        order:
+          $ref: '#/components/schemas/SortOrder'
+        by:
+          $ref: '#/components/schemas/ListProductsRequest.Sort.By'
+    NumericValue:
       type: object
       properties:
         value:
-          type: string
-    NumericValueCond:
-      type: object
-      properties:
-        eq:
-          type:
-          - number
-          - 'null'
+          type: number
           format: double
-      description: A numeric attribute value condition.
-    GetProductRequest:
-      type: object
-      properties:
-        site_market_code:
-          type: string
-          description: Code of a site market where the product is sold.
-          required:
-          - site_market_code
-        id:
-          type: string
-          format: int64
-          description: Primary key of the product to get.
-          required:
-          - id
-        back_link:
+        unit:
           type:
           - string
           - 'null'
-          description: 'URL linking back to partner''s site.
-
-
-            If provided, it is used to populate a query parameter for product
-
-            buybox link.'
-      required:
-      - site_market_code
-      - id
-    OfferWarranty:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - M12
-      - M18
-      - M24
-      - M30
-      - M36
-      default: UNSPECIFIED
-      description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
-    CategoryFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            type: string
-            format: int64
-        is_recursive:
-          type: boolean
-          description: 'If set to true selected category and all its subcategories will
-
-            be considered recursively.'
-    Int64Pagination:
-      type: object
-      properties:
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Limit on the number of results to be returned. Between 1 and 100.
-
-            Default and maximum is 100.'
-        ending_before:
-          type: string
-          format: int64
-        starting_after:
-          type: string
-          format: int64
-      description: Paginates resources with int64 primary key.
-    GetProductResponse:
-      type: object
-      properties:
-        product:
-          $ref: '#/components/schemas/Product'
-          description: The product retrieved.
     Buybox:
       type: object
       properties:
@@ -628,6 +512,122 @@ components:
 
             parameter will be included in the link.'
       description: A Buybox.
+    ProductIDFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
+            format: int64
+    GetProductResponse:
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/Product'
+          description: The product retrieved.
+    NumericValueCond:
+      type: object
+      properties:
+        eq:
+          type:
+          - number
+          - 'null'
+          format: double
+      description: A numeric attribute value condition.
+    SortOrder:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      default: ASC
+    OfferWarranty:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - M12
+      - M18
+      - M24
+      - M30
+      - M36
+      default: UNSPECIFIED
+      description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
+    ProductNameFilter:
+      type: object
+      properties:
+        matches:
+          type:
+          - string
+          - 'null'
+    GetProductRequest:
+      type: object
+      properties:
+        site_market_code:
+          type: string
+          description: Code of a site market where the product is sold.
+          required:
+          - site_market_code
+        id:
+          type: string
+          format: int64
+          description: Primary key of the product to get.
+          required:
+          - id
+        back_link:
+          type:
+          - string
+          - 'null'
+          description: 'URL linking back to partner''s site.
+
+
+            If provided, it is used to populate a query parameter for product
+
+            buybox link.'
+      required:
+      - site_market_code
+      - id
+    StringValue:
+      type: object
+      properties:
+        value:
+          type: string
+    ListProductsRequest:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Int64Pagination'
+        sort:
+          $ref: '#/components/schemas/ListProductsRequest.Sort'
+        filter:
+          $ref: '#/components/schemas/ListProductsRequest.Filter'
+        site_market_code:
+          type: string
+          description: The code of a site market where the products are sold.
+          required:
+          - site_market_code
+        back_link:
+          type:
+          - string
+          - 'null'
+          description: 'URL linking back to partner''s site.
+
+
+            If provided, it is used to populate a query parameter for each
+
+            product buybox link.'
+      required:
+      - site_market_code
+    ListProductsResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+          description: The products found.
+        has_more:
+          type: boolean
+          description: Indicates whether there are more results available.
   securitySchemes:
     APIKeyAuth:
       type: apiKey

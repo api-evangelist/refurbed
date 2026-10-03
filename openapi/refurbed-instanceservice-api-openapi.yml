@@ -188,173 +188,26 @@ paths:
     - url: https://api.refurbed.com
 components:
   schemas:
-    GetInstanceResponse:
-      type: object
-      properties:
-        instance:
-          $ref: '#/components/schemas/Instance'
-          description: The instance retrieved.
-    Buybox:
-      type: object
-      properties:
-        instance_id:
-          type: string
-          format: int64
-          description: Primary key of the linked instance.
-        instance_name:
-          type: string
-          description: Human-readable name of the linked instance.
-        grading:
-          $ref: '#/components/schemas/OfferGrading'
-          description: Grading of the item sold.
-        grading_name:
-          type: string
-          description: Human-readable name of the grading.
-        warranty:
-          $ref: '#/components/schemas/OfferWarranty'
-          description: Warranty of the item sold.
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-          description: Currency in which the item is sold.
-        price:
-          type: string
-          description: Price at which the item is sold.
-        link:
-          type: string
-          description: 'URL to the item on refurbed marketplace.
-
-
-            If a back link is specified in the original request an additional query
-
-            parameter will be included in the link.'
-      description: A Buybox.
-    InstanceIDFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            type: string
-            format: int64
-    Expression:
-      type: object
-      properties:
-        attribute_id:
-          type: string
-          format: int64
-        cond_enum:
-          $ref: '#/components/schemas/EnumValueCond'
-        cond_numeric:
-          $ref: '#/components/schemas/NumericValueCond'
-      description: An attribute expression.
-    Media:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/MediaType'
-          description: Type of the media.
-        url:
-          type: string
-          description: URL to the media.
-      description: A media.
-    SortOrder:
-      type: string
-      enum:
-      - ASC
-      - DESC
-      default: ASC
-    MediaType:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - IMAGE
-      default: UNSPECIFIED
-    ListInstancesByProductRequest.Filter:
+    Attribute:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/InstanceIDFilter'
+          type: string
+          format: int64
+          description: Primary key.
         name:
-          $ref: '#/components/schemas/InstanceNameFilter'
-        attributes:
-          $ref: '#/components/schemas/AttributesFilter'
-    EnumValueCond:
-      type: object
-      properties:
-        eq:
-          type:
-          - string
-          - 'null'
-      description: An enum attribute value condition.
-    NumericValue:
-      type: object
-      properties:
-        value:
-          type: number
-          format: double
-        unit:
-          type:
-          - string
-          - 'null'
-    Status:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
           type: string
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/Any'
-    Any:
-      type: object
-      properties:
-        '@type':
-          type: string
-      additionalProperties: {}
-    ListInstancesByProductRequest.Sort:
-      type: object
-      properties:
-        order:
-          $ref: '#/components/schemas/SortOrder'
-        by:
-          $ref: '#/components/schemas/ListInstancesByProductRequest.Sort.By'
-    GetInstanceRequest:
-      type: object
-      properties:
-        site_market_code:
-          type: string
-          description: The code of a site market where the instance is sold.
-          required:
-          - site_market_code
-        id:
-          type: string
-          format: int64
-        gtin:
-          type: string
-          description: A GTIN-8, GTIN-12 or GTIN-13. Note that EAN-13 and UPC-A codes are GTINs.
-        back_link:
-          type:
-          - string
-          - 'null'
-          description: 'URL linking back to partner''s site.
-
-
-            If provided, it is used to populate a query parameter for instance
-
-            buybox link.'
-      required:
-      - site_market_code
-    AttributeType:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - ENUM
-      - NUMERIC
-      default: UNSPECIFIED
-      description: "A type of an attribute.\n\n - ENUM: An enumerated attribute has a string value, e.g. Colour = black.\n - NUMERIC: A numeric attribute has a numeric value with an optional unit, e.g.\nMemory = 2 GB"
+          description: Human-readable name.
+        type:
+          $ref: '#/components/schemas/AttributeType'
+          description: Type fo the attribute.
+        value_str:
+          $ref: '#/components/schemas/StringValue'
+          description: Value is set if type is ENUM.
+        value_num:
+          $ref: '#/components/schemas/NumericValue'
+          description: Value is set if type is NUMERIC.
+      description: An Attribute.
     CurrencyCode:
       type: string
       enum:
@@ -538,47 +391,6 @@ components:
       - ZWL
       default: UNSPECIFIED
       description: "Currency codes as specified in ISO 4217.\n\n - AED: XTS = 963; // Code reserved for testing purposes."
-    AttributesFilter:
-      type: object
-      properties:
-        all_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/Expression'
-    OfferGrading:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - A
-      - B
-      - C
-      default: UNSPECIFIED
-      description: The grading of the item being sold.
-    Attribute:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: Primary key.
-        name:
-          type: string
-          description: Human-readable name.
-        type:
-          $ref: '#/components/schemas/AttributeType'
-          description: Type fo the attribute.
-        value_str:
-          $ref: '#/components/schemas/StringValue'
-          description: Value is set if type is ENUM.
-        value_num:
-          $ref: '#/components/schemas/NumericValue'
-          description: Value is set if type is NUMERIC.
-      description: An Attribute.
-    StringValue:
-      type: object
-      properties:
-        value:
-          type: string
     ListInstancesByProductRequest:
       type: object
       properties:
@@ -612,15 +424,90 @@ components:
       required:
       - site_market_code
       - product_id
-    NumericValueCond:
+    MediaType:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - IMAGE
+      default: UNSPECIFIED
+    Int64Pagination:
+      type: object
+      properties:
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+            Default and maximum is 100.'
+        ending_before:
+          type: string
+          format: int64
+        starting_after:
+          type: string
+          format: int64
+      description: Paginates resources with int64 primary key.
+    Any:
+      type: object
+      properties:
+        '@type':
+          type: string
+      additionalProperties: {}
+    Expression:
+      type: object
+      properties:
+        attribute_id:
+          type: string
+          format: int64
+        cond_enum:
+          $ref: '#/components/schemas/EnumValueCond'
+        cond_numeric:
+          $ref: '#/components/schemas/NumericValueCond'
+      description: An attribute expression.
+    OfferGrading:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - A
+      - B
+      - C
+      default: UNSPECIFIED
+      description: The grading of the item being sold.
+    ListInstancesByProductRequest.Filter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/InstanceIDFilter'
+        name:
+          $ref: '#/components/schemas/InstanceNameFilter'
+        attributes:
+          $ref: '#/components/schemas/AttributesFilter'
+    AttributesFilter:
+      type: object
+      properties:
+        all_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/Expression'
+    Media:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/MediaType'
+          description: Type of the media.
+        url:
+          type: string
+          description: URL to the media.
+      description: A media.
+    EnumValueCond:
       type: object
       properties:
         eq:
           type:
-          - number
+          - string
           - 'null'
-          format: double
-      description: A numeric attribute value condition.
+      description: An enum attribute value condition.
     ListInstancesByProductRequest.Sort.By:
       type: string
       enum:
@@ -639,17 +526,64 @@ components:
         has_more:
           type: boolean
           description: Indicates whether there are more results available.
-    OfferWarranty:
+    GetInstanceResponse:
+      type: object
+      properties:
+        instance:
+          $ref: '#/components/schemas/Instance'
+          description: The instance retrieved.
+    AttributeType:
       type: string
       enum:
       - UNSPECIFIED
-      - M12
-      - M18
-      - M24
-      - M30
-      - M36
+      - ENUM
+      - NUMERIC
       default: UNSPECIFIED
-      description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
+      description: "A type of an attribute.\n\n - ENUM: An enumerated attribute has a string value, e.g. Colour = black.\n - NUMERIC: A numeric attribute has a numeric value with an optional unit, e.g.\nMemory = 2 GB"
+    NumericValue:
+      type: object
+      properties:
+        value:
+          type: number
+          format: double
+        unit:
+          type:
+          - string
+          - 'null'
+    Buybox:
+      type: object
+      properties:
+        instance_id:
+          type: string
+          format: int64
+          description: Primary key of the linked instance.
+        instance_name:
+          type: string
+          description: Human-readable name of the linked instance.
+        grading:
+          $ref: '#/components/schemas/OfferGrading'
+          description: Grading of the item sold.
+        grading_name:
+          type: string
+          description: Human-readable name of the grading.
+        warranty:
+          $ref: '#/components/schemas/OfferWarranty'
+          description: Warranty of the item sold.
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+          description: Currency in which the item is sold.
+        price:
+          type: string
+          description: Price at which the item is sold.
+        link:
+          type: string
+          description: 'URL to the item on refurbed marketplace.
+
+
+            If a back link is specified in the original request an additional query
+
+            parameter will be included in the link.'
+      description: A Buybox.
     Instance:
       type: object
       properties:
@@ -691,24 +625,71 @@ components:
 
             this instance is sold.'
       description: An instance.
-    Int64Pagination:
+    NumericValueCond:
       type: object
       properties:
-        limit:
+        eq:
           type:
-          - integer
+          - number
           - 'null'
+          format: double
+      description: A numeric attribute value condition.
+    SortOrder:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      default: ASC
+    OfferWarranty:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - M12
+      - M18
+      - M24
+      - M30
+      - M36
+      default: UNSPECIFIED
+      description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
+    InstanceIDFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
+            format: int64
+    GetInstanceRequest:
+      type: object
+      properties:
+        site_market_code:
+          type: string
+          description: The code of a site market where the instance is sold.
+          required:
+          - site_market_code
+        id:
+          type: string
           format: int64
-          description: 'Limit on the number of results to be returned. Between 1 and 100.
+        gtin:
+          type: string
+          description: A GTIN-8, GTIN-12 or GTIN-13. Note that EAN-13 and UPC-A codes are GTINs.
+        back_link:
+          type:
+          - string
+          - 'null'
+          description: 'URL linking back to partner''s site.
 
-            Default and maximum is 100.'
-        ending_before:
+
+            If provided, it is used to populate a query parameter for instance
+
+            buybox link.'
+      required:
+      - site_market_code
+    StringValue:
+      type: object
+      properties:
+        value:
           type: string
-          format: int64
-        starting_after:
-          type: string
-          format: int64
-      description: Paginates resources with int64 primary key.
     InstanceNameFilter:
       type: object
       properties:
@@ -716,11 +697,37 @@ components:
           type:
           - string
           - 'null'
-    GetInstanceResponse_2:
+    Status:
       type: object
       properties:
-        instance:
-          $ref: '#/components/schemas/Instance_2'
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Any'
+    ListInstancesByProductRequest.Sort:
+      type: object
+      properties:
+        order:
+          $ref: '#/components/schemas/SortOrder'
+        by:
+          $ref: '#/components/schemas/ListInstancesByProductRequest.Sort.By'
+    BatchGetInstancesRequest:
+      type: object
+      properties:
+        instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchGetInstancesRequest.Get'
+          description: Instances to get. Between 1 and 50.
+          required:
+          - instances
+      required:
+      - instances
     InstanceIdentifier:
       type: object
       properties:
@@ -735,6 +742,33 @@ components:
           type: string
           description: Manufacturer Part Number.
       description: Identifier of an instance.
+    BatchGetInstancesResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchGetInstancesResponse.Result'
+          description: Results of the get operation. In request order.
+    Instance_2:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          description: Primary key.
+        name:
+          type: string
+          description: Human-readable name.
+      description: An instance.
+    Any_2:
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+      additionalProperties: {}
+      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
     BatchGetInstancesResponse.Result:
       type: object
       properties:
@@ -743,24 +777,29 @@ components:
         instance:
           $ref: '#/components/schemas/Instance_2'
           description: Retrieved instance. Set if status code is OK.
+    GetInstanceResponse_2:
+      type: object
+      properties:
+        instance:
+          $ref: '#/components/schemas/Instance_2'
     BatchGetInstancesRequest.Get:
       type: object
       properties:
         identifier:
           $ref: '#/components/schemas/InstanceIdentifier'
           description: The identifier of the instance to get.
-    BatchGetInstancesRequest:
+    GetInstanceRequest_2:
       type: object
       properties:
-        instances:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchGetInstancesRequest.Get'
-          description: Instances to get. Between 1 and 50.
-          required:
-          - instances
-      required:
-      - instances
+        id:
+          type: string
+          format: int64
+        gtin:
+          type: string
+          description: A GTIN-8, GTIN-12 or GTIN-13. Note that EAN-13 and UPC-A codes are GTINs.
+        mpn:
+          type: string
+          description: Manufacturer Part Number.
     Status_2:
       type: object
       properties:
@@ -794,45 +833,6 @@ components:
         You can find out more about this error model and how to work with it in the
 
         [API Design Guide](https://cloud.google.com/apis/design/errors).'
-    Any_2:
-      type: object
-      properties:
-        '@type':
-          type: string
-          description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
-      additionalProperties: {}
-      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
-    Instance_2:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: Primary key.
-        name:
-          type: string
-          description: Human-readable name.
-      description: An instance.
-    BatchGetInstancesResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchGetInstancesResponse.Result'
-          description: Results of the get operation. In request order.
-    GetInstanceRequest_2:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-        gtin:
-          type: string
-          description: A GTIN-8, GTIN-12 or GTIN-13. Note that EAN-13 and UPC-A codes are GTINs.
-        mpn:
-          type: string
-          description: Manufacturer Part Number.
   securitySchemes:
     APIKeyAuth:
       type: apiKey

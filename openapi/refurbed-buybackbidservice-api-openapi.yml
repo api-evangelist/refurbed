@@ -390,136 +390,6 @@ paths:
         required: true
 components:
   schemas:
-    Numeric:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-        any_of:
-          type: array
-          items:
-            type: number
-            format: double
-        none_of:
-          type: array
-          items:
-            type: number
-            format: double
-    CreateBuybackBidRequest:
-      type: object
-      properties:
-        product_id:
-          type: string
-          format: int64
-          title: The Product id
-          required:
-          - product_id
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductAttribute'
-          title: List of attributes assigned to the product
-          required:
-          - attributes
-        stock:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          title: Stock to buy. If left undefined the stock will be considered unlimited
-        grading:
-          $ref: '#/components/schemas/BuybackBidGrading'
-          title: Grading for the desired product
-        market_bids:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreateBuybackMarketBid'
-          title: Market bids to create
-          required:
-          - market_bids
-        sku:
-          type:
-          - string
-          - 'null'
-          title: Bid SKU
-      required:
-      - product_id
-      - attributes
-      - market_bids
-    GetSecondOfferBuybackMarketBidRequest:
-      type: object
-      properties:
-        order_item_id:
-          type: string
-          format: int64
-          title: The ID of the product received (may be the same as order item's product ID)
-          required:
-          - order_item_id
-        product_id:
-          type: string
-          format: int64
-          title: The product ID of the product received (may be the same as order item's product ID)
-          required:
-          - product_id
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductAttribute'
-          title: The list of attributes of the product received (may be the same as order item's attributes)
-          required:
-          - attributes
-        grading:
-          $ref: '#/components/schemas/BuybackBidGrading'
-          title: 'The grading of the product received (same as order item''s grading, if the product received doesn''t have a
-
-            different grading)'
-      required:
-      - order_item_id
-      - product_id
-      - attributes
-    UpdateBuybackMarketBidRequest:
-      type: object
-      properties:
-        bid_identifier:
-          $ref: '#/components/schemas/BuybackBidIdentifier'
-          description: Accepts either bid ID or SKU.
-          title: The identifier of the bid
-        market_code:
-          $ref: '#/components/schemas/CountryCode'
-          title: Two-letter code indicating the market of the market
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-          title: Currency for the price
-        price:
-          type: string
-          title: Price as a string containing a decimal number
-          required:
-          - price
-      required:
-      - price
-    ProductAttribute:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          title: Attribute ID
-          required:
-          - id
-        value_str:
-          type: string
-          required:
-          - value_str
-        value_num:
-          type: number
-          format: double
-          required:
-          - value_num
-      required:
-      - id
-      - value_str
-      - value_num
     OptionalUInt32RangeFilter:
       type: object
       properties:
@@ -557,113 +427,7 @@ components:
           - integer
           - 'null'
           format: int64
-    BuybackMarketBidSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          title: Primary key
-        product_id:
-          type: string
-          format: int64
-          title: The product id
-        product_name:
-          type: string
-          title: The user-friendly product_name
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/BuybackAttribute'
-          title: List of attributes assigned to the product
-        market_code:
-          $ref: '#/components/schemas/CountryCode'
-          title: Two-letter code indicating the market
-        grading:
-          $ref: '#/components/schemas/BuybackBidGrading'
-          title: Grading for the desired product
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-          title: Currency for the price
-        price:
-          type: string
-          title: The price
-        bid_id:
-          type: string
-          format: int64
-          title: Bid ID
-        bid_sku:
-          type:
-          - string
-          - 'null'
-          title: Bid SKU
-    CreateBuybackMarketBid:
-      type: object
-      properties:
-        market_code:
-          $ref: '#/components/schemas/CountryCode'
-          title: Two-letter code indicating the market
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-          title: Currency for the price
-        price:
-          type: string
-          title: Price as a string containing a decimal number
-          required:
-          - price
-      required:
-      - price
-    BuybackBidIdentifier:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-        sku:
-          type: string
-    ListBuybackBidsRequest.Sort.By:
-      type: string
-      enum:
-      - ID
-      - PRODUCT_ID
-      - GRADING
-      - STOCK
-      - PRODUCT_NAME
-      - SKU
-      default: ID
-    SortOrder:
-      type: string
-      enum:
-      - ASC
-      - DESC
-      default: ASC
-    GetSecondOfferBuybackMarketBidResponse:
-      type: object
-      properties:
-        market_bid:
-          $ref: '#/components/schemas/BuybackMarketBidSummary'
-    BuybackMarketBid:
-      type: object
-      properties:
-        bid_id:
-          type: string
-          format: int64
-          title: Bid ID
-        market_code:
-          $ref: '#/components/schemas/CountryCode'
-          title: Two-letter code indicating the market
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-          title: Currency for the price
-        price:
-          type: string
-          title: Price as a string containing a decimal number
-        bid_sku:
-          type:
-          - string
-          - 'null'
-          title: Bid SKU
-    CreateBuybackMarketBidRequest:
+    DeleteBuybackMarketBidRequest:
       type: object
       properties:
         bid_identifier:
@@ -673,61 +437,13 @@ components:
         market_code:
           $ref: '#/components/schemas/CountryCode'
           title: Two-letter code indicating the market
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-          title: Currency for the price
-        price:
-          type: string
-          title: Price as a string containing a decimal number
-          required:
-          - price
-      required:
-      - price
-    ListBuybackBidsRequest.Filter:
+    Attribute:
       type: object
       properties:
-        id:
-          $ref: '#/components/schemas/Int64Filter'
-        product_id:
-          $ref: '#/components/schemas/Int64Filter'
-        grading:
-          $ref: '#/components/schemas/BuybackBidGradingFilter'
-        stock:
-          $ref: '#/components/schemas/OptionalUInt32RangeFilter'
-        market_code:
-          $ref: '#/components/schemas/CountryCodeFilter'
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCodeFilter'
-        product_name:
-          $ref: '#/components/schemas/TextSearchFilter'
-        product_attribute:
-          $ref: '#/components/schemas/BuybackAttributeFilter'
-        sku:
-          $ref: '#/components/schemas/StringSetContainsFilter'
-    ListBuybackBidsResponse:
-      type: object
-      properties:
-        bids:
-          type: array
-          items:
-            $ref: '#/components/schemas/BuybackBid'
-          description: The bids found.
-        has_more:
-          type: boolean
-          description: Indicates whether there are more results available.
-    UpdateBuybackBidResponse:
-      type: object
-      properties:
-        bid:
-          $ref: '#/components/schemas/BuybackBid'
-    BuybackAttributeType:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - ENUM
-      - NUMERIC
-      default: UNSPECIFIED
-      title: "- ENUM: An enumerated attribute has a string value, e.g. Colour = black.\n - NUMERIC: A numeric attribute has a numeric value with an optional unit, e.g.\nMemory = 2 GB"
+        value_str:
+          $ref: '#/components/schemas/Enum'
+        value_num:
+          $ref: '#/components/schemas/Numeric'
     CountryCodeFilter:
       type: object
       properties:
@@ -739,82 +455,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CountryCode'
-    NumericValue:
-      type: object
-      properties:
-        value:
-          type: number
-          format: double
-        unit:
-          type:
-          - string
-          - 'null'
-    Status:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
-        message:
-          type: string
-          description: 'A developer-facing error message, which should be in English. Any
-
-            user-facing error message should be localized and sent in the
-
-            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/Any'
-          description: 'A list of messages that carry the error details.  There is a common set of
-
-            message types for APIs to use.'
-      description: 'The `Status` type defines a logical error model that is suitable for
-
-        different programming environments, including REST APIs and RPC APIs. It is
-
-        used by [gRPC](https://github.com/grpc). Each `Status` message contains
-
-        three pieces of data: error code, error message, and error details.
-
-
-        You can find out more about this error model and how to work with it in the
-
-        [API Design Guide](https://cloud.google.com/apis/design/errors).'
-    CreateBuybackMarketBidResponse:
-      type: object
-      properties:
-        market_bid:
-          $ref: '#/components/schemas/BuybackMarketBid'
-    Any:
-      type: object
-      properties:
-        '@type':
-          type: string
-          description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
-      additionalProperties: {}
-      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
-    Int64Filter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            type: string
-            format: int64
-        none_of:
-          type: array
-          items:
-            type: string
-            format: int64
-    ListBuybackBidsRequest.Sort:
-      type: object
-      properties:
-        order:
-          $ref: '#/components/schemas/SortOrder'
-        by:
-          $ref: '#/components/schemas/ListBuybackBidsRequest.Sort.By'
     UpdateBuybackMarketBidResponse:
       type: object
       properties:
@@ -1003,88 +643,17 @@ components:
       - ZWL
       default: UNSPECIFIED
       description: "Currency codes as specified in ISO 4217.\n\n - AED: XTS = 963; // Code reserved for testing purposes."
-    TextSearchFilter:
+    ListBuybackBidsResponse:
       type: object
       properties:
-        term:
-          type: string
-          title: Full-text match
-    BuybackBid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-          description: Primary key.
-        product_id:
-          type: string
-          format: int64
-          title: The product id
-        product_name:
-          type: string
-          description: Human-readable name for the product.
-        attributes:
+        bids:
           type: array
           items:
-            $ref: '#/components/schemas/BuybackAttribute'
-          title: List of attributes assigned to the product
-        stock:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          title: Stock the merchant is willing to buy. If undefined it means unlimited
-        grading:
-          $ref: '#/components/schemas/BuybackBidGrading'
-          title: Grading for the desired product
-        market_bids:
-          type: array
-          items:
-            $ref: '#/components/schemas/BuybackMarketBid'
-          description: Configured market bids. Unique by market code.
-        sku:
-          type:
-          - string
-          - 'null'
-          title: Bid SKU
-    BuybackAttributeFilter:
-      type: object
-      properties:
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attribute'
-    StringValue:
-      type: object
-      properties:
-        value:
-          type: string
-    Attribute:
-      type: object
-      properties:
-        value_str:
-          $ref: '#/components/schemas/Enum'
-        value_num:
-          $ref: '#/components/schemas/Numeric'
-    ListBuybackBidsRequest:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/Int64Pagination'
-        sort:
-          $ref: '#/components/schemas/ListBuybackBidsRequest.Sort'
-        filter:
-          $ref: '#/components/schemas/ListBuybackBidsRequest.Filter'
-    DeleteBuybackMarketBidRequest:
-      type: object
-      properties:
-        bid_identifier:
-          $ref: '#/components/schemas/BuybackBidIdentifier'
-          description: Accepts either bid ID or SKU.
-          title: The identifier of the bid
-        market_code:
-          $ref: '#/components/schemas/CountryCode'
-          title: Two-letter code indicating the market
+            $ref: '#/components/schemas/BuybackBid'
+          description: The bids found.
+        has_more:
+          type: boolean
+          description: Indicates whether there are more results available.
     UpdateBuybackBidRequest:
       type: object
       properties:
@@ -1098,58 +667,195 @@ components:
           - 'null'
           format: int64
           title: Stock to buy. If left undefined the stock will be considered unlimited
-    StringSetContainsFilter:
+    Int64Pagination:
       type: object
       properties:
-        any_of:
+        limit:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+            Default and maximum is 100.'
+        ending_before:
+          type: string
+          format: int64
+        starting_after:
+          type: string
+          format: int64
+      description: Paginates resources with int64 primary key.
+    Any:
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+      additionalProperties: {}
+      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+    CreateBuybackBidRequest:
+      type: object
+      properties:
+        product_id:
+          type: string
+          format: int64
+          title: The Product id
+          required:
+          - product_id
+        attributes:
           type: array
           items:
-            type: string
-        none_of:
+            $ref: '#/components/schemas/ProductAttribute'
+          title: List of attributes assigned to the product
+          required:
+          - attributes
+        stock:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          title: Stock to buy. If left undefined the stock will be considered unlimited
+        grading:
+          $ref: '#/components/schemas/BuybackBidGrading'
+          title: Grading for the desired product
+        market_bids:
           type: array
           items:
-            type: string
-        contains:
+            $ref: '#/components/schemas/CreateBuybackMarketBid'
+          title: Market bids to create
+          required:
+          - market_bids
+        sku:
           type:
           - string
           - 'null'
-    CurrencyCodeFilter:
+          title: Bid SKU
+      required:
+      - product_id
+      - attributes
+      - market_bids
+    BuybackBidGradingFilter:
       type: object
       properties:
         any_of:
           type: array
           items:
-            $ref: '#/components/schemas/CurrencyCode'
+            $ref: '#/components/schemas/BuybackBidGrading'
         none_of:
           type: array
           items:
-            $ref: '#/components/schemas/CurrencyCode'
-    BuybackAttribute:
+            $ref: '#/components/schemas/BuybackBidGrading'
+    TextSearchFilter:
+      type: object
+      properties:
+        term:
+          type: string
+          title: Full-text match
+    ListBuybackBidsRequest.Sort:
+      type: object
+      properties:
+        order:
+          $ref: '#/components/schemas/SortOrder'
+        by:
+          $ref: '#/components/schemas/ListBuybackBidsRequest.Sort.By'
+    ListBuybackBidsRequest.Sort.By:
+      type: string
+      enum:
+      - ID
+      - PRODUCT_ID
+      - GRADING
+      - STOCK
+      - PRODUCT_NAME
+      - SKU
+      default: ID
+    ListBuybackBidsRequest.Filter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Int64Filter'
+        product_id:
+          $ref: '#/components/schemas/Int64Filter'
+        grading:
+          $ref: '#/components/schemas/BuybackBidGradingFilter'
+        stock:
+          $ref: '#/components/schemas/OptionalUInt32RangeFilter'
+        market_code:
+          $ref: '#/components/schemas/CountryCodeFilter'
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCodeFilter'
+        product_name:
+          $ref: '#/components/schemas/TextSearchFilter'
+        product_attribute:
+          $ref: '#/components/schemas/BuybackAttributeFilter'
+        sku:
+          $ref: '#/components/schemas/StringSetContainsFilter'
+    ListBuybackBidsRequest:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Int64Pagination'
+        sort:
+          $ref: '#/components/schemas/ListBuybackBidsRequest.Sort'
+        filter:
+          $ref: '#/components/schemas/ListBuybackBidsRequest.Filter'
+    UpdateBuybackMarketBidRequest:
+      type: object
+      properties:
+        bid_identifier:
+          $ref: '#/components/schemas/BuybackBidIdentifier'
+          description: Accepts either bid ID or SKU.
+          title: The identifier of the bid
+        market_code:
+          $ref: '#/components/schemas/CountryCode'
+          title: Two-letter code indicating the market of the market
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+          title: Currency for the price
+        price:
+          type: string
+          title: Price as a string containing a decimal number
+          required:
+          - price
+      required:
+      - price
+    Enum:
       type: object
       properties:
         id:
           type: string
           format: int64
-          title: Attribute ID
-        name:
-          type: string
-          description: Human-readable name.
-        type:
-          $ref: '#/components/schemas/BuybackAttributeType'
-          description: Type for the attribute.
-        value_str:
-          $ref: '#/components/schemas/StringValue'
-          description: Value is set if type is ENUM.
-        value_num:
-          $ref: '#/components/schemas/NumericValue'
-          description: Value is set if type is NUMERIC.
-    DeleteBuybackBidRequest:
+        any_of:
+          type: array
+          items:
+            type: string
+        none_of:
+          type: array
+          items:
+            type: string
+    CreateBuybackMarketBid:
       type: object
       properties:
-        identifier:
-          $ref: '#/components/schemas/BuybackBidIdentifier'
-          description: Accepts either bid ID or SKU.
-          title: The identifier of the bid
+        market_code:
+          $ref: '#/components/schemas/CountryCode'
+          title: Two-letter code indicating the market
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+          title: Currency for the price
+        price:
+          type: string
+          title: Price as a string containing a decimal number
+          required:
+          - price
+      required:
+      - price
+    BuybackBidIdentifier:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+        sku:
+          type: string
     CountryCode:
       type: string
       enum:
@@ -1405,11 +1111,66 @@ components:
       - ZM
       default: UNSPECIFIED
       description: Alpha-2 country codes as specified in ISO 3166-1.
-    CreateBuybackBidResponse:
+    NumericValue:
       type: object
       properties:
-        bid:
-          $ref: '#/components/schemas/BuybackBid'
+        value:
+          type: number
+          format: double
+        unit:
+          type:
+          - string
+          - 'null'
+    ProductAttribute:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          title: Attribute ID
+          required:
+          - id
+        value_str:
+          type: string
+          required:
+          - value_str
+        value_num:
+          type: number
+          format: double
+          required:
+          - value_num
+      required:
+      - id
+      - value_str
+      - value_num
+    BuybackAttributeType:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - ENUM
+      - NUMERIC
+      default: UNSPECIFIED
+      title: "- ENUM: An enumerated attribute has a string value, e.g. Colour = black.\n - NUMERIC: A numeric attribute has a numeric value with an optional unit, e.g.\nMemory = 2 GB"
+    CreateBuybackMarketBidRequest:
+      type: object
+      properties:
+        bid_identifier:
+          $ref: '#/components/schemas/BuybackBidIdentifier'
+          description: Accepts either bid ID or SKU.
+          title: The identifier of the bid
+        market_code:
+          $ref: '#/components/schemas/CountryCode'
+          title: Two-letter code indicating the market
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+          title: Currency for the price
+        price:
+          type: string
+          title: Price as a string containing a decimal number
+          required:
+          - price
+      required:
+      - price
     BuybackBidGrading:
       type: string
       enum:
@@ -1420,18 +1181,235 @@ components:
       - D
       - E
       default: UNSPECIFIED
-    BuybackBidGradingFilter:
+    CurrencyCodeFilter:
       type: object
       properties:
         any_of:
           type: array
           items:
-            $ref: '#/components/schemas/BuybackBidGrading'
+            $ref: '#/components/schemas/CurrencyCode'
         none_of:
           type: array
           items:
-            $ref: '#/components/schemas/BuybackBidGrading'
-    Enum:
+            $ref: '#/components/schemas/CurrencyCode'
+    BuybackAttributeFilter:
+      type: object
+      properties:
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+    SortOrder:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      default: ASC
+    StringSetContainsFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
+        none_of:
+          type: array
+          items:
+            type: string
+        contains:
+          type:
+          - string
+          - 'null'
+    BuybackMarketBidSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          title: Primary key
+        product_id:
+          type: string
+          format: int64
+          title: The product id
+        product_name:
+          type: string
+          title: The user-friendly product_name
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuybackAttribute'
+          title: List of attributes assigned to the product
+        market_code:
+          $ref: '#/components/schemas/CountryCode'
+          title: Two-letter code indicating the market
+        grading:
+          $ref: '#/components/schemas/BuybackBidGrading'
+          title: Grading for the desired product
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+          title: Currency for the price
+        price:
+          type: string
+          title: The price
+        bid_id:
+          type: string
+          format: int64
+          title: Bid ID
+        bid_sku:
+          type:
+          - string
+          - 'null'
+          title: Bid SKU
+    CreateBuybackBidResponse:
+      type: object
+      properties:
+        bid:
+          $ref: '#/components/schemas/BuybackBid'
+    CreateBuybackMarketBidResponse:
+      type: object
+      properties:
+        market_bid:
+          $ref: '#/components/schemas/BuybackMarketBid'
+    Int64Filter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
+            format: int64
+        none_of:
+          type: array
+          items:
+            type: string
+            format: int64
+    StringValue:
+      type: object
+      properties:
+        value:
+          type: string
+    GetSecondOfferBuybackMarketBidRequest:
+      type: object
+      properties:
+        order_item_id:
+          type: string
+          format: int64
+          title: The ID of the product received (may be the same as order item's product ID)
+          required:
+          - order_item_id
+        product_id:
+          type: string
+          format: int64
+          title: The product ID of the product received (may be the same as order item's product ID)
+          required:
+          - product_id
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductAttribute'
+          title: The list of attributes of the product received (may be the same as order item's attributes)
+          required:
+          - attributes
+        grading:
+          $ref: '#/components/schemas/BuybackBidGrading'
+          title: 'The grading of the product received (same as order item''s grading, if the product received doesn''t have a
+
+            different grading)'
+      required:
+      - order_item_id
+      - product_id
+      - attributes
+    BuybackBid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          description: Primary key.
+        product_id:
+          type: string
+          format: int64
+          title: The product id
+        product_name:
+          type: string
+          description: Human-readable name for the product.
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuybackAttribute'
+          title: List of attributes assigned to the product
+        stock:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          title: Stock the merchant is willing to buy. If undefined it means unlimited
+        grading:
+          $ref: '#/components/schemas/BuybackBidGrading'
+          title: Grading for the desired product
+        market_bids:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuybackMarketBid'
+          description: Configured market bids. Unique by market code.
+        sku:
+          type:
+          - string
+          - 'null'
+          title: Bid SKU
+    UpdateBuybackBidResponse:
+      type: object
+      properties:
+        bid:
+          $ref: '#/components/schemas/BuybackBid'
+    BuybackMarketBid:
+      type: object
+      properties:
+        bid_id:
+          type: string
+          format: int64
+          title: Bid ID
+        market_code:
+          $ref: '#/components/schemas/CountryCode'
+          title: Two-letter code indicating the market
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+          title: Currency for the price
+        price:
+          type: string
+          title: Price as a string containing a decimal number
+        bid_sku:
+          type:
+          - string
+          - 'null'
+          title: Bid SKU
+    DeleteBuybackBidRequest:
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/BuybackBidIdentifier'
+          description: Accepts either bid ID or SKU.
+          title: The identifier of the bid
+    BuybackAttribute:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+          title: Attribute ID
+        name:
+          type: string
+          description: Human-readable name.
+        type:
+          $ref: '#/components/schemas/BuybackAttributeType'
+          description: Type for the attribute.
+        value_str:
+          $ref: '#/components/schemas/StringValue'
+          description: Value is set if type is ENUM.
+        value_num:
+          $ref: '#/components/schemas/NumericValue'
+          description: Value is set if type is NUMERIC.
+    Numeric:
       type: object
       properties:
         id:
@@ -1440,29 +1418,51 @@ components:
         any_of:
           type: array
           items:
-            type: string
+            type: number
+            format: double
         none_of:
           type: array
           items:
-            type: string
-    Int64Pagination:
+            type: number
+            format: double
+    Status:
       type: object
       properties:
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Limit on the number of results to be returned. Between 1 and 100.
+        code:
+          type: integer
+          format: int32
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: 'A developer-facing error message, which should be in English. Any
 
-            Default and maximum is 100.'
-        ending_before:
-          type: string
-          format: int64
-        starting_after:
-          type: string
-          format: int64
-      description: Paginates resources with int64 primary key.
+            user-facing error message should be localized and sent in the
+
+            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Any'
+          description: 'A list of messages that carry the error details.  There is a common set of
+
+            message types for APIs to use.'
+      description: 'The `Status` type defines a logical error model that is suitable for
+
+        different programming environments, including REST APIs and RPC APIs. It is
+
+        used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
+        three pieces of data: error code, error message, and error details.
+
+
+        You can find out more about this error model and how to work with it in the
+
+        [API Design Guide](https://cloud.google.com/apis/design/errors).'
+    GetSecondOfferBuybackMarketBidResponse:
+      type: object
+      properties:
+        market_bid:
+          $ref: '#/components/schemas/BuybackMarketBidSummary'
   securitySchemes:
     APIKeyAuth:
       type: apiKey
