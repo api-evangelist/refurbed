@@ -417,19 +417,436 @@ paths:
         required: true
 components:
   schemas:
-    BatchCreateMarketOffersResponse:
+    StringFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
+        none_of:
+          type: array
+          items:
+            type: string
+    MarketOfferIdentifierFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/MarketOfferIdentifier'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/MarketOfferIdentifier'
+    BoolFilter:
+      type: object
+      properties:
+        value:
+          type:
+          - boolean
+          - 'null'
+    OptionalNumericRangeFilter:
+      type: object
+      properties:
+        is_set:
+          type:
+          - boolean
+          - 'null'
+        gt:
+          type:
+          - string
+          - 'null'
+        ge:
+          type:
+          - string
+          - 'null'
+        any_of:
+          type: array
+          items:
+            type: string
+        none_of:
+          type: array
+          items:
+            type: string
+        le:
+          type:
+          - string
+          - 'null'
+        lt:
+          type:
+          - string
+          - 'null'
+      description: 'Numeric range filter is used for decimal numbers. It is especially
+
+        used for monetary amounts and other quantities where exactness is required.'
+    ListMarketOffersByOfferRequest:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/StringPagination'
+        sort:
+          $ref: '#/components/schemas/ListMarketOffersByOfferRequest.Sort'
+        filter:
+          $ref: '#/components/schemas/ListMarketOffersByOfferRequest.Filter'
+        offer_identifier:
+          $ref: '#/components/schemas/OfferIdentifier'
+    BatchDeleteMarketOffersRequest:
+      type: object
+      properties:
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchDeleteMarketOffersRequest.Delete'
+          description: Market offers to delete. Between 1 and 50.
+          required:
+          - offers
+      required:
+      - offers
+    CreateMarketOfferRequest:
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/OfferIdentifier'
+        market_price:
+          $ref: '#/components/schemas/CreateMarketOfferRequest.CreateOfferMarketPrice'
+    ListMarketOffersRequest:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/MarketOfferIdentifierPagination'
+        sort:
+          $ref: '#/components/schemas/ListMarketOffersRequest.Sort'
+        filter:
+          $ref: '#/components/schemas/ListMarketOffersRequest.Filter'
+    ListMarketOffersRequest.Filter.OfferNameFilter:
+      type: object
+      properties:
+        matches:
+          type:
+          - string
+          - 'null'
+    OfferWarranty:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - M12
+      - M18
+      - M24
+      - M30
+      - M36
+      default: UNSPECIFIED
+      description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
+    BatchGetMarketOffersRequest:
+      type: object
+      properties:
+        market_offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchGetMarketOffersRequest.Get'
+          description: Market offers to get. Between 1 and 50.
+          required:
+          - market_offers
+      required:
+      - market_offers
+    CreateMarketOfferResponse:
+      type: object
+      properties:
+        market_offer:
+          $ref: '#/components/schemas/MarketOffer'
+    BatchDeleteMarketOffersResponse.Result:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+    NumericRangeFilter:
+      type: object
+      properties:
+        gt:
+          type:
+          - string
+          - 'null'
+        ge:
+          type:
+          - string
+          - 'null'
+        any_of:
+          type: array
+          items:
+            type: string
+        none_of:
+          type: array
+          items:
+            type: string
+        le:
+          type:
+          - string
+          - 'null'
+        lt:
+          type:
+          - string
+          - 'null'
+      description: 'Numeric range filter is used for decimal numbers. It is especially
+
+        used for monetary amounts and other quantities where exactness is required.'
+    OfferState:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - OK
+      - UNVERIFIED
+      - SUBMITTED
+      - PENDING_REVIEW
+      - REJECTED
+      default: UNSPECIFIED
+      description: " - OK: Everything is in order. Final state.\n - UNVERIFIED: Offer needs to be verified in the refurbed merchant interface before\nbeing shown publicly. This state is set on all offers that are created\nusing GTIN/MPN identifiers. Next state: OK.\n - SUBMITTED: Offer has been submitted using catalog attributes, but not processed yet.\nNext state: PENDING_REVIEW.\n - PENDING_REVIEW: Offer has been submitted using catalog attributes, and is awaiting manual review.\nNext state: OK, REJECTED.\n - REJECTED: Offer will not proceed to the marketplace. Final state."
+    UInt32RangeFilter:
+      type: object
+      properties:
+        gt:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        ge:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        any_of:
+          type: array
+          items:
+            type: integer
+            format: int64
+        none_of:
+          type: array
+          items:
+            type: integer
+            format: int64
+        le:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        lt:
+          type:
+          - integer
+          - 'null'
+          format: int64
+    MarketOffer:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/MarketOfferIdentifier'
+          description: Primary key.
+        version:
+          type: string
+          format: int64
+          description: Version of this offer / offer market price.
+        is_current:
+          type: boolean
+          description: Indicates whether this is the currently available version.
+        created_at:
+          type: string
+          format: date-time
+          description: When the offer was initially created.
+        instance_id:
+          type: string
+          format: int64
+          description: The refurbed instance id ("product variant") this offer is for.
+        instance_name:
+          type: string
+          description: Human-readable name of the instance this offer is for.
+        state:
+          $ref: '#/components/schemas/OfferState'
+          description: The offer's state.
+        sku:
+          type: string
+          description: 'The merchant''s SKU.
+
+
+            Max. length is 256 unicode characters. SKUs cannot have leading or trailing
+
+            whitespace characters.
+
+
+            Can be empty string for old offers that did not require SKU to be set.'
+        grading:
+          $ref: '#/components/schemas/OfferGrading'
+          description: Grading of the item sold.
+        warranty:
+          $ref: '#/components/schemas/OfferWarranty'
+          description: Warranty of the item sold.
+        stock:
+          type: integer
+          format: int64
+          description: The item's stock.
+        shipping_profile_id:
+          type: string
+          format: int64
+          description: 'The shipping profile connected to this offer. This determines in what
+
+            markets the offer is sold and what the shipping costs are.'
+        shipping_profile_name:
+          type: string
+          description: Name of shipping profile.
+        secondary_shipping_profile_id:
+          type:
+          - string
+          - 'null'
+          format: int64
+          description: 'An optional secondary shipping profile id. Can be used to offer express
+
+            shipping next to standard shipping. Has to be different from the primary
+
+            shipping profile.'
+        secondary_shipping_profile_name:
+          type:
+          - string
+          - 'null'
+          description: 'Name of secondary shipping profile. Only returned if secondary shipping
+
+            profile is set.'
+        taxation:
+          $ref: '#/components/schemas/OfferTaxation'
+          description: The taxation mode set for this offer.
+        real_taxation:
+          $ref: '#/components/schemas/OfferTaxation'
+          description: 'The taxation mode the offer uses. This is either the set offer taxation
+
+            or the global taxation mode (merchant account settings) that overrides it.'
+        reference_currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+          description: Currency of reference prices.
+        reference_price:
+          type: string
+          description: 'Reference gross price of this offer. The reference price is used to
+
+            calculate prices if they are not defined for a market.'
+        reference_min_price:
+          type:
+          - string
+          - 'null'
+          description: 'Optional reference minimum price in market currency for automatic
+
+            repricing. The reference minimum price is used to calculate minimum prices
+
+            if they are not defined for a market.'
+        market_price:
+          $ref: '#/components/schemas/OfferMarketPrice'
+          description: The market price.
+      description: 'A merchant''s market offer. A market offer is a combination of an offer with
+
+        a specific offer market price.'
+    OfferBuyboxScope:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - INSTANCE_GRADING_BATTERY_CONDITION
+      default: UNSPECIFIED
+    OfferVisibility:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - FULL
+      - NONE
+      - LIMITED
+      - HIDDEN
+      default: UNSPECIFIED
+      description: "Indicates if and how an offer is shown on the refurbed platform.\n\n - FULL: Offer is normally shown to customers.\n - NONE: Offer is not shown to customers (e.g. does not ship into this market, is\nout of stock, is not verified,...).\n - LIMITED: Offer was hidden from some pages by refurbed (e.g. because price is\nhigher than refurbed's instance SRP).\n - HIDDEN: Offer was hidden by refurbed (e.g. because of an unreasonably low or high\nprice)."
+    ListMarketOffersByOfferRequest.Sort:
+      type: object
+      properties:
+        order:
+          $ref: '#/components/schemas/SortOrder'
+        by:
+          $ref: '#/components/schemas/ListMarketOffersByOfferRequest.Sort.By'
+    ListMarketOffersRequest.Sort:
+      type: object
+      properties:
+        order:
+          $ref: '#/components/schemas/SortOrder'
+        by:
+          $ref: '#/components/schemas/ListMarketOffersRequest.Sort.By'
+    GetMarketOfferRequest:
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/MarketOfferIdentifier'
+          description: The identifier of the market offer to get.
+    Create.CreateOfferMarketPrice:
+      type: object
+      properties:
+        market_code:
+          type: string
+          required:
+          - market_code
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        price:
+          type: string
+          required:
+          - price
+        min_price:
+          type:
+          - string
+          - 'null'
+      required:
+      - market_code
+      - price
+    ListMarketOffersResponse:
+      type: object
+      properties:
+        market_offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/MarketOffer'
+          description: The market offers found.
+        has_more:
+          type: boolean
+          description: Indicates whether there are more results available.
+    OfferWarrantyFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferWarranty'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferWarranty'
+    BatchGetMarketOffersResponse:
       type: object
       properties:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/BatchCreateMarketOffersResponse.Result'
-          description: Results of the create operation. In request order.
-    UpdateMarketOfferResponse:
+            $ref: '#/components/schemas/BatchGetMarketOffersResponse.Result'
+          description: Results of the get operation. In request order.
+    OfferTaxationFilter:
       type: object
       properties:
-        market_offer:
-          $ref: '#/components/schemas/MarketOffer'
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferTaxation'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferTaxation'
+    BatchCreateMarketOffersRequest:
+      type: object
+      properties:
+        market_offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchCreateMarketOffersRequest.Create'
+          description: Market offers to create. Between 1 and 50.
+          required:
+          - market_offers
+      required:
+      - market_offers
     CurrencyCode:
       type: string
       enum:
@@ -613,133 +1030,17 @@ components:
       - ZWL
       default: UNSPECIFIED
       description: "Currency codes as specified in ISO 4217.\n\n - AED: XTS = 963; // Code reserved for testing purposes."
-    BatchDeleteMarketOffersRequest:
-      type: object
-      properties:
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchDeleteMarketOffersRequest.Delete'
-          description: Market offers to delete. Between 1 and 50.
-          required:
-          - offers
-      required:
-      - offers
-    OfferGradingFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferGrading'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferGrading'
-    MarketOfferIdentifier:
-      type: object
-      properties:
-        offer_id:
-          $ref: '#/components/schemas/OfferIdentifier'
-        market_code:
-          type: string
-          required:
-          - market_code
-      required:
-      - market_code
-    NumericRangeFilter:
-      type: object
-      properties:
-        gt:
-          type:
-          - string
-          - 'null'
-        ge:
-          type:
-          - string
-          - 'null'
-        any_of:
-          type: array
-          items:
-            type: string
-        none_of:
-          type: array
-          items:
-            type: string
-        le:
-          type:
-          - string
-          - 'null'
-        lt:
-          type:
-          - string
-          - 'null'
-      description: 'Numeric range filter is used for decimal numbers. It is especially
-
-        used for monetary amounts and other quantities where exactness is required.'
-    OfferVisibility:
+    OfferBuyboxState:
       type: string
       enum:
       - UNSPECIFIED
-      - FULL
-      - NONE
-      - LIMITED
-      - HIDDEN
+      - WON
+      - SHOULD_WIN
+      - ELIGIBLE
+      - WON_ELSEWHERE
+      - INELIGIBLE
       default: UNSPECIFIED
-      description: "Indicates if and how an offer is shown on the refurbed platform.\n\n - FULL: Offer is normally shown to customers.\n - NONE: Offer is not shown to customers (e.g. does not ship into this market, is\nout of stock, is not verified,...).\n - LIMITED: Offer was hidden from some pages by refurbed (e.g. because price is\nhigher than refurbed's instance SRP).\n - HIDDEN: Offer was hidden by refurbed (e.g. because of an unreasonably low or high\nprice)."
-    ListMarketOffersByOfferRequest.Sort.By:
-      type: string
-      enum:
-      - ID
-      - MARKET_PRICE_MARKET_CODE
-      - MARKET_PRICE_MARKET_NAME
-      - MARKET_PRICE_IS_SITE_MARKET
-      - MARKET_PRICE_IS_CALCULATED
-      - MARKET_PRICE_CURRENCY_CODE
-      - MARKET_PRICE_PRICE
-      - MARKET_PRICE_MIN_PRICE
-      - MARKET_PRICE_SITE_MARKET_CURRENCY_CODE
-      - MARKET_PRICE_SITE_MARKET_PRICE
-      - MARKET_PRICE_SITE_MARKET_MIN_PRICE
-      default: ID
-    OfferTaxation:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - GROSS
-      - MARGINAL
-      default: UNSPECIFIED
-    Any:
-      type: object
-      properties:
-        '@type':
-          type: string
-          description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
-      additionalProperties: {}
-      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
-    BatchCreateMarketOffersRequest:
-      type: object
-      properties:
-        market_offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchCreateMarketOffersRequest.Create'
-          description: Market offers to create. Between 1 and 50.
-          required:
-          - market_offers
-      required:
-      - market_offers
-    StringFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            type: string
-        none_of:
-          type: array
-          items:
-            type: string
+      description: " - WON: Offer currently has the BuyBox.\n - SHOULD_WIN: Current offer configuration should win the BuyBox on next refresh.\n - ELIGIBLE: Offer currently does not have the BuyBox.\n - WON_ELSEWHERE: Offer currently does not have the BuyBox but another offer of this\nmerchant does.\n - INELIGIBLE: Offer cannot reach the BuyBox at this time, e.g. because refurbed's\nBuyBox protection for this product is enabled and the offer's stock\nis too low."
     OfferGrading:
       type: string
       enum:
@@ -755,6 +1056,211 @@ components:
         Please consult the refurbed seller guide and quality charta to learn about
 
         refurbed''s grading requirements.'
+    GetMarketOfferResponse:
+      type: object
+      properties:
+        market_offer:
+          $ref: '#/components/schemas/MarketOffer'
+    OptionalInt64Filter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
+            format: int64
+        none_of:
+          type: array
+          items:
+            type: string
+            format: int64
+        is_set:
+          type:
+          - boolean
+          - 'null'
+    OfferSKUFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
+        none_of:
+          type: array
+          items:
+            type: string
+        contains:
+          type:
+          - string
+          - 'null'
+    OfferGradingFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferGrading'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferGrading'
+    TimestampRangeFilter:
+      type: object
+      properties:
+        gt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        ge:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        any_of:
+          type: array
+          items:
+            type: string
+            format: date-time
+        none_of:
+          type: array
+          items:
+            type: string
+            format: date-time
+        le:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        lt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    MarketOfferIdentifier:
+      type: object
+      properties:
+        offer_id:
+          $ref: '#/components/schemas/OfferIdentifier'
+        market_code:
+          type: string
+          required:
+          - market_code
+      required:
+      - market_code
+    BatchCreateMarketOffersRequest.Create:
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/OfferIdentifier'
+        market_price:
+          $ref: '#/components/schemas/Create.CreateOfferMarketPrice'
+    BatchDeleteMarketOffersRequest.Delete:
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/MarketOfferIdentifier'
+          description: The identifier of the market offer to delete.
+    Update.UpdateOfferMarketPrice:
+      type: object
+      properties:
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        price:
+          type:
+          - string
+          - 'null'
+        min_price:
+          type: string
+        delete_min_price:
+          type: boolean
+    ListMarketOffersByOfferResponse:
+      type: object
+      properties:
+        market_offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/MarketOffer'
+          description: The market offers found.
+        has_more:
+          type: boolean
+          description: Indicates whether there are more results available.
+    OfferBuyboxScopeFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferBuyboxScope'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferBuyboxScope'
+    BatchUpdateMarketOffersResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchUpdateMarketOffersResponse.Result'
+          description: Results of the update operation. In request order.
+    ListMarketOffersByOfferRequest.Filter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/MarketOfferIdentifierFilter'
+        market_price_market_code:
+          $ref: '#/components/schemas/StringFilter'
+        market_price_is_site_market:
+          $ref: '#/components/schemas/BoolFilter'
+        market_price_is_calculated:
+          $ref: '#/components/schemas/BoolFilter'
+        market_price_currency_code:
+          $ref: '#/components/schemas/CurrencyCodeFilter'
+        market_price_price:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        market_price_min_price:
+          $ref: '#/components/schemas/OptionalNumericRangeFilter'
+        market_price_site_market_currency_code:
+          $ref: '#/components/schemas/CurrencyCodeFilter'
+        market_price_site_market_price:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        market_price_site_market_min_price:
+          $ref: '#/components/schemas/OptionalNumericRangeFilter'
+        market_price_visibility:
+          $ref: '#/components/schemas/OfferVisibilityFilter'
+        market_price_instance_buybox_state:
+          $ref: '#/components/schemas/OfferBuyboxStateFilter'
+        market_price_buybox_scope:
+          $ref: '#/components/schemas/OfferBuyboxScopeFilter'
+          title: only applicable when buybox state is WON
+    BatchUpdateMarketOffersResponse.Result:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+        market_offer:
+          $ref: '#/components/schemas/MarketOffer'
+          description: Updated market offer. Set if status code is OK.
+    Any:
+      type: object
+      properties:
+        '@type':
+          type: string
+          description: "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+      additionalProperties: {}
+      description: "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(&foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := &pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := &pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": <string>,\n      \"lastName\": <string>\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+    OfferStateFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferState'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferState'
     BuyboxInfo:
       type: object
       properties:
@@ -788,90 +1294,317 @@ components:
         suggested_offer_price_diff:
           type: string
           description: Same as site_market_suggested_offer_price_diff but in offer price currency.
-    ListMarketOffersRequest.Filter.OfferNameFilter:
+    UpdateMarketOfferResponse:
       type: object
       properties:
-        matches:
+        market_offer:
+          $ref: '#/components/schemas/MarketOffer'
+    OfferTaxation:
+      type: string
+      enum:
+      - UNSPECIFIED
+      - GROSS
+      - MARGINAL
+      default: UNSPECIFIED
+    CreateMarketOfferRequest.CreateOfferMarketPrice:
+      type: object
+      properties:
+        market_code:
+          type: string
+          required:
+          - market_code
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        price:
+          type: string
+          required:
+          - price
+        min_price:
           type:
           - string
           - 'null'
-    BatchGetMarketOffersRequest:
-      type: object
-      properties:
-        market_offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchGetMarketOffersRequest.Get'
-          description: Market offers to get. Between 1 and 50.
-          required:
-          - market_offers
       required:
-      - market_offers
-    CreateMarketOfferResponse:
+      - market_code
+      - price
+    BatchDeleteMarketOffersResponse:
       type: object
       properties:
-        market_offer:
-          $ref: '#/components/schemas/MarketOffer'
-    ListMarketOffersByOfferResponse:
-      type: object
-      properties:
-        market_offers:
+        results:
           type: array
           items:
-            $ref: '#/components/schemas/MarketOffer'
-          description: The market offers found.
-        has_more:
-          type: boolean
-          description: Indicates whether there are more results available.
-    GetMarketOfferResponse:
+            $ref: '#/components/schemas/BatchDeleteMarketOffersResponse.Result'
+          description: Results of the delete operation. In request order.
+    OfferIdentifier:
       type: object
       properties:
-        market_offer:
-          $ref: '#/components/schemas/MarketOffer'
-    BatchDeleteMarketOffersResponse.Result:
+        id:
+          type: string
+          format: int64
+        sku:
+          type: string
+    BatchCreateMarketOffersResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchCreateMarketOffersResponse.Result'
+          description: Results of the create operation. In request order.
+    ListMarketOffersRequest.Filter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/MarketOfferIdentifierFilter'
+        offer_id:
+          $ref: '#/components/schemas/Int64Filter'
+        created_at:
+          $ref: '#/components/schemas/TimestampRangeFilter'
+        instance_id:
+          $ref: '#/components/schemas/Int64Filter'
+        state:
+          $ref: '#/components/schemas/OfferStateFilter'
+        name:
+          $ref: '#/components/schemas/ListMarketOffersRequest.Filter.OfferNameFilter'
+        sku:
+          $ref: '#/components/schemas/OfferSKUFilter'
+        grading:
+          $ref: '#/components/schemas/OfferGradingFilter'
+        warranty:
+          $ref: '#/components/schemas/OfferWarrantyFilter'
+        stock:
+          $ref: '#/components/schemas/UInt32RangeFilter'
+        shipping_profile_id:
+          $ref: '#/components/schemas/Int64Filter'
+        secondary_shipping_profile_id:
+          $ref: '#/components/schemas/OptionalInt64Filter'
+        taxation:
+          $ref: '#/components/schemas/OfferTaxationFilter'
+        reference_currency_code:
+          $ref: '#/components/schemas/CurrencyCodeFilter'
+        reference_price:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        reference_min_price:
+          $ref: '#/components/schemas/OptionalNumericRangeFilter'
+        market_price_market_code:
+          $ref: '#/components/schemas/StringFilter'
+        market_price_is_site_market:
+          $ref: '#/components/schemas/BoolFilter'
+        market_price_is_calculated:
+          $ref: '#/components/schemas/BoolFilter'
+        market_price_currency_code:
+          $ref: '#/components/schemas/CurrencyCodeFilter'
+        market_price_price:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        market_price_min_price:
+          $ref: '#/components/schemas/OptionalNumericRangeFilter'
+        market_price_site_market_currency_code:
+          $ref: '#/components/schemas/CurrencyCodeFilter'
+        market_price_site_market_price:
+          $ref: '#/components/schemas/NumericRangeFilter'
+        market_price_site_market_min_price:
+          $ref: '#/components/schemas/OptionalNumericRangeFilter'
+        market_price_visibility:
+          $ref: '#/components/schemas/OfferVisibilityFilter'
+        market_price_instance_buybox_state:
+          $ref: '#/components/schemas/OfferBuyboxStateFilter'
+        market_price_buybox_scope:
+          $ref: '#/components/schemas/OfferBuyboxScopeFilter'
+          title: only applicable when buybox state is WON
+    BatchGetMarketOffersRequest.Get:
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/MarketOfferIdentifier'
+          description: The identifier of the market offer to get.
+    UpdateMarketOfferRequest:
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/MarketOfferIdentifier'
+          description: The identifier of the market offer to update.
+        market_price:
+          $ref: '#/components/schemas/UpdateMarketOfferRequest.UpdateOfferMarketPrice'
+    BatchGetMarketOffersResponse.Result:
       type: object
       properties:
         status:
           $ref: '#/components/schemas/Status'
-    OfferBuyboxScope:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - INSTANCE_GRADING_BATTERY_CONDITION
-      default: UNSPECIFIED
-    UInt32RangeFilter:
+        market_offer:
+          $ref: '#/components/schemas/MarketOffer'
+          description: Retrieved market offer. Set if status code is OK.
+    UpdateMarketOfferRequest.UpdateOfferMarketPrice:
       type: object
       properties:
-        gt:
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCode'
+        price:
           type:
-          - integer
+          - string
           - 'null'
-          format: int64
-        ge:
-          type:
-          - integer
-          - 'null'
-          format: int64
+        min_price:
+          type: string
+        delete_min_price:
+          type: boolean
+    ListMarketOffersByOfferRequest.Sort.By:
+      type: string
+      enum:
+      - ID
+      - MARKET_PRICE_MARKET_CODE
+      - MARKET_PRICE_MARKET_NAME
+      - MARKET_PRICE_IS_SITE_MARKET
+      - MARKET_PRICE_IS_CALCULATED
+      - MARKET_PRICE_CURRENCY_CODE
+      - MARKET_PRICE_PRICE
+      - MARKET_PRICE_MIN_PRICE
+      - MARKET_PRICE_SITE_MARKET_CURRENCY_CODE
+      - MARKET_PRICE_SITE_MARKET_PRICE
+      - MARKET_PRICE_SITE_MARKET_MIN_PRICE
+      default: ID
+    Status:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: 'A developer-facing error message, which should be in English. Any
+
+            user-facing error message should be localized and sent in the
+
+            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Any'
+          description: 'A list of messages that carry the error details.  There is a common set of
+
+            message types for APIs to use.'
+      description: 'The `Status` type defines a logical error model that is suitable for
+
+        different programming environments, including REST APIs and RPC APIs. It is
+
+        used by [gRPC](https://github.com/grpc). Each `Status` message contains
+
+        three pieces of data: error code, error message, and error details.
+
+
+        You can find out more about this error model and how to work with it in the
+
+        [API Design Guide](https://cloud.google.com/apis/design/errors).'
+    BatchCreateMarketOffersResponse.Result:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+        market_offer:
+          $ref: '#/components/schemas/MarketOffer'
+          description: Created market offer. Set if status code is OK.
+    OfferVisibilityFilter:
+      type: object
+      properties:
         any_of:
           type: array
           items:
-            type: integer
+            $ref: '#/components/schemas/OfferVisibility'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferVisibility'
+    DeleteMarketOfferRequest:
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/MarketOfferIdentifier'
+          description: The identifier of the market offer to delete.
+    BatchUpdateMarketOffersRequest.Update:
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/MarketOfferIdentifier'
+          description: The identifier of the market offer to update.
+        market_price:
+          $ref: '#/components/schemas/Update.UpdateOfferMarketPrice'
+    SortOrder:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      default: ASC
+    ListMarketOffersRequest.Sort.By:
+      type: string
+      enum:
+      - ID
+      default: ID
+    CurrencyCodeFilter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyCode'
+        none_of:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyCode'
+    BatchUpdateMarketOffersRequest:
+      type: object
+      properties:
+        market_offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchUpdateMarketOffersRequest.Update'
+          description: Market offers to update. Between 1 and 50.
+          required:
+          - market_offers
+      required:
+      - market_offers
+    Int64Filter:
+      type: object
+      properties:
+        any_of:
+          type: array
+          items:
+            type: string
             format: int64
         none_of:
           type: array
           items:
-            type: integer
+            type: string
             format: int64
-        le:
+    MarketOfferIdentifierPagination:
+      type: object
+      properties:
+        limit:
           type:
           - integer
           - 'null'
           format: int64
-        lt:
+          description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+            Default and maximum is 100.'
+        ending_before:
+          $ref: '#/components/schemas/MarketOfferIdentifier'
+        starting_after:
+          $ref: '#/components/schemas/MarketOfferIdentifier'
+      description: Paginates resources with market offer identifier key.
+    StringPagination:
+      type: object
+      properties:
+        limit:
           type:
           - integer
           - 'null'
           format: int64
+          description: 'Limit on the number of results to be returned. Between 1 and 100.
+
+            Default and maximum is 100.'
+        ending_before:
+          type: string
+        starting_after:
+          type: string
+      description: Paginates resources with string primary key.
     OfferMarketPrice:
       type: object
       properties:
@@ -941,530 +1674,6 @@ components:
       description: 'An offer price defines the price configuration of an offer for a single
 
         market.'
-    MarketOfferIdentifierFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/MarketOfferIdentifier'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/MarketOfferIdentifier'
-    MarketOfferIdentifierPagination:
-      type: object
-      properties:
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Limit on the number of results to be returned. Between 1 and 100.
-
-            Default and maximum is 100.'
-        ending_before:
-          $ref: '#/components/schemas/MarketOfferIdentifier'
-        starting_after:
-          $ref: '#/components/schemas/MarketOfferIdentifier'
-      description: Paginates resources with market offer identifier key.
-    ListMarketOffersRequest.Sort:
-      type: object
-      properties:
-        order:
-          $ref: '#/components/schemas/SortOrder'
-        by:
-          $ref: '#/components/schemas/ListMarketOffersRequest.Sort.By'
-    OfferSKUFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            type: string
-        none_of:
-          type: array
-          items:
-            type: string
-        contains:
-          type:
-          - string
-          - 'null'
-    DeleteMarketOfferRequest:
-      type: object
-      properties:
-        identifier:
-          $ref: '#/components/schemas/MarketOfferIdentifier'
-          description: The identifier of the market offer to delete.
-    BatchUpdateMarketOffersResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchUpdateMarketOffersResponse.Result'
-          description: Results of the update operation. In request order.
-    ListMarketOffersByOfferRequest.Filter:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/MarketOfferIdentifierFilter'
-        market_price_market_code:
-          $ref: '#/components/schemas/StringFilter'
-        market_price_is_site_market:
-          $ref: '#/components/schemas/BoolFilter'
-        market_price_is_calculated:
-          $ref: '#/components/schemas/BoolFilter'
-        market_price_currency_code:
-          $ref: '#/components/schemas/CurrencyCodeFilter'
-        market_price_price:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        market_price_min_price:
-          $ref: '#/components/schemas/OptionalNumericRangeFilter'
-        market_price_site_market_currency_code:
-          $ref: '#/components/schemas/CurrencyCodeFilter'
-        market_price_site_market_price:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        market_price_site_market_min_price:
-          $ref: '#/components/schemas/OptionalNumericRangeFilter'
-        market_price_visibility:
-          $ref: '#/components/schemas/OfferVisibilityFilter'
-        market_price_instance_buybox_state:
-          $ref: '#/components/schemas/OfferBuyboxStateFilter'
-        market_price_buybox_scope:
-          $ref: '#/components/schemas/OfferBuyboxScopeFilter'
-          title: only applicable when buybox state is WON
-    TimestampRangeFilter:
-      type: object
-      properties:
-        gt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        ge:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        any_of:
-          type: array
-          items:
-            type: string
-            format: date-time
-        none_of:
-          type: array
-          items:
-            type: string
-            format: date-time
-        le:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        lt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-    Update.UpdateOfferMarketPrice:
-      type: object
-      properties:
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-        price:
-          type:
-          - string
-          - 'null'
-        min_price:
-          type: string
-        delete_min_price:
-          type: boolean
-    OfferBuyboxScopeFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferBuyboxScope'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferBuyboxScope'
-    CreateMarketOfferRequest.CreateOfferMarketPrice:
-      type: object
-      properties:
-        market_code:
-          type: string
-          required:
-          - market_code
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-        price:
-          type: string
-          required:
-          - price
-        min_price:
-          type:
-          - string
-          - 'null'
-      required:
-      - market_code
-      - price
-    BatchUpdateMarketOffersRequest:
-      type: object
-      properties:
-        market_offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchUpdateMarketOffersRequest.Update'
-          description: Market offers to update. Between 1 and 50.
-          required:
-          - market_offers
-      required:
-      - market_offers
-    BatchDeleteMarketOffersResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchDeleteMarketOffersResponse.Result'
-          description: Results of the delete operation. In request order.
-    BatchCreateMarketOffersResponse.Result:
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/Status'
-        market_offer:
-          $ref: '#/components/schemas/MarketOffer'
-          description: Created market offer. Set if status code is OK.
-    Create.CreateOfferMarketPrice:
-      type: object
-      properties:
-        market_code:
-          type: string
-          required:
-          - market_code
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-        price:
-          type: string
-          required:
-          - price
-        min_price:
-          type:
-          - string
-          - 'null'
-      required:
-      - market_code
-      - price
-    ListMarketOffersRequest.Sort.By:
-      type: string
-      enum:
-      - ID
-      default: ID
-    CurrencyCodeFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrencyCode'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrencyCode'
-    OfferVisibilityFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferVisibility'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferVisibility'
-    OptionalNumericRangeFilter:
-      type: object
-      properties:
-        is_set:
-          type:
-          - boolean
-          - 'null'
-        gt:
-          type:
-          - string
-          - 'null'
-        ge:
-          type:
-          - string
-          - 'null'
-        any_of:
-          type: array
-          items:
-            type: string
-        none_of:
-          type: array
-          items:
-            type: string
-        le:
-          type:
-          - string
-          - 'null'
-        lt:
-          type:
-          - string
-          - 'null'
-      description: 'Numeric range filter is used for decimal numbers. It is especially
-
-        used for monetary amounts and other quantities where exactness is required.'
-    OfferStateFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferState'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferState'
-    ListMarketOffersResponse:
-      type: object
-      properties:
-        market_offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/MarketOffer'
-          description: The market offers found.
-        has_more:
-          type: boolean
-          description: Indicates whether there are more results available.
-    CreateMarketOfferRequest:
-      type: object
-      properties:
-        identifier:
-          $ref: '#/components/schemas/OfferIdentifier'
-        market_price:
-          $ref: '#/components/schemas/CreateMarketOfferRequest.CreateOfferMarketPrice'
-    ListMarketOffersByOfferRequest.Sort:
-      type: object
-      properties:
-        order:
-          $ref: '#/components/schemas/SortOrder'
-        by:
-          $ref: '#/components/schemas/ListMarketOffersByOfferRequest.Sort.By'
-    GetMarketOfferRequest:
-      type: object
-      properties:
-        identifier:
-          $ref: '#/components/schemas/MarketOfferIdentifier'
-          description: The identifier of the market offer to get.
-    BatchDeleteMarketOffersRequest.Delete:
-      type: object
-      properties:
-        identifier:
-          $ref: '#/components/schemas/MarketOfferIdentifier'
-          description: The identifier of the market offer to delete.
-    SortOrder:
-      type: string
-      enum:
-      - ASC
-      - DESC
-      default: ASC
-    OfferWarranty:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - M12
-      - M18
-      - M24
-      - M30
-      - M36
-      default: UNSPECIFIED
-      description: "The warranty the merchant provides to the customer. Only 12 months is supported.\n\n - M12: 12 months.\n - M18: 18 months, deprecated. Only 12 months is supported for new offers.\n - M24: 24 months, deprecated. Only 12 months is supported for new offers.\n - M30: 30 months, deprecated. Only 12 months is supported for new offers.\n - M36: 36 months, deprecated. Only 12 months is supported for new offers."
-    ListMarketOffersRequest:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/MarketOfferIdentifierPagination'
-        sort:
-          $ref: '#/components/schemas/ListMarketOffersRequest.Sort'
-        filter:
-          $ref: '#/components/schemas/ListMarketOffersRequest.Filter'
-    OfferTaxationFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferTaxation'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferTaxation'
-    BatchCreateMarketOffersRequest.Create:
-      type: object
-      properties:
-        identifier:
-          $ref: '#/components/schemas/OfferIdentifier'
-        market_price:
-          $ref: '#/components/schemas/Create.CreateOfferMarketPrice'
-    UpdateMarketOfferRequest:
-      type: object
-      properties:
-        identifier:
-          $ref: '#/components/schemas/MarketOfferIdentifier'
-          description: The identifier of the market offer to update.
-        market_price:
-          $ref: '#/components/schemas/UpdateMarketOfferRequest.UpdateOfferMarketPrice'
-    Int64Filter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            type: string
-            format: int64
-        none_of:
-          type: array
-          items:
-            type: string
-            format: int64
-    BatchGetMarketOffersResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchGetMarketOffersResponse.Result'
-          description: Results of the get operation. In request order.
-    ListMarketOffersRequest.Filter:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/MarketOfferIdentifierFilter'
-        offer_id:
-          $ref: '#/components/schemas/Int64Filter'
-        created_at:
-          $ref: '#/components/schemas/TimestampRangeFilter'
-        instance_id:
-          $ref: '#/components/schemas/Int64Filter'
-        state:
-          $ref: '#/components/schemas/OfferStateFilter'
-        name:
-          $ref: '#/components/schemas/ListMarketOffersRequest.Filter.OfferNameFilter'
-        sku:
-          $ref: '#/components/schemas/OfferSKUFilter'
-        grading:
-          $ref: '#/components/schemas/OfferGradingFilter'
-        warranty:
-          $ref: '#/components/schemas/OfferWarrantyFilter'
-        stock:
-          $ref: '#/components/schemas/UInt32RangeFilter'
-        shipping_profile_id:
-          $ref: '#/components/schemas/Int64Filter'
-        secondary_shipping_profile_id:
-          $ref: '#/components/schemas/OptionalInt64Filter'
-        taxation:
-          $ref: '#/components/schemas/OfferTaxationFilter'
-        reference_currency_code:
-          $ref: '#/components/schemas/CurrencyCodeFilter'
-        reference_price:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        reference_min_price:
-          $ref: '#/components/schemas/OptionalNumericRangeFilter'
-        market_price_market_code:
-          $ref: '#/components/schemas/StringFilter'
-        market_price_is_site_market:
-          $ref: '#/components/schemas/BoolFilter'
-        market_price_is_calculated:
-          $ref: '#/components/schemas/BoolFilter'
-        market_price_currency_code:
-          $ref: '#/components/schemas/CurrencyCodeFilter'
-        market_price_price:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        market_price_min_price:
-          $ref: '#/components/schemas/OptionalNumericRangeFilter'
-        market_price_site_market_currency_code:
-          $ref: '#/components/schemas/CurrencyCodeFilter'
-        market_price_site_market_price:
-          $ref: '#/components/schemas/NumericRangeFilter'
-        market_price_site_market_min_price:
-          $ref: '#/components/schemas/OptionalNumericRangeFilter'
-        market_price_visibility:
-          $ref: '#/components/schemas/OfferVisibilityFilter'
-        market_price_instance_buybox_state:
-          $ref: '#/components/schemas/OfferBuyboxStateFilter'
-        market_price_buybox_scope:
-          $ref: '#/components/schemas/OfferBuyboxScopeFilter'
-          title: only applicable when buybox state is WON
-    OfferWarrantyFilter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferWarranty'
-        none_of:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferWarranty'
-    BatchUpdateMarketOffersRequest.Update:
-      type: object
-      properties:
-        identifier:
-          $ref: '#/components/schemas/MarketOfferIdentifier'
-          description: The identifier of the market offer to update.
-        market_price:
-          $ref: '#/components/schemas/Update.UpdateOfferMarketPrice'
-    BatchGetMarketOffersRequest.Get:
-      type: object
-      properties:
-        identifier:
-          $ref: '#/components/schemas/MarketOfferIdentifier'
-          description: The identifier of the market offer to get.
-    StringPagination:
-      type: object
-      properties:
-        limit:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: 'Limit on the number of results to be returned. Between 1 and 100.
-
-            Default and maximum is 100.'
-        ending_before:
-          type: string
-        starting_after:
-          type: string
-      description: Paginates resources with string primary key.
-    OfferIdentifier:
-      type: object
-      properties:
-        id:
-          type: string
-          format: int64
-        sku:
-          type: string
-    BoolFilter:
-      type: object
-      properties:
-        value:
-          type:
-          - boolean
-          - 'null'
-    BatchGetMarketOffersResponse.Result:
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/Status'
-        market_offer:
-          $ref: '#/components/schemas/MarketOffer'
-          description: Retrieved market offer. Set if status code is OK.
     OfferBuyboxStateFilter:
       type: object
       properties:
@@ -1476,215 +1685,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OfferBuyboxState'
-    OfferState:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - OK
-      - UNVERIFIED
-      - SUBMITTED
-      - PENDING_REVIEW
-      - REJECTED
-      default: UNSPECIFIED
-      description: " - OK: Everything is in order. Final state.\n - UNVERIFIED: Offer needs to be verified in the refurbed merchant interface before\nbeing shown publicly. This state is set on all offers that are created\nusing GTIN/MPN identifiers. Next state: OK.\n - SUBMITTED: Offer has been submitted using catalog attributes, but not processed yet.\nNext state: PENDING_REVIEW.\n - PENDING_REVIEW: Offer has been submitted using catalog attributes, and is awaiting manual review.\nNext state: OK, REJECTED.\n - REJECTED: Offer will not proceed to the marketplace. Final state."
-    MarketOffer:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/MarketOfferIdentifier'
-          description: Primary key.
-        version:
-          type: string
-          format: int64
-          description: Version of this offer / offer market price.
-        is_current:
-          type: boolean
-          description: Indicates whether this is the currently available version.
-        created_at:
-          type: string
-          format: date-time
-          description: When the offer was initially created.
-        instance_id:
-          type: string
-          format: int64
-          description: The refurbed instance id ("product variant") this offer is for.
-        instance_name:
-          type: string
-          description: Human-readable name of the instance this offer is for.
-        state:
-          $ref: '#/components/schemas/OfferState'
-          description: The offer's state.
-        sku:
-          type: string
-          description: 'The merchant''s SKU.
-
-
-            Max. length is 256 unicode characters. SKUs cannot have leading or trailing
-
-            whitespace characters.
-
-
-            Can be empty string for old offers that did not require SKU to be set.'
-        grading:
-          $ref: '#/components/schemas/OfferGrading'
-          description: Grading of the item sold.
-        warranty:
-          $ref: '#/components/schemas/OfferWarranty'
-          description: Warranty of the item sold.
-        stock:
-          type: integer
-          format: int64
-          description: The item's stock.
-        shipping_profile_id:
-          type: string
-          format: int64
-          description: 'The shipping profile connected to this offer. This determines in what
-
-            markets the offer is sold and what the shipping costs are.'
-        shipping_profile_name:
-          type: string
-          description: Name of shipping profile.
-        secondary_shipping_profile_id:
-          type:
-          - string
-          - 'null'
-          format: int64
-          description: 'An optional secondary shipping profile id. Can be used to offer express
-
-            shipping next to standard shipping. Has to be different from the primary
-
-            shipping profile.'
-        secondary_shipping_profile_name:
-          type:
-          - string
-          - 'null'
-          description: 'Name of secondary shipping profile. Only returned if secondary shipping
-
-            profile is set.'
-        taxation:
-          $ref: '#/components/schemas/OfferTaxation'
-          description: The taxation mode set for this offer.
-        real_taxation:
-          $ref: '#/components/schemas/OfferTaxation'
-          description: 'The taxation mode the offer uses. This is either the set offer taxation
-
-            or the global taxation mode (merchant account settings) that overrides it.'
-        reference_currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-          description: Currency of reference prices.
-        reference_price:
-          type: string
-          description: 'Reference gross price of this offer. The reference price is used to
-
-            calculate prices if they are not defined for a market.'
-        reference_min_price:
-          type:
-          - string
-          - 'null'
-          description: 'Optional reference minimum price in market currency for automatic
-
-            repricing. The reference minimum price is used to calculate minimum prices
-
-            if they are not defined for a market.'
-        market_price:
-          $ref: '#/components/schemas/OfferMarketPrice'
-          description: The market price.
-      description: 'A merchant''s market offer. A market offer is a combination of an offer with
-
-        a specific offer market price.'
-    UpdateMarketOfferRequest.UpdateOfferMarketPrice:
-      type: object
-      properties:
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCode'
-        price:
-          type:
-          - string
-          - 'null'
-        min_price:
-          type: string
-        delete_min_price:
-          type: boolean
-    ListMarketOffersByOfferRequest:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/StringPagination'
-        sort:
-          $ref: '#/components/schemas/ListMarketOffersByOfferRequest.Sort'
-        filter:
-          $ref: '#/components/schemas/ListMarketOffersByOfferRequest.Filter'
-        offer_identifier:
-          $ref: '#/components/schemas/OfferIdentifier'
-    Status:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
-        message:
-          type: string
-          description: 'A developer-facing error message, which should be in English. Any
-
-            user-facing error message should be localized and sent in the
-
-            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.'
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/Any'
-          description: 'A list of messages that carry the error details.  There is a common set of
-
-            message types for APIs to use.'
-      description: 'The `Status` type defines a logical error model that is suitable for
-
-        different programming environments, including REST APIs and RPC APIs. It is
-
-        used by [gRPC](https://github.com/grpc). Each `Status` message contains
-
-        three pieces of data: error code, error message, and error details.
-
-
-        You can find out more about this error model and how to work with it in the
-
-        [API Design Guide](https://cloud.google.com/apis/design/errors).'
-    OptionalInt64Filter:
-      type: object
-      properties:
-        any_of:
-          type: array
-          items:
-            type: string
-            format: int64
-        none_of:
-          type: array
-          items:
-            type: string
-            format: int64
-        is_set:
-          type:
-          - boolean
-          - 'null'
-    OfferBuyboxState:
-      type: string
-      enum:
-      - UNSPECIFIED
-      - WON
-      - SHOULD_WIN
-      - ELIGIBLE
-      - WON_ELSEWHERE
-      - INELIGIBLE
-      default: UNSPECIFIED
-      description: " - WON: Offer currently has the BuyBox.\n - SHOULD_WIN: Current offer configuration should win the BuyBox on next refresh.\n - ELIGIBLE: Offer currently does not have the BuyBox.\n - WON_ELSEWHERE: Offer currently does not have the BuyBox but another offer of this\nmerchant does.\n - INELIGIBLE: Offer cannot reach the BuyBox at this time, e.g. because refurbed's\nBuyBox protection for this product is enabled and the offer's stock\nis too low."
-    BatchUpdateMarketOffersResponse.Result:
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/Status'
-        market_offer:
-          $ref: '#/components/schemas/MarketOffer'
-          description: Updated market offer. Set if status code is OK.
   securitySchemes:
     APIKeyAuth:
       type: apiKey
