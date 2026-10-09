@@ -2,7 +2,7 @@
 name: Manage refurbed offers and market prices
 description: Create and update a merchant offer on an instance, then set or adjust per-market prices on the refurbed marketplace.
 api: openapi/refurbed-merchant-api-openapi.json
-operations: [ListMarkets, ListCurrencies, GetInstance, ListShippingProfiles, CreateOffer, UpdateOffer, ListOffers, CreateMarketOffer, UpdateMarketOffer, ListMarketOffersByOffer]
+operations: [postRefbMerchantV1MarketServiceListMarkets, ListCurrencies, postRefbMerchantV1InstanceServiceGetInstance, ListShippingProfiles, CreateOffer, UpdateOffer, ListOffers, CreateMarketOffer, UpdateMarketOffer, ListMarketOffersByOffer]
 ---
 
 # Manage refurbed offers and market prices

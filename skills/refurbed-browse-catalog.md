@@ -2,7 +2,7 @@
 name: Browse the refurbed catalog (Affiliate Partner API)
 description: As an affiliate, list markets and products and read instance BuyBox pricing and purchase-redirect links from the refurbed marketplace.
 api: openapi/refurbed-affiliate-api-openapi.json
-operations: [ListMarkets, GetMarket, ListProducts, GetProduct, ListInstancesByProduct, GetInstance]
+operations: [postRefbMerchantV1MarketServiceListMarkets, postRefbMerchantV1MarketServiceGetMarket, ListProducts, GetProduct, ListInstancesByProduct, postRefbMerchantV1InstanceServiceGetInstance]
 ---
 
 # Browse the refurbed catalog (Affiliate Partner API)
